@@ -8,6 +8,7 @@ class AppTheme {
     scaffoldBackgroundColor: Color.fromARGB(255, 13, 21, 34),
     appBarTheme: AppBarTheme(
       backgroundColor: Color.fromARGB(255, 13, 21, 34),
+      surfaceTintColor: Color.fromARGB(255, 13, 21, 34),
     ),
   );
 }

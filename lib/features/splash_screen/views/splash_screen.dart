@@ -1,8 +1,8 @@
 import 'package:chat_app/core/assets.dart';
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/status_bar_updater.dart';
-import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +18,8 @@ class _SplashScreenState extends State<SplashScreen> {
       (timeStamp) async {
         await Future.delayed(const Duration(seconds: 3));
         if (mounted) {
-          NavigationUtils.introductionPage(context);
+          context.go("/");
+          // NavigationUtils.introductionPage(context);
         }
       },
     );

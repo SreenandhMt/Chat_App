@@ -2,11 +2,21 @@ import 'package:chat_app/features/auth/views/create_profile_page.dart';
 import 'package:chat_app/features/auth/views/introduction_page.dart';
 import 'package:chat_app/features/auth/views/number_verification_page.dart';
 import 'package:chat_app/features/auth/views/otp_verification_page.dart';
+import 'package:chat_app/features/chat_page/views/chat_page.dart';
+import 'package:chat_app/features/home/views/home_page.dart';
 import 'package:chat_app/features/splash_screen/views/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final router = GoRouter(initialLocation: "/splash", routes: [
+    GoRoute(
+      path: "/",
+      builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+      path: "/chat",
+      builder: (context, state) => ChattingPage(),
+    ),
     GoRoute(
       path: "/splash",
       builder: (context, state) => SplashScreen(),

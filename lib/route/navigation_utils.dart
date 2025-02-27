@@ -10,4 +10,7 @@ class NavigationUtils {
       context.push("/introduction/verification-otp");
   static createProfilePage(BuildContext context) =>
       context.push("/introduction/create-profile");
+
+  // chatting page
+  static chattingPage(BuildContext context) => context.push("/chat");
 }
