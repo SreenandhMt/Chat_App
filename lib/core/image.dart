@@ -23,6 +23,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     Image image = Image.network(widget.imageUrl);
     image.image.resolve(const ImageConfiguration()).addListener(
       ImageStreamListener((ImageInfo info, bool _) {
+        if (!mounted) return;
         setState(() {
           imageWidth = info.image.width.toDouble();
           imageHeight = info.image.height.toDouble();

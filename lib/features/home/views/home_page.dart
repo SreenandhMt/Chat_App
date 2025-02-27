@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 10),
         itemBuilder: (context, index) => ListTile(
           title: Text(
-            "User Name",
+            index > 5 ? "Innovative Online Shopping" : "User Name",
             maxLines: 1,
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
           ),
@@ -50,7 +50,9 @@ class HomePage extends StatelessWidget {
               )
             ],
           ),
-          onTap: () => NavigationUtils.chattingPage(context),
+          onTap: () => index > 5
+              ? NavigationUtils.groupChattingPage(context)
+              : NavigationUtils.chattingPage(context),
         ),
         separatorBuilder: (context, index) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),

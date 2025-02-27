@@ -30,4 +30,10 @@ class AppColors {
           : Colors.grey.shade200;
     }
   }
+
+  static Color themeColor(context) {
+    return Theme.of(context).brightness == Brightness.light
+        ? Colors.white
+        : Colors.black;
+  }
 }

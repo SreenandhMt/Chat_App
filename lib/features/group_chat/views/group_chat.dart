@@ -2,33 +2,28 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:audio_waveforms/audio_waveforms.dart';
-import 'package:chat_app/components/chat_page/chat_widget.dart';
-import 'package:chat_app/features/chat_page/views/chat_info_page.dart';
+import 'package:chat_app/features/chat_page/views/chat_page.dart';
+import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:chat_app/components/chat_page/audio_player.dart';
-import 'package:chat_app/components/chat_page/document_widget.dart';
-import 'package:chat_app/components/chat_page/link_preview.dart';
-import 'package:chat_app/components/chat_page/poll_widget.dart';
-import 'package:chat_app/core/colors.dart';
-import 'package:chat_app/core/image.dart';
-import 'package:chat_app/core/size.dart';
-import 'package:video_player/video_player.dart';
+import '../../../components/chat_page/chat_widget.dart';
+import '../../../components/group_chat/chat_widget.dart';
+import '../../../core/colors.dart';
+import '../../../core/size.dart';
+import '../../chat_page/views/chat_info_page.dart';
 
-class ChattingPage extends StatefulWidget {
-  const ChattingPage({super.key});
+class GroupChatPage extends StatefulWidget {
+  const GroupChatPage({super.key});
 
   @override
-  State<ChattingPage> createState() => _ChattingPageState();
+  State<GroupChatPage> createState() => _GroupChatPageState();
 }
 
-class _ChattingPageState extends State<ChattingPage> {
+class _GroupChatPageState extends State<GroupChatPage> {
   final scrollController = ScrollController();
   bool isRecoding = false;
   List<int> selectedIndex = [];
@@ -123,20 +118,27 @@ class _ChattingPageState extends State<ChattingPage> {
                   icon: Icon(Icons.arrow_back),
                 ),
                 if (selectedIndex.isEmpty) ...[
-                  CircleAvatar(
-                    radius: 20,
-                  ),
-                  width10,
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "George Alan",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text("Online"),
-                    ],
+                  InkWell(
+                    onTap: () => NavigationUtils.groupInfoPage(context),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 20,
+                        ),
+                        width10,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Innovative",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text("44 Members"),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   Spacer(),
                   IconButton(
@@ -251,7 +253,7 @@ class _ChattingPageState extends State<ChattingPage> {
                             : null,
                         borderRadius: BorderRadius.circular(2),
                       ),
-                      child: ChatWidget(
+                      child: GroupChatWidget(
                         isSender: (index == 3 || index == 1),
                         audio: index == 3
                             ? "https://webaudioapi.com/samples/audio-tag/chrono.mp3"
@@ -374,117 +376,5 @@ class _ChattingPageState extends State<ChattingPage> {
   void dispose() {
     hideReactions();
     super.dispose();
-  }
-}
-
-class AudioRecodingWidget extends StatefulWidget {
-  const AudioRecodingWidget({super.key});
-
-  @override
-  State<AudioRecodingWidget> createState() => _AudioRecodingWidgetState();
-}
-
-class _AudioRecodingWidgetState extends State<AudioRecodingWidget> {
-  late final RecorderController recorderController;
-
-  @override
-  void initState() {
-    super.initState();
-    initController();
-  }
-
-  void initController() async {
-    recorderController = RecorderController()
-      ..androidEncoder = AndroidEncoder.aac
-      ..androidOutputFormat = AndroidOutputFormat.mpeg4
-      ..iosEncoder = IosEncoder.kAudioFormatMPEG4AAC
-      ..sampleRate = 44100;
-    await recorderController.checkPermission();
-    if (recorderController.hasPermission) {
-      Directory tempDir = await getTemporaryDirectory();
-      final audioPath =
-          '${tempDir.path}/audio_${DateTime.now().millisecondsSinceEpoch}.m4a';
-
-      recorderController.record(path: audioPath);
-
-      setState(() {});
-    }
-  }
-
-  @override
-  void dispose() {
-    recorderController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            width10,
-            Text(
-              "0:10",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-            ),
-            width20,
-            Expanded(
-                child: AudioWaveforms(
-              size: Size(double.infinity, 40),
-              recorderController: recorderController,
-              shouldCalculateScrolledPosition: true,
-              padding: EdgeInsets.symmetric(vertical: 10),
-              waveStyle: WaveStyle(
-                scaleFactor: 50,
-                waveColor: Colors.white,
-                extendWaveform: true,
-                showMiddleLine: false,
-                spacing: 6.0,
-              ),
-            )),
-            width10,
-          ],
-        ),
-        height10,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              onPressed: () {
-                recorderController.stop();
-              },
-              icon: Icon(
-                Icons.delete,
-                size: 30,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                if (recorderController.isRecording) {
-                  recorderController.pause();
-                } else {
-                  recorderController.record();
-                }
-              },
-              icon: Icon(
-                Icons.pause_circle_outline_rounded,
-                size: 50,
-                color: Colors.red,
-              ),
-            ),
-            CircleAvatar(
-              backgroundColor: Colors.grey,
-              child: Icon(
-                Icons.send_rounded,
-                color: Colors.white,
-                size: 20,
-              ),
-            ),
-          ],
-        ),
-        height10,
-      ],
-    );
   }
 }
