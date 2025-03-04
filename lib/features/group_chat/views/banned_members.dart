@@ -1,3 +1,4 @@
+import 'package:chat_app/components/app_search_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/colors.dart';
@@ -15,19 +16,7 @@ class BannedMembers extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(20),
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: Icon(Icons.search),
-                fillColor: AppColors.grey(context),
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  gapPadding: 5.0,
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
+            child: AppSearchBar(),
           ),
           ...List.generate(
             10,
@@ -38,7 +27,7 @@ class BannedMembers extends StatelessWidget {
                   leading: CircleAvatar(
                     backgroundColor: Colors.grey[300],
                     backgroundImage: NetworkImage(
-                        "https://randomuser.me/api/portraits/men/1.jpg"),
+                        "https://randomuser.me/api/portraits/men/${index + 30}.jpg"),
                   ),
                   title: Text("User $index"),
                   trailing: Icon(Icons.close),

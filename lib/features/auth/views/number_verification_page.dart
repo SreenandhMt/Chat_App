@@ -1,9 +1,11 @@
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/views/introduction_page.dart';
+import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -37,14 +39,14 @@ class NumberVerificationPage extends StatelessWidget {
         children: [
           Spacer(),
           Text(
-            "Enter Your Phone Number",
+            LocaleData.loginTitleText.getString(context),
             style:
                 GoogleFonts.outfit(fontSize: 29, fontWeight: FontWeight.w500),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
-              "Please confirm your country code and enter your phone number",
+              LocaleData.loginDescriptionText.getString(context),
               textAlign: TextAlign.center,
               style: GoogleFonts.quicksand(
                   fontSize: 16, fontWeight: FontWeight.w600),
@@ -82,7 +84,8 @@ class NumberVerificationPage extends StatelessWidget {
                         signed: true, decimal: true),
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
-                      hintText: "Phone Number",
+                      hintText:
+                          LocaleData.loginPhoneNumberHit.getString(context),
                       filled: true,
                       fillColor: AppColors.grey(context),
                       border: OutlineInputBorder(
@@ -104,7 +107,7 @@ class NumberVerificationPage extends StatelessWidget {
           ),
           Spacer(),
           AppButton(
-              title: "Continue",
+              title: LocaleData.continueText.getString(context),
               onPressed: () => NavigationUtils.otpVerificationPage(context)),
           height20,
         ],

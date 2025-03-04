@@ -1,5 +1,5 @@
+import 'package:chat_app/components/app_search_bar.dart';
 import 'package:chat_app/core/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AllGroupMembers extends StatelessWidget {
@@ -15,19 +15,7 @@ class AllGroupMembers extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(20),
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: Icon(Icons.search),
-                fillColor: AppColors.grey(context),
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  gapPadding: 5.0,
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
+            child: AppSearchBar(),
           ),
           ...List.generate(
             10,
@@ -38,7 +26,7 @@ class AllGroupMembers extends StatelessWidget {
                   leading: CircleAvatar(
                     backgroundColor: Colors.grey[300],
                     backgroundImage: NetworkImage(
-                        "https://randomuser.me/api/portraits/men/1.jpg"),
+                        "https://randomuser.me/api/portraits/men/$index.jpg"),
                   ),
                   title: Text("User $index"),
                   subtitle: Text("Hello"),

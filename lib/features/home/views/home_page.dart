@@ -1,8 +1,21 @@
+import 'package:chat_app/components/app_search_bar.dart';
+import 'package:chat_app/components/home/user_widget.dart';
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+
+final List<String> category = [
+  "All",
+  "Personal",
+  "Group",
+  "Community",
+  "Event",
+  "News",
+  "Other"
+];
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,56 +25,95 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Chats",
-          style: GoogleFonts.outfit(fontSize: 25, fontWeight: FontWeight.w700),
+          LocaleData.chatsText.getString(context),
         ),
         actions: [
-          CircleAvatar(radius: 25),
+          PopupMenuButton(
+            position: PopupMenuPosition.under,
+            splashRadius: 20,
+            shape: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(10)),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: Row(
+                  children: [
+                    width10,
+                    Text(LocaleData.newGroupText.getString(context)),
+                    width50,
+                    width20,
+                  ],
+                ),
+                onTap: () => NavigationUtils.createGroupPage(context),
+              ),
+              PopupMenuItem(
+                child: Row(
+                  children: [
+                    width10,
+                    Text(LocaleData.newContactText.getString(context)),
+                    width50,
+                    width20,
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                child: Row(
+                  children: [
+                    width10,
+                    Text(LocaleData.inviteFriendsText.getString(context)),
+                    width50,
+                    width20,
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                child: Row(
+                  children: [
+                    width10,
+                    Text(LocaleData.settingsText.getString(context)),
+                    width50,
+                    width20,
+                  ],
+                ),
+                onTap: () => NavigationUtils.settingsPage(context),
+              ),
+            ],
+            child: Icon(Icons.more_vert),
+          ),
           width10,
         ],
       ),
-      body: ListView.separated(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        itemBuilder: (context, index) => ListTile(
-          title: Text(
-            index > 5 ? "Innovative Online Shopping" : "User Name",
-            maxLines: 1,
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: AppSearchBar(),
           ),
-          leading: CircleAvatar(
-            radius: 28,
-          ),
-          subtitle: Text(
-            "Last Message or last seen",
-            maxLines: 1,
-          ),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text("10:30 PM"),
-              CircleAvatar(
-                radius: 10,
-                backgroundColor: AppColors.secondary(context),
-                child: Text(
-                  "1",
-                  style: TextStyle(fontSize: 14),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: List.generate(
+                category.length,
+                (index) => Container(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  margin: EdgeInsets.only(right: 5),
+                  decoration: BoxDecoration(
+                    color: index == 0
+                        ? AppColors.secondary(context)
+                        : AppColors.grey(context),
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: Text(category[index]),
                 ),
-              )
-            ],
+              ),
+            ),
           ),
-          onTap: () => index > 5
-              ? NavigationUtils.groupChattingPage(context)
-              : NavigationUtils.chattingPage(context),
-        ),
-        separatorBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-          child: Divider(
-            thickness: 0.1,
-            height: 0.1,
+          ...List.generate(
+            10,
+            (index) => UserWidget(index: index),
           ),
-        ),
-        itemCount: 10,
+        ],
       ),
     );
   }

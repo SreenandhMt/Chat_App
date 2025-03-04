@@ -8,8 +8,8 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateProfilePage extends StatelessWidget {
-  const CreateProfilePage({super.key});
+class EditProfilePage extends StatelessWidget {
+  const EditProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CreateProfilePage extends StatelessWidget {
                   icon: Icon(Icons.arrow_back_ios_rounded),
                 ),
                 width15,
-                Text("Your Profile",
+                Text("Edit Profile",
                     style: GoogleFonts.outfit(
                         fontSize: 19, fontWeight: FontWeight.w500))
               ],
@@ -110,7 +110,7 @@ class CreateProfilePage extends StatelessWidget {
             ),
           ),
           Spacer(),
-          AppButton(title: LocaleData.saveText.getString(context)),
+          AppButton(title: "Edit"),
           height20,
         ],
       ),

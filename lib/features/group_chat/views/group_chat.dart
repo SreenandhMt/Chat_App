@@ -1,20 +1,19 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:chat_app/features/chat_page/views/chat_page.dart';
-import 'package:chat_app/route/navigation_utils.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:chat_app/components/chat_input.dart';
+import 'package:chat_app/components/chat_page/reaction_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../components/chat_page/chat_widget.dart';
+import '../../../components/chat_page/emoji_widget.dart';
+import '../../../components/group_chat/appbar.dart';
 import '../../../components/group_chat/chat_widget.dart';
 import '../../../core/colors.dart';
-import '../../../core/size.dart';
-import '../../chat_page/views/chat_info_page.dart';
 
 class GroupChatPage extends StatefulWidget {
   const GroupChatPage({super.key});
@@ -24,64 +23,15 @@ class GroupChatPage extends StatefulWidget {
 }
 
 class _GroupChatPageState extends State<GroupChatPage> {
+  bool isEmojiKeyboardHide = true;
+  final visibility = KeyboardVisibilityController();
+  TextEditingController controller = TextEditingController();
   final scrollController = ScrollController();
+  late StreamSubscription<bool> stream;
   bool isRecoding = false;
   List<int> selectedIndex = [];
   String? sticker;
   OverlayEntry? overlayEntry;
-
-  Widget _buildReaction(String emoji) {
-    return GestureDetector(
-      onTap: () {
-        hideReactions();
-        // Handle reaction selection (you can update message state)
-        print("Selected: $emoji");
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(emoji, style: TextStyle(fontSize: 24)),
-      ),
-    );
-  }
-
-  void hideReactions() {
-    overlayEntry?.remove();
-    overlayEntry = null;
-  }
-
-  void showReactions(BuildContext context, Offset position) {
-    hideReactions(); // Remove any existing popup
-
-    overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        left: position.dx - 60, // Adjust based on your UI
-        top: position.dy - 50, // Show above the tapped chat
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.backgroundColor(context),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            padding: EdgeInsets.all(8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _buildReaction("👍"),
-                _buildReaction("❤️"),
-                _buildReaction("😂"),
-                _buildReaction("😮"),
-                _buildReaction("😢"),
-                _buildReaction("🙏"),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-
-    Overlay.of(context).insert(overlayEntry!);
-  }
 
   @override
   void initState() {
@@ -103,125 +53,8 @@ class _GroupChatPageState extends State<GroupChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.chatBackgroundColor(context),
-      appBar: PreferredSize(
-          preferredSize: Size(MediaQuery.sizeOf(context).width, 65),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.backgroundColor(context),
-            ),
-            padding: MediaQuery.paddingOf(context),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () => context.pop(),
-                  icon: Icon(Icons.arrow_back),
-                ),
-                if (selectedIndex.isEmpty) ...[
-                  InkWell(
-                    onTap: () => NavigationUtils.groupInfoPage(context),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 20,
-                        ),
-                        width10,
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Innovative",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            Text("44 Members"),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(CupertinoIcons.video_camera, size: 36)),
-                  // width10,
-                  IconButton(
-                      onPressed: () {}, icon: Icon(CupertinoIcons.phone)),
-                  // width10,
-                  IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.info)),
-                ] else ...[
-                  if (selectedIndex.length > 1) ...[
-                    Text(selectedIndex.length.toString()),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.star_border_purple500_rounded),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.delete_outline_rounded),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.copy_rounded),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.forward_to_inbox_outlined),
-                    ),
-                  ] else ...[
-                    Text(selectedIndex.length.toString()),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.delete_outline_rounded),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.reply),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.star_border_purple500_rounded),
-                    ),
-                    PopupMenuButton(
-                      position: PopupMenuPosition.under,
-                      splashRadius: 20,
-                      shape: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10)),
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                          child: Row(
-                            children: [width10, Text("Info"), width50, width20],
-                          ),
-                          onTap: () => showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              hideReactions();
-                              return InfoBottomSheet();
-                            },
-                          ),
-                        ),
-                        PopupMenuItem(
-                          child: Row(
-                            children: [width10, Text("Copy"), width50, width20],
-                          ),
-                        ),
-                        PopupMenuItem(
-                          child: Row(
-                            children: [width10, Text("Edit"), width50, width20],
-                          ),
-                        )
-                      ],
-                      child: Icon(Icons.more_vert),
-                    )
-                  ],
-                ],
-                width10,
-              ],
-            ),
-          )),
+      appBar: groupChatAppBar(context,
+          selectedIndex: selectedIndex, hideReactions: hideReactions),
       body: Container(
         decoration: BoxDecoration(),
         child: Column(
@@ -276,85 +109,53 @@ class _GroupChatPageState extends State<GroupChatPage> {
                 ),
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.backgroundColor(context),
-                borderRadius: BorderRadius.circular(2),
-              ),
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: isRecoding
-                  ? AudioRecodingWidget()
-                  : Column(
-                      children: [
-                        ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minHeight: 50,
-                            maxHeight: 150,
-                          ),
-                          child: TextFormField(
-                            maxLines: null,
-                            keyboardType: TextInputType.multiline,
-                            contentInsertionConfiguration:
-                                ContentInsertionConfiguration(
-                              onContentInserted: (content) async {
-                                //getting url here
-                                debugPrint("Inserted content: ${content.uri}");
-                                if (content.mimeType != "image/gif") {
-                                  sticker =
-                                      await _convertUriToFile(content.data!);
-                                  log(sticker.toString());
-                                  setState(() {});
-                                }
-                              },
-                              allowedMimeTypes: [
-                                'image/png',
-                                'image/jpeg',
-                                // 'image/webp',
-                                'image/gif',
-                              ],
-                            ),
-                            decoration: InputDecoration(
-                                hintText: "Type your message...",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20)),
-                                    borderSide: BorderSide.none)),
-                          ),
-                        ),
-                        Divider(thickness: 0.1),
-                        Row(
-                          spacing: 15,
-                          children: [
-                            Icon(CupertinoIcons.add_circled),
-                            IconButton(
-                                onPressed: () {
-                                  isRecoding = !isRecoding;
-                                  setState(() {});
-                                },
-                                icon: Icon(CupertinoIcons.mic)),
-                            Icon(CupertinoIcons.smiley),
-                            Icon(Icons.sticky_note_2_outlined),
-                            Icon(CupertinoIcons.sparkles),
-                            Spacer(),
-                            CircleAvatar(
-                              backgroundColor: Colors.grey,
-                              child: Icon(
-                                Icons.send_rounded,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-            )
+            ChatInput(
+              stickerSelected: (content) async {
+                //getting url here
+                debugPrint("Inserted content: ${content.uri}");
+                if (content.mimeType != "image/gif") {
+                  sticker = await _convertUriToFile(content.data!);
+                  log(sticker.toString());
+                  setState(() {});
+                }
+              },
+              controller: TextEditingController(),
+              showEmojiKeyboard: showEmojiKeyboard,
+            ),
+            CustomEmojiKeyboard(
+              emojiController: controller,
+              isHide: isEmojiKeyboardHide,
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void showEmojiKeyboard() {
+    setState(() {
+      isEmojiKeyboardHide = false;
+    });
+  }
+
+  void keyboardVisibility() {
+    stream = visibility.onChange.listen((bool visible) {
+      if (visible == true) {
+        isEmojiKeyboardHide = true;
+        setState(() {});
+      }
+    });
+  }
+
+  void showReactions(BuildContext context, Offset position) {
+    overlayEntry =
+        createReactions(context, position, hideReactions, showEmojiKeyboard);
+    Overlay.of(context).insert(overlayEntry!);
+  }
+
+  void hideReactions() {
+    overlayEntry?.remove();
+    overlayEntry = null;
   }
 
   Future<String?> _convertUriToFile(Uint8List bytes) async {

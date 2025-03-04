@@ -1,6 +1,8 @@
+import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -40,14 +42,14 @@ class OTPVerificationPage extends StatelessWidget {
           children: [
             Spacer(),
             Text(
-              "Enter Code",
+              LocaleData.oTPVerificationTitleText.getString(context),
               style:
                   GoogleFonts.outfit(fontSize: 29, fontWeight: FontWeight.w600),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Text(
-                "We have send you an SMS with the code to +62 1309 - 1710 - 1920",
+                LocaleData.oTPVerificationDescriptionText.getString(context),
                 textAlign: TextAlign.center,
                 style: GoogleFonts.quicksand(
                     fontSize: 16, fontWeight: FontWeight.w600),
@@ -69,7 +71,7 @@ class OTPVerificationPage extends StatelessWidget {
             ),
             Spacer(),
             Text(
-              "Resend Code",
+              LocaleData.resetOTPText.getString(context),
               style: GoogleFonts.quicksand(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,

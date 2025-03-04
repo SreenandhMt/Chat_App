@@ -1,9 +1,8 @@
+import 'package:chat_app/components/app_search_bar.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/views/introduction_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/colors.dart';
 
 class AddMembersPage extends StatelessWidget {
   const AddMembersPage({super.key});
@@ -23,23 +22,13 @@ class AddMembersPage extends StatelessWidget {
                 if (index == 0) {
                   return Padding(
                     padding: const EdgeInsets.all(20),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        prefixIcon: Icon(Icons.search),
-                        fillColor: AppColors.grey(context),
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          gapPadding: 5.0,
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
+                    child: AppSearchBar(),
                   );
                 }
                 return ListTile(
-                  leading: const CircleAvatar(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://randomuser.me/api/portraits/men/$index.jpg"),
                     child: Icon(CupertinoIcons.person),
                   ),
                   title: Text("Name"),

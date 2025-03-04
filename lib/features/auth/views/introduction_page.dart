@@ -1,5 +1,7 @@
+import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:chat_app/core/assets.dart';
@@ -25,7 +27,7 @@ class IntroductionPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
-              "Connect easily with\nyour family and friends\nover countries",
+              LocaleData.introductionDescription.getString(context),
               textAlign: TextAlign.center,
               style:
                   GoogleFonts.outfit(fontSize: 25, fontWeight: FontWeight.w500),
@@ -39,7 +41,7 @@ class IntroductionPage extends StatelessWidget {
           ),
           height10,
           AppButton(
-            title: "Start Massaging",
+            title: LocaleData.introductionNextPageText.getString(context),
             onPressed: () => NavigationUtils.phoneVerificationPage(context),
           ),
           height20,

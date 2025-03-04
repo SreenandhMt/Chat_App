@@ -1,9 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-
-import 'package:chat_app/components/chat_page/audio_player.dart';
 import 'package:chat_app/components/chat_page/audio_widget.dart';
 import 'package:chat_app/components/chat_page/document_widget.dart';
 import 'package:chat_app/components/chat_page/image_widget.dart';
@@ -12,7 +7,6 @@ import 'package:chat_app/components/chat_page/poll_widget.dart';
 import 'package:chat_app/components/chat_page/sticker_widget.dart';
 import 'package:chat_app/components/chat_page/text_chat_widget.dart';
 import 'package:chat_app/components/chat_page/video_widget.dart';
-import 'package:chat_app/core/image.dart';
 
 import '../../core/colors.dart';
 

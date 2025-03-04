@@ -2,9 +2,10 @@ import 'package:chat_app/components/group_chat/delete_group.dart';
 import 'package:chat_app/components/group_chat/leave_group.dart';
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class GroupInfoPage extends StatelessWidget {
   const GroupInfoPage({super.key});
@@ -50,7 +51,7 @@ class GroupInfoPage extends StatelessWidget {
                           spacing: 10,
                           children: [
                             Icon(Icons.person_add_alt),
-                            Text("Add Members")
+                            Text(LocaleData.addMembersText.getString(context))
                           ],
                         ),
                       ),
@@ -68,7 +69,7 @@ class GroupInfoPage extends StatelessWidget {
                           spacing: 10,
                           children: [
                             Icon(Icons.people_outline_sharp),
-                            Text("View Members")
+                            Text(LocaleData.viewMembersText.getString(context))
                           ],
                         ),
                       ),
@@ -86,7 +87,8 @@ class GroupInfoPage extends StatelessWidget {
                           spacing: 10,
                           children: [
                             Icon(Icons.block),
-                            Text("Banned members"),
+                            Text(LocaleData.bannedMembersText
+                                .getString(context)),
                           ],
                         ),
                       ),
@@ -99,6 +101,41 @@ class GroupInfoPage extends StatelessWidget {
           ),
           height10,
           Container(
+            decoration:
+                BoxDecoration(color: AppColors.backgroundColor(context)),
+            padding: EdgeInsets.symmetric(vertical: 15),
+            child: Column(
+              children: [
+                InkWell(
+                  child: Row(
+                    children: [
+                      width20,
+                      Icon(
+                        Icons.notifications,
+                        size: 30,
+                      ),
+                      width15,
+                      Text(
+                        LocaleData.muteNotificationsText.getString(context),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Spacer(),
+                      Switch(
+                        value: false,
+                        onChanged: (value) {},
+                      ),
+                      width10,
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          height10,
+          Container(
             color: AppColors.backgroundColor(context),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +143,7 @@ class GroupInfoPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, top: 10, bottom: 5),
                   child: Text(
-                    "25 Members",
+                    context.formatString(LocaleData.groupMembersText, [15]),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -120,7 +157,7 @@ class GroupInfoPage extends StatelessWidget {
                     leading: CircleAvatar(
                       backgroundColor: Colors.grey[300],
                       backgroundImage: NetworkImage(
-                          "https://randomuser.me/api/portraits/men/1.jpg"),
+                          "https://randomuser.me/api/portraits/men/$index.jpg"),
                     ),
                     title: Text("User $index"),
                     subtitle: Text("Hello"),
@@ -140,7 +177,8 @@ class GroupInfoPage extends StatelessWidget {
                     children: [
                       width30,
                       Text(
-                        "View All (30 more)",
+                        context
+                            .formatString(LocaleData.viewAllMembersText, [9]),
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w500,
@@ -177,7 +215,7 @@ class GroupInfoPage extends StatelessWidget {
                       ),
                       width15,
                       Text(
-                        "Leave group",
+                        LocaleData.leaveGroupText.getString(context),
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -204,7 +242,7 @@ class GroupInfoPage extends StatelessWidget {
                       ),
                       width15,
                       Text(
-                        "Delete and Exit",
+                        LocaleData.deleteAndExitText.getString(context),
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,

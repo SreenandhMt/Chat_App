@@ -1,8 +1,4 @@
-import 'package:chat_app/core/status_bar_updater.dart';
 import 'package:chat_app/core/theme.dart';
-import 'package:chat_app/features/auth/views/create_profile_page.dart';
-import 'package:chat_app/features/auth/views/introduction_page.dart';
-import 'package:chat_app/features/splash_screen/views/splash_screen.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/go_router.dart';
 import 'package:flutter/material.dart';
