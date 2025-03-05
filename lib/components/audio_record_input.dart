@@ -7,7 +7,11 @@ import 'package:path_provider/path_provider.dart';
 import '../core/size.dart';
 
 class AudioRecordingWidget extends StatefulWidget {
-  const AudioRecordingWidget({super.key});
+  const AudioRecordingWidget({
+    super.key,
+    this.closeRecording,
+  });
+  final void Function()? closeRecording;
 
   @override
   State<AudioRecordingWidget> createState() => _AudioRecodingWidgetState();
@@ -82,6 +86,7 @@ class _AudioRecodingWidgetState extends State<AudioRecordingWidget> {
             IconButton(
               onPressed: () {
                 recorderController.stop();
+                return widget.closeRecording!();
               },
               icon: Icon(
                 Icons.delete,
@@ -102,12 +107,15 @@ class _AudioRecodingWidgetState extends State<AudioRecordingWidget> {
                 color: Colors.red,
               ),
             ),
-            CircleAvatar(
-              backgroundColor: Colors.grey,
-              child: Icon(
-                Icons.send_rounded,
-                color: Colors.white,
-                size: 20,
+            InkWell(
+              onTap: widget.closeRecording,
+              child: CircleAvatar(
+                backgroundColor: Colors.grey,
+                child: Icon(
+                  Icons.send_rounded,
+                  color: Colors.white,
+                  size: 20,
+                ),
               ),
             ),
           ],

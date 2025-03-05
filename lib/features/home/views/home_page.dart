@@ -1,6 +1,7 @@
 import 'package:chat_app/components/app_search_bar.dart';
 import 'package:chat_app/components/home/user_widget.dart';
 import 'package:chat_app/core/colors.dart';
+import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
@@ -25,7 +26,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          LocaleData.chatsText.getString(context),
+          LocaleData.chatsText.getString(
+            context,
+          ),
+          style: AppFonts.appBarStyle(context),
         ),
         actions: [
           PopupMenuButton(
@@ -104,7 +108,10 @@ class HomePage extends StatelessWidget {
                         : AppColors.grey(context),
                     borderRadius: BorderRadius.circular(18),
                   ),
-                  child: Text(category[index]),
+                  child: Text(
+                    category[index],
+                    style: AppFonts.subtitleStyle(context),
+                  ),
                 ),
               ),
             ),

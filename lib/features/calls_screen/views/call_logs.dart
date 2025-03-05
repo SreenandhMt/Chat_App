@@ -1,3 +1,4 @@
+import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,10 @@ class CallLogsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(LocaleData.callsText.getString(context)),
+        title: Text(
+          LocaleData.callsText.getString(context),
+          style: AppFonts.appBarStyle(context),
+        ),
       ),
       body: ListView.builder(
         itemCount: 10,

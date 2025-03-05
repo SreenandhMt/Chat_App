@@ -14,7 +14,6 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           LocaleData.settingsText.getString(context),
-          style: TextStyle(fontSize: 20),
         ),
       ),
       body: ListView(

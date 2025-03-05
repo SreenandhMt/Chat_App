@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/colors.dart';
 import '../../../core/size.dart';
 
-final List<FocusNode> _focusNodes = List.generate(4, (index) => FocusNode());
+final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class OTPVerificationPage extends StatelessWidget {
@@ -61,7 +61,7 @@ class OTPVerificationPage extends StatelessWidget {
               child: Row(
                 spacing: 10,
                 children: List.generate(
-                    4,
+                    6,
                     (index) => Expanded(
                         flex: 1,
                         child: OTPInput(
@@ -111,10 +111,10 @@ class _OTPInputState extends State<OTPInput> {
           }
         } else {
           isActive = true;
-          if (widget.index < 3) {
+          if (widget.index < 5) {
             _focusNodes[widget.index + 1].requestFocus();
           }
-          if (widget.index >= 3 && _formKey.currentState!.validate()) {
+          if (widget.index >= 5 && _formKey.currentState!.validate()) {
             NavigationUtils.createProfilePage(context);
           }
         }

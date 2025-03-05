@@ -22,7 +22,13 @@ class ChatInput extends StatefulWidget {
 }
 
 class _ChatInputState extends State<ChatInput> {
-  bool isRecoding = false;
+  bool isRecording = false;
+
+  void closeRecording() {
+    isRecording = false;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,15 +36,15 @@ class _ChatInputState extends State<ChatInput> {
         color: AppColors.backgroundColor(context),
         borderRadius: BorderRadius.circular(2),
       ),
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 2),
       padding: EdgeInsets.all(10),
-      child: isRecoding
-          ? AudioRecordingWidget()
+      child: isRecording
+          ? AudioRecordingWidget(closeRecording: closeRecording)
           : Column(
               children: [
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                    minHeight: 50,
+                    minHeight: 40,
                     maxHeight: 150,
                   ),
                   child: TextFormField(
@@ -70,7 +76,7 @@ class _ChatInputState extends State<ChatInput> {
                     Icon(CupertinoIcons.add_circled),
                     IconButton(
                         onPressed: () {
-                          isRecoding = !isRecoding;
+                          isRecording = !isRecording;
                           setState(() {});
                         },
                         icon: Icon(CupertinoIcons.mic)),

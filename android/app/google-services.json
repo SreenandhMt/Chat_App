@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "213235388230",
+    "firebase_url": "https://ebook-e2135-default-rtdb.firebaseio.com",
+    "project_id": "ebook-e2135",
+    "storage_bucket": "ebook-e2135.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213235388230:android:79c043525a78a3c0a2df47",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCERfXBav6RjUHptn1pGMCfzfi21xVn_NY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

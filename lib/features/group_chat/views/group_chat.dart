@@ -35,6 +35,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
 
   @override
   void initState() {
+    keyboardVisibility();
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         scrollController.jumpTo(scrollController.position.maxScrollExtent);

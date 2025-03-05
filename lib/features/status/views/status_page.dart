@@ -1,3 +1,4 @@
+import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,10 @@ class StatusPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(LocaleData.statusText.getString(context)),
+          title: Text(
+            LocaleData.statusText.getString(context),
+            style: AppFonts.appBarStyle(context),
+          ),
         ),
         body: ListView(
           children: [
