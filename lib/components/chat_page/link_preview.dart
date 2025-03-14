@@ -1,7 +1,8 @@
+import 'package:chat_app/core/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:html/parser.dart' as html_parser;
-import 'package:http/http.dart' as http;
+
+import 'package:chat_app/core/url_loader.dart';
 
 import '../../core/colors.dart';
 
@@ -11,10 +12,18 @@ class LinkPreviewWidget extends StatefulWidget {
     required this.link,
     required this.isSender,
     this.isGroup = false,
+    this.title,
+    this.description,
+    this.imageUrl,
+    required this.time,
   });
   final String link;
   final bool isSender;
   final bool isGroup;
+  final String? title;
+  final String? description;
+  final String? imageUrl;
+  final String time;
 
   @override
   State<LinkPreviewWidget> createState() => _LinkPreviewWidgetState();
@@ -28,46 +37,13 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
   @override
   void initState() {
     super.initState();
-    _fetchMetadata();
-  }
-
-  Future<void> _fetchMetadata() async {
-    try {
-      final response = await http.get(Uri.parse(widget.link));
-      if (response.statusCode == 200) {
-        var document = html_parser.parse(response.body);
-
-        // Extract Open Graph meta tags
-        title = _getMetaTagContent(document, 'og:title') ?? _getTitle(document);
-        description = _getMetaTagContent(document, 'og:description') ??
-            _getMetaTagContent(document, 'description') ??
-            '';
-        imageUrl = _getMetaTagContent(document, 'og:image') ?? '';
-
-        setState(() {});
-      }
-    } catch (e) {
-      debugPrint('Error fetching metadata: $e');
-    }
-  }
-
-  String getDomain(String url) {
-    Uri uri = Uri.parse(url);
-    return uri.host;
-  }
-
-  String? _getMetaTagContent(var document, String property) {
-    return document
-        .querySelector('meta[property="$property"]')
-        ?.attributes['content'];
-  }
-
-  String _getTitle(var document) {
-    return document.querySelector('title')?.text ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
+    String? title = widget.title;
+    String? description = widget.description;
+    String? imageUrl = widget.imageUrl;
     final size = MediaQuery.sizeOf(context);
     return Container(
       decoration: BoxDecoration(
@@ -88,7 +64,12 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (title.isEmpty && imageUrl.isEmpty && description.isEmpty)
+                if (title != null &&
+                    imageUrl != null &&
+                    description != null &&
+                    title.isEmpty &&
+                    imageUrl.isEmpty &&
+                    description.isEmpty)
                   SizedBox.shrink()
                 else
                   Container(
@@ -98,7 +79,7 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (imageUrl.isNotEmpty)
+                        if (imageUrl != null && imageUrl.isNotEmpty)
                           ClipRRect(
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
@@ -108,27 +89,32 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
                               width: double.infinity,
                             ),
                           ),
-                        if (title.isNotEmpty)
+                        if (title != null)
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, left: 10, right: 10),
+                            padding: EdgeInsets.only(
+                              top: 10,
+                              left: 10,
+                              right: 10,
+                            ),
                             child: Text(
                               title,
                               style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w700),
+                                  fontSize: 16, fontWeight: FontWeight.w600),
                             ),
                           ),
-                        if (description.isNotEmpty)
+                        if (description != null && description.isNotEmpty)
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 10, bottom: 5, left: 10, right: 10),
                             child: Text(description),
-                          ),
+                          )
+                        else
+                          height5,
                         Padding(
                           padding: const EdgeInsets.only(
                               bottom: 10, top: 0, left: 10, right: 10),
                           child: Text(
-                            getDomain(widget.link),
+                            UrlPreviewLoader.getDomain(widget.link),
                             style: TextStyle(color: Colors.grey, fontSize: 16),
                           ),
                         )
@@ -161,7 +147,7 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
                     color: Colors.blue,
                   ),
                 Text(
-                  "10:00 AM",
+                  widget.time,
                   style: TextStyle(fontSize: 12),
                 ),
               ],

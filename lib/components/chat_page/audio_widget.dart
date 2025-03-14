@@ -3,28 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/components/chat_page/audio_player.dart';
 import 'package:chat_app/core/colors.dart';
 
-class ChatAudioWidget extends StatefulWidget {
+class ChatAudioWidget extends StatelessWidget {
   const ChatAudioWidget({
     super.key,
     this.audio,
     required this.isSender,
     this.isGroup = false,
+    required this.wave,
+    required this.time,
   });
   final String? audio;
   final bool isSender;
   final bool isGroup;
+  final List<double> wave;
+  final String time;
 
-  @override
-  State<ChatAudioWidget> createState() => _ChatAudioWidgetState();
-}
-
-class _ChatAudioWidgetState extends State<ChatAudioWidget> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.chatColor(context, widget.isSender),
+        color: AppColors.chatColor(context, isSender),
         borderRadius: BorderRadius.circular(17),
       ),
       constraints: BoxConstraints(
@@ -32,13 +31,17 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
         maxWidth: size.width * 0.79,
         minWidth: size.width * 0.3,
       ),
-      margin: widget.isGroup ? null : EdgeInsets.all(10),
+      margin: isGroup ? null : EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(vertical: 13, horizontal: 15),
       child: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
-            child: AppAudioPlayer(audioUrl: widget.audio!),
+            child: AppAudioPlayer(
+              audioUrl: audio!,
+              wave: wave,
+              isSender: isSender,
+            ),
           ),
           Positioned(
             bottom: 0,
@@ -49,14 +52,14 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
               // crossAxisAlignment: CrossAxisAlignment.end,
               spacing: 5,
               children: [
-                if (widget.isSender)
+                if (isSender)
                   Icon(
                     Icons.check,
                     size: 13,
                     color: Colors.blue,
                   ),
                 Text(
-                  "10:00 AM",
+                  time,
                   style: TextStyle(fontSize: 12),
                 ),
               ],

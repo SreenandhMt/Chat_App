@@ -1,6 +1,7 @@
 import 'package:chat_app/core/assets.dart';
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/status_bar_updater.dart';
+import 'package:chat_app/route/auth_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,10 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) async {
         await Future.delayed(const Duration(seconds: 3));
-        if (mounted) {
-          context.go("/");
-          // NavigationUtils.introductionPage(context);
-        }
+        AuthChecker.checkAuth(context);
       },
     );
     super.initState();

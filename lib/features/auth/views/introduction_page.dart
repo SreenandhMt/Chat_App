@@ -1,3 +1,4 @@
+import 'package:chat_app/core/status_bar_updater.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
@@ -13,39 +14,41 @@ class IntroductionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(),
-          Image.asset(
-            AppAssets.introductionImage(context),
-            height: 400,
-            width: double.infinity,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              LocaleData.introductionDescription.getString(context),
-              textAlign: TextAlign.center,
-              style:
-                  GoogleFonts.outfit(fontSize: 25, fontWeight: FontWeight.w500),
+    return StatusBarUpdater(
+      child: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Spacer(),
+            Image.asset(
+              AppAssets.introductionImage(context),
+              height: 400,
+              width: double.infinity,
             ),
-          ),
-          Spacer(),
-          Text(
-            "Terms & Privacy Policy",
-            style: GoogleFonts.quicksand(
-                fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          height10,
-          AppButton(
-            title: LocaleData.introductionNextPageText.getString(context),
-            onPressed: () => NavigationUtils.phoneVerificationPage(context),
-          ),
-          height20,
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                LocaleData.introductionDescription.getString(context),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.outfit(
+                    fontSize: 25, fontWeight: FontWeight.w500),
+              ),
+            ),
+            Spacer(),
+            Text(
+              "Terms & Privacy Policy",
+              style: GoogleFonts.quicksand(
+                  fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+            height10,
+            AppButton(
+              title: LocaleData.introductionNextPageText.getString(context),
+              onPressed: () => NavigationUtils.phoneVerificationPage(context),
+            ),
+            height20,
+          ],
+        ),
       ),
     );
   }

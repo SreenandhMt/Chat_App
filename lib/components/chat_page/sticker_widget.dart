@@ -10,17 +10,19 @@ class StickerWidget extends StatelessWidget {
     required this.isSender,
     required this.sticker,
     this.isGroup = false,
+    required this.time,
   });
   final bool isSender;
   final String? sticker;
   final bool isGroup;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.chatColor(context, isSender),
+        // color: AppColors.chatColor(context, isSender),
         borderRadius: BorderRadius.circular(17),
       ),
       constraints: BoxConstraints(
@@ -34,7 +36,7 @@ class StickerWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
-            child: Image.file(File(sticker!), width: 150, height: 150),
+            child: Image.network(sticker ?? "", width: 150, height: 150),
           ),
           Positioned(
             bottom: 0,
@@ -52,7 +54,7 @@ class StickerWidget extends StatelessWidget {
                     color: Colors.blue,
                   ),
                 Text(
-                  "10:00 AM",
+                  time,
                   style: TextStyle(fontSize: 12),
                 ),
               ],

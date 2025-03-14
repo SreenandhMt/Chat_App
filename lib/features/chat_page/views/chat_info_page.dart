@@ -15,7 +15,7 @@ class InfoBottomSheet extends StatelessWidget {
         Container(
           color: AppColors.chatBackgroundColor(context),
           width: double.infinity,
-          child: ChatWidget(isSender: true),
+          // child: ChatWidget(isSender: true),
         ),
         height10,
         Row(

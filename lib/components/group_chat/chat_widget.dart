@@ -1,6 +1,8 @@
-import 'package:chat_app/core/size.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/auth/models/user_models.dart';
+import 'package:chat_app/features/chat_page/models/message_model.dart';
 
 import '../../core/colors.dart';
 import '../chat_page/chat_widget.dart';
@@ -8,23 +10,11 @@ import '../chat_page/chat_widget.dart';
 class GroupChatWidget extends StatefulWidget {
   const GroupChatWidget({
     super.key,
-    this.isSender = false,
-    this.image,
-    this.audio,
-    this.url,
-    this.pollData,
-    this.pdf,
-    this.sticker,
-    this.video,
+    required this.sender,
+    required this.messageModel,
   });
-  final bool isSender;
-  final String? image;
-  final String? audio;
-  final String? url;
-  final bool? pollData;
-  final String? pdf;
-  final String? sticker;
-  final String? video;
+  final UserModels? sender;
+  final MessageModel messageModel;
 
   @override
   State<GroupChatWidget> createState() => GroupChatWidgetState();
@@ -34,10 +24,20 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    if (widget.isSender) {
+    List<String> reactions = [];
+    if (widget.messageModel.reactions != null &&
+        widget.messageModel.reactions!.isNotEmpty) {
+      Map<String, dynamic> reactionMap = widget.messageModel.reactions!;
+      for (var i = 0; i < reactionMap.length; i++) {
+        String userId = reactionMap.keys.elementAt(i);
+        reactions.add(reactionMap[userId]!);
+      }
+    }
+    if (widget.messageModel.isSender) {
       return Align(
-        alignment:
-            widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
+        alignment: widget.messageModel.isSender
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
         child: ConstrainedBox(
           constraints: BoxConstraints(
             minHeight: 69,
@@ -47,29 +47,36 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
           child: Stack(
             children: [
               ChatItem(
-                  audio: widget.audio,
-                  image: widget.image,
-                  isSender: widget.isSender,
-                  pdf: widget.pdf,
-                  pollData: widget.pollData,
-                  sticker: widget.sticker,
-                  url: widget.url,
-                  video: widget.video),
-              Positioned(
-                  bottom: 0,
-                  right: 20,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: AppColors.grey(context),
-                        borderRadius: BorderRadius.circular(20)),
-                    padding:
-                        EdgeInsets.only(left: 5, right: 5, bottom: 3, top: 3),
-                    child: Row(
-                      children: [
-                        Text("😆"),
-                      ],
-                    ),
-                  ))
+                messageModel: widget.messageModel,
+                messageType: widget.messageModel.messageType,
+                message: widget.messageModel.message,
+                isSender: widget.messageModel.isSender,
+                wave: widget.messageModel.wave,
+                size: widget.messageModel.width != null &&
+                        widget.messageModel.height != null
+                    ? Size(widget.messageModel.width!.toDouble(),
+                        widget.messageModel.height!.toDouble())
+                    : null,
+              ),
+              if (reactions.isNotEmpty &&
+                  widget.messageModel.messageType != "delete")
+                Positioned(
+                    bottom: 0,
+                    right: 20,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.grey(context),
+                          borderRadius: BorderRadius.circular(20)),
+                      padding:
+                          EdgeInsets.only(left: 5, right: 5, bottom: 3, top: 3),
+                      child: Row(
+                        spacing: 4,
+                        children: List.generate(
+                          reactions.length <= 4 ? reactions.length : 4,
+                          (index) => Text(reactions[index]),
+                        ),
+                      ),
+                    ))
             ],
           ),
         ),
@@ -82,7 +89,11 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 5),
-            child: CircleAvatar(),
+            child: CircleAvatar(
+              backgroundImage: widget.sender == null
+                  ? null
+                  : NetworkImage(widget.sender!.imageUrl ?? ""),
+            ),
           ),
           width5,
           Column(
@@ -90,7 +101,7 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "George Alan",
+                widget.sender == null ? "Removed User" : widget.sender!.name,
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -98,7 +109,7 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
               ),
               height5,
               Align(
-                alignment: widget.isSender
+                alignment: widget.messageModel.isSender
                     ? Alignment.centerRight
                     : Alignment.centerLeft,
                 child: ConstrainedBox(
@@ -112,15 +123,18 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 15),
                         child: ChatItem(
-                            isGroup: true,
-                            audio: widget.audio,
-                            image: widget.image,
-                            isSender: widget.isSender,
-                            pdf: widget.pdf,
-                            pollData: widget.pollData,
-                            sticker: widget.sticker,
-                            url: widget.url,
-                            video: widget.video),
+                          messageModel: widget.messageModel,
+                          messageType: widget.messageModel.messageType,
+                          isGroup: true,
+                          isSender: widget.messageModel.isSender,
+                          message: widget.messageModel.message,
+                          wave: widget.messageModel.wave,
+                          size: widget.messageModel.height == null &&
+                                  widget.messageModel.height == null
+                              ? null
+                              : Size(widget.messageModel.width!.toDouble(),
+                                  widget.messageModel.height!.toDouble()),
+                        ),
                       ),
                       Positioned(
                           bottom: 0,
@@ -132,9 +146,11 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
                             padding: EdgeInsets.only(
                                 left: 5, right: 5, bottom: 3, top: 3),
                             child: Row(
-                              children: [
-                                Text("😆"),
-                              ],
+                              spacing: 4,
+                              children: List.generate(
+                                reactions.length <= 4 ? reactions.length : 4,
+                                (index) => Text(reactions[index]),
+                              ),
                             ),
                           ))
                     ],

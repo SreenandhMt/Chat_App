@@ -1,14 +1,22 @@
-import 'package:chat_app/core/colors.dart';
-import 'package:chat_app/route/navigation_utils.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:chat_app/core/colors.dart';
+import 'package:chat_app/features/auth/models/user_models.dart';
+import 'package:chat_app/features/home/models/chat_model.dart';
 
 class UserWidget extends StatelessWidget {
   const UserWidget({
     super.key,
     required this.index,
+    required this.userModel,
+    required this.chatModel,
+    this.onTap,
   });
   final int index;
+  final UserModels? userModel;
+  final ChatModel chatModel;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +24,18 @@ class UserWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
         title: Text(
-          index > 5 ? "Innovative Online Shopping" : "User Name",
+          chatModel.isGroup ? chatModel.groupName ?? "" : userModel!.name,
           maxLines: 1,
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
         ),
         leading: CircleAvatar(
           radius: 28,
-          backgroundImage: NetworkImage(
-              "https://randomuser.me/api/portraits/men/$index.jpg"),
+          backgroundImage: NetworkImage(chatModel.isGroup
+              ? chatModel.groupImage ?? ""
+              : userModel!.imageUrl ?? ""),
         ),
         subtitle: Text(
-          "Last Message or last seen",
+          chatModel.lastMessage,
           maxLines: 1,
         ),
         trailing: Column(
@@ -38,15 +47,17 @@ class UserWidget extends StatelessWidget {
               radius: 10,
               backgroundColor: AppColors.secondary(context),
               child: Text(
-                "1",
+                chatModel.unreadCount == null
+                    ? "0"
+                    : chatModel
+                        .unreadCount![FirebaseAuth.instance.currentUser!.uid]
+                        .toString(),
                 style: TextStyle(fontSize: 14),
               ),
             )
           ],
         ),
-        onTap: () => index > 5
-            ? NavigationUtils.groupChattingPage(context)
-            : NavigationUtils.chattingPage(context),
+        onTap: onTap,
       ),
     );
   }

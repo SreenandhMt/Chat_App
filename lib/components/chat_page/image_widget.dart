@@ -1,63 +1,72 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/image.dart';
 
-class ChatImageWidget extends StatefulWidget {
+class ChatImageWidget extends StatelessWidget {
   const ChatImageWidget({
     super.key,
     required this.image,
     required this.isSender,
     this.isGroup = false,
+    this.size,
+    required this.time,
   });
   final String image;
   final bool isSender;
   final bool isGroup;
+  final Size? size;
+  final String time;
 
-  @override
-  State<ChatImageWidget> createState() => _ChatImageWidgetState();
-}
-
-class _ChatImageWidgetState extends State<ChatImageWidget> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
+    final screenSize = MediaQuery.sizeOf(context);
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.chatColor(context, widget.isSender),
+        color: AppColors.chatColor(context, isSender),
         borderRadius: BorderRadius.circular(17),
       ),
       constraints: BoxConstraints(
-        minHeight: 65,
-        maxWidth: size.width * 0.79,
-        minWidth: size.width * 0.3,
+        maxHeight: screenSize.height * 0.5,
+        minHeight: 150,
+        maxWidth: screenSize.width * 0.70,
+        minWidth: 100,
       ),
-      margin: widget.isGroup ? null : EdgeInsets.all(10),
+      margin: isGroup ? null : EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(vertical: 9, horizontal: 9),
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 9),
-            child: NetworkImageWidget(imageUrl: widget.image),
+            padding: const EdgeInsets.only(bottom: 20),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                height: size!.height,
+                width: size!.width,
+                imageUrl: image,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Positioned(
             bottom: 0,
-            right: 0,
+            right: 5,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               // mainAxisAlignment: MainAxisAlignment.end,
               // crossAxisAlignment: CrossAxisAlignment.end,
               spacing: 5,
               children: [
-                if (widget.isSender)
+                if (isSender)
                   Icon(
                     Icons.check,
                     size: 13,
                     color: Colors.blue,
                   ),
                 Text(
-                  "10:00 AM",
+                  time,
                   style: TextStyle(fontSize: 12),
                 ),
               ],

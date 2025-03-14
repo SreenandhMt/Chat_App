@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class NavigationUtils {
+  //splash
+  static home(BuildContext context) => context.go("/");
   //auth
   static introductionPage(BuildContext context) => context.go("/introduction");
   static phoneVerificationPage(BuildContext context) =>
@@ -32,6 +34,8 @@ class NavigationUtils {
       context.push("/calls/details");
   static videoCallPage(BuildContext context) => context.push("/video-call");
   static voiceCallPage(BuildContext context) => context.push("/voice-call");
+  //invite friends
+  static inviteFriendsPage(BuildContext context) => context.push("/invite");
   //settings
   static settingsPage(BuildContext context) => context.push("/settings");
   //security

@@ -1,7 +1,12 @@
 import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../features/home/view_models/bloc/home_bloc.dart';
 
 class LeaveGroupDialog extends StatelessWidget {
   const LeaveGroupDialog({super.key});
@@ -34,7 +39,9 @@ class LeaveGroupDialog extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pop();
+                  },
                   height: 45,
                   shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15)),
@@ -45,7 +52,13 @@ class LeaveGroupDialog extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<GroupBloc>().add(GroupEvent.exitGroup());
+                    context.read<HomeBloc>().add(HomeEvent.getAllData());
+                    context.pop();
+                    context.pop();
+                    context.pop();
+                  },
                   color: Colors.red,
                   height: 45,
                   shape: OutlineInputBorder(

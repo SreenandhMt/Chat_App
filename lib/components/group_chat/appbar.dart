@@ -1,6 +1,9 @@
 import 'package:chat_app/features/chat_page/views/chat_info_page.dart';
+import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
+import 'package:chat_app/features/home/models/chat_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/colors.dart';
@@ -8,7 +11,9 @@ import '../../core/size.dart';
 import '../../route/navigation_utils.dart';
 
 PreferredSize groupChatAppBar(BuildContext context,
-    {required List<int> selectedIndex,
+    {required List<String> selectedMessagesId,
+    required ChatModel chatModel,
+    required void Function() clearSelectedMessage,
     required void Function() hideReactions}) {
   return PreferredSize(
       preferredSize: Size(MediaQuery.sizeOf(context).width, 65),
@@ -24,13 +29,14 @@ PreferredSize groupChatAppBar(BuildContext context,
               onPressed: () => context.pop(),
               icon: Icon(Icons.arrow_back),
             ),
-            if (selectedIndex.isEmpty) ...[
+            if (selectedMessagesId.isEmpty) ...[
               InkWell(
                 onTap: () => NavigationUtils.groupInfoPage(context),
                 child: Row(
                   children: [
                     CircleAvatar(
                       radius: 20,
+                      backgroundImage: NetworkImage(chatModel.groupImage ?? ""),
                     ),
                     width10,
                     Column(
@@ -38,10 +44,10 @@ PreferredSize groupChatAppBar(BuildContext context,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Innovative",
+                          chatModel.groupName!,
                           style: TextStyle(fontSize: 16),
                         ),
-                        Text("44 Members"),
+                        Text("${chatModel.participants.length} Members"),
                       ],
                     ),
                   ],
@@ -56,8 +62,8 @@ PreferredSize groupChatAppBar(BuildContext context,
               // width10,
               IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.info)),
             ] else ...[
-              if (selectedIndex.length > 1) ...[
-                Text(selectedIndex.length.toString()),
+              if (selectedMessagesId.length > 1) ...[
+                Text(selectedMessagesId.length.toString()),
                 Spacer(),
                 IconButton(
                   onPressed: () {},
@@ -76,10 +82,14 @@ PreferredSize groupChatAppBar(BuildContext context,
                   icon: Icon(Icons.forward_to_inbox_outlined),
                 ),
               ] else ...[
-                Text(selectedIndex.length.toString()),
+                Text(selectedMessagesId.length.toString()),
                 Spacer(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    hideReactions();
+                    _deleteMessage(context, selectedMessagesId.first);
+                    clearSelectedMessage();
+                  },
                   icon: Icon(Icons.delete_outline_rounded),
                 ),
                 IconButton(
@@ -128,4 +138,8 @@ PreferredSize groupChatAppBar(BuildContext context,
           ],
         ),
       ));
+}
+
+void _deleteMessage(BuildContext context, String messageId) {
+  context.read<GroupBloc>().add(GroupEvent.deleteMessage(messageId: messageId));
 }

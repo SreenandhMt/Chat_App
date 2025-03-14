@@ -1,15 +1,22 @@
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/auth/models/user_models.dart';
+import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/colors.dart';
 import '../../features/chat_page/views/chat_info_page.dart';
 import '../../route/navigation_utils.dart';
 
-PreferredSize appBar(BuildContext context,
-    {required void Function() hideReactions,
-    required List<int> selectedIndex}) {
+PreferredSize appBar(
+  BuildContext context, {
+  required void Function() hideReactions,
+  required List<String> selectedMessages,
+  required UserModels userModel,
+  required void Function() clearMessage,
+}) {
   return PreferredSize(
       preferredSize: Size(MediaQuery.sizeOf(context).width, 65),
       child: Container(
@@ -20,11 +27,11 @@ PreferredSize appBar(BuildContext context,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              onPressed: () => context.pop(),
-              icon: Icon(Icons.arrow_back),
-            ),
-            if (selectedIndex.isEmpty) ...[
+            if (selectedMessages.isEmpty) ...[
+              IconButton(
+                onPressed: () => context.pop(),
+                icon: Icon(Icons.arrow_back),
+              ),
               Expanded(
                 child: InkWell(
                   onTap: () => NavigationUtils.userProfilePage(context),
@@ -32,6 +39,7 @@ PreferredSize appBar(BuildContext context,
                     children: [
                       CircleAvatar(
                         radius: 20,
+                        backgroundImage: NetworkImage(userModel.imageUrl ?? ""),
                       ),
                       width10,
                       Column(
@@ -39,10 +47,10 @@ PreferredSize appBar(BuildContext context,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "George Alan",
+                            userModel.name,
                             style: TextStyle(fontSize: 16),
                           ),
-                          Text("Online"),
+                          Text(userModel.status),
                         ],
                       ),
                     ],
@@ -59,8 +67,12 @@ PreferredSize appBar(BuildContext context,
               // width10,
               IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.info)),
             ] else ...[
-              if (selectedIndex.length > 1) ...[
-                Text(selectedIndex.length.toString()),
+              if (selectedMessages.length > 1) ...[
+                IconButton(
+                  onPressed: clearMessage,
+                  icon: Icon(Icons.arrow_back),
+                ),
+                Text(selectedMessages.length.toString()),
                 Spacer(),
                 IconButton(
                   onPressed: () {},
@@ -79,10 +91,18 @@ PreferredSize appBar(BuildContext context,
                   icon: Icon(Icons.forward_to_inbox_outlined),
                 ),
               ] else ...[
-                Text(selectedIndex.length.toString()),
+                IconButton(
+                  onPressed: clearMessage,
+                  icon: Icon(Icons.arrow_back),
+                ),
+                Text(selectedMessages.length.toString()),
                 Spacer(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<ChatBloc>().add(ChatEvent.deleteMessage(
+                        messageId: selectedMessages.first));
+                    clearMessage();
+                  },
                   icon: Icon(Icons.delete_outline_rounded),
                 ),
                 IconButton(

@@ -1,15 +1,19 @@
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/auth/view_models/bloc/auth_bloc.dart';
 import 'package:chat_app/features/auth/views/introduction_page.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../components/auth/country_code_picker.dart';
+
+TextEditingController _controller = TextEditingController();
+String _code = "+91";
 
 class NumberVerificationPage extends StatelessWidget {
   const NumberVerificationPage({super.key});
@@ -69,7 +73,9 @@ class NumberVerificationPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CountryCodePicker(
-                        onCountrySelected: (name, code, flagUrl) {},
+                        onCountrySelected: (name, code, flagUrl) {
+                          _code = code;
+                        },
                       ),
                     ],
                   ),
@@ -82,7 +88,8 @@ class NumberVerificationPage extends StatelessWidget {
                     autofocus: true,
                     keyboardType: TextInputType.numberWithOptions(
                         signed: true, decimal: true),
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    controller: _controller,
                     decoration: InputDecoration(
                       hintText:
                           LocaleData.loginPhoneNumberHit.getString(context),
@@ -108,7 +115,13 @@ class NumberVerificationPage extends StatelessWidget {
           Spacer(),
           AppButton(
               title: LocaleData.continueText.getString(context),
-              onPressed: () => NavigationUtils.otpVerificationPage(context)),
+              onPressed: () {
+                context.read<AuthBloc>().add(
+                      AuthEvent.signinWithPhoneNumber(
+                          '$_code ${_controller.text}'),
+                    );
+                NavigationUtils.otpVerificationPage(context);
+              }),
           height20,
         ],
       ),

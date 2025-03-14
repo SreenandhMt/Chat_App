@@ -1,4 +1,7 @@
+import 'package:chat_app/components/chat_page/deleted_message.dart';
+import 'package:chat_app/components/chat_page/typing_widget.dart';
 import 'package:flutter/material.dart';
+
 import 'package:chat_app/components/chat_page/audio_widget.dart';
 import 'package:chat_app/components/chat_page/document_widget.dart';
 import 'package:chat_app/components/chat_page/image_widget.dart';
@@ -7,72 +10,72 @@ import 'package:chat_app/components/chat_page/poll_widget.dart';
 import 'package:chat_app/components/chat_page/sticker_widget.dart';
 import 'package:chat_app/components/chat_page/text_chat_widget.dart';
 import 'package:chat_app/components/chat_page/video_widget.dart';
+import 'package:chat_app/features/chat_page/models/message_model.dart';
 
 import '../../core/colors.dart';
 
-class ChatWidget extends StatefulWidget {
+class ChatWidget extends StatelessWidget {
   const ChatWidget({
     super.key,
-    this.isSender = false,
-    this.image,
-    this.audio,
-    this.url,
-    this.pollData,
-    this.pdf,
-    this.sticker,
-    this.video,
+    required this.messageModel,
   });
-  final bool isSender;
-  final String? image;
-  final String? audio;
-  final String? url;
-  final bool? pollData;
-  final String? pdf;
-  final String? sticker;
-  final String? video;
+  final MessageModel messageModel;
 
-  @override
-  State<ChatWidget> createState() => _ChatWidgetState();
-}
-
-class _ChatWidgetState extends State<ChatWidget> {
   @override
   Widget build(BuildContext context) {
+    List<String> reactions = [];
+    if (messageModel.reactions != null && messageModel.reactions!.isNotEmpty) {
+      Map<String, dynamic> reactionMap = messageModel.reactions!;
+      for (var i = 0; i < reactionMap.length; i++) {
+        String userId = reactionMap.keys.elementAt(i);
+        reactions.add(reactionMap[userId]!);
+      }
+    }
     final size = MediaQuery.sizeOf(context);
+    // if (messageModel.messageType == "typing" && messageModel.isSender) {
+    //   return const SizedBox.shrink();
+    // }
     return Align(
-      alignment: widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
+      alignment:
+          messageModel.isSender ? Alignment.centerRight : Alignment.centerLeft,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minHeight: 69,
+          minHeight: 30,
           maxWidth: size.width * 0.79,
-          minWidth: size.width * 0.3,
+          minWidth:
+              messageModel.messageType == "typing" ? 10 : size.width * 0.3,
         ),
         child: Stack(
           children: [
             ChatItem(
-                audio: widget.audio,
-                image: widget.image,
-                isSender: widget.isSender,
-                pdf: widget.pdf,
-                pollData: widget.pollData,
-                sticker: widget.sticker,
-                url: widget.url,
-                video: widget.video),
-            Positioned(
-                bottom: 0,
-                right: 20,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.grey(context),
-                      borderRadius: BorderRadius.circular(20)),
-                  padding:
-                      EdgeInsets.only(left: 5, right: 5, bottom: 3, top: 3),
-                  child: Row(
-                    children: [
-                      Text("😆"),
-                    ],
-                  ),
-                ))
+              messageModel: messageModel,
+              messageType: messageModel.messageType,
+              message: messageModel.message,
+              isSender: messageModel.isSender,
+              wave: messageModel.wave,
+              size: messageModel.width != null && messageModel.height != null
+                  ? Size(messageModel.width!.toDouble(),
+                      messageModel.height!.toDouble())
+                  : null,
+            ),
+            if (reactions.isNotEmpty && messageModel.messageType != "delete")
+              Positioned(
+                  bottom: 0,
+                  right: 20,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColors.grey(context),
+                        borderRadius: BorderRadius.circular(20)),
+                    padding:
+                        EdgeInsets.only(left: 5, right: 5, bottom: 3, top: 3),
+                    child: Row(
+                      spacing: 4,
+                      children: List.generate(
+                        reactions.length <= 4 ? reactions.length : 4,
+                        (index) => Text(reactions[index]),
+                      ),
+                    ),
+                  ))
           ],
         ),
       ),
@@ -80,74 +83,104 @@ class _ChatWidgetState extends State<ChatWidget> {
   }
 }
 
-class ChatItem extends StatefulWidget {
+class ChatItem extends StatelessWidget {
   const ChatItem({
     super.key,
+    this.message,
+    required this.messageType,
     this.isSender = false,
-    this.image,
-    this.audio,
-    this.url,
-    this.pollData,
-    this.pdf,
-    this.sticker,
-    this.video,
+    this.size,
     this.isGroup = false,
+    this.wave,
+    required this.messageModel,
   });
+  final String? message;
+  final String messageType;
   final bool isSender;
-  final String? image;
-  final String? audio;
-  final String? url;
-  final bool? pollData;
-  final String? pdf;
-  final String? sticker;
-  final String? video;
+  final Size? size;
   final bool isGroup;
+  final List<double>? wave;
+  final MessageModel messageModel;
 
-  @override
-  State<ChatItem> createState() => _ChatItemState();
-}
-
-class _ChatItemState extends State<ChatItem> {
   @override
   Widget build(BuildContext context) {
-    if (widget.video != null) {
-      return ChatVideoWidget(
-        video: widget.video!,
-        isSender: widget.isSender,
-        isGroup: widget.isGroup,
+    if (messageType == "sticker") {
+      return StickerWidget(
+        isSender: isSender,
+        sticker: messageModel.message,
+        time: messageModel.time,
+        isGroup: isGroup,
       );
     }
-    if (widget.sticker != null) {
+    if (messageType == "video") {
+      return ChatVideoWidget(
+          video: message!,
+          isSender: isSender,
+          isGroup: isGroup,
+          videoSize: size,
+          time: messageModel.time);
+    }
+    if (messageType == "sticker") {
       return StickerWidget(
-          isSender: widget.isSender,
-          sticker: widget.sticker!,
-          isGroup: widget.isGroup);
+          isSender: isSender,
+          sticker: message!,
+          isGroup: isGroup,
+          time: messageModel.time);
     }
-    if (widget.pdf != null) {
-      return DocumentWidget(isSender: widget.isSender, isGroup: widget.isGroup);
+    if (messageType == "document") {
+      return DocumentWidget(
+          isSender: isSender, isGroup: isGroup, messageModel: messageModel);
     }
-    if (widget.pollData != null) {
-      return PollWidget(isSender: widget.isSender, isGroup: widget.isGroup);
+    if (messageType == "poll") {
+      return PollWidget(
+        isSender: isSender,
+        isGroup: isGroup,
+        messageModel: messageModel,
+      );
     }
-    if (widget.url != null) {
+    if (messageType == "link") {
       return LinkPreviewWidget(
-          link: widget.url!,
-          isSender: widget.isSender,
-          isGroup: widget.isGroup);
+        link: message!,
+        isSender: isSender,
+        isGroup: isGroup,
+        description: messageModel.linkPreviewDescription,
+        imageUrl: messageModel.linkPreviewUrl,
+        title: messageModel.linkPreviewTitle,
+        time: messageModel.time,
+      );
     }
-    if (widget.audio != null) {
+    if (messageType == "audio") {
       return ChatAudioWidget(
-          isSender: widget.isSender,
-          audio: widget.audio,
-          isGroup: widget.isGroup);
+          isSender: isSender,
+          audio: message!,
+          isGroup: isGroup,
+          wave: wave!,
+          time: messageModel.time);
     }
-    if (widget.image != null) {
+    if (messageType == "image") {
       return ChatImageWidget(
-          image: widget.image!,
-          isSender: widget.isSender,
-          isGroup: widget.isGroup);
+          image: message!,
+          isSender: isSender,
+          isGroup: isGroup,
+          size: size,
+          time: messageModel.time);
+    }
+    if (messageType == "delete") {
+      return DeletedMessageLog(
+          isSender: isSender, text: message!, isGroup: isGroup);
+    }
+    if (messageType == "typing") {
+      return StatusTypingWidget(
+        isSender: isSender,
+        text: "Typing...",
+        isGroup: isGroup,
+        time: messageModel.time,
+      );
     }
     return TextChatWidget(
-        isSender: widget.isSender, text: "", isGroup: widget.isGroup);
+        isSender: isSender,
+        text: message!,
+        isGroup: isGroup,
+        time: messageModel.time);
   }
 }

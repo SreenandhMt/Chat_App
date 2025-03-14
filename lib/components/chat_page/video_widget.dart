@@ -9,10 +9,14 @@ class ChatVideoWidget extends StatefulWidget {
     required this.video,
     required this.isSender,
     this.isGroup = false,
+    this.videoSize,
+    required this.time,
   });
   final String video;
   final bool isSender;
   final bool isGroup;
+  final Size? videoSize;
+  final String time;
 
   @override
   State<ChatVideoWidget> createState() => ChatVideoWidgetState();
@@ -45,9 +49,10 @@ class ChatVideoWidgetState extends State<ChatVideoWidget> {
         borderRadius: BorderRadius.circular(17),
       ),
       constraints: BoxConstraints(
-        minHeight: 65,
-        maxWidth: size.width * 0.79,
-        minWidth: size.width * 0.3,
+        maxHeight: size.height * 0.5,
+        minHeight: 150,
+        maxWidth: size.width * 0.70,
+        minWidth: size.width * 0.6,
       ),
       margin: widget.isGroup ? null : EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
@@ -58,32 +63,39 @@ class ChatVideoWidgetState extends State<ChatVideoWidget> {
             child: controller.value.isInitialized
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: AspectRatio(
-                        aspectRatio: controller.value.aspectRatio,
-                        child: Stack(
-                          children: [
-                            VideoPlayer(controller),
-                            Align(
-                              alignment: Alignment.center,
-                              child: IconButton(
-                                onPressed: () {
-                                  controller.value.isPlaying
-                                      ? controller.pause()
-                                      : controller.play();
-                                  setState(() {});
-                                },
-                                icon: Icon(
-                                  controller.value.isPlaying
-                                      ? Icons.pause_circle_filled_rounded
-                                      : Icons.play_circle_filled,
-                                  size: 50,
-                                ),
+                    child: SizedBox(
+                      width: controller.value.size.width,
+                      height: controller.value.size.height,
+                      child: Stack(
+                        children: [
+                          VideoPlayer(controller),
+                          Align(
+                            alignment: Alignment.center,
+                            child: IconButton(
+                              onPressed: () {
+                                controller.value.isPlaying
+                                    ? controller.pause()
+                                    : controller.play();
+                                setState(() {});
+                              },
+                              icon: Icon(
+                                controller.value.isPlaying
+                                    ? Icons.pause_circle_filled_rounded
+                                    : Icons.play_circle_filled,
+                                size: 50,
                               ),
-                            )
-                          ],
-                        )),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   )
-                : SizedBox.shrink(),
+                : widget.videoSize == null
+                    ? SizedBox.shrink()
+                    : SizedBox(
+                        width: widget.videoSize!.width,
+                        height: widget.videoSize!.height,
+                      ),
           ),
           Positioned(
             bottom: 0,
@@ -99,7 +111,7 @@ class ChatVideoWidgetState extends State<ChatVideoWidget> {
                     color: Colors.blue,
                   ),
                 Text(
-                  "10:00 AM",
+                  widget.time,
                   style: TextStyle(fontSize: 12),
                 ),
               ],

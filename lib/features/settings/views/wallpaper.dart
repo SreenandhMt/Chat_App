@@ -40,7 +40,7 @@ class WallpaperSettings extends StatelessWidget {
                   color: colors[index]),
               child: Column(
                 children: [
-                  ChatWidget(isSender: true),
+                  // ChatWidget(isSender: true),
                 ],
               ),
             ),

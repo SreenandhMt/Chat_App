@@ -9,7 +9,8 @@ import 'package:chat_app/features/calls_screen/views/video_call_page.dart';
 import 'package:chat_app/features/calls_screen/views/voice_call_page.dart';
 import 'package:chat_app/features/chat_page/views/chat_page.dart';
 import 'package:chat_app/features/chat_page/views/user_info.dart';
-import 'package:chat_app/features/group_chat/views/add_members.dart';
+import 'package:chat_app/features/contact/views/saved_contacts.dart';
+import 'package:chat_app/features/contact/views/add_members.dart';
 import 'package:chat_app/features/group_chat/views/all_group_members.dart';
 import 'package:chat_app/features/group_chat/views/banned_members.dart';
 import 'package:chat_app/features/group_chat/views/create_group.dart';
@@ -31,7 +32,7 @@ import 'package:go_router/go_router.dart';
 import '../features/calls_screen/views/call_logs.dart';
 
 class AppRouter {
-  static final router = GoRouter(initialLocation: "/intro", routes: [
+  static final router = GoRouter(initialLocation: "/splash", routes: [
     StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
             MainPageConfiguration(navigationShell: navigationShell),
@@ -123,6 +124,10 @@ class AppRouter {
             builder: (context, state) => CreateProfilePage(),
           ),
         ]),
+    GoRoute(
+      path: "/invite",
+      builder: (context, state) => InviteSavedContacts(),
+    ),
     GoRoute(
         path: "/settings",
         builder: (context, state) => SettingsPage(),

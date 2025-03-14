@@ -3,28 +3,25 @@ import 'package:flutter/material.dart';
 
 import 'package:chat_app/core/colors.dart';
 
-class TextChatWidget extends StatefulWidget {
+class TextChatWidget extends StatelessWidget {
   const TextChatWidget({
     super.key,
     required this.isSender,
     required this.text,
     this.isGroup = false,
+    required this.time,
   });
   final bool isSender;
   final String text;
   final bool isGroup;
+  final String time;
 
-  @override
-  State<TextChatWidget> createState() => _TextChatWidgetState();
-}
-
-class _TextChatWidgetState extends State<TextChatWidget> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.chatColor(context, widget.isSender),
+        color: AppColors.chatColor(context, isSender),
         borderRadius: BorderRadius.circular(17),
       ),
       constraints: BoxConstraints(
@@ -32,14 +29,14 @@ class _TextChatWidgetState extends State<TextChatWidget> {
         maxWidth: size.width * 0.79,
         minWidth: size.width * 0.3,
       ),
-      margin: widget.isGroup ? null : EdgeInsets.all(10),
+      margin: isGroup ? null : EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(vertical: 13, horizontal: 15),
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 21),
+            padding: const EdgeInsets.only(bottom: 20),
             child: Text(
-              "Hi, Testing the message",
+              text,
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -52,14 +49,14 @@ class _TextChatWidgetState extends State<TextChatWidget> {
               // crossAxisAlignment: CrossAxisAlignment.end,
               spacing: 5,
               children: [
-                if (widget.isSender)
+                if (isSender)
                   Icon(
                     Icons.check,
                     size: 13,
                     color: Colors.blue,
                   ),
                 Text(
-                  "10:00 AM",
+                  time,
                   style: TextStyle(fontSize: 12),
                 ),
               ],

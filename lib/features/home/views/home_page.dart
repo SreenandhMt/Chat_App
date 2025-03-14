@@ -3,9 +3,15 @@ import 'package:chat_app/components/home/user_widget.dart';
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/auth/models/user_models.dart';
+import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
+import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
+import 'package:chat_app/features/home/models/chat_model.dart';
+import 'package:chat_app/features/home/view_models/bloc/home_bloc.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
 final List<String> category = [
@@ -23,6 +29,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) => context.read<HomeBloc>().add(HomeEvent.getAllData()),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -69,6 +78,7 @@ class HomePage extends StatelessWidget {
                     width20,
                   ],
                 ),
+                onTap: () => NavigationUtils.inviteFriendsPage(context),
               ),
               PopupMenuItem(
                 child: Row(
@@ -87,41 +97,91 @@ class HomePage extends StatelessWidget {
           width10,
         ],
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: AppSearchBar(),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: List.generate(
-                category.length,
-                (index) => Container(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  margin: EdgeInsets.only(right: 5),
-                  decoration: BoxDecoration(
-                    color: index == 0
-                        ? AppColors.secondary(context)
-                        : AppColors.grey(context),
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Text(
-                    category[index],
-                    style: AppFonts.subtitleStyle(context),
+      body: BlocConsumer<HomeBloc, HomeState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: AppSearchBar(),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: List.generate(
+                      category.length,
+                      (index) => Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        margin: EdgeInsets.only(right: 5),
+                        decoration: BoxDecoration(
+                          color: index == 0
+                              ? AppColors.secondary(context)
+                              : AppColors.grey(context),
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        child: Text(
+                          category[index],
+                          style: AppFonts.subtitleStyle(context),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ),
-          ...List.generate(
-            10,
-            (index) => UserWidget(index: index),
-          ),
-        ],
-      ),
+                StreamBuilder(
+                  stream: state.chatsStream,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return SizedBox();
+                    }
+                    if (snapshot.data!.docs.isEmpty) {
+                      return Center(
+                        child: Text("No Chats Found"),
+                      );
+                    }
+                    context.read<HomeBloc>().add(HomeEvent.loadUserData(
+                        chatModel: snapshot.data?.docs
+                                .map(
+                                  (e) => ChatModel.fromJson(e.data()),
+                                )
+                                .toList() ??
+                            []));
+                    return Column(
+                      children: List.generate(
+                        state.chatsModels.length,
+                        (index) {
+                          final chat =
+                              state.chatsModels[index]["chat"] as ChatModel;
+                          final user =
+                              state.chatsModels[index]["user"] as UserModels?;
+                          return UserWidget(
+                            onTap: () {
+                              if (chat.isGroup) {
+                                context.read<GroupBloc>().add(
+                                    GroupEvent.loadData(
+                                        chat: state.chatsModels[index]));
+                                NavigationUtils.groupChattingPage(context);
+                                return;
+                              }
+                              context.read<ChatBloc>().add(
+                                  ChatEvent.getMessages(
+                                      state.chatsModels[index]));
+                              NavigationUtils.chattingPage(context);
+                            },
+                            index: index,
+                            chatModel: chat,
+                            userModel: user,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                )
+              ],
+            );
+          }),
     );
   }
 }

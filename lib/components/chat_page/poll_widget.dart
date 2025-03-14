@@ -1,17 +1,26 @@
+import 'package:chat_app/components/chat_page/profile_image_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/chat_page/models/message_model.dart';
+import 'package:chat_app/features/home/models/chat_model.dart';
+
+import '../../features/chat_page/view_models/bloc/chat_bloc.dart';
 
 class PollWidget extends StatefulWidget {
   const PollWidget({
     super.key,
     required this.isSender,
     this.isGroup = false,
+    required this.messageModel,
   });
   final bool isSender;
   final bool isGroup;
+  final MessageModel messageModel;
   @override
   State<PollWidget> createState() => _PollWidgetState();
 }
@@ -32,7 +41,7 @@ class _PollWidgetState extends State<PollWidget> {
       ),
       constraints: BoxConstraints(
         minHeight: 65,
-        maxWidth: size.width * 0.79,
+        maxWidth: size.width * 0.8,
         minWidth: size.width * 0.3,
       ),
       margin: widget.isGroup ? null : EdgeInsets.all(10),
@@ -41,36 +50,48 @@ class _PollWidgetState extends State<PollWidget> {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 20, left: 1),
-            child: Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 2),
-                    child: Text(
-                      "How do you prefer to shop?",
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
-                    ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 2),
+                  child: Text(
+                    widget.messageModel.message!,
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
                   ),
-                  PollItem(imageUrls: imageUrls),
-                  PollItem(imageUrls: imageUrls),
-                  PollItem(imageUrls: imageUrls),
-                  height10,
-                  Divider(),
-                  height10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "View All",
-                        style: TextStyle(
-                            color: AppColors.secondary(context), fontSize: 17),
-                      )
-                    ],
-                  )
-                ],
-              ),
+                ),
+                ...widget.messageModel.options!.keys.map(
+                  (value) => PollItem(
+                    option: value.toString(),
+                    messageId: widget.messageModel.id,
+                    votes: widget.messageModel.votes!,
+                    progress: (widget.messageModel.options![value]! /
+                            (context.read<ChatBloc>().state.chatData!['chat']
+                                    as ChatModel)
+                                .participants
+                                .length) *
+                        1,
+                    imageUrls: imageUrls,
+                    isSender: widget.isSender,
+                  ),
+                ),
+                height10,
+                Divider(),
+                height10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "View All",
+                      style: TextStyle(
+                          color: widget.isSender
+                              ? null
+                              : AppColors.secondary(context),
+                          fontSize: 17),
+                    )
+                  ],
+                )
+              ],
             ),
           ),
           Positioned(
@@ -89,7 +110,7 @@ class _PollWidgetState extends State<PollWidget> {
                     color: Colors.blue,
                   ),
                 Text(
-                  "10:00 AM",
+                  widget.messageModel.time,
                   style: TextStyle(fontSize: 12),
                 ),
               ],
@@ -105,69 +126,90 @@ class PollItem extends StatelessWidget {
   const PollItem({
     super.key,
     required this.imageUrls,
+    required this.isSender,
+    required this.option,
+    required this.progress,
+    required this.votes,
+    required this.messageId,
   });
   final List<String> imageUrls;
+  final bool isSender;
+  final String option;
+  final double progress;
+  final Map<String, dynamic> votes;
+  final String messageId;
 
   @override
   Widget build(BuildContext context) {
     return LimitedBox(
       maxWidth: double.infinity,
-      child: Expanded(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Icon(Icons.circle_outlined),
-            width10,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  LimitedBox(
-                    maxWidth: double.infinity,
-                    child: Expanded(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Online",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Spacer(),
-                          LimitedBox(
-                            maxHeight: 50,
-                            maxWidth: 70,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: imageUrls.asMap().entries.map((entry) {
-                                int index = entry.key;
-                                String url = entry.value;
-                                return Positioned(
-                                  left: index *
-                                      17, // Adjust overlap by modifying this value
-                                  child: CircleAvatar(
-                                    radius: 15,
-                                    backgroundImage: NetworkImage(url),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                          Text("3"),
-                        ],
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          CupertinoRadio(
+              groupValue: (votes[option] is List)
+                  ? (votes[option] as List)
+                      .contains(FirebaseAuth.instance.currentUser!.uid)
+                  : false,
+              value: true,
+              onChanged: (value) {
+                context.read<ChatBloc>().add(ChatEvent.votePoll(
+                    votes: votes, option: option, messageId: messageId));
+              }),
+          width10,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        option,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                  ),
-                  LinearProgressIndicator(
-                    color: AppColors.secondary(context),
-                    borderRadius: BorderRadius.circular(10),
-                    minHeight: 10,
-                    value: 0.4,
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+                    LimitedBox(
+                      maxHeight: 50,
+                      maxWidth: 70,
+                      child: Stack(
+                        alignment: Alignment.centerRight,
+                        children: List.generate(
+                            (votes[option] is List) ? votes[option].length : 0,
+                            (index) {
+                          return Positioned(
+                            right: index * 17,
+                            child: UserProfileScreen(
+                              uid: votes[option][index],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    width5,
+                    Text((votes[option] is List)
+                        ? votes[option].length.toString()
+                        : ""),
+                  ],
+                ),
+                LinearProgressIndicator(
+                  color: isSender
+                      ? AppColors.backgroundColor(context)
+                      : AppColors.secondary(context),
+                  borderRadius: BorderRadius.circular(10),
+                  minHeight: 10,
+                  value: progress,
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
