@@ -29,6 +29,15 @@ class NavigationUtils {
       context.push("/group-chat/add-member");
   static createGroupPage(BuildContext context) => context.push("/create-group");
 
+  //status
+  static createStatusMedia(BuildContext context) =>
+      context.push("/status-media");
+  static createStatusCamera(BuildContext context) =>
+      context.push("/status-camera");
+  static statusViewPage(BuildContext context) => context.push("/status-view");
+  static editImageStatus(BuildContext context) =>
+      context.push("/status-edit-image");
+
   //Call log
   static callDetailsPage(BuildContext context) =>
       context.push("/calls/details");

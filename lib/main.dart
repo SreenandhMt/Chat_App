@@ -4,6 +4,7 @@ import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
 import 'package:chat_app/features/contact/view_models/bloc/contact_bloc.dart';
 import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 import 'package:chat_app/features/home/view_models/bloc/home_bloc.dart';
+import 'package:chat_app/features/status/view_models/bloc/status_bloc.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/go_router.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => HomeBloc(),
+        ),
+        BlocProvider(
+          create: (context) => StatusBloc(),
         ),
         BlocProvider(
           create: (context) => ChatBloc(),

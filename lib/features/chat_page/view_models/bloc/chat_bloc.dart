@@ -1,8 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/chat_page/services/chat_services.dart';
 import 'package:chat_app/features/home/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

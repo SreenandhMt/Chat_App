@@ -27,6 +27,7 @@ mixin _$GroupEvent {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -34,7 +35,7 @@ mixin _$GroupEvent {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -58,6 +59,7 @@ mixin _$GroupEvent {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -65,7 +67,7 @@ mixin _$GroupEvent {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -89,6 +91,7 @@ mixin _$GroupEvent {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -96,7 +99,7 @@ mixin _$GroupEvent {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -121,12 +124,13 @@ mixin _$GroupEvent {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -143,12 +147,13 @@ mixin _$GroupEvent {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -165,12 +170,13 @@ mixin _$GroupEvent {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -284,6 +290,7 @@ class _$LoadDataImpl implements _LoadData {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -291,7 +298,7 @@ class _$LoadDataImpl implements _LoadData {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -318,6 +325,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -325,7 +333,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -352,6 +360,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -359,7 +368,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -390,12 +399,13 @@ class _$LoadDataImpl implements _LoadData {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -415,12 +425,13 @@ class _$LoadDataImpl implements _LoadData {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -440,12 +451,13 @@ class _$LoadDataImpl implements _LoadData {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -548,6 +560,7 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -555,7 +568,7 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -582,6 +595,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -589,7 +603,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -616,6 +630,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -623,7 +638,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -654,12 +669,13 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -679,12 +695,13 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -704,12 +721,13 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -811,6 +829,7 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -818,7 +837,7 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -845,6 +864,7 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -852,7 +872,7 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -879,6 +899,7 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -886,7 +907,7 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -917,12 +938,13 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -942,12 +964,13 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -967,12 +990,13 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -1083,6 +1107,7 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -1090,7 +1115,7 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -1117,6 +1142,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1124,7 +1150,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -1151,6 +1177,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1158,7 +1185,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -1189,12 +1216,13 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -1214,12 +1242,13 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -1239,12 +1268,13 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -1363,6 +1393,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -1370,7 +1401,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -1397,6 +1428,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1404,7 +1436,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -1431,6 +1463,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1438,7 +1471,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -1469,12 +1502,13 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -1494,12 +1528,13 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -1519,12 +1554,13 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -1628,6 +1664,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -1635,7 +1672,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -1662,6 +1699,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1669,7 +1707,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -1696,6 +1734,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1703,7 +1742,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -1734,12 +1773,13 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -1759,12 +1799,13 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -1784,12 +1825,13 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -1891,6 +1933,7 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -1898,7 +1941,7 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -1925,6 +1968,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1932,7 +1976,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -1959,6 +2003,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1966,7 +2011,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -1997,12 +2042,13 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -2022,12 +2068,13 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -2047,12 +2094,13 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -2154,6 +2202,7 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -2161,7 +2210,7 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -2188,6 +2237,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2195,7 +2245,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -2222,6 +2272,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2229,7 +2280,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -2260,12 +2311,13 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -2285,12 +2337,13 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -2310,12 +2363,13 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -2434,6 +2488,7 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -2441,7 +2496,7 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -2468,6 +2523,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2475,7 +2531,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -2502,6 +2558,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2509,7 +2566,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -2540,12 +2597,13 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -2565,12 +2623,13 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -2590,12 +2649,13 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -2620,6 +2680,277 @@ abstract class _CreatePoll implements GroupEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CreatePollImplCopyWith<_$CreatePollImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendStickerImplCopyWith<$Res> {
+  factory _$$SendStickerImplCopyWith(
+          _$SendStickerImpl value, $Res Function(_$SendStickerImpl) then) =
+      __$$SendStickerImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String stickerPath});
+}
+
+/// @nodoc
+class __$$SendStickerImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$SendStickerImpl>
+    implements _$$SendStickerImplCopyWith<$Res> {
+  __$$SendStickerImplCopyWithImpl(
+      _$SendStickerImpl _value, $Res Function(_$SendStickerImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? stickerPath = null,
+  }) {
+    return _then(_$SendStickerImpl(
+      stickerPath: null == stickerPath
+          ? _value.stickerPath
+          : stickerPath // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendStickerImpl implements _SendSticker {
+  const _$SendStickerImpl({required this.stickerPath});
+
+  @override
+  final String stickerPath;
+
+  @override
+  String toString() {
+    return 'GroupEvent.sendSticker(stickerPath: $stickerPath)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendStickerImpl &&
+            (identical(other.stickerPath, stickerPath) ||
+                other.stickerPath == stickerPath));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, stickerPath);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SendStickerImplCopyWith<_$SendStickerImpl> get copyWith =>
+      __$$SendStickerImplCopyWithImpl<_$SendStickerImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function() exitGroup,
+    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<String> members) addMember,
+  }) {
+    return sendSticker(stickerPath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function()? exitGroup,
+    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<String> members)? addMember,
+  }) {
+    return sendSticker?.call(stickerPath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function()? exitGroup,
+    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<String> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (sendSticker != null) {
+      return sendSticker(stickerPath);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return sendSticker(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return sendSticker?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (sendSticker != null) {
+      return sendSticker(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SendSticker implements GroupEvent {
+  const factory _SendSticker({required final String stickerPath}) =
+      _$SendStickerImpl;
+
+  String get stickerPath;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SendStickerImplCopyWith<_$SendStickerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2727,6 +3058,7 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -2734,7 +3066,7 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -2761,6 +3093,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2768,7 +3101,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -2795,6 +3128,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2802,7 +3136,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -2833,12 +3167,13 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -2858,12 +3193,13 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -2883,12 +3219,13 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -2996,6 +3333,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -3003,7 +3341,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -3030,6 +3368,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3037,7 +3376,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -3064,6 +3403,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3071,7 +3411,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -3102,12 +3442,13 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -3127,12 +3468,13 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -3152,12 +3494,13 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -3262,6 +3605,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -3269,7 +3613,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -3296,6 +3640,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3303,7 +3648,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -3330,6 +3675,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3337,7 +3683,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -3368,12 +3714,13 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -3393,12 +3740,13 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -3418,12 +3766,13 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -3528,6 +3877,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -3535,7 +3885,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -3562,6 +3912,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3569,7 +3920,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -3596,6 +3947,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3603,7 +3955,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -3634,12 +3986,13 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -3659,12 +4012,13 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -3684,12 +4038,13 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -3765,6 +4120,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -3772,7 +4128,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -3799,6 +4155,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3806,7 +4163,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -3833,6 +4190,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3840,7 +4198,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -3871,12 +4229,13 @@ class _$ExitGroupImpl implements _ExitGroup {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -3896,12 +4255,13 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -3921,12 +4281,13 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -3944,20 +4305,20 @@ abstract class _ExitGroup implements GroupEvent {
 }
 
 /// @nodoc
-abstract class _$$SendStickerImplCopyWith<$Res> {
-  factory _$$SendStickerImplCopyWith(
-          _$SendStickerImpl value, $Res Function(_$SendStickerImpl) then) =
-      __$$SendStickerImplCopyWithImpl<$Res>;
+abstract class _$$ReloadGroupImplCopyWith<$Res> {
+  factory _$$ReloadGroupImplCopyWith(
+          _$ReloadGroupImpl value, $Res Function(_$ReloadGroupImpl) then) =
+      __$$ReloadGroupImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String stickerPath});
 }
 
 /// @nodoc
-class __$$SendStickerImplCopyWithImpl<$Res>
-    extends _$GroupEventCopyWithImpl<$Res, _$SendStickerImpl>
-    implements _$$SendStickerImplCopyWith<$Res> {
-  __$$SendStickerImplCopyWithImpl(
-      _$SendStickerImpl _value, $Res Function(_$SendStickerImpl) _then)
+class __$$ReloadGroupImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$ReloadGroupImpl>
+    implements _$$ReloadGroupImplCopyWith<$Res> {
+  __$$ReloadGroupImplCopyWithImpl(
+      _$ReloadGroupImpl _value, $Res Function(_$ReloadGroupImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of GroupEvent
@@ -3967,7 +4328,7 @@ class __$$SendStickerImplCopyWithImpl<$Res>
   $Res call({
     Object? stickerPath = null,
   }) {
-    return _then(_$SendStickerImpl(
+    return _then(_$ReloadGroupImpl(
       stickerPath: null == stickerPath
           ? _value.stickerPath
           : stickerPath // ignore: cast_nullable_to_non_nullable
@@ -3978,22 +4339,22 @@ class __$$SendStickerImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SendStickerImpl implements _SendSticker {
-  const _$SendStickerImpl({required this.stickerPath});
+class _$ReloadGroupImpl implements _ReloadGroup {
+  const _$ReloadGroupImpl({required this.stickerPath});
 
   @override
   final String stickerPath;
 
   @override
   String toString() {
-    return 'GroupEvent.sendSticker(stickerPath: $stickerPath)';
+    return 'GroupEvent.reloadGroup(stickerPath: $stickerPath)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SendStickerImpl &&
+            other is _$ReloadGroupImpl &&
             (identical(other.stickerPath, stickerPath) ||
                 other.stickerPath == stickerPath));
   }
@@ -4006,8 +4367,8 @@ class _$SendStickerImpl implements _SendSticker {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SendStickerImplCopyWith<_$SendStickerImpl> get copyWith =>
-      __$$SendStickerImplCopyWithImpl<_$SendStickerImpl>(this, _$identity);
+  _$$ReloadGroupImplCopyWith<_$ReloadGroupImpl> get copyWith =>
+      __$$ReloadGroupImplCopyWithImpl<_$ReloadGroupImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4021,6 +4382,7 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -4028,7 +4390,7 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -4040,7 +4402,7 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<String> members) addMember,
   }) {
-    return sendSticker(stickerPath);
+    return reloadGroup(stickerPath);
   }
 
   @override
@@ -4055,6 +4417,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4062,7 +4425,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -4074,7 +4437,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<String> members)? addMember,
   }) {
-    return sendSticker?.call(stickerPath);
+    return reloadGroup?.call(stickerPath);
   }
 
   @override
@@ -4089,6 +4452,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4096,7 +4460,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -4109,8 +4473,8 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(List<String> members)? addMember,
     required TResult orElse(),
   }) {
-    if (sendSticker != null) {
-      return sendSticker(stickerPath);
+    if (reloadGroup != null) {
+      return reloadGroup(stickerPath);
     }
     return orElse();
   }
@@ -4127,17 +4491,18 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
   }) {
-    return sendSticker(this);
+    return reloadGroup(this);
   }
 
   @override
@@ -4152,17 +4517,18 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
   }) {
-    return sendSticker?.call(this);
+    return reloadGroup?.call(this);
   }
 
   @override
@@ -4177,34 +4543,35 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
     required TResult orElse(),
   }) {
-    if (sendSticker != null) {
-      return sendSticker(this);
+    if (reloadGroup != null) {
+      return reloadGroup(this);
     }
     return orElse();
   }
 }
 
-abstract class _SendSticker implements GroupEvent {
-  const factory _SendSticker({required final String stickerPath}) =
-      _$SendStickerImpl;
+abstract class _ReloadGroup implements GroupEvent {
+  const factory _ReloadGroup({required final String stickerPath}) =
+      _$ReloadGroupImpl;
 
   String get stickerPath;
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SendStickerImplCopyWith<_$SendStickerImpl> get copyWith =>
+  _$$ReloadGroupImplCopyWith<_$ReloadGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -4345,6 +4712,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -4352,7 +4720,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -4380,6 +4748,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4387,7 +4756,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -4415,6 +4784,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4422,7 +4792,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -4454,12 +4824,13 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -4479,12 +4850,13 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -4504,12 +4876,13 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -4630,6 +5003,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -4637,7 +5011,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -4664,6 +5038,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4671,7 +5046,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -4698,6 +5073,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4705,7 +5081,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -4736,12 +5112,13 @@ class _$CreateGroupImpl implements _CreateGroup {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -4761,12 +5138,13 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -4786,12 +5164,13 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -4901,6 +5280,7 @@ class _$AddMemberImpl implements _AddMember {
     required TResult Function(String link) sendLink,
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -4908,7 +5288,7 @@ class _$AddMemberImpl implements _AddMember {
     required TResult Function(bool isTyping) editStatusToTyping,
     required TResult Function(String messageId) markMessageAsSeen,
     required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String stickerPath) reloadGroup,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -4935,6 +5315,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult? Function(String link)? sendLink,
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4942,7 +5323,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult? Function(bool isTyping)? editStatusToTyping,
     TResult? Function(String messageId)? markMessageAsSeen,
     TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String stickerPath)? reloadGroup,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -4969,6 +5350,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult Function(String link)? sendLink,
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4976,7 +5358,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult Function(bool isTyping)? editStatusToTyping,
     TResult Function(String messageId)? markMessageAsSeen,
     TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String stickerPath)? reloadGroup,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -5007,12 +5389,13 @@ class _$AddMemberImpl implements _AddMember {
     required TResult Function(_SendLink value) sendLink,
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
     required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
     required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_ReloadGroup value) reloadGroup,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -5032,12 +5415,13 @@ class _$AddMemberImpl implements _AddMember {
     TResult? Function(_SendLink value)? sendLink,
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -5057,12 +5441,13 @@ class _$AddMemberImpl implements _AddMember {
     TResult Function(_SendLink value)? sendLink,
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
     TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
     TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_ReloadGroup value)? reloadGroup,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,

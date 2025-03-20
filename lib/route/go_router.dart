@@ -26,10 +26,14 @@ import 'package:chat_app/features/settings/views/security_settings.dart';
 import 'package:chat_app/features/settings/views/settings_page.dart';
 import 'package:chat_app/features/settings/views/wallpaper.dart';
 import 'package:chat_app/features/splash_screen/views/splash_screen.dart';
+import 'package:chat_app/features/status/views/create_status_camera.dart';
+import 'package:chat_app/features/status/views/create_status_media.dart';
 import 'package:chat_app/features/status/views/status_page.dart';
+import 'package:chat_app/features/status/views/status_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/calls_screen/views/call_logs.dart';
+import '../features/status/views/status_editor.dart';
 
 class AppRouter {
   static final router = GoRouter(initialLocation: "/splash", routes: [
@@ -127,6 +131,22 @@ class AppRouter {
     GoRoute(
       path: "/invite",
       builder: (context, state) => InviteSavedContacts(),
+    ),
+    GoRoute(
+      path: "/status-media",
+      builder: (context, state) => CreateStatusMedia(),
+    ),
+    GoRoute(
+      path: "/status-view",
+      builder: (context, state) => StatusView(),
+    ),
+    GoRoute(
+      path: "/status-camera",
+      builder: (context, state) => CreateStatusCameraPage(),
+    ),
+    GoRoute(
+      path: "/status-edit-image",
+      builder: (context, state) => StatusEditor(),
     ),
     GoRoute(
         path: "/settings",

@@ -14,28 +14,7 @@ part 'group_bloc.freezed.dart';
 
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
   GroupBloc() : super(GroupData()) {
-    on<_LoadData>((event, emit) async {
-      try {
-        log(event.chat["chat"].toString());
-        final allChats =
-            GroupService.getAllChats((event.chat["chat"] as ChatModel));
-        emit(
-          GroupState.groupData(
-            groupData: (event.chat["chat"] as ChatModel),
-            messageData: allChats,
-          ),
-        );
-        final allMembers = await GroupService.getAllUsers(
-            (event.chat["chat"] as ChatModel).participants);
-        emit(
-          (state as GroupData).copyWith(
-            groupMembers: allMembers,
-          ),
-        );
-      } catch (e) {
-        log(e.toString());
-      }
-    });
+    on<_LoadData>((event, emit) => _loadData(event, emit, state));
     on<_SendMessage>((event, emit) {
       if (event.message.isEmpty) return;
       GroupService.sendMessage((state as GroupData).groupData!, event.message);
@@ -89,40 +68,68 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
       GroupService.exitGroup((state as GroupData).groupData!);
     });
     //createMessage
-    on<_CreateGroupLoad>((event, emit) async {
-      final List<UserModels> contacts = await GroupService.getContacts();
-      emit(
-        GroupState.createGroupData(
-          groupDescription: event.groupDescription,
-          groupImagePath: event.groupImagePath,
-          groupName: event.groupName,
-          memberCanAddMember: event.memberCanAddMember,
-          memberCanEdit: event.memberCanEdit,
-          memberCanMessage: event.memberCanMessage,
-          contacts: contacts,
-        ),
-      );
-    });
-    on<_AddMember>((event, emit) {
-      if (state is GroupData) {
-        final groupState = state as GroupData;
-        GroupService.addMembers(
-            chatId: groupState.groupData!.chatId,
-            participantsIds: event.members);
-      }
-    });
-    on<_CreateGroup>((event, emit) {
-      if (state is _CreateGroupData) {
-        final groupState = state as _CreateGroupData;
-        GroupService.createGroup(
-            groupName: groupState.groupName,
-            groupDescription: groupState.groupDescription,
-            groupImagePath: groupState.groupImagePath,
-            memberCanEdit: groupState.memberCanEdit,
-            memberCanAddMember: groupState.memberCanAddMember,
-            memberCanMessage: groupState.memberCanMessage,
-            participantsIds: event.participants);
-      }
-    });
+    on<_CreateGroupLoad>((event, emit) async {});
+    on<_AddMember>((event, emit) => _addMember(event, emit, state));
+    on<_CreateGroup>((event, emit) => _createGroup(event, emit, state));
   }
+}
+
+void _loadData(event, emit, state) async {
+  try {
+    final allChats =
+        GroupService.getAllChats((event.chat["chat"] as ChatModel));
+    emit(
+      GroupState.groupData(
+        groupData: (event.chat["chat"] as ChatModel),
+        messageData: allChats,
+      ),
+    );
+    final allMembers = await GroupService.getAllUsers(
+        (event.chat["chat"] as ChatModel).participants);
+    emit(
+      (state as GroupData).copyWith(
+        groupData: (event.chat["chat"] as ChatModel),
+        messageData: allChats,
+        groupMembers: allMembers,
+      ),
+    );
+  } catch (e) {
+    log(e.toString());
+  }
+}
+
+void _addMember(event, emit, state) async {
+  if (state is GroupData) {
+    final groupState = state;
+    await GroupService.addMembers(
+        chatId: groupState.groupData!.chatId, participantsIds: event.members);
+    _reloadGroup(emit, state);
+  }
+}
+
+void _reloadGroup(emit, state) async {
+  final groupData =
+      await GroupService.reloadGroupData((state as GroupData).groupData!);
+  final members = await GroupService.getAllUsers(groupData.participants);
+  emit(
+    (state).copyWith(
+      groupData: groupData,
+      groupMembers: members,
+    ),
+  );
+}
+
+void _createGroup(event, emit, state) async {
+  final List<UserModels> contacts = await GroupService.getContacts();
+  emit(
+    GroupState.createGroupData(
+      groupDescription: event.groupDescription,
+      groupImagePath: event.groupImagePath,
+      groupName: event.groupName,
+      memberCanAddMember: event.memberCanAddMember,
+      memberCanEdit: event.memberCanEdit,
+      memberCanMessage: event.memberCanMessage,
+      contacts: contacts,
+    ),
+  );
 }

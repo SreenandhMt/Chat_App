@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class StatusRing extends StatelessWidget {
   final int segments;
+  final int? viewedIndex;
   final double gapSize;
   final double progress;
   final Color color;
@@ -12,6 +13,7 @@ class StatusRing extends StatelessWidget {
   const StatusRing({
     super.key,
     required this.segments,
+    this.viewedIndex,
     required this.gapSize,
     required this.progress,
     required this.color,
@@ -20,6 +22,14 @@ class StatusRing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Color> colors = [];
+    for (var i = 0; i < segments; i++) {
+      if (viewedIndex != null && (i + 1) <= viewedIndex!) {
+        colors.add(Colors.grey);
+      } else {
+        colors.add(color);
+      }
+    }
     return SizedBox(
       width: 60,
       height: 60,
@@ -46,7 +56,7 @@ class StatusRing extends StatelessWidget {
                 segments: segments,
                 gapSize: gapSize,
                 progress: progress,
-                color: color,
+                colors: colors,
                 strokeWidth: 4,
               ),
             ),
@@ -62,25 +72,19 @@ class StatusRingPainter extends CustomPainter {
   final int segments;
   final double gapSize;
   final double progress;
-  final Color color;
+  final List<Color> colors;
   final double strokeWidth;
 
   StatusRingPainter({
     required this.segments,
     required this.gapSize,
     required this.progress,
-    required this.color,
+    required this.colors,
     required this.strokeWidth,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = color
-      ..strokeWidth = strokeWidth
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-
     final double radius = size.width / 2;
     const double totalAngle = 2 * pi;
     double filledAngle = totalAngle * progress;
@@ -90,6 +94,11 @@ class StatusRingPainter extends CustomPainter {
 
     for (int i = 0; i < segments; i++) {
       if (i < filledSegments) {
+        final Paint paint = Paint()
+          ..color = colors[i % colors.length] // Cycle through colors
+          ..strokeWidth = strokeWidth
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round;
         canvas.drawArc(
           Rect.fromCircle(
               center: Offset(radius, radius), radius: radius - strokeWidth / 2),

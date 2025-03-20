@@ -104,7 +104,7 @@ class GroupService {
     }
   }
 
-  static void addMembers(
+  static Future<void> addMembers(
       {required String chatId, required List<String> participantsIds}) async {
     try {
       await firestore.collection("chats").doc(chatId).update({
@@ -221,5 +221,15 @@ class GroupService {
         .collection("messages")
         .doc(messageId)
         .update({"reactions.${auth.currentUser!.uid}": emoji});
+  }
+
+  static Future<ChatModel> reloadGroupData(ChatModel chatModel) async {
+    return await firestore
+        .collection("chats")
+        .doc(chatModel.chatId)
+        .get()
+        .then((value) {
+      return ChatModel.fromJson(value.data()!);
+    });
   }
 }

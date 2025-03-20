@@ -4,6 +4,7 @@ part of 'group_bloc.dart';
 class GroupEvent with _$GroupEvent {
   const factory GroupEvent.loadData({required Map<String, dynamic> chat}) =
       _LoadData;
+  //sending messages
   const factory GroupEvent.sendMessage(String message) = _SendMessage;
   const factory GroupEvent.sendImage(String path) = _SendImage;
   const factory GroupEvent.addReaction(String messageId, String emoji) =
@@ -15,19 +16,25 @@ class GroupEvent with _$GroupEvent {
   const factory GroupEvent.sendDocument(String path) = _SendDocument;
   const factory GroupEvent.createPoll(
       {required String question, required List<String> options}) = _CreatePoll;
+  const factory GroupEvent.sendSticker({required String stickerPath}) =
+      _SendSticker;
+  //
   const factory GroupEvent.votePoll(
       {required String messageId,
       required String option,
       required Map<String, dynamic> votes}) = _VotePoll;
+  //delete and edit
   const factory GroupEvent.deleteMessage({required String messageId}) =
       _DeleteMessage;
   const factory GroupEvent.editStatusToTyping({required bool isTyping}) =
+      //
       _EditStatusToTyping;
   const factory GroupEvent.markMessageAsSeen({required String messageId}) =
       _MarkMessageAsSeen;
   const factory GroupEvent.exitGroup() = _ExitGroup;
-  const factory GroupEvent.sendSticker({required String stickerPath}) =
-      _SendSticker;
+  //reloading group Data
+  const factory GroupEvent.reloadGroup({required String stickerPath}) =
+      _ReloadGroup;
   //create group
   const factory GroupEvent.createGroupLoad({
     required String groupName,
