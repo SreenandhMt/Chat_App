@@ -36,6 +36,7 @@ class StatusPage extends StatelessWidget {
               ListTile(
                 leading: InkWell(
                   onTap: () {
+                    if (state.myStatus.isEmpty) return;
                     context.read<StatusBloc>().add(StatusEvent.selectStatus(
                         value: {"user": null, "status": state.myStatus}));
                     NavigationUtils.statusViewPage(context);

@@ -3,7 +3,10 @@ import 'package:chat_app/core/size.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+
+import '../view_model/bloc/settings_bloc.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -145,63 +148,126 @@ class LanguageBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        height30,
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            "Choose Language",
-            style: AppFonts.titleFont(context),
-          ),
-        ),
-        height10,
-        ListTile(
-          leading: Padding(
-              padding: EdgeInsets.only(right: 10, left: 5),
-              child: Icon(Icons.language)),
-          title: Text(
-            'English',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-          trailing: Icon(Icons.check, size: 20),
-        ),
-        height10,
-        ListTile(
-          leading: Padding(
-              padding: EdgeInsets.only(right: 10, left: 5),
-              child: Icon(Icons.language)),
-          title: Text(
-            'Hindi',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-          trailing: Icon(Icons.check, size: 20),
-        ),
-        height10,
-        ListTile(
-          leading: Padding(
-              padding: EdgeInsets.only(right: 10, left: 5),
-              child: Icon(Icons.language)),
-          title: Text(
-            'Malayalam',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-          trailing: Icon(Icons.check, size: 20),
-        ),
-        height10,
-        ListTile(
-          leading: Padding(
-              padding: EdgeInsets.only(right: 10, left: 5),
-              child: Icon(Icons.language)),
-          title: Text(
-            'Spanish',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-          trailing: Icon(Icons.check, size: 20),
-        ),
-        height50,
-      ],
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (context, state) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            height30,
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Choose Language",
+                style: AppFonts.titleFont(context),
+              ),
+            ),
+            height10,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Padding(
+                          padding: EdgeInsets.only(right: 10, left: 5),
+                          child: Icon(Icons.language)),
+                      title: Text(
+                        'English',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      trailing: state.languageCode == 'en'
+                          ? Icon(Icons.check, size: 20)
+                          : SizedBox(),
+                      onTap: () {
+                        context.read<SettingsBloc>().add(
+                            SettingsEvent.changeLanguage(languageCode: 'en'));
+                        Navigator.pop(context);
+                      },
+                    ),
+                    height10,
+                    ListTile(
+                      leading: Padding(
+                          padding: EdgeInsets.only(right: 10, left: 5),
+                          child: Icon(Icons.language)),
+                      title: Text(
+                        'Tamil',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      trailing: state.languageCode == 'ta'
+                          ? Icon(Icons.check, size: 20)
+                          : SizedBox(),
+                      onTap: () {
+                        context.read<SettingsBloc>().add(
+                            SettingsEvent.changeLanguage(languageCode: 'ta'));
+                        Navigator.pop(context);
+                      },
+                    ),
+                    height10,
+                    ListTile(
+                      leading: Padding(
+                          padding: EdgeInsets.only(right: 10, left: 5),
+                          child: Icon(Icons.language)),
+                      title: Text(
+                        'Hindi',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      trailing: state.languageCode == 'hi'
+                          ? Icon(Icons.check, size: 20)
+                          : SizedBox(),
+                      onTap: () {
+                        context.read<SettingsBloc>().add(
+                            SettingsEvent.changeLanguage(languageCode: 'hi'));
+                        Navigator.pop(context);
+                      },
+                    ),
+                    height10,
+                    ListTile(
+                      leading: Padding(
+                          padding: EdgeInsets.only(right: 10, left: 5),
+                          child: Icon(Icons.language)),
+                      title: Text(
+                        'Malayalam',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      trailing: state.languageCode == 'ml'
+                          ? Icon(Icons.check, size: 20)
+                          : SizedBox(),
+                      onTap: () {
+                        context.read<SettingsBloc>().add(
+                            SettingsEvent.changeLanguage(languageCode: 'ml'));
+                        Navigator.pop(context);
+                      },
+                    ),
+                    height10,
+                    ListTile(
+                      leading: Padding(
+                          padding: EdgeInsets.only(right: 10, left: 5),
+                          child: Icon(Icons.language)),
+                      title: Text(
+                        'Spanish',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      trailing: state.languageCode == 'es'
+                          ? Icon(Icons.check, size: 20)
+                          : SizedBox(),
+                      onTap: () {
+                        context.read<SettingsBloc>().add(
+                            SettingsEvent.changeLanguage(languageCode: 'es'));
+                        Navigator.pop(context);
+                      },
+                    ),
+                    height30,
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

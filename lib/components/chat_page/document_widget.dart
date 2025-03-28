@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/core/file_type.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +28,15 @@ class DocumentWidget extends StatefulWidget {
 
 class _DocumentWidgetState extends State<DocumentWidget> {
   int fileSize = 0;
+  bool downloadDone = false;
   Future<int?> getFileSize(String fileUrl) async {
     try {
+      final filePath =
+          '/storage/emulated/0/Download/${widget.messageModel.documentName}';
+      final file = File(filePath);
+      if (await file.exists()) {
+        downloadDone = true;
+      }
       final response = await http.head(Uri.parse(fileUrl));
 
       if (response.statusCode == 200) {
@@ -62,6 +72,27 @@ class _DocumentWidgetState extends State<DocumentWidget> {
       }
     });
     super.initState();
+  }
+
+  Future<String?> _downloadFile(String url) async {
+    final filePath =
+        '/storage/emulated/0/Download/${widget.messageModel.documentName}';
+    final file = File(filePath);
+    try {
+      if (await file.exists()) {
+        return filePath;
+      }
+      await Dio().download(url, filePath);
+      if (mounted) {
+        setState(() {
+          downloadDone = true;
+        });
+      }
+      return filePath;
+    } catch (e) {
+      print("File download error: $e");
+      return null;
+    }
   }
 
   @override
@@ -136,12 +167,15 @@ class _DocumentWidgetState extends State<DocumentWidget> {
                     ],
                   ),
                 ),
-                if (!widget.isSender) ...[
-                  Spacer(),
-                  Icon(
-                    Icons.file_download_outlined,
-                    color: AppColors.secondary(context),
-                    size: 25,
+                if (!widget.isSender && !downloadDone) ...[
+                  IconButton(
+                    onPressed: () =>
+                        _downloadFile(widget.messageModel.message!),
+                    icon: Icon(
+                      Icons.file_download_outlined,
+                      color: AppColors.secondary(context),
+                      size: 25,
+                    ),
                   )
                 ]
               ],

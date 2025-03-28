@@ -149,6 +149,10 @@ class AppRouter {
       builder: (context, state) => StatusEditor(),
     ),
     GoRoute(
+      path: "/lock",
+      builder: (context, state) => AppLockSettings(),
+    ),
+    GoRoute(
         path: "/settings",
         builder: (context, state) => SettingsPage(),
         routes: [

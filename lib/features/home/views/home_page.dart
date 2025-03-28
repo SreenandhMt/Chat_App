@@ -29,9 +29,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) => context.read<HomeBloc>().add(HomeEvent.getAllData()),
-    );
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -141,13 +138,9 @@ class HomePage extends StatelessWidget {
                         child: Text("No Chats Found"),
                       );
                     }
-                    context.read<HomeBloc>().add(HomeEvent.loadUserData(
-                        chatModel: snapshot.data?.docs
-                                .map(
-                                  (e) => ChatModel.fromJson(e.data()),
-                                )
-                                .toList() ??
-                            []));
+                    context
+                        .read<HomeBloc>()
+                        .add(HomeEvent.loadUserData(docs: snapshot.data!.docs));
                     return Column(
                       children: List.generate(
                         state.chatsModels.length,

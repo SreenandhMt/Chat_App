@@ -17,5 +17,6 @@ class GroupState with _$GroupState {
     @Default(null) ChatModel? groupData,
     @Default({}) Map<String, UserModels> groupMembers,
     @Default(null) Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+    @Default(0) int wallpaperIndex,
   }) = GroupData;
 }

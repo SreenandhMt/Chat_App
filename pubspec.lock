@@ -18,29 +18,21 @@ packages:
     source: hosted
     version: "1.3.53"
   agora_rtc_engine:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: agora_rtc_engine
       sha256: "458c4b535a619d573915a36aa634feccd076ac72782263004e9666cafc449021"
       url: "https://pub.dev"
     source: hosted
     version: "6.5.1"
-  agora_rtm:
-    dependency: transitive
-    description:
-      name: agora_rtm
-      sha256: "6c65cf6c9658acc9024322798c546e9dc61c39605b67d0af069793d4ee81d199"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.5.9"
-  agora_uikit:
+  agora_token_service:
     dependency: "direct main"
     description:
-      name: agora_uikit
-      sha256: "2c06a3a12a1aeba6dda84c56bef66091fa6b87b11cc96dbff27c092d0697cef7"
+      name: agora_token_service
+      sha256: ce2829fb4923ef6c4e16839a00982718f8335b3726e4971354e27cebcf74566e
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.10"
+    version: "0.1.2"
   analyzer:
     dependency: transitive
     description:
@@ -73,6 +65,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  audio_session:
+    dependency: transitive
+    description:
+      name: audio_session
+      sha256: "2b7fff16a552486d078bfc09a8cde19f426dc6d6329262b684182597bec5b1ac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.25"
   audio_waveforms:
     dependency: "direct main"
     description:
@@ -377,22 +377,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.3"
-  ffmpeg_kit_flutter:
-    dependency: "direct main"
-    description:
-      name: ffmpeg_kit_flutter
-      sha256: "843aae41823ca94a0988d975b4b6cdc6948744b9b7e2707d81a3a9cd237b0100"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.3"
-  ffmpeg_kit_flutter_platform_interface:
-    dependency: transitive
-    description:
-      name: ffmpeg_kit_flutter_platform_interface
-      sha256: addf046ae44e190ad0101b2fde2ad909a3cd08a2a109f6106d2f7048b7abedee
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.1"
   file:
     dependency: transitive
     description:
@@ -566,14 +550,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
-  flutter_colorpicker:
-    dependency: "direct main"
-    description:
-      name: flutter_colorpicker
-      sha256: "969de5f6f9e2a570ac660fb7b501551451ea2a1ab9e2097e89475f60e07816ea"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   flutter_contacts:
     dependency: "direct main"
     description:
@@ -582,14 +558,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.9+2"
-  flutter_image_cropper:
-    dependency: "direct main"
-    description:
-      name: flutter_image_cropper
-      sha256: "5175fa4f717efe97522d5cb0f0c22ca803e115e5962cc3afc0b610485da20725"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2"
   flutter_keyboard_visibility:
     dependency: "direct main"
     description:
@@ -659,14 +627,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_painter:
-    dependency: "direct main"
-    description:
-      name: flutter_painter
-      sha256: "0e9737e5d9a33449a839275ae34f038d45115333f1e817ae9a0d81467c0779b7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -749,6 +709,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  hive_ce:
+    dependency: transitive
+    description:
+      name: hive_ce
+      sha256: ac66daee46ad46486a1ed12cf91e9d7479c875fb46889be8d2c96b557406647f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.10.1"
+  hive_ce_flutter:
+    dependency: "direct main"
+    description:
+      name: hive_ce_flutter
+      sha256: "74c1d5f10d803446b4e7913bb272137e2724ba8a56465444f9e7713aeb60a877"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  hive_ce_generator:
+    dependency: "direct dev"
+    description:
+      name: hive_ce_generator
+      sha256: "0b1c750e2d10c55a14cde16d479ada42704be6cef43c54b728ed0e4e02f7d808"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.8.2"
   html:
     dependency: "direct main"
     description:
@@ -789,30 +773,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.3"
-  image_cropper:
-    dependency: "direct main"
-    description:
-      name: image_cropper
-      sha256: "0c6ea3f96ccdcbe855fc86e9de582fdd6a94d578be8d817a05d9ecef9f1a258b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.0.0"
-  image_cropper_for_web:
-    dependency: transitive
-    description:
-      name: image_cropper_for_web
-      sha256: "34256c8fb7fcb233251787c876bb37271744459b593a948a2db73caa323034d0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.2"
-  image_cropper_platform_interface:
-    dependency: transitive
-    description:
-      name: image_cropper_platform_interface
-      sha256: e8e9d2ca36360387aee39295ce49029362ae4df3071f23e8e71f2b81e40b7531
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.0"
   image_editor:
     dependency: "direct main"
     description:
@@ -937,10 +897,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
+      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.6.7"
   json_annotation:
     dependency: "direct main"
     description:
@@ -957,6 +917,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.9.4"
+  just_audio:
+    dependency: "direct main"
+    description:
+      name: just_audio
+      sha256: f978d5b4ccea08f267dae0232ec5405c1b05d3f3cd63f82097ea46c015d5c09e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.46"
+  just_audio_platform_interface:
+    dependency: transitive
+    description:
+      name: just_audio_platform_interface
+      sha256: "271b93b484c6f494ecd72a107fffbdb26b425f170c665b9777a0a24a726f2f24"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.4.0"
+  just_audio_web:
+    dependency: transitive
+    description:
+      name: just_audio_web
+      sha256: "58915be64509a7683c44bf11cd1a23c15a48de104927bee116e3c63c8eeea0d4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.14"
   leak_tracker:
     dependency: transitive
     description:
@@ -1029,54 +1013,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  native_image_cropper:
-    dependency: "direct main"
-    description:
-      name: native_image_cropper
-      sha256: d9cb7c7e5904e5dc28c37ebf0d68d2fed2d46b161960e7770c078e98c80e66b0
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.6.0"
-  native_image_cropper_android:
-    dependency: transitive
-    description:
-      name: native_image_cropper_android
-      sha256: "77106960beee19fd080dc8bd609709da44e13824175cd6c1d330a8b7178a152e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.1"
-  native_image_cropper_ios:
-    dependency: transitive
-    description:
-      name: native_image_cropper_ios
-      sha256: "4c40ffc8ea1e52078384bba6adfae8a90bef064ebbb25a0d52211b828b3895aa"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
-  native_image_cropper_macos:
-    dependency: transitive
-    description:
-      name: native_image_cropper_macos
-      sha256: f3815264a7755047f0b38413c69f5b76ed4ffdd7af28edeacfc134b08b1d5a74
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
-  native_image_cropper_platform_interface:
-    dependency: transitive
-    description:
-      name: native_image_cropper_platform_interface
-      sha256: "3ac1484f83abd62be7ff1d74c475137c59008aa01e671d8678d5e25c46c98d59"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
-  native_image_cropper_web:
-    dependency: transitive
-    description:
-      name: native_image_cropper_web
-      sha256: "4767ca067ff2b5d1d3dd02c14eb00124da5d203ff917c9528b35f294bcf9227e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   nested:
     dependency: transitive
     description:
@@ -1714,6 +1650,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.3"
+  yaml_writer:
+    dependency: transitive
+    description:
+      name: yaml_writer
+      sha256: "69651cd7238411179ac32079937d4aa9a2970150d6b2ae2c6fe6de09402a5dc5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
 sdks:
   dart: ">=3.6.0 <4.0.0"
   flutter: ">=3.27.0"

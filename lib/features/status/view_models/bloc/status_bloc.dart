@@ -29,19 +29,24 @@ class StatusBloc extends Bloc<StatusEvent, StatusState> {
       _CreateStatus event, Emitter<StatusState> emit, StatusState state) async {
     await StatusService.createStatus(event.path, event.caption);
     final userStatus = await StatusService.getMyStatuses();
-    emit(state.copyWith(myStatus: userStatus!));
+    if (userStatus == null) return;
+    emit(state.copyWith(myStatus: userStatus));
   }
 
   void _getStatuses(
       _GetStatuses event, Emitter<StatusState> emit, StatusState state) async {
     final response = await StatusService.getStatuses();
     final userStatus = await StatusService.getMyStatuses();
-    final viewedStatus = response!["viewed"];
-    final newStatus = response["new"];
-    emit(state.copyWith(
-        statuses: newStatus,
-        viewedStatus: viewedStatus,
-        myStatus: userStatus!));
+    if (response != null) {
+      final viewedStatus = response["viewed"];
+      final newStatus = response["new"];
+      emit(state.copyWith(
+          statuses: newStatus,
+          viewedStatus: viewedStatus,
+          myStatus: userStatus ?? []));
+    } else {
+      emit(state.copyWith(myStatus: userStatus ?? []));
+    }
   }
 
   void _selectStatus(

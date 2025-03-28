@@ -155,6 +155,7 @@ class ChatItem extends StatelessWidget {
           audio: message!,
           isGroup: isGroup,
           wave: wave!,
+          messageId: messageModel.id,
           time: messageModel.time);
     }
     if (messageType == "image") {

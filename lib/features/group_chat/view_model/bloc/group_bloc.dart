@@ -7,6 +7,9 @@ import 'package:chat_app/features/group_chat/services/group_service.dart';
 import 'package:chat_app/features/home/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
+
+import '../../../settings/service/setting_service.dart';
 
 part 'group_event.dart';
 part 'group_state.dart';
@@ -76,8 +79,10 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
 
 void _loadData(event, emit, state) async {
   try {
-    final allChats =
-        GroupService.getAllChats((event.chat["chat"] as ChatModel));
+    final box = Hive.box("chatsCount");
+    final chatModel = (event.chat["chat"] as ChatModel);
+    final allChats = GroupService.getAllChats(chatModel);
+    box.put(chatModel.chatId, chatModel.messageCount);
     emit(
       GroupState.groupData(
         groupData: (event.chat["chat"] as ChatModel),
@@ -86,11 +91,13 @@ void _loadData(event, emit, state) async {
     );
     final allMembers = await GroupService.getAllUsers(
         (event.chat["chat"] as ChatModel).participants);
+    final index = SettingService.getWallpaper();
     emit(
       (state as GroupData).copyWith(
         groupData: (event.chat["chat"] as ChatModel),
         messageData: allChats,
         groupMembers: allMembers,
+        wallpaperIndex: index,
       ),
     );
   } catch (e) {

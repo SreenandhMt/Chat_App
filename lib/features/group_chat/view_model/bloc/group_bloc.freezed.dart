@@ -5490,7 +5490,8 @@ mixin _$GroupState {
     required TResult Function(
             ChatModel? groupData,
             Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)
         groupData,
   }) =>
       throw _privateConstructorUsedError;
@@ -5509,7 +5510,8 @@ mixin _$GroupState {
     TResult? Function(
             ChatModel? groupData,
             Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)?
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)?
         groupData,
   }) =>
       throw _privateConstructorUsedError;
@@ -5525,8 +5527,11 @@ mixin _$GroupState {
             List<UserModels>? contacts,
             List<String> selectedContacts)?
         createGroupData,
-    TResult Function(ChatModel? groupData, Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)?
+    TResult Function(
+            ChatModel? groupData,
+            Map<String, UserModels> groupMembers,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)?
         groupData,
     required TResult orElse(),
   }) =>
@@ -5761,7 +5766,8 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
     required TResult Function(
             ChatModel? groupData,
             Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)
         groupData,
   }) {
     return createGroupData(
@@ -5791,7 +5797,8 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
     TResult? Function(
             ChatModel? groupData,
             Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)?
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)?
         groupData,
   }) {
     return createGroupData?.call(
@@ -5818,8 +5825,11 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
             List<UserModels>? contacts,
             List<String> selectedContacts)?
         createGroupData,
-    TResult Function(ChatModel? groupData, Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)?
+    TResult Function(
+            ChatModel? groupData,
+            Map<String, UserModels> groupMembers,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)?
         groupData,
     required TResult orElse(),
   }) {
@@ -5905,9 +5915,8 @@ abstract class _$$GroupDataImplCopyWith<$Res> {
   $Res call(
       {ChatModel? groupData,
       Map<String, UserModels> groupMembers,
-      Stream<QuerySnapshot<Map<String, dynamic>>>? messageData});
-
-  $ChatModelCopyWith<$Res>? get groupData;
+      Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+      int wallpaperIndex});
 }
 
 /// @nodoc
@@ -5926,6 +5935,7 @@ class __$$GroupDataImplCopyWithImpl<$Res>
     Object? groupData = freezed,
     Object? groupMembers = null,
     Object? messageData = freezed,
+    Object? wallpaperIndex = null,
   }) {
     return _then(_$GroupDataImpl(
       groupData: freezed == groupData
@@ -5940,21 +5950,11 @@ class __$$GroupDataImplCopyWithImpl<$Res>
           ? _value.messageData
           : messageData // ignore: cast_nullable_to_non_nullable
               as Stream<QuerySnapshot<Map<String, dynamic>>>?,
+      wallpaperIndex: null == wallpaperIndex
+          ? _value.wallpaperIndex
+          : wallpaperIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
-  }
-
-  /// Create a copy of GroupState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChatModelCopyWith<$Res>? get groupData {
-    if (_value.groupData == null) {
-      return null;
-    }
-
-    return $ChatModelCopyWith<$Res>(_value.groupData!, (value) {
-      return _then(_value.copyWith(groupData: value));
-    });
   }
 }
 
@@ -5964,7 +5964,8 @@ class _$GroupDataImpl implements GroupData {
   const _$GroupDataImpl(
       {this.groupData = null,
       final Map<String, UserModels> groupMembers = const {},
-      this.messageData = null})
+      this.messageData = null,
+      this.wallpaperIndex = 0})
       : _groupMembers = groupMembers;
 
   @override
@@ -5982,10 +5983,13 @@ class _$GroupDataImpl implements GroupData {
   @override
   @JsonKey()
   final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData;
+  @override
+  @JsonKey()
+  final int wallpaperIndex;
 
   @override
   String toString() {
-    return 'GroupState.groupData(groupData: $groupData, groupMembers: $groupMembers, messageData: $messageData)';
+    return 'GroupState.groupData(groupData: $groupData, groupMembers: $groupMembers, messageData: $messageData, wallpaperIndex: $wallpaperIndex)';
   }
 
   @override
@@ -5998,12 +6002,18 @@ class _$GroupDataImpl implements GroupData {
             const DeepCollectionEquality()
                 .equals(other._groupMembers, _groupMembers) &&
             (identical(other.messageData, messageData) ||
-                other.messageData == messageData));
+                other.messageData == messageData) &&
+            (identical(other.wallpaperIndex, wallpaperIndex) ||
+                other.wallpaperIndex == wallpaperIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, groupData,
-      const DeepCollectionEquality().hash(_groupMembers), messageData);
+  int get hashCode => Object.hash(
+      runtimeType,
+      groupData,
+      const DeepCollectionEquality().hash(_groupMembers),
+      messageData,
+      wallpaperIndex);
 
   /// Create a copy of GroupState
   /// with the given fields replaced by the non-null parameter values.
@@ -6029,10 +6039,11 @@ class _$GroupDataImpl implements GroupData {
     required TResult Function(
             ChatModel? groupData,
             Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)
         groupData,
   }) {
-    return groupData(this.groupData, groupMembers, messageData);
+    return groupData(this.groupData, groupMembers, messageData, wallpaperIndex);
   }
 
   @override
@@ -6051,10 +6062,12 @@ class _$GroupDataImpl implements GroupData {
     TResult? Function(
             ChatModel? groupData,
             Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)?
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)?
         groupData,
   }) {
-    return groupData?.call(this.groupData, groupMembers, messageData);
+    return groupData?.call(
+        this.groupData, groupMembers, messageData, wallpaperIndex);
   }
 
   @override
@@ -6070,13 +6083,17 @@ class _$GroupDataImpl implements GroupData {
             List<UserModels>? contacts,
             List<String> selectedContacts)?
         createGroupData,
-    TResult Function(ChatModel? groupData, Map<String, UserModels> groupMembers,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData)?
+    TResult Function(
+            ChatModel? groupData,
+            Map<String, UserModels> groupMembers,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+            int wallpaperIndex)?
         groupData,
     required TResult orElse(),
   }) {
     if (groupData != null) {
-      return groupData(this.groupData, groupMembers, messageData);
+      return groupData(
+          this.groupData, groupMembers, messageData, wallpaperIndex);
     }
     return orElse();
   }
@@ -6115,14 +6132,15 @@ class _$GroupDataImpl implements GroupData {
 
 abstract class GroupData implements GroupState {
   const factory GroupData(
-          {final ChatModel? groupData,
-          final Map<String, UserModels> groupMembers,
-          final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData}) =
-      _$GroupDataImpl;
+      {final ChatModel? groupData,
+      final Map<String, UserModels> groupMembers,
+      final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
+      final int wallpaperIndex}) = _$GroupDataImpl;
 
   ChatModel? get groupData;
   Map<String, UserModels> get groupMembers;
   Stream<QuerySnapshot<Map<String, dynamic>>>? get messageData;
+  int get wallpaperIndex;
 
   /// Create a copy of GroupState
   /// with the given fields replaced by the non-null parameter values.

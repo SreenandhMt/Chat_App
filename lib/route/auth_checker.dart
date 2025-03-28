@@ -1,3 +1,4 @@
+import 'package:chat_app/features/settings/service/setting_service.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +15,10 @@ class AuthChecker {
         .then((value) => value.exists)) {
       NavigationUtils.createProfilePage(context);
     } else {
+      if (SettingService.getAppLock() != null) {
+        NavigationUtils.appLock(context);
+        return;
+      }
       NavigationUtils.home(context);
     }
   }

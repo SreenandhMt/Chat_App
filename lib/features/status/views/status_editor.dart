@@ -9,8 +9,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:native_image_cropper/native_image_cropper.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:image_editor/image_editor.dart';
 
@@ -25,7 +23,6 @@ class _StatusEditorState extends State<StatusEditor> {
   File? _image;
   Uint8List? bytes;
   ScreenshotController screenshotController = ScreenshotController();
-  final CropController _controller = CropController();
   TextEditingController captionController = TextEditingController();
   List<Offset?> points = [];
   Color brushColor = Colors.red;

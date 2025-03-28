@@ -18,7 +18,8 @@ class GroupInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GroupBloc, GroupState>(builder: (context, state) {
       return state.when(
-        groupData: (groupData, groupMembers, messageData) => Scaffold(
+        groupData: (groupData, groupMembers, messageData, wallpaperIndex) =>
+            Scaffold(
           backgroundColor: AppColors.themeColor(context),
           appBar: AppBar(
             title: Text("Group Info"),

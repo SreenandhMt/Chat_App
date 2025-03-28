@@ -20,21 +20,25 @@ mixin _$HomeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllData,
-    required TResult Function(List<ChatModel> chatModel) loadUserData,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadUserData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllData,
-    TResult? Function(List<ChatModel> chatModel)? loadUserData,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllData,
-    TResult Function(List<ChatModel> chatModel)? loadUserData,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +129,9 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllData,
-    required TResult Function(List<ChatModel> chatModel) loadUserData,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadUserData,
   }) {
     return started();
   }
@@ -135,7 +141,8 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllData,
-    TResult? Function(List<ChatModel> chatModel)? loadUserData,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
   }) {
     return started?.call();
   }
@@ -145,7 +152,8 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllData,
-    TResult Function(List<ChatModel> chatModel)? loadUserData,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -236,7 +244,9 @@ class _$getAllDataImpl implements _getAllData {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllData,
-    required TResult Function(List<ChatModel> chatModel) loadUserData,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadUserData,
   }) {
     return getAllData();
   }
@@ -246,7 +256,8 @@ class _$getAllDataImpl implements _getAllData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllData,
-    TResult? Function(List<ChatModel> chatModel)? loadUserData,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
   }) {
     return getAllData?.call();
   }
@@ -256,7 +267,8 @@ class _$getAllDataImpl implements _getAllData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllData,
-    TResult Function(List<ChatModel> chatModel)? loadUserData,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
     required TResult orElse(),
   }) {
     if (getAllData != null) {
@@ -310,7 +322,7 @@ abstract class _$$LoadUserDataImplCopyWith<$Res> {
           _$LoadUserDataImpl value, $Res Function(_$LoadUserDataImpl) then) =
       __$$LoadUserDataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ChatModel> chatModel});
+  $Res call({List<QueryDocumentSnapshot<Map<String, dynamic>>> docs});
 }
 
 /// @nodoc
@@ -326,13 +338,13 @@ class __$$LoadUserDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chatModel = null,
+    Object? docs = null,
   }) {
     return _then(_$LoadUserDataImpl(
-      chatModel: null == chatModel
-          ? _value._chatModel
-          : chatModel // ignore: cast_nullable_to_non_nullable
-              as List<ChatModel>,
+      docs: null == docs
+          ? _value._docs
+          : docs // ignore: cast_nullable_to_non_nullable
+              as List<QueryDocumentSnapshot<Map<String, dynamic>>>,
     ));
   }
 }
@@ -340,20 +352,21 @@ class __$$LoadUserDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadUserDataImpl implements _LoadUserData {
-  const _$LoadUserDataImpl({required final List<ChatModel> chatModel})
-      : _chatModel = chatModel;
+  const _$LoadUserDataImpl(
+      {required final List<QueryDocumentSnapshot<Map<String, dynamic>>> docs})
+      : _docs = docs;
 
-  final List<ChatModel> _chatModel;
+  final List<QueryDocumentSnapshot<Map<String, dynamic>>> _docs;
   @override
-  List<ChatModel> get chatModel {
-    if (_chatModel is EqualUnmodifiableListView) return _chatModel;
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> get docs {
+    if (_docs is EqualUnmodifiableListView) return _docs;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_chatModel);
+    return EqualUnmodifiableListView(_docs);
   }
 
   @override
   String toString() {
-    return 'HomeEvent.loadUserData(chatModel: $chatModel)';
+    return 'HomeEvent.loadUserData(docs: $docs)';
   }
 
   @override
@@ -361,13 +374,12 @@ class _$LoadUserDataImpl implements _LoadUserData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadUserDataImpl &&
-            const DeepCollectionEquality()
-                .equals(other._chatModel, _chatModel));
+            const DeepCollectionEquality().equals(other._docs, _docs));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_chatModel));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_docs));
 
   /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -382,9 +394,11 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllData,
-    required TResult Function(List<ChatModel> chatModel) loadUserData,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadUserData,
   }) {
-    return loadUserData(chatModel);
+    return loadUserData(docs);
   }
 
   @override
@@ -392,9 +406,10 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllData,
-    TResult? Function(List<ChatModel> chatModel)? loadUserData,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
   }) {
-    return loadUserData?.call(chatModel);
+    return loadUserData?.call(docs);
   }
 
   @override
@@ -402,11 +417,12 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllData,
-    TResult Function(List<ChatModel> chatModel)? loadUserData,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
     required TResult orElse(),
   }) {
     if (loadUserData != null) {
-      return loadUserData(chatModel);
+      return loadUserData(docs);
     }
     return orElse();
   }
@@ -447,10 +463,11 @@ class _$LoadUserDataImpl implements _LoadUserData {
 }
 
 abstract class _LoadUserData implements HomeEvent {
-  const factory _LoadUserData({required final List<ChatModel> chatModel}) =
-      _$LoadUserDataImpl;
+  const factory _LoadUserData(
+      {required final List<QueryDocumentSnapshot<Map<String, dynamic>>>
+          docs}) = _$LoadUserDataImpl;
 
-  List<ChatModel> get chatModel;
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> get docs;
 
   /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.

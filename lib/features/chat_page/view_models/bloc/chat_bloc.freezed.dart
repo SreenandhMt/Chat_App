@@ -3590,13 +3590,15 @@ mixin _$ChatState {
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String get isError => throw _privateConstructorUsedError;
+  int get wallpaperIndex => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             Map<String, dynamic>? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError)
+            String isError,
+            int wallpaperIndex)
         chatData,
   }) =>
       throw _privateConstructorUsedError;
@@ -3606,7 +3608,8 @@ mixin _$ChatState {
             Map<String, dynamic>? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError)?
+            String isError,
+            int wallpaperIndex)?
         chatData,
   }) =>
       throw _privateConstructorUsedError;
@@ -3616,7 +3619,8 @@ mixin _$ChatState {
             Map<String, dynamic>? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError)?
+            String isError,
+            int wallpaperIndex)?
         chatData,
     required TResult orElse(),
   }) =>
@@ -3654,7 +3658,8 @@ abstract class $ChatStateCopyWith<$Res> {
       {Map<String, dynamic>? chatData,
       Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       bool isLoading,
-      String isError});
+      String isError,
+      int wallpaperIndex});
 }
 
 /// @nodoc
@@ -3676,6 +3681,7 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
     Object? messageData = freezed,
     Object? isLoading = null,
     Object? isError = null,
+    Object? wallpaperIndex = null,
   }) {
     return _then(_value.copyWith(
       chatData: freezed == chatData
@@ -3694,6 +3700,10 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as String,
+      wallpaperIndex: null == wallpaperIndex
+          ? _value.wallpaperIndex
+          : wallpaperIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -3710,7 +3720,8 @@ abstract class _$$ChatDataImplCopyWith<$Res>
       {Map<String, dynamic>? chatData,
       Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       bool isLoading,
-      String isError});
+      String isError,
+      int wallpaperIndex});
 }
 
 /// @nodoc
@@ -3730,6 +3741,7 @@ class __$$ChatDataImplCopyWithImpl<$Res>
     Object? messageData = freezed,
     Object? isLoading = null,
     Object? isError = null,
+    Object? wallpaperIndex = null,
   }) {
     return _then(_$ChatDataImpl(
       chatData: freezed == chatData
@@ -3748,6 +3760,10 @@ class __$$ChatDataImplCopyWithImpl<$Res>
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as String,
+      wallpaperIndex: null == wallpaperIndex
+          ? _value.wallpaperIndex
+          : wallpaperIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -3759,7 +3775,8 @@ class _$ChatDataImpl implements _ChatData {
       {final Map<String, dynamic>? chatData = null,
       this.messageData = null,
       this.isLoading = false,
-      this.isError = ""})
+      this.isError = "",
+      this.wallpaperIndex = 0})
       : _chatData = chatData;
 
   final Map<String, dynamic>? _chatData;
@@ -3782,10 +3799,13 @@ class _$ChatDataImpl implements _ChatData {
   @override
   @JsonKey()
   final String isError;
+  @override
+  @JsonKey()
+  final int wallpaperIndex;
 
   @override
   String toString() {
-    return 'ChatState.chatData(chatData: $chatData, messageData: $messageData, isLoading: $isLoading, isError: $isError)';
+    return 'ChatState.chatData(chatData: $chatData, messageData: $messageData, isLoading: $isLoading, isError: $isError, wallpaperIndex: $wallpaperIndex)';
   }
 
   @override
@@ -3798,7 +3818,9 @@ class _$ChatDataImpl implements _ChatData {
                 other.messageData == messageData) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isError, isError) || other.isError == isError));
+            (identical(other.isError, isError) || other.isError == isError) &&
+            (identical(other.wallpaperIndex, wallpaperIndex) ||
+                other.wallpaperIndex == wallpaperIndex));
   }
 
   @override
@@ -3807,7 +3829,8 @@ class _$ChatDataImpl implements _ChatData {
       const DeepCollectionEquality().hash(_chatData),
       messageData,
       isLoading,
-      isError);
+      isError,
+      wallpaperIndex);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -3824,10 +3847,12 @@ class _$ChatDataImpl implements _ChatData {
             Map<String, dynamic>? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError)
+            String isError,
+            int wallpaperIndex)
         chatData,
   }) {
-    return chatData(this.chatData, messageData, isLoading, isError);
+    return chatData(
+        this.chatData, messageData, isLoading, isError, wallpaperIndex);
   }
 
   @override
@@ -3837,10 +3862,12 @@ class _$ChatDataImpl implements _ChatData {
             Map<String, dynamic>? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError)?
+            String isError,
+            int wallpaperIndex)?
         chatData,
   }) {
-    return chatData?.call(this.chatData, messageData, isLoading, isError);
+    return chatData?.call(
+        this.chatData, messageData, isLoading, isError, wallpaperIndex);
   }
 
   @override
@@ -3850,12 +3877,14 @@ class _$ChatDataImpl implements _ChatData {
             Map<String, dynamic>? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError)?
+            String isError,
+            int wallpaperIndex)?
         chatData,
     required TResult orElse(),
   }) {
     if (chatData != null) {
-      return chatData(this.chatData, messageData, isLoading, isError);
+      return chatData(
+          this.chatData, messageData, isLoading, isError, wallpaperIndex);
     }
     return orElse();
   }
@@ -3894,7 +3923,8 @@ abstract class _ChatData implements ChatState {
       {final Map<String, dynamic>? chatData,
       final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       final bool isLoading,
-      final String isError}) = _$ChatDataImpl;
+      final String isError,
+      final int wallpaperIndex}) = _$ChatDataImpl;
 
   @override
   Map<String, dynamic>? get chatData;
@@ -3904,6 +3934,8 @@ abstract class _ChatData implements ChatState {
   bool get isLoading;
   @override
   String get isError;
+  @override
+  int get wallpaperIndex;
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.

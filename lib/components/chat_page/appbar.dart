@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/colors.dart';
+import '../../features/calls_screen/view_models/bloc/calling_bloc.dart';
 import '../../features/chat_page/views/chat_info_page.dart';
 import '../../route/navigation_utils.dart';
 
@@ -58,11 +59,19 @@ PreferredSize appBar(
                 ),
               ),
               IconButton(
-                  onPressed: () => NavigationUtils.videoCallPage(context),
+                  onPressed: () async {
+                    context.read<CallingBloc>().add(
+                        CallingEvent.startVideoCalling(receiver: userModel));
+                    NavigationUtils.videoCallPage(context);
+                  },
                   icon: Icon(CupertinoIcons.video_camera, size: 36)),
               // width10,
               IconButton(
-                  onPressed: () => NavigationUtils.voiceCallPage(context),
+                  onPressed: () async {
+                    context.read<CallingBloc>().add(
+                        CallingEvent.startVoiceCalling(receiver: userModel));
+                    NavigationUtils.voiceCallPage(context);
+                  },
                   icon: Icon(CupertinoIcons.phone)),
               // width10,
               IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.info)),

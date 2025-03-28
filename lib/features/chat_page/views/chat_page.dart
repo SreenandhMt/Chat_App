@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:chat_app/components/chat_page/reaction_overlay.dart';
+import 'package:chat_app/core/wallpaper_colors.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/chat_page/models/message_model.dart';
 import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
@@ -79,7 +80,7 @@ class _ChattingPageState extends State<ChattingPage> {
           }
           final user = state.chatData!["user"] as UserModels;
           return Scaffold(
-            backgroundColor: AppColors.chatBackgroundColor(context),
+            backgroundColor: wallpaperColor(context)[state.wallpaperIndex],
             appBar: appBar(
               context,
               hideReactions: hideReactions,

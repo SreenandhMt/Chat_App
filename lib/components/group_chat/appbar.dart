@@ -1,3 +1,4 @@
+import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/chat_page/views/chat_info_page.dart';
 import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 import 'package:chat_app/features/home/models/chat_model.dart';
@@ -8,6 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/colors.dart';
 import '../../core/size.dart';
+import '../../features/calls_screen/view_models/bloc/calling_bloc.dart';
 import '../../route/navigation_utils.dart';
 
 PreferredSize groupChatAppBar(BuildContext context,
@@ -55,10 +57,20 @@ PreferredSize groupChatAppBar(BuildContext context,
               ),
               Spacer(),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<CallingBloc>().add(
+                        CallingEvent.startGroupVideoCalling(group: chatModel));
+                    NavigationUtils.videoCallPage(context);
+                  },
                   icon: Icon(CupertinoIcons.video_camera, size: 36)),
               // width10,
-              IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.phone)),
+              IconButton(
+                  onPressed: () {
+                    context.read<CallingBloc>().add(
+                        CallingEvent.startGroupVoiceCalling(group: chatModel));
+                    NavigationUtils.voiceCallPage(context);
+                  },
+                  icon: Icon(CupertinoIcons.phone)),
               // width10,
               IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.info)),
             ] else ...[

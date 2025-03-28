@@ -43,18 +43,16 @@ class UserWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text("10:30 PM"),
-            CircleAvatar(
-              radius: 10,
-              backgroundColor: AppColors.secondary(context),
-              child: Text(
-                chatModel.unreadCount == null
-                    ? "0"
-                    : chatModel
-                        .unreadCount![FirebaseAuth.instance.currentUser!.uid]
-                        .toString(),
-                style: TextStyle(fontSize: 14),
-              ),
-            )
+            if (chatModel.unreadCount != null && chatModel.unreadCount != 0)
+              CircleAvatar(
+                  radius: 10,
+                  backgroundColor: AppColors.secondary(context),
+                  child: Text(
+                    chatModel.unreadCount.toString(),
+                    style: TextStyle(fontSize: 14),
+                  ))
+            else
+              SizedBox(),
           ],
         ),
         onTap: onTap,

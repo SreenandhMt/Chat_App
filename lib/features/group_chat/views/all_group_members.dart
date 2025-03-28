@@ -15,7 +15,8 @@ class AllGroupMembers extends StatelessWidget {
       ),
       body: BlocBuilder<GroupBloc, GroupState>(builder: (context, state) {
         return state.when(
-          groupData: (groupData, groupMembers, messageData) => ListView(
+          groupData: (groupData, groupMembers, messageData, wallpaperIndex) =>
+              ListView(
             children: [
               Padding(
                 padding: const EdgeInsets.all(20),

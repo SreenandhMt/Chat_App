@@ -7,5 +7,6 @@ class ChatState with _$ChatState {
     @Default(null) Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
     @Default(false) bool isLoading,
     @Default("") String isError,
+    @Default(0) int wallpaperIndex,
   }) = _ChatData;
 }

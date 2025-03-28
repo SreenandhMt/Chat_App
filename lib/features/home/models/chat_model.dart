@@ -1,29 +1,59 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class ChatModel {
+  final String chatId;
+  final int createdAt;
+  final bool isGroup;
+  final String lastMessage;
+  final String lastMessageSender;
+  final int lastMessageTime;
+  final List<String> participants;
+  //group
+  final String? groupImage;
+  final String? groupName;
+  final String? groupDescription;
+  final bool? memberCanAddMember;
+  final bool? memberCanEdit;
+  final bool? memberCanMessage;
+  final int? unreadCount;
+  final int order;
+  final int messageCount;
 
-part 'chat_model.freezed.dart';
-part 'chat_model.g.dart';
+  factory ChatModel.fromJson(Map<String, dynamic> json, int? count) =>
+      ChatModel(
+          chatId: json["chatId"],
+          createdAt: json["createdAt"],
+          isGroup: json["isGroup"],
+          lastMessage: json["lastMessage"],
+          lastMessageSender: json["lastMessageSender"],
+          lastMessageTime: json["lastMessageTime"],
+          participants: List<String>.from(json["participants"]),
+          groupImage: json["groupImage"],
+          groupName: json["groupName"],
+          groupDescription: json["groupDescription"],
+          memberCanAddMember: json["memberCanAddMember"],
+          memberCanEdit: json["memberCanEdit"],
+          memberCanMessage: json["memberCanMessage"],
+          unreadCount: json["messageCount"] != null && count != null
+              ? (json["messageCount"] as int) - count
+              : null,
+          messageCount: (json["messageCount"] as int),
+          order: json["order"]);
 
-@freezed
-class ChatModel with _$ChatModel {
-  const factory ChatModel({
-    required String chatId,
-    required int createdAt,
-    required bool isGroup,
-    required String lastMessage,
-    required String lastMessageSender,
-    required int lastMessageTime,
-    required List<String> participants,
-    //group
-    required String? groupImage,
-    required String? groupName,
-    required String? groupDescription,
-    required bool? memberCanAddMember,
-    required bool? memberCanEdit,
-    required bool? memberCanMessage,
-    required Map<String, dynamic>? unreadCount,
-    required int order,
-  }) = _ChatModel;
-
-  factory ChatModel.fromJson(Map<String, dynamic> json) =>
-      _$ChatModelFromJson(json);
+  ChatModel({
+    required this.chatId,
+    required this.createdAt,
+    required this.isGroup,
+    required this.lastMessage,
+    required this.lastMessageSender,
+    required this.lastMessageTime,
+    required this.participants,
+    required this.groupImage,
+    required this.groupName,
+    required this.groupDescription,
+    required this.memberCanAddMember,
+    required this.memberCanEdit,
+    required this.memberCanMessage,
+    required this.unreadCount,
+    required this.order,
+    required this.messageCount,
+  });
 }

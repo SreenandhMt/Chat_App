@@ -7,6 +7,7 @@ import 'package:chat_app/features/home/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:image/image.dart' as img;
 import 'package:video_player/video_player.dart';
 
@@ -27,6 +28,8 @@ class ChatServices {
 
   static void updateMessageCount(ChatModel chatModel, String lastMessage,
       String lastMessageSender, int lastMessageTime) async {
+    final box = Hive.box("chatsCount");
+    box.put(chatModel.chatId, chatModel.messageCount + 1);
     return await _firestore.collection("chats").doc(chatModel.chatId).update({
       "messageCount": FieldValue.increment(1),
       "lastMessage": lastMessage,

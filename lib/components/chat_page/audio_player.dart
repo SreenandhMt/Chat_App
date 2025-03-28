@@ -1,33 +1,36 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:chat_app/core/colors.dart';
-import 'package:chat_app/core/size.dart';
 
 class AppAudioPlayer extends StatefulWidget {
   final String audioUrl;
   final List<double> wave;
   final bool isSender;
+  final String messageId;
 
   const AppAudioPlayer({
     super.key,
     required this.audioUrl,
     required this.wave,
     required this.isSender,
+    required this.messageId,
   });
 
   @override
   _AppAudioPlayerState createState() => _AppAudioPlayerState();
 }
 
-class _AppAudioPlayerState extends State<AppAudioPlayer> {
-  late final PlayerController _playerController;
+class _AppAudioPlayerState extends State<AppAudioPlayer>
+    with WidgetsBindingObserver {
+  final _playerController = AudioPlayer();
   bool isPlaying = false;
+  bool downloadDone = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
   double progress = 0.0;
@@ -44,61 +47,58 @@ class _AppAudioPlayerState extends State<AppAudioPlayer> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
-    _playerController = PlayerController();
     _initializePlayer();
   }
 
   Future<void> _initializePlayer() async {
+    final filePath = '/storage/emulated/0/Download/${widget.messageId}.mp3';
+    final file = File(filePath);
+    if (await file.exists()) {
+      downloadDone = true;
+    }
     try {
-      localPath = await _downloadFile(widget.audioUrl);
-      if (localPath == null) {
-        log("Failed to download file.");
-        return;
-      }
-      setState(() {});
-
       await _playerController
-          .preparePlayer(
-              path: localPath!,
-              shouldExtractWaveform: true,
-              noOfSamples: style.getSamplesForWidth(350))
-          .then((v) {
-        _playerController.updateFrequency = UpdateFrequency.low;
-      });
-      _playerController.onCurrentDurationChanged.listen((p) {
-        if (!mounted) return;
-        if (_playerController.maxDuration > 0 && isPlaying) {
-          setState(() {
-            progress = p / _playerController.maxDuration;
-          });
-        }
-        setState(() {
-          position = Duration(minutes: p);
-        });
-      });
+          .setAudioSource(AudioSource.uri(Uri.parse(widget.audioUrl)));
+      _playerController.durationStream.listen(
+        (event) {
+          duration = event ?? Duration.zero;
+          if (mounted) {
+            setState(() {});
+          }
+        },
+      );
+      _playerController.positionStream.listen(
+        (event) {
+          final newProgress = event.inMilliseconds / duration.inMilliseconds;
 
-      _playerController.onCompletion.listen((_) {
-        if (!mounted) return;
-        setState(() {
-          isPlaying = false;
-          position = Duration.zero;
-        });
-      });
+          if ((newProgress - progress).abs() > 0.001 && mounted) {
+            setState(() {
+              position = event;
+              progress = newProgress;
+            });
+          }
+        },
+      );
     } catch (e) {
       print("Error initializing player: $e");
     }
   }
 
   Future<String?> _downloadFile(String url) async {
-    final dir = await getApplicationDocumentsDirectory();
-    final filePath = '${dir.path}/s.mp3';
+    final filePath = '/storage/emulated/0/Download/${widget.messageId}.mp3';
     final file = File(filePath);
     try {
       if (await file.exists()) {
         return filePath;
       }
       await Dio().download(url, filePath);
+      if (mounted) {
+        setState(() {
+          downloadDone = true;
+        });
+      }
       return filePath;
     } catch (e) {
       print("File download error: $e");
@@ -108,20 +108,29 @@ class _AppAudioPlayerState extends State<AppAudioPlayer> {
 
   void _togglePlayPause() async {
     if (isPlaying) {
-      _playerController.pausePlayer();
+      _playerController.pause();
     } else {
-      _playerController.startPlayer();
+      _playerController.play();
     }
-
-    setState(() {
-      isPlaying = !isPlaying;
-    });
+    if (mounted) {
+      setState(() {
+        isPlaying = !isPlaying;
+      });
+    }
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _playerController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      _playerController.stop();
+    }
   }
 
   String _formatDuration(Duration d) {
@@ -148,62 +157,35 @@ class _AppAudioPlayerState extends State<AppAudioPlayer> {
             onPressed: _togglePlayPause,
           ),
           Expanded(
-            child: localPath != null
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomPaint(
-                        size: Size(300, 40),
-                        painter: WaveformPainter(widget.wave, progress),
-                      ),
-                      Text(
-                        _formatDuration(position),
-                        style: const TextStyle(color: Colors.black54),
-                      ),
-                    ],
-                  )
-                : const Center(child: CircularProgressIndicator()),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomPaint(
+                  size: Size(300, 55),
+                  painter: WaveformPainter(widget.wave, progress),
+                ),
+                Text(
+                  _formatDuration(position),
+                  style: const TextStyle(color: Colors.black54),
+                ),
+              ],
+            ),
           ),
-          width5,
-          DownloadAudioProgressBar()
+          if (!widget.isSender && !downloadDone)
+            IconButton(
+                onPressed: () => _downloadFile(widget.audioUrl),
+                icon: Icon(Icons.file_download_outlined))
         ],
       ),
     );
   }
 }
 
-class DownloadAudioProgressBar extends StatelessWidget {
-  const DownloadAudioProgressBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        LimitedBox(
-          maxWidth: 30,
-          maxHeight: 30,
-          child: CircularProgressIndicator(
-            value: 0.2,
-            color: Colors.white,
-            backgroundColor: Colors.grey,
-            strokeAlign: 0.1,
-          ),
-        ),
-        Icon(
-          Icons.close,
-          size: 20,
-        )
-      ],
-    );
-  }
-}
-
 class WaveformPainter extends CustomPainter {
   final List<double> amplitudes;
-  final double progress; // Tracks playback progress
+  final double progress;
 
   WaveformPainter(this.amplitudes, this.progress);
 
@@ -211,21 +193,29 @@ class WaveformPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Paint playedPaint = Paint()
       ..color = Colors.blue
-      ..strokeWidth = 3
+      ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
 
     final Paint unplayedPaint = Paint()
       ..color = Colors.grey
-      ..strokeWidth = 3
+      ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
 
     final double midY = size.height / 2;
-    final double spacing = size.width / amplitudes.length;
-    final int playedIndex = (amplitudes.length * progress).toInt();
+    final double maxBarHeight = size.height * 0.7; // Limit max bar height
 
-    for (int i = 0; i < amplitudes.length; i++) {
-      final double height = amplitudes[i] * size.height * 0.8;
-      final double x = i * spacing;
+    // **Step 1: Downsample the waveform data to fit width**
+    int targetSamples = size.width ~/ 3; // 3px spacing
+    List<double> downsampledWave = _downsampleWave(amplitudes, targetSamples);
+
+    double spacing = size.width / downsampledWave.length;
+    int playedIndex = (downsampledWave.length * progress).toInt();
+
+    // **Step 2: Draw the waveform**
+    for (int i = 0; i < downsampledWave.length; i++) {
+      double height =
+          (downsampledWave[i] * maxBarHeight).clamp(2, maxBarHeight);
+      double x = i * spacing;
       final Paint paint = i <= playedIndex ? playedPaint : unplayedPaint;
 
       canvas.drawLine(
@@ -239,4 +229,18 @@ class WaveformPainter extends CustomPainter {
   @override
   bool shouldRepaint(WaveformPainter oldDelegate) =>
       oldDelegate.progress != progress || oldDelegate.amplitudes != amplitudes;
+
+  // **Step 3: Downsampling Function**
+  List<double> _downsampleWave(List<double> wave, int targetSamples) {
+    if (wave.length <= targetSamples) return wave; // No need to downsample
+
+    List<double> result = [];
+    double step = wave.length / targetSamples;
+
+    for (int i = 0; i < targetSamples; i++) {
+      int index = (i * step).toInt();
+      result.add(wave[index]);
+    }
+    return result;
+  }
 }

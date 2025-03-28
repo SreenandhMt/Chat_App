@@ -6,6 +6,7 @@ import 'package:chat_app/features/chat_page/services/chat_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 import '../../home/models/chat_model.dart';
 
@@ -14,6 +15,7 @@ FirebaseAuth auth = FirebaseAuth.instance;
 FirebaseStorage storage = FirebaseStorage.instance;
 
 class GroupService {
+  static final box = Hive.box("chatsCount");
   static Future<Map<String, UserModels>> getAllUsers(
       List<String> participants) async {
     Map<String, UserModels> allMembers = {};
@@ -224,12 +226,13 @@ class GroupService {
   }
 
   static Future<ChatModel> reloadGroupData(ChatModel chatModel) async {
+    final data = await box.get(chatModel.chatId);
     return await firestore
         .collection("chats")
         .doc(chatModel.chatId)
         .get()
         .then((value) {
-      return ChatModel.fromJson(value.data()!);
+      return ChatModel.fromJson(value.data()!, data);
     });
   }
 }

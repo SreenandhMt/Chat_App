@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:chat_app/components/chat_input.dart';
+import 'package:chat_app/core/wallpaper_colors.dart';
 import 'package:chat_app/features/chat_page/models/message_model.dart';
 import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 import 'package:flutter/gestures.dart';
@@ -57,8 +58,10 @@ class _GroupChatPageState extends State<GroupChatPage> {
         listener: (context, state) {},
         builder: (context, state) {
           return state.when(
-              groupData: (groupData, groupMembers, messageData) => Scaffold(
-                    backgroundColor: AppColors.chatBackgroundColor(context),
+              groupData: (groupData, groupMembers, messageData,
+                      wallpaperIndex) =>
+                  Scaffold(
+                    backgroundColor: wallpaperColor(context)[wallpaperIndex],
                     appBar: groupChatAppBar(context, chatModel: groupData!,
                         clearSelectedMessage: () {
                       setState(() {

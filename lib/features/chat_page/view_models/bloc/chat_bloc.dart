@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:chat_app/features/chat_page/services/chat_services.dart';
 import 'package:chat_app/features/home/models/chat_model.dart';
+import 'package:chat_app/features/settings/service/setting_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';
@@ -13,9 +15,15 @@ part 'chat_bloc.freezed.dart';
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc() : super(_ChatData()) {
     on<_GetMessages>((event, emit) {
-      final data =
-          ChatServices.getAllChats(event.chatData["chat"] as ChatModel);
-      emit(_ChatData(messageData: data, chatData: event.chatData));
+      final box = Hive.box("chatsCount");
+      final chatModel = (event.chatData["chat"] as ChatModel);
+      final allChats = ChatServices.getAllChats(chatModel);
+      box.put(chatModel.chatId, chatModel.messageCount);
+      final index = SettingService.getWallpaper();
+      emit(_ChatData(
+          messageData: allChats,
+          chatData: event.chatData,
+          wallpaperIndex: index));
     });
     on<_SendMessage>((event, emit) {
       if (event.message.isEmpty) return;

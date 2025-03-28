@@ -1,10 +1,21 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:chat_app/core/colors.dart';
+import 'package:chat_app/features/calls_screen/models/call_model.dart';
+import 'package:chat_app/features/calls_screen/services/agora_service.dart';
+import 'package:chat_app/features/calls_screen/services/calling_service.dart';
 import 'package:chat_app/route/navigation_utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/fonts.dart';
 import '../../core/size.dart';
+import '../calls_screen/view_models/bloc/calling_bloc.dart';
 
 class MainPageConfiguration extends StatefulWidget {
   const MainPageConfiguration({
@@ -18,14 +29,156 @@ class MainPageConfiguration extends StatefulWidget {
 }
 
 class _MainPageConfigurationState extends State<MainPageConfiguration> {
-  bool isActiveCall = true;
+  bool isRinging = false;
+  CallModel? callModel;
+  ValueNotifier<Duration?> duration = ValueNotifier<Duration?>(null);
+  Timer? _timer;
+
+  void startDurationFunction(Timestamp startTime) {
+    _timer?.cancel();
+
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        _timer = null;
+        return;
+      }
+      duration.value = DateTime.now().difference(startTime.toDate());
+    });
+  }
+
+  void stopDurationFunction() {
+    if (_timer == null) return;
+    _timer?.cancel();
+    _timer = null;
+  }
+
+  @override
+  void initState() {
+    FirebaseFirestore.instance
+        .collection("calls")
+        .where("status", isEqualTo: "ringing")
+        .where("callerId", isNotEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots()
+        .listen((event) async {
+      if (event.docs.isNotEmpty) {
+        log(event.docs.first.data().toString());
+        callModel = await CallingService.convertCallModel(
+            callData: event.docs.first.data());
+        setState(() {
+          isRinging = true;
+        });
+      }
+    });
+    AgoraService.instance.initialize(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    stopDurationFunction();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    log("ss");
+    final activeCall = context.watch<CallingBloc>().state.currentCall;
+    if (activeCall != null &&
+        _timer == null &&
+        activeCall.status != "ringing") {
+      startDurationFunction(activeCall.startTime);
+    } else if (activeCall == null && _timer != null) {
+      stopDurationFunction();
+    }
     return Scaffold(
+      appBar: activeCall == null
+          ? null
+          : PreferredSize(
+              preferredSize: Size(double.infinity, 55),
+              child: Container(
+                margin: EdgeInsets.only(
+                    top: MediaQuery.paddingOf(context).top, left: 5, right: 5),
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                decoration: BoxDecoration(
+                    color: AppColors.themeColor(context),
+                    borderRadius: BorderRadius.circular(15)),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          activeCall.userModels?.imageUrl ??
+                              activeCall.groupImage ??
+                              ""),
+                    ),
+                    width10,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            activeCall.userModels?.name ??
+                                activeCall.groupName ??
+                                "",
+                            style: AppFonts.subtitleStyle(context),
+                          ),
+                          ValueListenableBuilder(
+                              valueListenable: duration,
+                              builder: (context, _, __) {
+                                return Text(activeCall.status == "ringing"
+                                    ? "Ringing.."
+                                    : duration.value == null
+                                        ? ""
+                                        : duration.value!.inHours == 0
+                                            ? "${duration.value!.inMinutes.remainder(60)}:${duration.value!.inSeconds.remainder(60)}"
+                                            : "${duration.value!.inHours}:${duration.value!.inMinutes.remainder(60)}:${duration.value!.inSeconds.remainder(60)}");
+                              })
+                        ],
+                      ),
+                    ),
+                    Text(
+                      activeCall.isVideoCall ? "Video Call" : "Voice Call",
+                      style: AppFonts.buttonStyle(context),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          AgoraService.instance.leaveChannel(context);
+                          if (activeCall.callType == "group") {
+                            if (context
+                                .read<CallingBloc>()
+                                .state
+                                .remoteUsers
+                                .isNotEmpty) {
+                              return;
+                            }
+                            context.read<CallingBloc>().add(
+                                CallingEvent.endGroupCall(
+                                    callId: activeCall.historyId));
+                          } else {
+                            context.read<CallingBloc>().add(
+                                CallingEvent.endNormalCall(
+                                    callId: activeCall.historyId));
+                          }
+                        },
+                        icon: Icon(Icons.close)),
+                    IconButton(
+                        onPressed: () {
+                          if (activeCall.isVideoCall) {
+                            NavigationUtils.videoCallPage(context);
+                          } else {
+                            NavigationUtils.voiceCallPage(context);
+                          }
+                        },
+                        icon: Icon(Icons.open_in_full_rounded))
+                  ],
+                ),
+              )),
       body: Stack(
         children: [
           widget.navigationShell,
-          if (isActiveCall) //calling widget
+          if (isRinging) //calling widget
             Positioned(
                 top: MediaQuery.paddingOf(context).top * 0.8,
                 right: 10,
@@ -43,7 +196,9 @@ class _MainPageConfigurationState extends State<MainPageConfiguration> {
                         children: [
                           ListTile(
                             title: Text(
-                              "George Allen",
+                              callModel?.userModels?.name ??
+                                  callModel?.groupName ??
+                                  "",
                               style: AppFonts.titleFont(context),
                             ),
                             subtitle: Row(
@@ -59,7 +214,10 @@ class _MainPageConfigurationState extends State<MainPageConfiguration> {
                             trailing: CircleAvatar(
                               radius: 25,
                               backgroundImage: NetworkImage(
-                                  "https://randomuser.me/api/portraits/men/20.jpg"),
+                                callModel?.userModels?.imageUrl ??
+                                    callModel?.groupImage ??
+                                    "",
+                              ),
                             ),
                           ),
                           height10,
@@ -71,8 +229,16 @@ class _MainPageConfigurationState extends State<MainPageConfiguration> {
                                 child: MaterialButton(
                                   onPressed: () {
                                     setState(() {
-                                      isActiveCall = false;
+                                      isRinging = false;
                                     });
+                                    if (callModel!.callType == "normal") {
+                                      context.read<CallingBloc>().add(
+                                          CallingEvent.endNormalCall(
+                                              callId: callModel!.historyId));
+                                      context.read<CallingBloc>().add(
+                                          CallingEvent.setCurrentCall(
+                                              callModel: callModel!));
+                                    }
                                   },
                                   color: Colors.red,
                                   height: 45,
@@ -88,9 +254,19 @@ class _MainPageConfigurationState extends State<MainPageConfiguration> {
                                 child: MaterialButton(
                                   onPressed: () {
                                     setState(() {
-                                      isActiveCall = false;
+                                      isRinging = false;
                                     });
-                                    NavigationUtils.voiceCallPage(context);
+                                    if (callModel!.isVideoCall) {
+                                      context.read<CallingBloc>().add(
+                                          CallingEvent.setCurrentCall(
+                                              callModel: callModel!));
+                                      NavigationUtils.videoCallPage(context);
+                                    } else {
+                                      context.read<CallingBloc>().add(
+                                          CallingEvent.setCurrentCall(
+                                              callModel: callModel!));
+                                      NavigationUtils.voiceCallPage(context);
+                                    }
                                   },
                                   color: Colors.green,
                                   height: 45,

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 class NavigationUtils {
   //splash
   static home(BuildContext context) => context.go("/");
+  static appLock(BuildContext context) => context.go("/lock");
   //auth
   static introductionPage(BuildContext context) => context.go("/introduction");
   static phoneVerificationPage(BuildContext context) =>

@@ -11,12 +11,14 @@ class ChatAudioWidget extends StatelessWidget {
     this.isGroup = false,
     required this.wave,
     required this.time,
+    required this.messageId,
   });
   final String? audio;
   final bool isSender;
   final bool isGroup;
   final List<double> wave;
   final String time;
+  final String messageId;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class ChatAudioWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: AppAudioPlayer(
+              messageId: messageId,
               audioUrl: audio!,
               wave: wave,
               isSender: isSender,
