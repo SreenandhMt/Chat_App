@@ -1,6 +1,6 @@
-import 'package:chat_app/features/auth/models/user_models.dart';
-import 'package:chat_app/features/chat_page/views/chat_info_page.dart';
-import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
+import 'package:chat_app/components/group_chat/delete_message.dart';
+import 'package:chat_app/features/chat_page/models/message_model.dart';
+import 'package:chat_app/features/chat_page/views/message_info_page.dart';
 import 'package:chat_app/features/home/models/chat_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +9,16 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/colors.dart';
 import '../../core/size.dart';
+import '../../features/auth/models/user_models.dart';
 import '../../features/calls_screen/view_models/bloc/calling_bloc.dart';
 import '../../route/navigation_utils.dart';
 
 PreferredSize groupChatAppBar(BuildContext context,
     {required List<String> selectedMessagesId,
     required ChatModel chatModel,
+    required List<MessageModel> models,
     required void Function() clearSelectedMessage,
+    required Map<String, UserModels> allMembers,
     required void Function() hideReactions}) {
   return PreferredSize(
       preferredSize: Size(MediaQuery.sizeOf(context).width, 65),
@@ -59,7 +62,11 @@ PreferredSize groupChatAppBar(BuildContext context,
               IconButton(
                   onPressed: () {
                     context.read<CallingBloc>().add(
-                        CallingEvent.startGroupVideoCalling(group: chatModel));
+                        CallingEvent.startGroupVideoCalling(
+                            chatId: chatModel.chatId,
+                            groupName: chatModel.groupName ?? "",
+                            image: chatModel.groupImage ?? "",
+                            participants: chatModel.participants));
                     NavigationUtils.videoCallPage(context);
                   },
                   icon: Icon(CupertinoIcons.video_camera, size: 36)),
@@ -67,7 +74,11 @@ PreferredSize groupChatAppBar(BuildContext context,
               IconButton(
                   onPressed: () {
                     context.read<CallingBloc>().add(
-                        CallingEvent.startGroupVoiceCalling(group: chatModel));
+                        CallingEvent.startGroupVoiceCalling(
+                            chatId: chatModel.chatId,
+                            groupName: chatModel.groupName ?? "",
+                            image: chatModel.groupImage ?? "",
+                            participants: chatModel.participants));
                     NavigationUtils.voiceCallPage(context);
                   },
                   icon: Icon(CupertinoIcons.phone)),
@@ -78,80 +89,103 @@ PreferredSize groupChatAppBar(BuildContext context,
                 Text(selectedMessagesId.length.toString()),
                 Spacer(),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.star_border_purple500_rounded),
-                ),
-                IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                                child: DeleteMessageDialog(
+                              messageIds: selectedMessagesId,
+                              onlyDeleteForMe: true,
+                              clearSelectedMessage: clearSelectedMessage,
+                              hideReactions: hideReactions,
+                            )));
+                  },
                   icon: Icon(Icons.delete_outline_rounded),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.copy_rounded),
+                  onPressed: () {
+                    hideReactions();
+                    clearSelectedMessage();
+                  },
+                  icon: Icon(Icons.star_border_purple500_rounded),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.forward_to_inbox_outlined),
+                  onPressed: () {
+                    hideReactions();
+                    clearSelectedMessage();
+                  },
+                  icon: Icon(Icons.copy_rounded),
                 ),
               ] else ...[
                 Text(selectedMessagesId.length.toString()),
                 Spacer(),
                 IconButton(
                   onPressed: () {
-                    hideReactions();
-                    _deleteMessage(context, selectedMessagesId.first);
-                    clearSelectedMessage();
+                    final selectedModels = models;
+                    if (selectedModels
+                        .where((element) =>
+                            !element.isSender ||
+                            element.messageType == "delete")
+                        .isNotEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                            child: DeleteMessageDialog(
+                          messageIds: selectedMessagesId,
+                          onlyDeleteForMe: true,
+                          clearSelectedMessage: clearSelectedMessage,
+                          hideReactions: hideReactions,
+                        )),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                            child: DeleteMessageDialog(
+                          messageIds: selectedMessagesId,
+                          clearSelectedMessage: clearSelectedMessage,
+                          hideReactions: hideReactions,
+                        )),
+                      );
+                    }
                   },
                   icon: Icon(Icons.delete_outline_rounded),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.reply),
+                  onPressed: () {
+                    hideReactions();
+                    clearSelectedMessage();
+                  },
+                  icon: Icon(Icons.copy_rounded),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    hideReactions();
+                    clearSelectedMessage();
+                  },
                   icon: Icon(Icons.star_border_purple500_rounded),
                 ),
-                PopupMenuButton(
-                  position: PopupMenuPosition.under,
-                  splashRadius: 20,
-                  shape: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10)),
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      child: Row(
-                        children: [width10, Text("Info"), width50, width20],
-                      ),
-                      onTap: () => showModalBottomSheet(
+                if (models.isNotEmpty &&
+                    models.length <= 1 &&
+                    models.first.isSender)
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
                         context: context,
                         builder: (context) {
                           hideReactions();
-                          return InfoBottomSheet();
+                          return InfoBottomSheet(
+                              messageModel: models.first,
+                              allMembers: allMembers);
                         },
-                      ),
-                    ),
-                    PopupMenuItem(
-                      child: Row(
-                        children: [width10, Text("Copy"), width50, width20],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      child: Row(
-                        children: [width10, Text("Edit"), width50, width20],
-                      ),
-                    )
-                  ],
-                  child: Icon(Icons.more_vert),
-                )
+                      );
+                    },
+                    icon: Icon(Icons.info_outline),
+                  ),
               ],
             ],
             width10,
           ],
         ),
       ));
-}
-
-void _deleteMessage(BuildContext context, String messageId) {
-  context.read<GroupBloc>().add(GroupEvent.deleteMessage(messageId: messageId));
 }

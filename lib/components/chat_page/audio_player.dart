@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
@@ -81,6 +82,29 @@ class _AppAudioPlayerState extends State<AppAudioPlayer>
           }
         },
       );
+      _playerController.playingStream.listen(
+        (event) {
+          log("not working");
+          if (mounted) {
+            setState(() {
+              isPlaying = event;
+            });
+          }
+        },
+      );
+      _playerController.playerStateStream.listen((state) {
+        if (state.processingState == ProcessingState.completed) {
+          if (mounted) {
+            setState(() {
+              progress = 0.0;
+              isPlaying = false;
+              _playerController.seek(Duration.zero);
+              _playerController.pause();
+            });
+          }
+        }
+      });
+      _playerController.setLoopMode(LoopMode.off);
     } catch (e) {
       print("Error initializing player: $e");
     }
@@ -112,11 +136,6 @@ class _AppAudioPlayerState extends State<AppAudioPlayer>
     } else {
       _playerController.play();
     }
-    if (mounted) {
-      setState(() {
-        isPlaying = !isPlaying;
-      });
-    }
   }
 
   @override
@@ -130,6 +149,8 @@ class _AppAudioPlayerState extends State<AppAudioPlayer>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
       _playerController.stop();
+      progress = 0.0;
+      _playerController.seek(Duration.zero);
     }
   }
 
@@ -167,8 +188,13 @@ class _AppAudioPlayerState extends State<AppAudioPlayer>
                   painter: WaveformPainter(widget.wave, progress),
                 ),
                 Text(
-                  _formatDuration(position),
-                  style: const TextStyle(color: Colors.black54),
+                  isPlaying
+                      ? "${_formatDuration(duration)} / ${_formatDuration(position)}"
+                      : _formatDuration(duration),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500),
                 ),
               ],
             ),

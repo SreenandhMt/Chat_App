@@ -12,6 +12,7 @@ class InviteSavedContacts extends StatefulWidget {
 }
 
 class _InviteSavedContactsState extends State<InviteSavedContacts> {
+  String message = "";
   Future<void> getContacts() async {
     if (!await FlutterContacts.requestPermission()) {
       return; // Return empty list if permission is denied
@@ -34,23 +35,35 @@ class _InviteSavedContactsState extends State<InviteSavedContacts> {
     return Scaffold(
       appBar: AppBar(),
       body: BlocConsumer<ContactBloc, ContactState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state.showMessage != null) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.showMessage!)));
+            context.read<ContactBloc>().add(ContactEvent.clearMessage());
+          }
+        },
         builder: (context, state) {
           return ListView(
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  "Contact on ComptChat",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              if (state.registeredContacts.isNotEmpty)
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    "Contact on ComptChat",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
               ...List.generate(
                 state.registeredContacts.length,
                 (index) {
                   UserModels contact = state.registeredContacts[index];
                   return ListTile(
+                    onTap: () {
+                      context
+                          .read<ContactBloc>()
+                          .add(ContactEvent.createChat(uid: contact.uid));
+                    },
                     leading: contact.imageUrl == null
                         ? const CircleAvatar(
                             child: Icon(Icons.person),
@@ -63,14 +76,15 @@ class _InviteSavedContactsState extends State<InviteSavedContacts> {
                   );
                 },
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  "Invite",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              if (state.contacts.isNotEmpty)
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    "Invite",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
               ...List.generate(
                 state.contacts.length,
                 (index) {

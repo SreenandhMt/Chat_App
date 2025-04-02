@@ -12,9 +12,15 @@ class CallingEvent with _$CallingEvent {
   const factory CallingEvent.endNormalCall({required String callId}) =
       _EndNormalCall;
   const factory CallingEvent.startGroupVideoCalling(
-      {required ChatModel group}) = _StartGroupVideoCalling;
+      {required String chatId,
+      required String image,
+      required String groupName,
+      required List<String> participants}) = _StartGroupVideoCalling;
   const factory CallingEvent.startGroupVoiceCalling(
-      {required ChatModel group}) = _StartGroupVoiceCalling;
+      {required String chatId,
+      required String image,
+      required String groupName,
+      required List<String> participants}) = _StartGroupVoiceCalling;
   const factory CallingEvent.endGroupCall({required String callId}) =
       _EndGroupCall;
   const factory CallingEvent.selectCallModel({required CallModel callModel}) =

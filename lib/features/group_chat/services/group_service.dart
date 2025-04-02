@@ -32,6 +32,22 @@ class GroupService {
   static Stream<QuerySnapshot<Map<String, dynamic>>>? getAllChats(
       ChatModel chatModel) {
     try {
+      int? date;
+      for (var map in chatModel.joinedDate ?? []) {
+        if (map[auth.currentUser!.uid] != null) {
+          date = map[auth.currentUser!.uid];
+          break;
+        }
+      }
+      if (date != null) {
+        return firestore
+            .collection("chats")
+            .doc(chatModel.chatId)
+            .collection("messages")
+            .where("timestamp", isGreaterThan: date)
+            .orderBy("timestamp", descending: true)
+            .snapshots();
+      }
       return firestore
           .collection("chats")
           .doc(chatModel.chatId)
@@ -44,6 +60,33 @@ class GroupService {
     }
   }
 
+  //! kicking, removing, and deleting
+
+  static Future<void> deleteChatForMe(
+      ChatModel chatModel, String messageId) async {
+    try {
+      await firestore
+          .collection("chats")
+          .doc(chatModel.chatId)
+          .collection("messages")
+          .doc(messageId)
+          .update({
+        "hidechat": FieldValue.arrayUnion([auth.currentUser!.uid])
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  static void deleteGroup(ChatModel chatModel) async {
+    try {
+      if (chatModel.createdBy != auth.currentUser!.uid) return;
+      await firestore.collection("chats").doc(chatModel.chatId).delete();
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
   static void exitGroup(ChatModel chatModel) async {
     try {
       final participants = List<String>.from(chatModel.participants);
@@ -52,10 +95,83 @@ class GroupService {
         "participants": participants,
         "leaved": FieldValue.arrayUnion([auth.currentUser!.uid]),
       });
+      ChatServices.sendLog(
+          chatModel, "${auth.currentUser!.displayName ?? ""} left");
     } catch (e) {
       log(e.toString());
     }
   }
+
+  static Future<void> kickUser(
+      ChatModel chatModel, String uid, String name) async {
+    try {
+      final participants = List<String>.from(chatModel.participants);
+      participants.remove(uid);
+      await firestore.collection("chats").doc(chatModel.chatId).update({
+        "participants": participants,
+        "kicked": FieldValue.arrayUnion([uid]),
+      });
+      ChatServices.sendLog(
+          chatModel, "${auth.currentUser!.displayName ?? ""} kicked $name");
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  static Future<void> makeAdmin(ChatModel chatModel, String uid) async {
+    try {
+      await firestore.collection("chats").doc(chatModel.chatId).update({
+        "admins": FieldValue.arrayUnion([uid]),
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  static Future<void> removeAdmin(ChatModel chatModel, String uid) async {
+    try {
+      await firestore.collection("chats").doc(chatModel.chatId).update({
+        "admins": FieldValue.arrayRemove([uid]),
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  static Future<void> blockUser(
+      ChatModel chatModel, String uid, String name) async {
+    try {
+      final participants = List<String>.from(chatModel.participants);
+      participants.remove(uid);
+      await firestore.collection("chats").doc(chatModel.chatId).update({
+        "participants": participants,
+        "blocked": FieldValue.arrayUnion([uid]),
+      });
+      ChatServices.sendLog(
+          chatModel, "${auth.currentUser!.displayName ?? ""} blocked $name");
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  static Future<void> editPermission(
+      ChatModel chatModel,
+      bool? memberCanAddMember,
+      bool? memberCanEdit,
+      bool? memberCanMessage) async {
+    try {
+      await firestore.collection("chats").doc(chatModel.chatId).update({
+        if (memberCanAddMember != null)
+          "memberCanAddMember": memberCanAddMember,
+        if (memberCanEdit != null) "memberCanEdit": memberCanEdit,
+        if (memberCanMessage != null) "memberCanMessage": memberCanMessage
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  //
 
   static void createGroup(
       {required String groupName,
@@ -70,14 +186,16 @@ class GroupService {
       final date = DateTime.now().microsecondsSinceEpoch;
       final participants = List<String>.from(participantsIds)
         ..add(auth.currentUser!.uid);
-      final File? imageFile =
-          groupImagePath.isEmpty ? null : File(groupImagePath);
       String url = "";
-      if (imageFile != null) {
-        final ref = await storage
-            .ref("/groupImage/${imageFile.path.split("/").last}")
-            .putFile(imageFile);
-        url = await ref.ref.getDownloadURL();
+      if (groupImagePath.isNotEmpty) {
+        final File? imageFile =
+            groupImagePath.isEmpty ? null : File(groupImagePath);
+        if (imageFile != null) {
+          final ref = await storage
+              .ref("/groupImage/${imageFile.path.split("/").last}")
+              .putFile(imageFile);
+          url = await ref.ref.getDownloadURL();
+        }
       }
 
       await firestore.collection("chats").doc(id).set({
@@ -94,7 +212,8 @@ class GroupService {
         "participants": participants, // it means the current members
         "blocked": [], //blocked members
         "leaved": [], //leaved members
-        "lastMessage": "",
+        "admins": [auth.currentUser!.uid],
+        "lastMessage": "Who chat first 🌙",
         "lastMessageSender": auth.currentUser!.uid,
         "lastMessageTime": date,
         "createdBy": auth.currentUser!.uid,
@@ -107,12 +226,26 @@ class GroupService {
   }
 
   static Future<void> addMembers(
-      {required String chatId, required List<String> participantsIds}) async {
+      {required ChatModel chatModel,
+      required List<UserModels> participants}) async {
     try {
-      await firestore.collection("chats").doc(chatId).update({
-        "participants": FieldValue.arrayUnion(participantsIds),
-        "history": FieldValue.arrayUnion(participantsIds),
+      List<String> membersIds = [], membersNames = [];
+      for (var user in participants) {
+        membersIds.add(user.uid);
+        membersNames.add(user.name);
+      }
+      final int time = DateTime.now().millisecondsSinceEpoch;
+      await firestore.collection("chats").doc(chatModel.chatId).update({
+        "participants": FieldValue.arrayUnion(membersIds),
+        "history": FieldValue.arrayUnion(membersIds),
+        "joinedDate": FieldValue.arrayUnion([
+          ...membersIds.map(
+            (e) => {e: time},
+          )
+        ])
       });
+      ChatServices.sendLog(chatModel,
+          "${auth.currentUser!.displayName ?? ""} added $membersNames");
     } catch (e) {
       log(e.toString());
     }
@@ -143,26 +276,26 @@ class GroupService {
     return [];
   }
 
-  static void sendMessage(ChatModel chatModel, String message) async {
+  static Future<void> sendMessage(ChatModel chatModel, String message) async {
     ChatServices.sendMessage(chatModel, message,
         userName: auth.currentUser!.displayName ?? "");
   }
 
-  static void sendImage(ChatModel chatModel, String path) async {
+  static Future<void> sendImage(ChatModel chatModel, String path) async {
     ChatServices.sendImage(chatModel, path,
         lastMessage: auth.currentUser!.displayName != null
             ? null
             : "${auth.currentUser!.displayName}: Image");
   }
 
-  static void sendVideo(ChatModel chatModel, String path) async {
-    ChatServices.sendVideo(chatModel, path,
+  static Future<void> sendVideo(ChatModel chatModel, String path) async {
+    await ChatServices.sendVideo(chatModel, path,
         lastMessage: auth.currentUser!.displayName != null
             ? null
             : "${auth.currentUser!.displayName}: Video");
   }
 
-  static void sendDocument(ChatModel chatModel, String path) async {
+  static Future<void> sendDocument(ChatModel chatModel, String path) async {
     ChatServices.sendDocument(chatModel, path,
         lastMessage: auth.currentUser!.displayName != null
             ? null
@@ -177,21 +310,21 @@ class GroupService {
             : "${auth.currentUser!.displayName}: Audio");
   }
 
-  static void sendLink(ChatModel chatModel, String link) async {
+  static Future<void> sendLink(ChatModel chatModel, String link) async {
     ChatServices.sendLink(chatModel, link,
         lastMessage: auth.currentUser!.displayName != null
             ? null
             : "${auth.currentUser!.displayName}: $link");
   }
 
-  static void sendSticker(ChatModel chatModel, String sticker) async {
+  static Future<void> sendSticker(ChatModel chatModel, String sticker) async {
     ChatServices.sendSticker(chatModel, sticker,
         lastMessage: auth.currentUser!.displayName != null
             ? null
             : "${auth.currentUser!.displayName}: Sticker");
   }
 
-  static void sendPoll(
+  static Future<void> sendPoll(
       ChatModel chatModel, String question, List<String> options) async {
     ChatServices.sendPoll(chatModel, question, options,
         lastMessage: auth.currentUser!.displayName != null
@@ -199,12 +332,13 @@ class GroupService {
             : "${auth.currentUser!.displayName}: Poll");
   }
 
-  static void votePoll(ChatModel chatModel, String messageId, String option,
-      Map<String, dynamic> votes) async {
+  static Future<void> votePoll(ChatModel chatModel, String messageId,
+      String option, Map<String, dynamic> votes) async {
     ChatServices.votePoll(chatModel, messageId, option, votes);
   }
 
-  static void deleteMessage(ChatModel chatModel, String messageId) async {
+  static Future<void> deleteMessage(
+      ChatModel chatModel, String messageId) async {
     await firestore
         .collection("chats")
         .doc(chatModel.chatId)
@@ -213,6 +347,18 @@ class GroupService {
         .update({
       "message": "This message has been deleted",
       "messageType": "delete"
+    });
+  }
+
+  static Future<void> muteChat(ChatModel chatModel) async {
+    await firestore.collection("chats").doc(chatModel.chatId).update({
+      "muted": FieldValue.arrayUnion([auth.currentUser!.uid]),
+    });
+  }
+
+  static Future<void> unmuteChat(ChatModel chatModel) async {
+    await firestore.collection("chats").doc(chatModel.chatId).update({
+      "muted": FieldValue.arrayRemove([auth.currentUser!.uid]),
     });
   }
 

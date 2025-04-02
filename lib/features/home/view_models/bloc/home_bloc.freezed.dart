@@ -20,6 +20,7 @@ mixin _$HomeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllData,
+    required TResult Function(String category) filterCategoryUsers,
     required TResult Function(
             List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
         loadUserData,
@@ -29,6 +30,7 @@ mixin _$HomeEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllData,
+    TResult? Function(String category)? filterCategoryUsers,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
         loadUserData,
   }) =>
@@ -37,6 +39,7 @@ mixin _$HomeEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllData,
+    TResult Function(String category)? filterCategoryUsers,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
         loadUserData,
     required TResult orElse(),
@@ -46,6 +49,7 @@ mixin _$HomeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_getAllData value) getAllData,
+    required TResult Function(_FilterCategoryUsers value) filterCategoryUsers,
     required TResult Function(_LoadUserData value) loadUserData,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +57,7 @@ mixin _$HomeEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_getAllData value)? getAllData,
+    TResult? Function(_FilterCategoryUsers value)? filterCategoryUsers,
     TResult? Function(_LoadUserData value)? loadUserData,
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +65,7 @@ mixin _$HomeEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_getAllData value)? getAllData,
+    TResult Function(_FilterCategoryUsers value)? filterCategoryUsers,
     TResult Function(_LoadUserData value)? loadUserData,
     required TResult orElse(),
   }) =>
@@ -129,6 +135,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllData,
+    required TResult Function(String category) filterCategoryUsers,
     required TResult Function(
             List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
         loadUserData,
@@ -141,6 +148,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllData,
+    TResult? Function(String category)? filterCategoryUsers,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
         loadUserData,
   }) {
@@ -152,6 +160,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllData,
+    TResult Function(String category)? filterCategoryUsers,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
         loadUserData,
     required TResult orElse(),
@@ -167,6 +176,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_getAllData value) getAllData,
+    required TResult Function(_FilterCategoryUsers value) filterCategoryUsers,
     required TResult Function(_LoadUserData value) loadUserData,
   }) {
     return started(this);
@@ -177,6 +187,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_getAllData value)? getAllData,
+    TResult? Function(_FilterCategoryUsers value)? filterCategoryUsers,
     TResult? Function(_LoadUserData value)? loadUserData,
   }) {
     return started?.call(this);
@@ -187,6 +198,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_getAllData value)? getAllData,
+    TResult Function(_FilterCategoryUsers value)? filterCategoryUsers,
     TResult Function(_LoadUserData value)? loadUserData,
     required TResult orElse(),
   }) {
@@ -244,6 +256,7 @@ class _$getAllDataImpl implements _getAllData {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllData,
+    required TResult Function(String category) filterCategoryUsers,
     required TResult Function(
             List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
         loadUserData,
@@ -256,6 +269,7 @@ class _$getAllDataImpl implements _getAllData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllData,
+    TResult? Function(String category)? filterCategoryUsers,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
         loadUserData,
   }) {
@@ -267,6 +281,7 @@ class _$getAllDataImpl implements _getAllData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllData,
+    TResult Function(String category)? filterCategoryUsers,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
         loadUserData,
     required TResult orElse(),
@@ -282,6 +297,7 @@ class _$getAllDataImpl implements _getAllData {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_getAllData value) getAllData,
+    required TResult Function(_FilterCategoryUsers value) filterCategoryUsers,
     required TResult Function(_LoadUserData value) loadUserData,
   }) {
     return getAllData(this);
@@ -292,6 +308,7 @@ class _$getAllDataImpl implements _getAllData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_getAllData value)? getAllData,
+    TResult? Function(_FilterCategoryUsers value)? filterCategoryUsers,
     TResult? Function(_LoadUserData value)? loadUserData,
   }) {
     return getAllData?.call(this);
@@ -302,6 +319,7 @@ class _$getAllDataImpl implements _getAllData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_getAllData value)? getAllData,
+    TResult Function(_FilterCategoryUsers value)? filterCategoryUsers,
     TResult Function(_LoadUserData value)? loadUserData,
     required TResult orElse(),
   }) {
@@ -314,6 +332,165 @@ class _$getAllDataImpl implements _getAllData {
 
 abstract class _getAllData implements HomeEvent {
   const factory _getAllData() = _$getAllDataImpl;
+}
+
+/// @nodoc
+abstract class _$$FilterCategoryUsersImplCopyWith<$Res> {
+  factory _$$FilterCategoryUsersImplCopyWith(_$FilterCategoryUsersImpl value,
+          $Res Function(_$FilterCategoryUsersImpl) then) =
+      __$$FilterCategoryUsersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String category});
+}
+
+/// @nodoc
+class __$$FilterCategoryUsersImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$FilterCategoryUsersImpl>
+    implements _$$FilterCategoryUsersImplCopyWith<$Res> {
+  __$$FilterCategoryUsersImplCopyWithImpl(_$FilterCategoryUsersImpl _value,
+      $Res Function(_$FilterCategoryUsersImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? category = null,
+  }) {
+    return _then(_$FilterCategoryUsersImpl(
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FilterCategoryUsersImpl implements _FilterCategoryUsers {
+  const _$FilterCategoryUsersImpl({required this.category});
+
+  @override
+  final String category;
+
+  @override
+  String toString() {
+    return 'HomeEvent.filterCategoryUsers(category: $category)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FilterCategoryUsersImpl &&
+            (identical(other.category, category) ||
+                other.category == category));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, category);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FilterCategoryUsersImplCopyWith<_$FilterCategoryUsersImpl> get copyWith =>
+      __$$FilterCategoryUsersImplCopyWithImpl<_$FilterCategoryUsersImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllData,
+    required TResult Function(String category) filterCategoryUsers,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadUserData,
+  }) {
+    return filterCategoryUsers(category);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllData,
+    TResult? Function(String category)? filterCategoryUsers,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
+  }) {
+    return filterCategoryUsers?.call(category);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllData,
+    TResult Function(String category)? filterCategoryUsers,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadUserData,
+    required TResult orElse(),
+  }) {
+    if (filterCategoryUsers != null) {
+      return filterCategoryUsers(category);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_getAllData value) getAllData,
+    required TResult Function(_FilterCategoryUsers value) filterCategoryUsers,
+    required TResult Function(_LoadUserData value) loadUserData,
+  }) {
+    return filterCategoryUsers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_getAllData value)? getAllData,
+    TResult? Function(_FilterCategoryUsers value)? filterCategoryUsers,
+    TResult? Function(_LoadUserData value)? loadUserData,
+  }) {
+    return filterCategoryUsers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_getAllData value)? getAllData,
+    TResult Function(_FilterCategoryUsers value)? filterCategoryUsers,
+    TResult Function(_LoadUserData value)? loadUserData,
+    required TResult orElse(),
+  }) {
+    if (filterCategoryUsers != null) {
+      return filterCategoryUsers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FilterCategoryUsers implements HomeEvent {
+  const factory _FilterCategoryUsers({required final String category}) =
+      _$FilterCategoryUsersImpl;
+
+  String get category;
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FilterCategoryUsersImplCopyWith<_$FilterCategoryUsersImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -394,6 +571,7 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllData,
+    required TResult Function(String category) filterCategoryUsers,
     required TResult Function(
             List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
         loadUserData,
@@ -406,6 +584,7 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllData,
+    TResult? Function(String category)? filterCategoryUsers,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
         loadUserData,
   }) {
@@ -417,6 +596,7 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllData,
+    TResult Function(String category)? filterCategoryUsers,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
         loadUserData,
     required TResult orElse(),
@@ -432,6 +612,7 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_getAllData value) getAllData,
+    required TResult Function(_FilterCategoryUsers value) filterCategoryUsers,
     required TResult Function(_LoadUserData value) loadUserData,
   }) {
     return loadUserData(this);
@@ -442,6 +623,7 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_getAllData value)? getAllData,
+    TResult? Function(_FilterCategoryUsers value)? filterCategoryUsers,
     TResult? Function(_LoadUserData value)? loadUserData,
   }) {
     return loadUserData?.call(this);
@@ -452,6 +634,7 @@ class _$LoadUserDataImpl implements _LoadUserData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_getAllData value)? getAllData,
+    TResult Function(_FilterCategoryUsers value)? filterCategoryUsers,
     TResult Function(_LoadUserData value)? loadUserData,
     required TResult orElse(),
   }) {
@@ -480,17 +663,24 @@ abstract class _LoadUserData implements HomeEvent {
 mixin _$HomeState {
   bool get isLoading => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get chatsModels =>
-      throw _privateConstructorUsedError;
+  List<ChatModel> get chatsModels => throw _privateConstructorUsedError;
   Stream<QuerySnapshot<Map<String, dynamic>>>? get chatsStream =>
       throw _privateConstructorUsedError;
+  List<String> get categoryList => throw _privateConstructorUsedError;
+  String get selectedCategory => throw _privateConstructorUsedError;
+  List<ChatModel> get filteredChats => throw _privateConstructorUsedError;
+  bool get filteredChatsEmpty => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             bool isLoading,
             String errorMessage,
-            List<Map<String, dynamic>> chatsModels,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream)
+            List<ChatModel> chatsModels,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+            List<String> categoryList,
+            String selectedCategory,
+            List<ChatModel> filteredChats,
+            bool filteredChatsEmpty)
         loadedData,
   }) =>
       throw _privateConstructorUsedError;
@@ -499,8 +689,12 @@ mixin _$HomeState {
     TResult? Function(
             bool isLoading,
             String errorMessage,
-            List<Map<String, dynamic>> chatsModels,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream)?
+            List<ChatModel> chatsModels,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+            List<String> categoryList,
+            String selectedCategory,
+            List<ChatModel> filteredChats,
+            bool filteredChatsEmpty)?
         loadedData,
   }) =>
       throw _privateConstructorUsedError;
@@ -509,8 +703,12 @@ mixin _$HomeState {
     TResult Function(
             bool isLoading,
             String errorMessage,
-            List<Map<String, dynamic>> chatsModels,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream)?
+            List<ChatModel> chatsModels,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+            List<String> categoryList,
+            String selectedCategory,
+            List<ChatModel> filteredChats,
+            bool filteredChatsEmpty)?
         loadedData,
     required TResult orElse(),
   }) =>
@@ -547,8 +745,12 @@ abstract class $HomeStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       String errorMessage,
-      List<Map<String, dynamic>> chatsModels,
-      Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream});
+      List<ChatModel> chatsModels,
+      Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+      List<String> categoryList,
+      String selectedCategory,
+      List<ChatModel> filteredChats,
+      bool filteredChatsEmpty});
 }
 
 /// @nodoc
@@ -570,6 +772,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? errorMessage = null,
     Object? chatsModels = null,
     Object? chatsStream = freezed,
+    Object? categoryList = null,
+    Object? selectedCategory = null,
+    Object? filteredChats = null,
+    Object? filteredChatsEmpty = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -583,11 +789,27 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       chatsModels: null == chatsModels
           ? _value.chatsModels
           : chatsModels // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<ChatModel>,
       chatsStream: freezed == chatsStream
           ? _value.chatsStream
           : chatsStream // ignore: cast_nullable_to_non_nullable
               as Stream<QuerySnapshot<Map<String, dynamic>>>?,
+      categoryList: null == categoryList
+          ? _value.categoryList
+          : categoryList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      selectedCategory: null == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as String,
+      filteredChats: null == filteredChats
+          ? _value.filteredChats
+          : filteredChats // ignore: cast_nullable_to_non_nullable
+              as List<ChatModel>,
+      filteredChatsEmpty: null == filteredChatsEmpty
+          ? _value.filteredChatsEmpty
+          : filteredChatsEmpty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -603,8 +825,12 @@ abstract class _$$LoadedDataImplCopyWith<$Res>
   $Res call(
       {bool isLoading,
       String errorMessage,
-      List<Map<String, dynamic>> chatsModels,
-      Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream});
+      List<ChatModel> chatsModels,
+      Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+      List<String> categoryList,
+      String selectedCategory,
+      List<ChatModel> filteredChats,
+      bool filteredChatsEmpty});
 }
 
 /// @nodoc
@@ -624,6 +850,10 @@ class __$$LoadedDataImplCopyWithImpl<$Res>
     Object? errorMessage = null,
     Object? chatsModels = null,
     Object? chatsStream = freezed,
+    Object? categoryList = null,
+    Object? selectedCategory = null,
+    Object? filteredChats = null,
+    Object? filteredChatsEmpty = null,
   }) {
     return _then(_$LoadedDataImpl(
       isLoading: null == isLoading
@@ -637,11 +867,27 @@ class __$$LoadedDataImplCopyWithImpl<$Res>
       chatsModels: null == chatsModels
           ? _value._chatsModels
           : chatsModels // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<ChatModel>,
       chatsStream: freezed == chatsStream
           ? _value.chatsStream
           : chatsStream // ignore: cast_nullable_to_non_nullable
               as Stream<QuerySnapshot<Map<String, dynamic>>>?,
+      categoryList: null == categoryList
+          ? _value._categoryList
+          : categoryList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      selectedCategory: null == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as String,
+      filteredChats: null == filteredChats
+          ? _value._filteredChats
+          : filteredChats // ignore: cast_nullable_to_non_nullable
+              as List<ChatModel>,
+      filteredChatsEmpty: null == filteredChatsEmpty
+          ? _value.filteredChatsEmpty
+          : filteredChatsEmpty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -650,11 +896,17 @@ class __$$LoadedDataImplCopyWithImpl<$Res>
 
 class _$LoadedDataImpl implements _LoadedData {
   _$LoadedDataImpl(
-      {this.isLoading = false,
+      {this.isLoading = true,
       this.errorMessage = "",
-      final List<Map<String, dynamic>> chatsModels = const [],
-      this.chatsStream = null})
-      : _chatsModels = chatsModels;
+      final List<ChatModel> chatsModels = const [],
+      this.chatsStream = null,
+      final List<String> categoryList = const [],
+      this.selectedCategory = "All",
+      final List<ChatModel> filteredChats = const [],
+      this.filteredChatsEmpty = false})
+      : _chatsModels = chatsModels,
+        _categoryList = categoryList,
+        _filteredChats = filteredChats;
 
   @override
   @JsonKey()
@@ -662,10 +914,10 @@ class _$LoadedDataImpl implements _LoadedData {
   @override
   @JsonKey()
   final String errorMessage;
-  final List<Map<String, dynamic>> _chatsModels;
+  final List<ChatModel> _chatsModels;
   @override
   @JsonKey()
-  List<Map<String, dynamic>> get chatsModels {
+  List<ChatModel> get chatsModels {
     if (_chatsModels is EqualUnmodifiableListView) return _chatsModels;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_chatsModels);
@@ -674,10 +926,34 @@ class _$LoadedDataImpl implements _LoadedData {
   @override
   @JsonKey()
   final Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream;
+  final List<String> _categoryList;
+  @override
+  @JsonKey()
+  List<String> get categoryList {
+    if (_categoryList is EqualUnmodifiableListView) return _categoryList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categoryList);
+  }
+
+  @override
+  @JsonKey()
+  final String selectedCategory;
+  final List<ChatModel> _filteredChats;
+  @override
+  @JsonKey()
+  List<ChatModel> get filteredChats {
+    if (_filteredChats is EqualUnmodifiableListView) return _filteredChats;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filteredChats);
+  }
+
+  @override
+  @JsonKey()
+  final bool filteredChatsEmpty;
 
   @override
   String toString() {
-    return 'HomeState.loadedData(isLoading: $isLoading, errorMessage: $errorMessage, chatsModels: $chatsModels, chatsStream: $chatsStream)';
+    return 'HomeState.loadedData(isLoading: $isLoading, errorMessage: $errorMessage, chatsModels: $chatsModels, chatsStream: $chatsStream, categoryList: $categoryList, selectedCategory: $selectedCategory, filteredChats: $filteredChats, filteredChatsEmpty: $filteredChatsEmpty)';
   }
 
   @override
@@ -692,12 +968,28 @@ class _$LoadedDataImpl implements _LoadedData {
             const DeepCollectionEquality()
                 .equals(other._chatsModels, _chatsModels) &&
             (identical(other.chatsStream, chatsStream) ||
-                other.chatsStream == chatsStream));
+                other.chatsStream == chatsStream) &&
+            const DeepCollectionEquality()
+                .equals(other._categoryList, _categoryList) &&
+            (identical(other.selectedCategory, selectedCategory) ||
+                other.selectedCategory == selectedCategory) &&
+            const DeepCollectionEquality()
+                .equals(other._filteredChats, _filteredChats) &&
+            (identical(other.filteredChatsEmpty, filteredChatsEmpty) ||
+                other.filteredChatsEmpty == filteredChatsEmpty));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, errorMessage,
-      const DeepCollectionEquality().hash(_chatsModels), chatsStream);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      errorMessage,
+      const DeepCollectionEquality().hash(_chatsModels),
+      chatsStream,
+      const DeepCollectionEquality().hash(_categoryList),
+      selectedCategory,
+      const DeepCollectionEquality().hash(_filteredChats),
+      filteredChatsEmpty);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -713,11 +1005,16 @@ class _$LoadedDataImpl implements _LoadedData {
     required TResult Function(
             bool isLoading,
             String errorMessage,
-            List<Map<String, dynamic>> chatsModels,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream)
+            List<ChatModel> chatsModels,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+            List<String> categoryList,
+            String selectedCategory,
+            List<ChatModel> filteredChats,
+            bool filteredChatsEmpty)
         loadedData,
   }) {
-    return loadedData(isLoading, errorMessage, chatsModels, chatsStream);
+    return loadedData(isLoading, errorMessage, chatsModels, chatsStream,
+        categoryList, selectedCategory, filteredChats, filteredChatsEmpty);
   }
 
   @override
@@ -726,11 +1023,16 @@ class _$LoadedDataImpl implements _LoadedData {
     TResult? Function(
             bool isLoading,
             String errorMessage,
-            List<Map<String, dynamic>> chatsModels,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream)?
+            List<ChatModel> chatsModels,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+            List<String> categoryList,
+            String selectedCategory,
+            List<ChatModel> filteredChats,
+            bool filteredChatsEmpty)?
         loadedData,
   }) {
-    return loadedData?.call(isLoading, errorMessage, chatsModels, chatsStream);
+    return loadedData?.call(isLoading, errorMessage, chatsModels, chatsStream,
+        categoryList, selectedCategory, filteredChats, filteredChatsEmpty);
   }
 
   @override
@@ -739,13 +1041,18 @@ class _$LoadedDataImpl implements _LoadedData {
     TResult Function(
             bool isLoading,
             String errorMessage,
-            List<Map<String, dynamic>> chatsModels,
-            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream)?
+            List<ChatModel> chatsModels,
+            Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+            List<String> categoryList,
+            String selectedCategory,
+            List<ChatModel> filteredChats,
+            bool filteredChatsEmpty)?
         loadedData,
     required TResult orElse(),
   }) {
     if (loadedData != null) {
-      return loadedData(isLoading, errorMessage, chatsModels, chatsStream);
+      return loadedData(isLoading, errorMessage, chatsModels, chatsStream,
+          categoryList, selectedCategory, filteredChats, filteredChatsEmpty);
     }
     return orElse();
   }
@@ -781,20 +1088,31 @@ class _$LoadedDataImpl implements _LoadedData {
 
 abstract class _LoadedData implements HomeState {
   factory _LoadedData(
-          {final bool isLoading,
-          final String errorMessage,
-          final List<Map<String, dynamic>> chatsModels,
-          final Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream}) =
-      _$LoadedDataImpl;
+      {final bool isLoading,
+      final String errorMessage,
+      final List<ChatModel> chatsModels,
+      final Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
+      final List<String> categoryList,
+      final String selectedCategory,
+      final List<ChatModel> filteredChats,
+      final bool filteredChatsEmpty}) = _$LoadedDataImpl;
 
   @override
   bool get isLoading;
   @override
   String get errorMessage;
   @override
-  List<Map<String, dynamic>> get chatsModels;
+  List<ChatModel> get chatsModels;
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>>? get chatsStream;
+  @override
+  List<String> get categoryList;
+  @override
+  String get selectedCategory;
+  @override
+  List<ChatModel> get filteredChats;
+  @override
+  bool get filteredChatsEmpty;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.

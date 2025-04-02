@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MessageModel {
@@ -10,18 +13,22 @@ class MessageModel {
   final bool isSender;
   final int timestamp;
   final String time;
+  final String? date;
   final String? message;
 
-  //* // text message done
+  //*// text message done
 
-  //* //image message done
+  //*//image message done
 
-  //* //video message done
+  //*//video message done
 
-  //* //link preview done
+  //*//link preview done
   final String? linkPreviewTitle;
   final String? linkPreviewDescription;
   final String? linkPreviewUrl;
+
+  //*// video
+  final String? thumbnail;
 
   //* //document done only
   final String? documentType;
@@ -56,10 +63,12 @@ class MessageModel {
     required this.isSender,
     required this.timestamp,
     required this.time,
+    this.date,
     required this.message,
     this.linkPreviewTitle,
     this.linkPreviewDescription,
     this.linkPreviewUrl,
+    this.thumbnail,
     this.documentType,
     this.documentName,
     this.options,
@@ -99,6 +108,7 @@ class MessageModel {
       documentType: json['documentType'],
       documentName: json["documentName"],
       options: options,
+      thumbnail: json["thumbnail"],
       votes: votes,
       wave: (json['wave'] is List)
           ? (json['wave'] as List)
@@ -108,6 +118,25 @@ class MessageModel {
           : [],
       width: json['width']?.toInt(),
       height: json['height']?.toInt(),
+      date: _formatDate(
+          DateTime.fromMillisecondsSinceEpoch(json['timestamp']).toString()),
     );
+  }
+
+  static String _formatDate(String dateString) {
+    DateFormat inputFormat = DateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    DateTime parsedDate = inputFormat.parse(dateString);
+
+    DateTime today = DateTime.now();
+    DateTime yesterday = today.subtract(Duration(days: 1));
+
+    if (DateUtils.isSameDay(parsedDate, today)) {
+      return 'Today';
+    } else if (DateUtils.isSameDay(parsedDate, yesterday)) {
+      return 'Yesterday';
+    } else {
+      DateFormat outputFormat = DateFormat('d MMMM yyyy');
+      return outputFormat.format(parsedDate);
+    }
   }
 }

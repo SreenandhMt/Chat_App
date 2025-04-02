@@ -24,7 +24,7 @@ class UserWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
         title: Text(
-          chatModel.isGroup ? chatModel.groupName ?? "" : userModel!.name,
+          chatModel.isGroup ? chatModel.groupName ?? "" : userModel?.name ?? "",
           maxLines: 1,
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
         ),
@@ -32,7 +32,19 @@ class UserWidget extends StatelessWidget {
           radius: 28,
           backgroundImage: NetworkImage(chatModel.isGroup
               ? chatModel.groupImage ?? ""
-              : userModel!.imageUrl ?? ""),
+              : userModel?.imageUrl ?? ""),
+          child: Stack(
+            children: [
+              if (!chatModel.isGroup &&
+                  userModel != null &&
+                  userModel!.status == "Online")
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: CircleAvatar(
+                      radius: 8, backgroundColor: AppColors.primary(context)),
+                )
+            ],
+          ),
         ),
         subtitle: Text(
           chatModel.lastMessage,

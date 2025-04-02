@@ -1,4 +1,3 @@
-import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:chat_app/components/audio_record_input.dart';
 import 'package:chat_app/components/chat_page/poll_creating_widget.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
+import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 import 'package:chat_app/localization/locals.dart';
 
 import '../core/colors.dart';
@@ -16,12 +16,14 @@ import '../core/colors.dart';
 class ChatInput extends StatefulWidget {
   const ChatInput({
     super.key,
+    this.inputLoading = false,
     required this.stickerSelected,
     required this.controller,
     required this.showEmojiKeyboard,
     this.onSubmit,
     this.isGroup = false,
   });
+  final bool inputLoading;
   final void Function(KeyboardInsertedContent) stickerSelected;
   final TextEditingController controller;
   final void Function() showEmojiKeyboard;
@@ -73,6 +75,12 @@ class _ChatInputState extends State<ChatInput> {
                       ],
                     ),
                     decoration: InputDecoration(
+                        suffixIcon: widget.inputLoading
+                            ? CircularProgressIndicator(
+                                strokeAlign: -5,
+                                color: AppColors.primary(context),
+                              )
+                            : null,
                         hintText: LocaleData.chatHitText.getString(context),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.only(
@@ -150,16 +158,18 @@ class _ChatInputState extends State<ChatInput> {
                                   }
                                 },
                               ),
-                              PopupMenuItem(
-                                child: buildPopUpButtonWidget(
-                                    "Poll", Icons.edit_note_rounded),
-                                onTap: () async {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => PollCreatingWidget(),
-                                  );
-                                },
-                              ),
+                              if (widget.isGroup)
+                                PopupMenuItem(
+                                  child: buildPopUpButtonWidget(
+                                      "Poll", Icons.edit_note_rounded),
+                                  onTap: () async {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          PollCreatingWidget(),
+                                    );
+                                  },
+                                ),
                             ],
                         child: Icon(CupertinoIcons.add_circled)),
                     IconButton(

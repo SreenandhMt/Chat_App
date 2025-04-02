@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -6,6 +7,7 @@ import 'package:chat_app/components/chat_input.dart';
 import 'package:chat_app/core/wallpaper_colors.dart';
 import 'package:chat_app/features/chat_page/models/message_model.dart';
 import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,14 +35,27 @@ class _GroupChatPageState extends State<GroupChatPage> {
   late StreamSubscription<bool> stream;
   bool isRecoding = false;
   List<String> selectedMessagesId = [];
+  List<MessageModel> selectedMessagesModel = [];
   String? sticker;
   OverlayEntry? overlayEntry;
+  bool listening = false;
 
   @override
   void initState() {
     keyboardVisibility();
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
+        controller.addListener(() {
+          if (controller.text.isNotEmpty) {
+            context
+                .read<GroupBloc>()
+                .add(GroupEvent.editStatusToTyping(isTyping: true));
+          } else {
+            context
+                .read<GroupBloc>()
+                .add(GroupEvent.editStatusToTyping(isTyping: false));
+          }
+        });
         scrollController.addListener(() {
           if (overlayEntry != null) {
             overlayEntry!.remove();
@@ -54,140 +69,194 @@ class _GroupChatPageState extends State<GroupChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<GroupBloc, GroupState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return state.when(
-              groupData: (groupData, groupMembers, messageData,
-                      wallpaperIndex) =>
-                  Scaffold(
-                    backgroundColor: wallpaperColor(context)[wallpaperIndex],
-                    appBar: groupChatAppBar(context, chatModel: groupData!,
-                        clearSelectedMessage: () {
-                      setState(() {
-                        selectedMessagesId.clear();
-                      });
-                    },
-                        selectedMessagesId: selectedMessagesId,
-                        hideReactions: hideReactions),
-                    body: StreamBuilder(
-                        stream: messageData,
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return SizedBox();
-                          }
-                          return Container(
-                            decoration: BoxDecoration(),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: ListView(
-                                    reverse: true,
-                                    dragStartBehavior: DragStartBehavior.down,
-                                    controller: scrollController,
-                                    children: List.generate(
-                                      snapshot.data!.docs.length,
-                                      (index) {
-                                        final message = MessageModel.fromJson(
-                                            snapshot.data!.docs[index].data());
-                                        return GestureDetector(
-                                          onTap: () => setState(() {
-                                            hideReactions();
-                                            selectedMessagesId
-                                                .remove(message.id);
-                                          }),
-                                          onLongPressStart: (details) =>
-                                              setState(() {
-                                            if (!message.isSender) {
-                                              showReactions(
-                                                context,
-                                                Offset(
-                                                    70,
-                                                    details.globalPosition.dy -
-                                                        30),
-                                                message.id,
-                                              );
-                                            }
-                                            if (selectedMessagesId
-                                                .contains(message.id)) {
-                                              selectedMessagesId
-                                                  .remove(message.id);
-                                            } else {
-                                              selectedMessagesId
-                                                  .add(message.id);
-                                            }
-                                          }),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: selectedMessagesId
-                                                      .contains(message.id)
-                                                  ? AppColors.primary(context)
-                                                      .withOpacity(0.1)
-                                                  : null,
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
-                                            ),
-                                            child: GroupChatWidget(
-                                                sender: groupMembers[
-                                                    message.senderId],
-                                                messageModel: message),
-                                          ),
-                                        );
-                                      },
-                                    ),
+    return BlocConsumer<GroupBloc, GroupState>(listener: (context, state) {
+      if (state is GroupData) {
+        if (state.messageData != null && !listening) {
+          listening = true;
+          log("Init");
+          state.messageData!.listen(
+            (event) {
+              context
+                  .read<GroupBloc>()
+                  .add(GroupEvent.loadMessageModel(docs: event.docs));
+            },
+          );
+        }
+      }
+    }, builder: (context, state) {
+      return state.when(
+          groupData: (groupData,
+              groupMembers,
+              allGroupMembers,
+              blockedGroupMembers,
+              messageData,
+              wallpaperIndex,
+              messages,
+              isLoading,
+              inputLoading) {
+            if (groupData == null) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return Scaffold(
+              backgroundColor: wallpaperColor(context)[wallpaperIndex],
+              appBar: groupChatAppBar(context,
+                  chatModel: groupData,
+                  allMembers: allGroupMembers,
+                  models: selectedMessagesModel, clearSelectedMessage: () {
+                setState(() {
+                  selectedMessagesId.clear();
+                  selectedMessagesModel.clear();
+                });
+              },
+                  selectedMessagesId: selectedMessagesId,
+                  hideReactions: hideReactions),
+              body: PopScope(
+                canPop: isEmojiKeyboardHide,
+                onPopInvoked: (didPop) {
+                  setState(() {
+                    isEmojiKeyboardHide = true;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
+                          reverse: true,
+                          dragStartBehavior: DragStartBehavior.down,
+                          controller: scrollController,
+                          children: List.generate(
+                            messages.length,
+                            (index) {
+                              final message = messages[index];
+                              return GestureDetector(
+                                onTap: () => clickedMessage(message),
+                                onLongPressStart: (details) =>
+                                    onLongPressStart(message, details),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color:
+                                        selectedMessagesId.contains(message.id)
+                                            ? AppColors.primary(context)
+                                                .withOpacity(0.1)
+                                            : null,
+                                    borderRadius: BorderRadius.circular(2),
                                   ),
+                                  child: GroupChatWidget(
+                                      sender: allGroupMembers[message.senderId],
+                                      messageModel: message),
                                 ),
-                                ChatInput(
-                                  isGroup: true,
-                                  stickerSelected: (content) async {
-                                    //getting url here
-                                    debugPrint(
-                                        "Inserted content: ${content.uri}");
-                                    if (content.mimeType != "image/gif") {
-                                      final stickerImage =
-                                          await _convertUriToFile(
-                                              content.data!);
-                                      context.read<GroupBloc>().add(
-                                          GroupEvent.sendSticker(
-                                              stickerPath: stickerImage!));
-                                    }
-                                  },
-                                  onSubmit: () {
-                                    if (controller.text.isEmpty) return;
-                                    if (isValidUrl(controller.text)) {
-                                      context.read<GroupBloc>().add(
-                                          GroupEvent.sendLink(controller.text));
-                                      controller.clear();
-                                      return;
-                                    }
-                                    context.read<GroupBloc>().add(
-                                          GroupEvent.sendMessage(
-                                              controller.text),
-                                        );
-                                    controller.clear();
-                                  },
-                                  controller: controller,
-                                  showEmojiKeyboard: showEmojiKeyboard,
-                                ),
-                                CustomEmojiKeyboard(
-                                  emojiController: controller,
-                                  isHide: isEmojiKeyboardHide,
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      if (groupData.memberCanMessage != null &&
+                              groupData.memberCanMessage! ||
+                          groupData.admins
+                              .contains(FirebaseAuth.instance.currentUser!.uid))
+                        ChatInput(
+                          inputLoading: inputLoading,
+                          isGroup: true,
+                          stickerSelected: (content) async {
+                            if (content.mimeType != "image/gif") {
+                              final stickerImage =
+                                  await _convertUriToFile(content.data!);
+                              context.read<GroupBloc>().add(
+                                  GroupEvent.sendSticker(
+                                      stickerPath: stickerImage!));
+                            }
+                          },
+                          onSubmit: () {
+                            if (controller.text.isEmpty) return;
+                            if (isValidUrl(controller.text)) {
+                              context
+                                  .read<GroupBloc>()
+                                  .add(GroupEvent.sendLink(controller.text));
+                              controller.clear();
+                              return;
+                            }
+                            context.read<GroupBloc>().add(
+                                  GroupEvent.sendMessage(controller.text),
+                                );
+                            controller.clear();
+                          },
+                          controller: controller,
+                          showEmojiKeyboard: showEmojiKeyboard,
+                        )
+                      else
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(10),
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColors.themeColor(context)),
+                          alignment: Alignment.center,
+                          child: Text("Only admin can send messages"),
+                        ),
+                      CustomEmojiKeyboard(
+                        emojiController: controller,
+                        isHide: isEmojiKeyboardHide,
+                      ),
+                    ],
                   ),
-              createGroupData: (groupName,
-                      groupDescription,
-                      groupImagePath,
-                      memberCanEdit,
-                      memberCanAddMember,
-                      memberCanMessage,
-                      contacts,
-                      selectedContacts) =>
-                  CircularProgressIndicator());
-        });
+                ),
+              ),
+            );
+          },
+          createGroupData: (groupName,
+                  groupDescription,
+                  groupImagePath,
+                  memberCanEdit,
+                  memberCanAddMember,
+                  memberCanMessage,
+                  contacts,
+                  selectedContacts) =>
+              CircularProgressIndicator());
+    });
+  }
+
+  void clickedMessage(MessageModel message) {
+    if (message.messageType == "log") return;
+    final id = message.id;
+    if (selectedMessagesId.isEmpty) return;
+    if (!selectedMessagesId.contains(id)) {
+      selectedMessagesId.add(id);
+      selectedMessagesModel.add(message);
+      setState(() {});
+      return;
+    }
+    setState(() {
+      hideReactions();
+      final index = selectedMessagesId.indexOf(id);
+      selectedMessagesId.remove(id);
+      selectedMessagesModel.removeAt(index);
+    });
+  }
+
+  void onLongPressStart(MessageModel message, details) {
+    if (message.messageType == "log") return;
+    setState(() {
+      if (!message.isSender) {
+        showReactions(
+          context,
+          Offset(70, details.globalPosition.dy - 30),
+          message.id,
+        );
+      }
+      if (selectedMessagesId.contains(message.id)) {
+        final index = selectedMessagesId.indexOf(message.id);
+        selectedMessagesId.remove(message.id);
+        selectedMessagesModel.removeAt(index);
+      } else {
+        selectedMessagesId.add(message.id);
+        selectedMessagesModel.add(message);
+      }
+    });
   }
 
   bool isValidUrl(String text) {

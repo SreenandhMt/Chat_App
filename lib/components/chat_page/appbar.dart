@@ -1,6 +1,6 @@
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
-import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
+import 'package:chat_app/features/chat_page/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,14 +8,16 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/colors.dart';
 import '../../features/calls_screen/view_models/bloc/calling_bloc.dart';
-import '../../features/chat_page/views/chat_info_page.dart';
+import '../../features/chat_page/views/message_info_page.dart';
 import '../../route/navigation_utils.dart';
+import '../group_chat/delete_message.dart';
 
 PreferredSize appBar(
   BuildContext context, {
   required void Function() hideReactions,
   required List<String> selectedMessages,
   required UserModels userModel,
+  required List<MessageModel> models,
   required void Function() clearMessage,
 }) {
   return PreferredSize(
@@ -84,20 +86,27 @@ PreferredSize appBar(
                 Text(selectedMessages.length.toString()),
                 Spacer(),
                 IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                                child: DeleteMessageDialog(
+                              messageIds: selectedMessages,
+                              onlyDeleteForMe: true,
+                              clearSelectedMessage: clearMessage,
+                              hideReactions: hideReactions,
+                              isGroup: false,
+                            )));
+                  },
+                  icon: Icon(Icons.delete_outline_rounded),
+                ),
+                IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.star_border_purple500_rounded),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.delete_outline_rounded),
-                ),
-                IconButton(
-                  onPressed: () {},
                   icon: Icon(Icons.copy_rounded),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.forward_to_inbox_outlined),
                 ),
               ] else ...[
                 IconButton(
@@ -108,52 +117,70 @@ PreferredSize appBar(
                 Spacer(),
                 IconButton(
                   onPressed: () {
-                    context.read<ChatBloc>().add(ChatEvent.deleteMessage(
-                        messageId: selectedMessages.first));
-                    clearMessage();
+                    final selectedModels = models;
+                    if (selectedModels
+                        .where((element) =>
+                            !element.isSender ||
+                            element.messageType == "delete")
+                        .isNotEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                            child: DeleteMessageDialog(
+                          messageIds: selectedMessages,
+                          onlyDeleteForMe: true,
+                          clearSelectedMessage: clearMessage,
+                          hideReactions: hideReactions,
+                          isGroup: false,
+                        )),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                            child: DeleteMessageDialog(
+                          messageIds: selectedMessages,
+                          clearSelectedMessage: clearMessage,
+                          hideReactions: hideReactions,
+                          isGroup: false,
+                        )),
+                      );
+                    }
                   },
                   icon: Icon(Icons.delete_outline_rounded),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.reply),
+                  onPressed: () {
+                    hideReactions();
+                    clearMessage();
+                  },
+                  icon: Icon(Icons.copy_rounded),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    hideReactions();
+                    clearMessage();
+                  },
                   icon: Icon(Icons.star_border_purple500_rounded),
                 ),
-                PopupMenuButton(
-                  position: PopupMenuPosition.under,
-                  splashRadius: 20,
-                  shape: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10)),
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      child: Row(
-                        children: [width10, Text("Info"), width50, width20],
-                      ),
-                      onTap: () => showModalBottomSheet(
+                if (models.isNotEmpty &&
+                    models.length <= 1 &&
+                    models.first.isSender)
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
                         context: context,
                         builder: (context) {
                           hideReactions();
-                          return InfoBottomSheet();
+                          return InfoBottomSheet(
+                            messageModel: models.first,
+                            allMembers: {userModel.uid: userModel},
+                          );
                         },
-                      ),
-                    ),
-                    PopupMenuItem(
-                      child: Row(
-                        children: [width10, Text("Copy"), width50, width20],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      child: Row(
-                        children: [width10, Text("Edit"), width50, width20],
-                      ),
-                    )
-                  ],
-                  child: Icon(Icons.more_vert),
-                )
+                      );
+                    },
+                    icon: Icon(Icons.info_outline),
+                  ),
               ],
             ],
             width10,

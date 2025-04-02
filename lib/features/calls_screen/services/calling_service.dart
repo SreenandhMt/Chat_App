@@ -179,7 +179,11 @@ class CallingService {
     return callModel;
   }
 
-  static Future<CallModel> groupCall(ChatModel groupData) async {
+  static Future<CallModel> groupCall(
+      {required String chatId,
+      required String image,
+      required String groupName,
+      required List<String> participants}) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final map = {
       "callId": id,
@@ -187,7 +191,7 @@ class CallingService {
       "token": _getToken(),
       "participantsID": [
         _auth.currentUser!.uid,
-        ...groupData.participants,
+        ...participants,
       ],
       "participants": {
         _auth.currentUser!.uid: {
@@ -195,9 +199,9 @@ class CallingService {
           "leftAt": null,
         },
       },
-      "groupId": groupData.chatId,
-      "groupImage": groupData.groupImage,
-      "groupName": groupData.groupName,
+      "groupId": chatId,
+      "groupImage": image,
+      "groupName": groupName,
       "callType": "group",
       "status": "ringing",
       "startTime": Timestamp.now(),
@@ -208,7 +212,11 @@ class CallingService {
     return callModel;
   }
 
-  static Future<CallModel> groupVideoCall(ChatModel groupData) async {
+  static Future<CallModel> groupVideoCall(
+      {required String chatId,
+      required String image,
+      required String groupName,
+      required List<String> participants}) async {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
     final map = {
       "callId": id,
@@ -216,7 +224,7 @@ class CallingService {
       "token": _getToken(),
       "participantsID": [
         _auth.currentUser!.uid,
-        ...groupData.participants,
+        ...participants,
       ],
       "participants": {
         _auth.currentUser!.uid: {
@@ -224,9 +232,9 @@ class CallingService {
           "leftAt": null,
         },
       },
-      "groupId": groupData.chatId,
-      "groupImage": groupData.groupImage,
-      "groupName": groupData.groupName,
+      "groupId": chatId,
+      "groupImage": image,
+      "groupName": groupName,
       "callType": "group",
       "status": "ringing",
       "startTime": Timestamp.now(),

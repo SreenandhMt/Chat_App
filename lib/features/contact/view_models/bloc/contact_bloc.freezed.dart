@@ -21,8 +21,10 @@ mixin _$ContactEvent {
     required TResult Function() loadContacts,
     required TResult Function() loadContactFormApp,
     required TResult Function(List<String> members) addGroupMemberList,
-    required TResult Function(String id) addMembersList,
-    required TResult Function(String id) removeMembersList,
+    required TResult Function(String id, UserModels model) addMembersList,
+    required TResult Function(String id, UserModels model) removeMembersList,
+    required TResult Function(String uid) createChat,
+    required TResult Function() clearMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,8 +32,10 @@ mixin _$ContactEvent {
     TResult? Function()? loadContacts,
     TResult? Function()? loadContactFormApp,
     TResult? Function(List<String> members)? addGroupMemberList,
-    TResult? Function(String id)? addMembersList,
-    TResult? Function(String id)? removeMembersList,
+    TResult? Function(String id, UserModels model)? addMembersList,
+    TResult? Function(String id, UserModels model)? removeMembersList,
+    TResult? Function(String uid)? createChat,
+    TResult? Function()? clearMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,8 +43,10 @@ mixin _$ContactEvent {
     TResult Function()? loadContacts,
     TResult Function()? loadContactFormApp,
     TResult Function(List<String> members)? addGroupMemberList,
-    TResult Function(String id)? addMembersList,
-    TResult Function(String id)? removeMembersList,
+    TResult Function(String id, UserModels model)? addMembersList,
+    TResult Function(String id, UserModels model)? removeMembersList,
+    TResult Function(String uid)? createChat,
+    TResult Function()? clearMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +57,8 @@ mixin _$ContactEvent {
     required TResult Function(_AddGroupMemberList value) addGroupMemberList,
     required TResult Function(_AddMembersList value) addMembersList,
     required TResult Function(_RemoveMembersList value) removeMembersList,
+    required TResult Function(_CreateChat value) createChat,
+    required TResult Function(_ClearMessage value) clearMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +68,8 @@ mixin _$ContactEvent {
     TResult? Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult? Function(_AddMembersList value)? addMembersList,
     TResult? Function(_RemoveMembersList value)? removeMembersList,
+    TResult? Function(_CreateChat value)? createChat,
+    TResult? Function(_ClearMessage value)? clearMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +79,8 @@ mixin _$ContactEvent {
     TResult Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult Function(_AddMembersList value)? addMembersList,
     TResult Function(_RemoveMembersList value)? removeMembersList,
+    TResult Function(_CreateChat value)? createChat,
+    TResult Function(_ClearMessage value)? clearMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,8 +151,10 @@ class _$loadContactsImpl implements _loadContacts {
     required TResult Function() loadContacts,
     required TResult Function() loadContactFormApp,
     required TResult Function(List<String> members) addGroupMemberList,
-    required TResult Function(String id) addMembersList,
-    required TResult Function(String id) removeMembersList,
+    required TResult Function(String id, UserModels model) addMembersList,
+    required TResult Function(String id, UserModels model) removeMembersList,
+    required TResult Function(String uid) createChat,
+    required TResult Function() clearMessage,
   }) {
     return loadContacts();
   }
@@ -151,8 +165,10 @@ class _$loadContactsImpl implements _loadContacts {
     TResult? Function()? loadContacts,
     TResult? Function()? loadContactFormApp,
     TResult? Function(List<String> members)? addGroupMemberList,
-    TResult? Function(String id)? addMembersList,
-    TResult? Function(String id)? removeMembersList,
+    TResult? Function(String id, UserModels model)? addMembersList,
+    TResult? Function(String id, UserModels model)? removeMembersList,
+    TResult? Function(String uid)? createChat,
+    TResult? Function()? clearMessage,
   }) {
     return loadContacts?.call();
   }
@@ -163,8 +179,10 @@ class _$loadContactsImpl implements _loadContacts {
     TResult Function()? loadContacts,
     TResult Function()? loadContactFormApp,
     TResult Function(List<String> members)? addGroupMemberList,
-    TResult Function(String id)? addMembersList,
-    TResult Function(String id)? removeMembersList,
+    TResult Function(String id, UserModels model)? addMembersList,
+    TResult Function(String id, UserModels model)? removeMembersList,
+    TResult Function(String uid)? createChat,
+    TResult Function()? clearMessage,
     required TResult orElse(),
   }) {
     if (loadContacts != null) {
@@ -181,6 +199,8 @@ class _$loadContactsImpl implements _loadContacts {
     required TResult Function(_AddGroupMemberList value) addGroupMemberList,
     required TResult Function(_AddMembersList value) addMembersList,
     required TResult Function(_RemoveMembersList value) removeMembersList,
+    required TResult Function(_CreateChat value) createChat,
+    required TResult Function(_ClearMessage value) clearMessage,
   }) {
     return loadContacts(this);
   }
@@ -193,6 +213,8 @@ class _$loadContactsImpl implements _loadContacts {
     TResult? Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult? Function(_AddMembersList value)? addMembersList,
     TResult? Function(_RemoveMembersList value)? removeMembersList,
+    TResult? Function(_CreateChat value)? createChat,
+    TResult? Function(_ClearMessage value)? clearMessage,
   }) {
     return loadContacts?.call(this);
   }
@@ -205,6 +227,8 @@ class _$loadContactsImpl implements _loadContacts {
     TResult Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult Function(_AddMembersList value)? addMembersList,
     TResult Function(_RemoveMembersList value)? removeMembersList,
+    TResult Function(_CreateChat value)? createChat,
+    TResult Function(_ClearMessage value)? clearMessage,
     required TResult orElse(),
   }) {
     if (loadContacts != null) {
@@ -262,8 +286,10 @@ class _$loadContactFormAppImpl implements _loadContactFormApp {
     required TResult Function() loadContacts,
     required TResult Function() loadContactFormApp,
     required TResult Function(List<String> members) addGroupMemberList,
-    required TResult Function(String id) addMembersList,
-    required TResult Function(String id) removeMembersList,
+    required TResult Function(String id, UserModels model) addMembersList,
+    required TResult Function(String id, UserModels model) removeMembersList,
+    required TResult Function(String uid) createChat,
+    required TResult Function() clearMessage,
   }) {
     return loadContactFormApp();
   }
@@ -274,8 +300,10 @@ class _$loadContactFormAppImpl implements _loadContactFormApp {
     TResult? Function()? loadContacts,
     TResult? Function()? loadContactFormApp,
     TResult? Function(List<String> members)? addGroupMemberList,
-    TResult? Function(String id)? addMembersList,
-    TResult? Function(String id)? removeMembersList,
+    TResult? Function(String id, UserModels model)? addMembersList,
+    TResult? Function(String id, UserModels model)? removeMembersList,
+    TResult? Function(String uid)? createChat,
+    TResult? Function()? clearMessage,
   }) {
     return loadContactFormApp?.call();
   }
@@ -286,8 +314,10 @@ class _$loadContactFormAppImpl implements _loadContactFormApp {
     TResult Function()? loadContacts,
     TResult Function()? loadContactFormApp,
     TResult Function(List<String> members)? addGroupMemberList,
-    TResult Function(String id)? addMembersList,
-    TResult Function(String id)? removeMembersList,
+    TResult Function(String id, UserModels model)? addMembersList,
+    TResult Function(String id, UserModels model)? removeMembersList,
+    TResult Function(String uid)? createChat,
+    TResult Function()? clearMessage,
     required TResult orElse(),
   }) {
     if (loadContactFormApp != null) {
@@ -304,6 +334,8 @@ class _$loadContactFormAppImpl implements _loadContactFormApp {
     required TResult Function(_AddGroupMemberList value) addGroupMemberList,
     required TResult Function(_AddMembersList value) addMembersList,
     required TResult Function(_RemoveMembersList value) removeMembersList,
+    required TResult Function(_CreateChat value) createChat,
+    required TResult Function(_ClearMessage value) clearMessage,
   }) {
     return loadContactFormApp(this);
   }
@@ -316,6 +348,8 @@ class _$loadContactFormAppImpl implements _loadContactFormApp {
     TResult? Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult? Function(_AddMembersList value)? addMembersList,
     TResult? Function(_RemoveMembersList value)? removeMembersList,
+    TResult? Function(_CreateChat value)? createChat,
+    TResult? Function(_ClearMessage value)? clearMessage,
   }) {
     return loadContactFormApp?.call(this);
   }
@@ -328,6 +362,8 @@ class _$loadContactFormAppImpl implements _loadContactFormApp {
     TResult Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult Function(_AddMembersList value)? addMembersList,
     TResult Function(_RemoveMembersList value)? removeMembersList,
+    TResult Function(_CreateChat value)? createChat,
+    TResult Function(_ClearMessage value)? clearMessage,
     required TResult orElse(),
   }) {
     if (loadContactFormApp != null) {
@@ -420,8 +456,10 @@ class _$AddGroupMemberListImpl implements _AddGroupMemberList {
     required TResult Function() loadContacts,
     required TResult Function() loadContactFormApp,
     required TResult Function(List<String> members) addGroupMemberList,
-    required TResult Function(String id) addMembersList,
-    required TResult Function(String id) removeMembersList,
+    required TResult Function(String id, UserModels model) addMembersList,
+    required TResult Function(String id, UserModels model) removeMembersList,
+    required TResult Function(String uid) createChat,
+    required TResult Function() clearMessage,
   }) {
     return addGroupMemberList(members);
   }
@@ -432,8 +470,10 @@ class _$AddGroupMemberListImpl implements _AddGroupMemberList {
     TResult? Function()? loadContacts,
     TResult? Function()? loadContactFormApp,
     TResult? Function(List<String> members)? addGroupMemberList,
-    TResult? Function(String id)? addMembersList,
-    TResult? Function(String id)? removeMembersList,
+    TResult? Function(String id, UserModels model)? addMembersList,
+    TResult? Function(String id, UserModels model)? removeMembersList,
+    TResult? Function(String uid)? createChat,
+    TResult? Function()? clearMessage,
   }) {
     return addGroupMemberList?.call(members);
   }
@@ -444,8 +484,10 @@ class _$AddGroupMemberListImpl implements _AddGroupMemberList {
     TResult Function()? loadContacts,
     TResult Function()? loadContactFormApp,
     TResult Function(List<String> members)? addGroupMemberList,
-    TResult Function(String id)? addMembersList,
-    TResult Function(String id)? removeMembersList,
+    TResult Function(String id, UserModels model)? addMembersList,
+    TResult Function(String id, UserModels model)? removeMembersList,
+    TResult Function(String uid)? createChat,
+    TResult Function()? clearMessage,
     required TResult orElse(),
   }) {
     if (addGroupMemberList != null) {
@@ -462,6 +504,8 @@ class _$AddGroupMemberListImpl implements _AddGroupMemberList {
     required TResult Function(_AddGroupMemberList value) addGroupMemberList,
     required TResult Function(_AddMembersList value) addMembersList,
     required TResult Function(_RemoveMembersList value) removeMembersList,
+    required TResult Function(_CreateChat value) createChat,
+    required TResult Function(_ClearMessage value) clearMessage,
   }) {
     return addGroupMemberList(this);
   }
@@ -474,6 +518,8 @@ class _$AddGroupMemberListImpl implements _AddGroupMemberList {
     TResult? Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult? Function(_AddMembersList value)? addMembersList,
     TResult? Function(_RemoveMembersList value)? removeMembersList,
+    TResult? Function(_CreateChat value)? createChat,
+    TResult? Function(_ClearMessage value)? clearMessage,
   }) {
     return addGroupMemberList?.call(this);
   }
@@ -486,6 +532,8 @@ class _$AddGroupMemberListImpl implements _AddGroupMemberList {
     TResult Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult Function(_AddMembersList value)? addMembersList,
     TResult Function(_RemoveMembersList value)? removeMembersList,
+    TResult Function(_CreateChat value)? createChat,
+    TResult Function(_ClearMessage value)? clearMessage,
     required TResult orElse(),
   }) {
     if (addGroupMemberList != null) {
@@ -514,7 +562,7 @@ abstract class _$$AddMembersListImplCopyWith<$Res> {
           $Res Function(_$AddMembersListImpl) then) =
       __$$AddMembersListImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id});
+  $Res call({String id, UserModels model});
 }
 
 /// @nodoc
@@ -531,12 +579,17 @@ class __$$AddMembersListImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? model = null,
   }) {
     return _then(_$AddMembersListImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      model: null == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as UserModels,
     ));
   }
 }
@@ -544,14 +597,16 @@ class __$$AddMembersListImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddMembersListImpl implements _AddMembersList {
-  const _$AddMembersListImpl({required this.id});
+  const _$AddMembersListImpl({required this.id, required this.model});
 
   @override
   final String id;
+  @override
+  final UserModels model;
 
   @override
   String toString() {
-    return 'ContactEvent.addMembersList(id: $id)';
+    return 'ContactEvent.addMembersList(id: $id, model: $model)';
   }
 
   @override
@@ -559,11 +614,12 @@ class _$AddMembersListImpl implements _AddMembersList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddMembersListImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.model, model) || other.model == model));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, model);
 
   /// Create a copy of ContactEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -580,10 +636,12 @@ class _$AddMembersListImpl implements _AddMembersList {
     required TResult Function() loadContacts,
     required TResult Function() loadContactFormApp,
     required TResult Function(List<String> members) addGroupMemberList,
-    required TResult Function(String id) addMembersList,
-    required TResult Function(String id) removeMembersList,
+    required TResult Function(String id, UserModels model) addMembersList,
+    required TResult Function(String id, UserModels model) removeMembersList,
+    required TResult Function(String uid) createChat,
+    required TResult Function() clearMessage,
   }) {
-    return addMembersList(id);
+    return addMembersList(id, model);
   }
 
   @override
@@ -592,10 +650,12 @@ class _$AddMembersListImpl implements _AddMembersList {
     TResult? Function()? loadContacts,
     TResult? Function()? loadContactFormApp,
     TResult? Function(List<String> members)? addGroupMemberList,
-    TResult? Function(String id)? addMembersList,
-    TResult? Function(String id)? removeMembersList,
+    TResult? Function(String id, UserModels model)? addMembersList,
+    TResult? Function(String id, UserModels model)? removeMembersList,
+    TResult? Function(String uid)? createChat,
+    TResult? Function()? clearMessage,
   }) {
-    return addMembersList?.call(id);
+    return addMembersList?.call(id, model);
   }
 
   @override
@@ -604,12 +664,14 @@ class _$AddMembersListImpl implements _AddMembersList {
     TResult Function()? loadContacts,
     TResult Function()? loadContactFormApp,
     TResult Function(List<String> members)? addGroupMemberList,
-    TResult Function(String id)? addMembersList,
-    TResult Function(String id)? removeMembersList,
+    TResult Function(String id, UserModels model)? addMembersList,
+    TResult Function(String id, UserModels model)? removeMembersList,
+    TResult Function(String uid)? createChat,
+    TResult Function()? clearMessage,
     required TResult orElse(),
   }) {
     if (addMembersList != null) {
-      return addMembersList(id);
+      return addMembersList(id, model);
     }
     return orElse();
   }
@@ -622,6 +684,8 @@ class _$AddMembersListImpl implements _AddMembersList {
     required TResult Function(_AddGroupMemberList value) addGroupMemberList,
     required TResult Function(_AddMembersList value) addMembersList,
     required TResult Function(_RemoveMembersList value) removeMembersList,
+    required TResult Function(_CreateChat value) createChat,
+    required TResult Function(_ClearMessage value) clearMessage,
   }) {
     return addMembersList(this);
   }
@@ -634,6 +698,8 @@ class _$AddMembersListImpl implements _AddMembersList {
     TResult? Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult? Function(_AddMembersList value)? addMembersList,
     TResult? Function(_RemoveMembersList value)? removeMembersList,
+    TResult? Function(_CreateChat value)? createChat,
+    TResult? Function(_ClearMessage value)? clearMessage,
   }) {
     return addMembersList?.call(this);
   }
@@ -646,6 +712,8 @@ class _$AddMembersListImpl implements _AddMembersList {
     TResult Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult Function(_AddMembersList value)? addMembersList,
     TResult Function(_RemoveMembersList value)? removeMembersList,
+    TResult Function(_CreateChat value)? createChat,
+    TResult Function(_ClearMessage value)? clearMessage,
     required TResult orElse(),
   }) {
     if (addMembersList != null) {
@@ -656,10 +724,12 @@ class _$AddMembersListImpl implements _AddMembersList {
 }
 
 abstract class _AddMembersList implements ContactEvent {
-  const factory _AddMembersList({required final String id}) =
-      _$AddMembersListImpl;
+  const factory _AddMembersList(
+      {required final String id,
+      required final UserModels model}) = _$AddMembersListImpl;
 
   String get id;
+  UserModels get model;
 
   /// Create a copy of ContactEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -674,7 +744,7 @@ abstract class _$$RemoveMembersListImplCopyWith<$Res> {
           $Res Function(_$RemoveMembersListImpl) then) =
       __$$RemoveMembersListImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id});
+  $Res call({String id, UserModels model});
 }
 
 /// @nodoc
@@ -691,12 +761,17 @@ class __$$RemoveMembersListImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? model = null,
   }) {
     return _then(_$RemoveMembersListImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      model: null == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as UserModels,
     ));
   }
 }
@@ -704,14 +779,16 @@ class __$$RemoveMembersListImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RemoveMembersListImpl implements _RemoveMembersList {
-  const _$RemoveMembersListImpl({required this.id});
+  const _$RemoveMembersListImpl({required this.id, required this.model});
 
   @override
   final String id;
+  @override
+  final UserModels model;
 
   @override
   String toString() {
-    return 'ContactEvent.removeMembersList(id: $id)';
+    return 'ContactEvent.removeMembersList(id: $id, model: $model)';
   }
 
   @override
@@ -719,11 +796,12 @@ class _$RemoveMembersListImpl implements _RemoveMembersList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RemoveMembersListImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.model, model) || other.model == model));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, model);
 
   /// Create a copy of ContactEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -740,10 +818,12 @@ class _$RemoveMembersListImpl implements _RemoveMembersList {
     required TResult Function() loadContacts,
     required TResult Function() loadContactFormApp,
     required TResult Function(List<String> members) addGroupMemberList,
-    required TResult Function(String id) addMembersList,
-    required TResult Function(String id) removeMembersList,
+    required TResult Function(String id, UserModels model) addMembersList,
+    required TResult Function(String id, UserModels model) removeMembersList,
+    required TResult Function(String uid) createChat,
+    required TResult Function() clearMessage,
   }) {
-    return removeMembersList(id);
+    return removeMembersList(id, model);
   }
 
   @override
@@ -752,10 +832,12 @@ class _$RemoveMembersListImpl implements _RemoveMembersList {
     TResult? Function()? loadContacts,
     TResult? Function()? loadContactFormApp,
     TResult? Function(List<String> members)? addGroupMemberList,
-    TResult? Function(String id)? addMembersList,
-    TResult? Function(String id)? removeMembersList,
+    TResult? Function(String id, UserModels model)? addMembersList,
+    TResult? Function(String id, UserModels model)? removeMembersList,
+    TResult? Function(String uid)? createChat,
+    TResult? Function()? clearMessage,
   }) {
-    return removeMembersList?.call(id);
+    return removeMembersList?.call(id, model);
   }
 
   @override
@@ -764,12 +846,14 @@ class _$RemoveMembersListImpl implements _RemoveMembersList {
     TResult Function()? loadContacts,
     TResult Function()? loadContactFormApp,
     TResult Function(List<String> members)? addGroupMemberList,
-    TResult Function(String id)? addMembersList,
-    TResult Function(String id)? removeMembersList,
+    TResult Function(String id, UserModels model)? addMembersList,
+    TResult Function(String id, UserModels model)? removeMembersList,
+    TResult Function(String uid)? createChat,
+    TResult Function()? clearMessage,
     required TResult orElse(),
   }) {
     if (removeMembersList != null) {
-      return removeMembersList(id);
+      return removeMembersList(id, model);
     }
     return orElse();
   }
@@ -782,6 +866,8 @@ class _$RemoveMembersListImpl implements _RemoveMembersList {
     required TResult Function(_AddGroupMemberList value) addGroupMemberList,
     required TResult Function(_AddMembersList value) addMembersList,
     required TResult Function(_RemoveMembersList value) removeMembersList,
+    required TResult Function(_CreateChat value) createChat,
+    required TResult Function(_ClearMessage value) clearMessage,
   }) {
     return removeMembersList(this);
   }
@@ -794,6 +880,8 @@ class _$RemoveMembersListImpl implements _RemoveMembersList {
     TResult? Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult? Function(_AddMembersList value)? addMembersList,
     TResult? Function(_RemoveMembersList value)? removeMembersList,
+    TResult? Function(_CreateChat value)? createChat,
+    TResult? Function(_ClearMessage value)? clearMessage,
   }) {
     return removeMembersList?.call(this);
   }
@@ -806,6 +894,8 @@ class _$RemoveMembersListImpl implements _RemoveMembersList {
     TResult Function(_AddGroupMemberList value)? addGroupMemberList,
     TResult Function(_AddMembersList value)? addMembersList,
     TResult Function(_RemoveMembersList value)? removeMembersList,
+    TResult Function(_CreateChat value)? createChat,
+    TResult Function(_ClearMessage value)? clearMessage,
     required TResult orElse(),
   }) {
     if (removeMembersList != null) {
@@ -816,10 +906,12 @@ class _$RemoveMembersListImpl implements _RemoveMembersList {
 }
 
 abstract class _RemoveMembersList implements ContactEvent {
-  const factory _RemoveMembersList({required final String id}) =
-      _$RemoveMembersListImpl;
+  const factory _RemoveMembersList(
+      {required final String id,
+      required final UserModels model}) = _$RemoveMembersListImpl;
 
   String get id;
+  UserModels get model;
 
   /// Create a copy of ContactEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -829,20 +921,332 @@ abstract class _RemoveMembersList implements ContactEvent {
 }
 
 /// @nodoc
+abstract class _$$CreateChatImplCopyWith<$Res> {
+  factory _$$CreateChatImplCopyWith(
+          _$CreateChatImpl value, $Res Function(_$CreateChatImpl) then) =
+      __$$CreateChatImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$CreateChatImplCopyWithImpl<$Res>
+    extends _$ContactEventCopyWithImpl<$Res, _$CreateChatImpl>
+    implements _$$CreateChatImplCopyWith<$Res> {
+  __$$CreateChatImplCopyWithImpl(
+      _$CreateChatImpl _value, $Res Function(_$CreateChatImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContactEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$CreateChatImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateChatImpl implements _CreateChat {
+  const _$CreateChatImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'ContactEvent.createChat(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateChatImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of ContactEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateChatImplCopyWith<_$CreateChatImpl> get copyWith =>
+      __$$CreateChatImplCopyWithImpl<_$CreateChatImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadContacts,
+    required TResult Function() loadContactFormApp,
+    required TResult Function(List<String> members) addGroupMemberList,
+    required TResult Function(String id, UserModels model) addMembersList,
+    required TResult Function(String id, UserModels model) removeMembersList,
+    required TResult Function(String uid) createChat,
+    required TResult Function() clearMessage,
+  }) {
+    return createChat(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadContacts,
+    TResult? Function()? loadContactFormApp,
+    TResult? Function(List<String> members)? addGroupMemberList,
+    TResult? Function(String id, UserModels model)? addMembersList,
+    TResult? Function(String id, UserModels model)? removeMembersList,
+    TResult? Function(String uid)? createChat,
+    TResult? Function()? clearMessage,
+  }) {
+    return createChat?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadContacts,
+    TResult Function()? loadContactFormApp,
+    TResult Function(List<String> members)? addGroupMemberList,
+    TResult Function(String id, UserModels model)? addMembersList,
+    TResult Function(String id, UserModels model)? removeMembersList,
+    TResult Function(String uid)? createChat,
+    TResult Function()? clearMessage,
+    required TResult orElse(),
+  }) {
+    if (createChat != null) {
+      return createChat(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_loadContacts value) loadContacts,
+    required TResult Function(_loadContactFormApp value) loadContactFormApp,
+    required TResult Function(_AddGroupMemberList value) addGroupMemberList,
+    required TResult Function(_AddMembersList value) addMembersList,
+    required TResult Function(_RemoveMembersList value) removeMembersList,
+    required TResult Function(_CreateChat value) createChat,
+    required TResult Function(_ClearMessage value) clearMessage,
+  }) {
+    return createChat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_loadContacts value)? loadContacts,
+    TResult? Function(_loadContactFormApp value)? loadContactFormApp,
+    TResult? Function(_AddGroupMemberList value)? addGroupMemberList,
+    TResult? Function(_AddMembersList value)? addMembersList,
+    TResult? Function(_RemoveMembersList value)? removeMembersList,
+    TResult? Function(_CreateChat value)? createChat,
+    TResult? Function(_ClearMessage value)? clearMessage,
+  }) {
+    return createChat?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_loadContacts value)? loadContacts,
+    TResult Function(_loadContactFormApp value)? loadContactFormApp,
+    TResult Function(_AddGroupMemberList value)? addGroupMemberList,
+    TResult Function(_AddMembersList value)? addMembersList,
+    TResult Function(_RemoveMembersList value)? removeMembersList,
+    TResult Function(_CreateChat value)? createChat,
+    TResult Function(_ClearMessage value)? clearMessage,
+    required TResult orElse(),
+  }) {
+    if (createChat != null) {
+      return createChat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateChat implements ContactEvent {
+  const factory _CreateChat({required final String uid}) = _$CreateChatImpl;
+
+  String get uid;
+
+  /// Create a copy of ContactEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreateChatImplCopyWith<_$CreateChatImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClearMessageImplCopyWith<$Res> {
+  factory _$$ClearMessageImplCopyWith(
+          _$ClearMessageImpl value, $Res Function(_$ClearMessageImpl) then) =
+      __$$ClearMessageImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearMessageImplCopyWithImpl<$Res>
+    extends _$ContactEventCopyWithImpl<$Res, _$ClearMessageImpl>
+    implements _$$ClearMessageImplCopyWith<$Res> {
+  __$$ClearMessageImplCopyWithImpl(
+      _$ClearMessageImpl _value, $Res Function(_$ClearMessageImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContactEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearMessageImpl implements _ClearMessage {
+  const _$ClearMessageImpl();
+
+  @override
+  String toString() {
+    return 'ContactEvent.clearMessage()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearMessageImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadContacts,
+    required TResult Function() loadContactFormApp,
+    required TResult Function(List<String> members) addGroupMemberList,
+    required TResult Function(String id, UserModels model) addMembersList,
+    required TResult Function(String id, UserModels model) removeMembersList,
+    required TResult Function(String uid) createChat,
+    required TResult Function() clearMessage,
+  }) {
+    return clearMessage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadContacts,
+    TResult? Function()? loadContactFormApp,
+    TResult? Function(List<String> members)? addGroupMemberList,
+    TResult? Function(String id, UserModels model)? addMembersList,
+    TResult? Function(String id, UserModels model)? removeMembersList,
+    TResult? Function(String uid)? createChat,
+    TResult? Function()? clearMessage,
+  }) {
+    return clearMessage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadContacts,
+    TResult Function()? loadContactFormApp,
+    TResult Function(List<String> members)? addGroupMemberList,
+    TResult Function(String id, UserModels model)? addMembersList,
+    TResult Function(String id, UserModels model)? removeMembersList,
+    TResult Function(String uid)? createChat,
+    TResult Function()? clearMessage,
+    required TResult orElse(),
+  }) {
+    if (clearMessage != null) {
+      return clearMessage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_loadContacts value) loadContacts,
+    required TResult Function(_loadContactFormApp value) loadContactFormApp,
+    required TResult Function(_AddGroupMemberList value) addGroupMemberList,
+    required TResult Function(_AddMembersList value) addMembersList,
+    required TResult Function(_RemoveMembersList value) removeMembersList,
+    required TResult Function(_CreateChat value) createChat,
+    required TResult Function(_ClearMessage value) clearMessage,
+  }) {
+    return clearMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_loadContacts value)? loadContacts,
+    TResult? Function(_loadContactFormApp value)? loadContactFormApp,
+    TResult? Function(_AddGroupMemberList value)? addGroupMemberList,
+    TResult? Function(_AddMembersList value)? addMembersList,
+    TResult? Function(_RemoveMembersList value)? removeMembersList,
+    TResult? Function(_CreateChat value)? createChat,
+    TResult? Function(_ClearMessage value)? clearMessage,
+  }) {
+    return clearMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_loadContacts value)? loadContacts,
+    TResult Function(_loadContactFormApp value)? loadContactFormApp,
+    TResult Function(_AddGroupMemberList value)? addGroupMemberList,
+    TResult Function(_AddMembersList value)? addMembersList,
+    TResult Function(_RemoveMembersList value)? removeMembersList,
+    TResult Function(_CreateChat value)? createChat,
+    TResult Function(_ClearMessage value)? clearMessage,
+    required TResult orElse(),
+  }) {
+    if (clearMessage != null) {
+      return clearMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearMessage implements ContactEvent {
+  const factory _ClearMessage() = _$ClearMessageImpl;
+}
+
+/// @nodoc
 mixin _$ContactState {
   List<Contact> get contacts => throw _privateConstructorUsedError;
   List<UserModels> get registeredContacts => throw _privateConstructorUsedError;
   List<String> get selectedContacts => throw _privateConstructorUsedError;
+  List<UserModels> get selectedContactModels =>
+      throw _privateConstructorUsedError;
   List<String> get alreadyJoinedUsers => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  ChatModel? get chatModel => throw _privateConstructorUsedError;
+  String? get showMessage => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             List<Contact> contacts,
             List<UserModels> registeredContacts,
             List<String> selectedContacts,
+            List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
-            bool isLoading)
+            bool isLoading,
+            ChatModel? chatModel,
+            String? showMessage)
         contactData,
   }) =>
       throw _privateConstructorUsedError;
@@ -852,8 +1256,11 @@ mixin _$ContactState {
             List<Contact> contacts,
             List<UserModels> registeredContacts,
             List<String> selectedContacts,
+            List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
-            bool isLoading)?
+            bool isLoading,
+            ChatModel? chatModel,
+            String? showMessage)?
         contactData,
   }) =>
       throw _privateConstructorUsedError;
@@ -863,8 +1270,11 @@ mixin _$ContactState {
             List<Contact> contacts,
             List<UserModels> registeredContacts,
             List<String> selectedContacts,
+            List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
-            bool isLoading)?
+            bool isLoading,
+            ChatModel? chatModel,
+            String? showMessage)?
         contactData,
     required TResult orElse(),
   }) =>
@@ -903,8 +1313,11 @@ abstract class $ContactStateCopyWith<$Res> {
       {List<Contact> contacts,
       List<UserModels> registeredContacts,
       List<String> selectedContacts,
+      List<UserModels> selectedContactModels,
       List<String> alreadyJoinedUsers,
-      bool isLoading});
+      bool isLoading,
+      ChatModel? chatModel,
+      String? showMessage});
 }
 
 /// @nodoc
@@ -925,8 +1338,11 @@ class _$ContactStateCopyWithImpl<$Res, $Val extends ContactState>
     Object? contacts = null,
     Object? registeredContacts = null,
     Object? selectedContacts = null,
+    Object? selectedContactModels = null,
     Object? alreadyJoinedUsers = null,
     Object? isLoading = null,
+    Object? chatModel = freezed,
+    Object? showMessage = freezed,
   }) {
     return _then(_value.copyWith(
       contacts: null == contacts
@@ -941,6 +1357,10 @@ class _$ContactStateCopyWithImpl<$Res, $Val extends ContactState>
           ? _value.selectedContacts
           : selectedContacts // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      selectedContactModels: null == selectedContactModels
+          ? _value.selectedContactModels
+          : selectedContactModels // ignore: cast_nullable_to_non_nullable
+              as List<UserModels>,
       alreadyJoinedUsers: null == alreadyJoinedUsers
           ? _value.alreadyJoinedUsers
           : alreadyJoinedUsers // ignore: cast_nullable_to_non_nullable
@@ -949,6 +1369,14 @@ class _$ContactStateCopyWithImpl<$Res, $Val extends ContactState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      chatModel: freezed == chatModel
+          ? _value.chatModel
+          : chatModel // ignore: cast_nullable_to_non_nullable
+              as ChatModel?,
+      showMessage: freezed == showMessage
+          ? _value.showMessage
+          : showMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -965,8 +1393,11 @@ abstract class _$$ContactDataImplCopyWith<$Res>
       {List<Contact> contacts,
       List<UserModels> registeredContacts,
       List<String> selectedContacts,
+      List<UserModels> selectedContactModels,
       List<String> alreadyJoinedUsers,
-      bool isLoading});
+      bool isLoading,
+      ChatModel? chatModel,
+      String? showMessage});
 }
 
 /// @nodoc
@@ -985,8 +1416,11 @@ class __$$ContactDataImplCopyWithImpl<$Res>
     Object? contacts = null,
     Object? registeredContacts = null,
     Object? selectedContacts = null,
+    Object? selectedContactModels = null,
     Object? alreadyJoinedUsers = null,
     Object? isLoading = null,
+    Object? chatModel = freezed,
+    Object? showMessage = freezed,
   }) {
     return _then(_$ContactDataImpl(
       contacts: null == contacts
@@ -1001,6 +1435,10 @@ class __$$ContactDataImplCopyWithImpl<$Res>
           ? _value._selectedContacts
           : selectedContacts // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      selectedContactModels: null == selectedContactModels
+          ? _value._selectedContactModels
+          : selectedContactModels // ignore: cast_nullable_to_non_nullable
+              as List<UserModels>,
       alreadyJoinedUsers: null == alreadyJoinedUsers
           ? _value._alreadyJoinedUsers
           : alreadyJoinedUsers // ignore: cast_nullable_to_non_nullable
@@ -1009,6 +1447,14 @@ class __$$ContactDataImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      chatModel: freezed == chatModel
+          ? _value.chatModel
+          : chatModel // ignore: cast_nullable_to_non_nullable
+              as ChatModel?,
+      showMessage: freezed == showMessage
+          ? _value.showMessage
+          : showMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1020,11 +1466,15 @@ class _$ContactDataImpl implements _ContactData {
       {final List<Contact> contacts = const [],
       final List<UserModels> registeredContacts = const [],
       final List<String> selectedContacts = const [],
+      final List<UserModels> selectedContactModels = const [],
       final List<String> alreadyJoinedUsers = const [],
-      this.isLoading = false})
+      this.isLoading = false,
+      this.chatModel = null,
+      this.showMessage = null})
       : _contacts = contacts,
         _registeredContacts = registeredContacts,
         _selectedContacts = selectedContacts,
+        _selectedContactModels = selectedContactModels,
         _alreadyJoinedUsers = alreadyJoinedUsers;
 
   final List<Contact> _contacts;
@@ -1056,6 +1506,16 @@ class _$ContactDataImpl implements _ContactData {
     return EqualUnmodifiableListView(_selectedContacts);
   }
 
+  final List<UserModels> _selectedContactModels;
+  @override
+  @JsonKey()
+  List<UserModels> get selectedContactModels {
+    if (_selectedContactModels is EqualUnmodifiableListView)
+      return _selectedContactModels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedContactModels);
+  }
+
   final List<String> _alreadyJoinedUsers;
   @override
   @JsonKey()
@@ -1069,10 +1529,16 @@ class _$ContactDataImpl implements _ContactData {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final ChatModel? chatModel;
+  @override
+  @JsonKey()
+  final String? showMessage;
 
   @override
   String toString() {
-    return 'ContactState.contactData(contacts: $contacts, registeredContacts: $registeredContacts, selectedContacts: $selectedContacts, alreadyJoinedUsers: $alreadyJoinedUsers, isLoading: $isLoading)';
+    return 'ContactState.contactData(contacts: $contacts, registeredContacts: $registeredContacts, selectedContacts: $selectedContacts, selectedContactModels: $selectedContactModels, alreadyJoinedUsers: $alreadyJoinedUsers, isLoading: $isLoading, chatModel: $chatModel, showMessage: $showMessage)';
   }
 
   @override
@@ -1086,9 +1552,15 @@ class _$ContactDataImpl implements _ContactData {
             const DeepCollectionEquality()
                 .equals(other._selectedContacts, _selectedContacts) &&
             const DeepCollectionEquality()
+                .equals(other._selectedContactModels, _selectedContactModels) &&
+            const DeepCollectionEquality()
                 .equals(other._alreadyJoinedUsers, _alreadyJoinedUsers) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.chatModel, chatModel) ||
+                other.chatModel == chatModel) &&
+            (identical(other.showMessage, showMessage) ||
+                other.showMessage == showMessage));
   }
 
   @override
@@ -1097,8 +1569,11 @@ class _$ContactDataImpl implements _ContactData {
       const DeepCollectionEquality().hash(_contacts),
       const DeepCollectionEquality().hash(_registeredContacts),
       const DeepCollectionEquality().hash(_selectedContacts),
+      const DeepCollectionEquality().hash(_selectedContactModels),
       const DeepCollectionEquality().hash(_alreadyJoinedUsers),
-      isLoading);
+      isLoading,
+      chatModel,
+      showMessage);
 
   /// Create a copy of ContactState
   /// with the given fields replaced by the non-null parameter values.
@@ -1115,12 +1590,22 @@ class _$ContactDataImpl implements _ContactData {
             List<Contact> contacts,
             List<UserModels> registeredContacts,
             List<String> selectedContacts,
+            List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
-            bool isLoading)
+            bool isLoading,
+            ChatModel? chatModel,
+            String? showMessage)
         contactData,
   }) {
-    return contactData(contacts, registeredContacts, selectedContacts,
-        alreadyJoinedUsers, isLoading);
+    return contactData(
+        contacts,
+        registeredContacts,
+        selectedContacts,
+        selectedContactModels,
+        alreadyJoinedUsers,
+        isLoading,
+        chatModel,
+        showMessage);
   }
 
   @override
@@ -1130,12 +1615,22 @@ class _$ContactDataImpl implements _ContactData {
             List<Contact> contacts,
             List<UserModels> registeredContacts,
             List<String> selectedContacts,
+            List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
-            bool isLoading)?
+            bool isLoading,
+            ChatModel? chatModel,
+            String? showMessage)?
         contactData,
   }) {
-    return contactData?.call(contacts, registeredContacts, selectedContacts,
-        alreadyJoinedUsers, isLoading);
+    return contactData?.call(
+        contacts,
+        registeredContacts,
+        selectedContacts,
+        selectedContactModels,
+        alreadyJoinedUsers,
+        isLoading,
+        chatModel,
+        showMessage);
   }
 
   @override
@@ -1145,14 +1640,24 @@ class _$ContactDataImpl implements _ContactData {
             List<Contact> contacts,
             List<UserModels> registeredContacts,
             List<String> selectedContacts,
+            List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
-            bool isLoading)?
+            bool isLoading,
+            ChatModel? chatModel,
+            String? showMessage)?
         contactData,
     required TResult orElse(),
   }) {
     if (contactData != null) {
-      return contactData(contacts, registeredContacts, selectedContacts,
-          alreadyJoinedUsers, isLoading);
+      return contactData(
+          contacts,
+          registeredContacts,
+          selectedContacts,
+          selectedContactModels,
+          alreadyJoinedUsers,
+          isLoading,
+          chatModel,
+          showMessage);
     }
     return orElse();
   }
@@ -1191,8 +1696,11 @@ abstract class _ContactData implements ContactState {
       {final List<Contact> contacts,
       final List<UserModels> registeredContacts,
       final List<String> selectedContacts,
+      final List<UserModels> selectedContactModels,
       final List<String> alreadyJoinedUsers,
-      final bool isLoading}) = _$ContactDataImpl;
+      final bool isLoading,
+      final ChatModel? chatModel,
+      final String? showMessage}) = _$ContactDataImpl;
 
   @override
   List<Contact> get contacts;
@@ -1201,9 +1709,15 @@ abstract class _ContactData implements ContactState {
   @override
   List<String> get selectedContacts;
   @override
+  List<UserModels> get selectedContactModels;
+  @override
   List<String> get alreadyJoinedUsers;
   @override
   bool get isLoading;
+  @override
+  ChatModel? get chatModel;
+  @override
+  String? get showMessage;
 
   /// Create a copy of ContactState
   /// with the given fields replaced by the non-null parameter values.

@@ -24,8 +24,12 @@ mixin _$CallingEvent {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -54,8 +58,12 @@ mixin _$CallingEvent {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -81,8 +89,12 @@ mixin _$CallingEvent {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -251,8 +263,12 @@ class _$StartedImpl implements _Started {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -284,8 +300,12 @@ class _$StartedImpl implements _Started {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -314,8 +334,12 @@ class _$StartedImpl implements _Started {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -483,8 +507,12 @@ class _$CallHistoryImpl implements _CallHistory {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -516,8 +544,12 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -546,8 +578,12 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -715,8 +751,12 @@ class _$GetCallStreamImpl implements _GetCallStream {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -748,8 +788,12 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -778,8 +822,12 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -976,8 +1024,12 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -1009,8 +1061,12 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -1039,8 +1095,12 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -1246,8 +1306,12 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -1279,8 +1343,12 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -1309,8 +1377,12 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -1514,8 +1586,12 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -1547,8 +1623,12 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -1577,8 +1657,12 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -1715,7 +1799,11 @@ abstract class _$$StartGroupVideoCallingImplCopyWith<$Res> {
           $Res Function(_$StartGroupVideoCallingImpl) then) =
       __$$StartGroupVideoCallingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ChatModel group});
+  $Res call(
+      {String chatId,
+      String image,
+      String groupName,
+      List<String> participants});
 }
 
 /// @nodoc
@@ -1732,13 +1820,28 @@ class __$$StartGroupVideoCallingImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? group = null,
+    Object? chatId = null,
+    Object? image = null,
+    Object? groupName = null,
+    Object? participants = null,
   }) {
     return _then(_$StartGroupVideoCallingImpl(
-      group: null == group
-          ? _value.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as ChatModel,
+      chatId: null == chatId
+          ? _value.chatId
+          : chatId // ignore: cast_nullable_to_non_nullable
+              as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      groupName: null == groupName
+          ? _value.groupName
+          : groupName // ignore: cast_nullable_to_non_nullable
+              as String,
+      participants: null == participants
+          ? _value._participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -1746,14 +1849,30 @@ class __$$StartGroupVideoCallingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
-  const _$StartGroupVideoCallingImpl({required this.group});
+  const _$StartGroupVideoCallingImpl(
+      {required this.chatId,
+      required this.image,
+      required this.groupName,
+      required final List<String> participants})
+      : _participants = participants;
 
   @override
-  final ChatModel group;
+  final String chatId;
+  @override
+  final String image;
+  @override
+  final String groupName;
+  final List<String> _participants;
+  @override
+  List<String> get participants {
+    if (_participants is EqualUnmodifiableListView) return _participants;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_participants);
+  }
 
   @override
   String toString() {
-    return 'CallingEvent.startGroupVideoCalling(group: $group)';
+    return 'CallingEvent.startGroupVideoCalling(chatId: $chatId, image: $image, groupName: $groupName, participants: $participants)';
   }
 
   @override
@@ -1761,11 +1880,17 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StartGroupVideoCallingImpl &&
-            (identical(other.group, group) || other.group == group));
+            (identical(other.chatId, chatId) || other.chatId == chatId) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.groupName, groupName) ||
+                other.groupName == groupName) &&
+            const DeepCollectionEquality()
+                .equals(other._participants, _participants));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, group);
+  int get hashCode => Object.hash(runtimeType, chatId, image, groupName,
+      const DeepCollectionEquality().hash(_participants));
 
   /// Create a copy of CallingEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1785,8 +1910,12 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -1806,7 +1935,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
   }) {
-    return startGroupVideoCalling(group);
+    return startGroupVideoCalling(chatId, image, groupName, participants);
   }
 
   @override
@@ -1818,8 +1947,12 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -1836,7 +1969,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
   }) {
-    return startGroupVideoCalling?.call(group);
+    return startGroupVideoCalling?.call(chatId, image, groupName, participants);
   }
 
   @override
@@ -1848,8 +1981,12 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -1868,7 +2005,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     required TResult orElse(),
   }) {
     if (startGroupVideoCalling != null) {
-      return startGroupVideoCalling(group);
+      return startGroupVideoCalling(chatId, image, groupName, participants);
     }
     return orElse();
   }
@@ -1967,10 +2104,16 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
 }
 
 abstract class _StartGroupVideoCalling implements CallingEvent {
-  const factory _StartGroupVideoCalling({required final ChatModel group}) =
-      _$StartGroupVideoCallingImpl;
+  const factory _StartGroupVideoCalling(
+      {required final String chatId,
+      required final String image,
+      required final String groupName,
+      required final List<String> participants}) = _$StartGroupVideoCallingImpl;
 
-  ChatModel get group;
+  String get chatId;
+  String get image;
+  String get groupName;
+  List<String> get participants;
 
   /// Create a copy of CallingEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1986,7 +2129,11 @@ abstract class _$$StartGroupVoiceCallingImplCopyWith<$Res> {
           $Res Function(_$StartGroupVoiceCallingImpl) then) =
       __$$StartGroupVoiceCallingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ChatModel group});
+  $Res call(
+      {String chatId,
+      String image,
+      String groupName,
+      List<String> participants});
 }
 
 /// @nodoc
@@ -2003,13 +2150,28 @@ class __$$StartGroupVoiceCallingImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? group = null,
+    Object? chatId = null,
+    Object? image = null,
+    Object? groupName = null,
+    Object? participants = null,
   }) {
     return _then(_$StartGroupVoiceCallingImpl(
-      group: null == group
-          ? _value.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as ChatModel,
+      chatId: null == chatId
+          ? _value.chatId
+          : chatId // ignore: cast_nullable_to_non_nullable
+              as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      groupName: null == groupName
+          ? _value.groupName
+          : groupName // ignore: cast_nullable_to_non_nullable
+              as String,
+      participants: null == participants
+          ? _value._participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -2017,14 +2179,30 @@ class __$$StartGroupVoiceCallingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
-  const _$StartGroupVoiceCallingImpl({required this.group});
+  const _$StartGroupVoiceCallingImpl(
+      {required this.chatId,
+      required this.image,
+      required this.groupName,
+      required final List<String> participants})
+      : _participants = participants;
 
   @override
-  final ChatModel group;
+  final String chatId;
+  @override
+  final String image;
+  @override
+  final String groupName;
+  final List<String> _participants;
+  @override
+  List<String> get participants {
+    if (_participants is EqualUnmodifiableListView) return _participants;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_participants);
+  }
 
   @override
   String toString() {
-    return 'CallingEvent.startGroupVoiceCalling(group: $group)';
+    return 'CallingEvent.startGroupVoiceCalling(chatId: $chatId, image: $image, groupName: $groupName, participants: $participants)';
   }
 
   @override
@@ -2032,11 +2210,17 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StartGroupVoiceCallingImpl &&
-            (identical(other.group, group) || other.group == group));
+            (identical(other.chatId, chatId) || other.chatId == chatId) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.groupName, groupName) ||
+                other.groupName == groupName) &&
+            const DeepCollectionEquality()
+                .equals(other._participants, _participants));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, group);
+  int get hashCode => Object.hash(runtimeType, chatId, image, groupName,
+      const DeepCollectionEquality().hash(_participants));
 
   /// Create a copy of CallingEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2056,8 +2240,12 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -2077,7 +2265,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
   }) {
-    return startGroupVoiceCalling(group);
+    return startGroupVoiceCalling(chatId, image, groupName, participants);
   }
 
   @override
@@ -2089,8 +2277,12 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -2107,7 +2299,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
   }) {
-    return startGroupVoiceCalling?.call(group);
+    return startGroupVoiceCalling?.call(chatId, image, groupName, participants);
   }
 
   @override
@@ -2119,8 +2311,12 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -2139,7 +2335,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     required TResult orElse(),
   }) {
     if (startGroupVoiceCalling != null) {
-      return startGroupVoiceCalling(group);
+      return startGroupVoiceCalling(chatId, image, groupName, participants);
     }
     return orElse();
   }
@@ -2238,10 +2434,16 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
 }
 
 abstract class _StartGroupVoiceCalling implements CallingEvent {
-  const factory _StartGroupVoiceCalling({required final ChatModel group}) =
-      _$StartGroupVoiceCallingImpl;
+  const factory _StartGroupVoiceCalling(
+      {required final String chatId,
+      required final String image,
+      required final String groupName,
+      required final List<String> participants}) = _$StartGroupVoiceCallingImpl;
 
-  ChatModel get group;
+  String get chatId;
+  String get image;
+  String get groupName;
+  List<String> get participants;
 
   /// Create a copy of CallingEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2324,8 +2526,12 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -2357,8 +2563,12 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -2387,8 +2597,12 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -2594,8 +2808,12 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -2627,8 +2845,12 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -2657,8 +2879,12 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -2871,8 +3097,12 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -2904,8 +3134,12 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -2934,8 +3168,12 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -3141,8 +3379,12 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -3174,8 +3416,12 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -3204,8 +3450,12 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -3412,8 +3662,12 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -3445,8 +3699,12 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -3475,8 +3733,12 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -3683,8 +3945,12 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -3716,8 +3982,12 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -3746,8 +4016,12 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -3951,8 +4225,12 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -3984,8 +4262,12 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -4014,8 +4296,12 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -4229,8 +4515,12 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -4262,8 +4552,12 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -4292,8 +4586,12 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -4511,8 +4809,12 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -4544,8 +4846,12 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -4574,8 +4880,12 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -4801,8 +5111,12 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -4834,8 +5148,12 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -4864,8 +5182,12 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -5093,8 +5415,12 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -5126,8 +5452,12 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -5156,8 +5486,12 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -5338,8 +5672,12 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -5371,8 +5709,12 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -5401,8 +5743,12 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -5570,8 +5916,12 @@ class _$OnLeaveImpl implements _OnLeave {
     required TResult Function(UserModels receiver) startVideoCalling,
     required TResult Function(UserModels receiver) startVoiceCalling,
     required TResult Function(String callId) endNormalCall,
-    required TResult Function(ChatModel group) startGroupVideoCalling,
-    required TResult Function(ChatModel group) startGroupVoiceCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
     required TResult Function(String callId) endGroupCall,
     required TResult Function(CallModel callModel) selectCallModel,
     required TResult Function(
@@ -5603,8 +5953,12 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult? Function(UserModels receiver)? startVideoCalling,
     TResult? Function(UserModels receiver)? startVoiceCalling,
     TResult? Function(String callId)? endNormalCall,
-    TResult? Function(ChatModel group)? startGroupVideoCalling,
-    TResult? Function(ChatModel group)? startGroupVoiceCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult? Function(String callId)? endGroupCall,
     TResult? Function(CallModel callModel)? selectCallModel,
     TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
@@ -5633,8 +5987,12 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult Function(UserModels receiver)? startVideoCalling,
     TResult Function(UserModels receiver)? startVoiceCalling,
     TResult Function(String callId)? endNormalCall,
-    TResult Function(ChatModel group)? startGroupVideoCalling,
-    TResult Function(ChatModel group)? startGroupVoiceCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
     TResult Function(String callId)? endGroupCall,
     TResult Function(CallModel callModel)? selectCallModel,
     TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?

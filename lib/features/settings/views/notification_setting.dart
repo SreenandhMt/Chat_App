@@ -37,7 +37,7 @@ class NotificationSetting extends StatelessWidget {
                     settingsList[index],
                     style: TextStyle(fontSize: 17),
                   ),
-                  value: state.notificationSetting![index].status,
+                  value: state.notificationSetting?[index].status ?? false,
                   onChanged: (value) {
                     context.read<SettingsBloc>().add(
                           SettingsEvent.turnNotification(

@@ -1,7 +1,10 @@
 import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class DeleteGroupDialog extends StatelessWidget {
   const DeleteGroupDialog({super.key});
@@ -34,7 +37,9 @@ class DeleteGroupDialog extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pop();
+                  },
                   height: 45,
                   shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15)),
@@ -45,7 +50,14 @@ class DeleteGroupDialog extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context
+                        .read<GroupBloc>()
+                        .add(GroupEvent.deleteGroup(uid: ""));
+                    context.pop();
+                    context.pop();
+                    context.pop();
+                  },
                   color: Colors.red,
                   height: 45,
                   shape: OutlineInputBorder(

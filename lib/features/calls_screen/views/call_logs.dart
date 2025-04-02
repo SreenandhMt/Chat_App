@@ -109,7 +109,8 @@ class CallLogsScreen extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: state.callHistory[index].status == "missed"
+                          color: state.callHistory[index].status == "missed" &&
+                                  !state.callHistory[index].isCaller
                               ? Colors.red
                               : null),
                     ),

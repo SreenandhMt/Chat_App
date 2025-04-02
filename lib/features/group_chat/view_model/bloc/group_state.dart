@@ -15,8 +15,14 @@ class GroupState with _$GroupState {
 
   const factory GroupState.groupData({
     @Default(null) ChatModel? groupData,
-    @Default({}) Map<String, UserModels> groupMembers,
+    @Default(null)
+    Map<String, UserModels>? groupMembers, //it current available members
+    @Default({}) Map<String, UserModels> allGroupMembers,
+    @Default(null) Map<String, UserModels>? blockedGroupMembers,
     @Default(null) Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
     @Default(0) int wallpaperIndex,
+    @Default([]) List<MessageModel> messages,
+    @Default(false) bool isLoading,
+    @Default(false) bool inputLoading,
   }) = GroupData;
 }

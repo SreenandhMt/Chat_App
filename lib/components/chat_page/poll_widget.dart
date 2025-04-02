@@ -66,8 +66,7 @@ class _PollWidgetState extends State<PollWidget> {
                     messageId: widget.messageModel.id,
                     votes: widget.messageModel.votes!,
                     progress: (widget.messageModel.options![value]! /
-                            (context.read<ChatBloc>().state.chatData!['chat']
-                                    as ChatModel)
+                            (context.read<ChatBloc>().state.chatData!)
                                 .participants
                                 .length) *
                         1,

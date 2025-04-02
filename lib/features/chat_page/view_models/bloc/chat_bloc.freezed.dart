@@ -19,7 +19,10 @@ mixin _$ChatEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -32,15 +35,20 @@ mixin _$ChatEvent {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -53,15 +61,20 @@ mixin _$ChatEvent {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -74,9 +87,12 @@ mixin _$ChatEvent {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -84,6 +100,7 @@ mixin _$ChatEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -95,14 +112,18 @@ mixin _$ChatEvent {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -114,14 +135,18 @@ mixin _$ChatEvent {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -133,8 +158,11 @@ mixin _$ChatEvent {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -202,7 +230,10 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -215,9 +246,12 @@ class _$StartedImpl implements _Started {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return started();
   }
@@ -226,7 +260,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -239,9 +275,12 @@ class _$StartedImpl implements _Started {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return started?.call();
   }
@@ -250,7 +289,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -263,9 +304,12 @@ class _$StartedImpl implements _Started {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -279,6 +323,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -290,8 +335,11 @@ class _$StartedImpl implements _Started {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return started(this);
   }
@@ -301,6 +349,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -312,8 +361,11 @@ class _$StartedImpl implements _Started {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return started?.call(this);
   }
@@ -323,6 +375,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -334,8 +387,11 @@ class _$StartedImpl implements _Started {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -355,7 +411,7 @@ abstract class _$$GetMessagesImplCopyWith<$Res> {
           _$GetMessagesImpl value, $Res Function(_$GetMessagesImpl) then) =
       __$$GetMessagesImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Map<String, dynamic> chatData});
+  $Res call({ChatModel chatData});
 }
 
 /// @nodoc
@@ -375,9 +431,9 @@ class __$$GetMessagesImplCopyWithImpl<$Res>
   }) {
     return _then(_$GetMessagesImpl(
       null == chatData
-          ? _value._chatData
+          ? _value.chatData
           : chatData // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as ChatModel,
     ));
   }
 }
@@ -385,16 +441,10 @@ class __$$GetMessagesImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetMessagesImpl implements _GetMessages {
-  const _$GetMessagesImpl(final Map<String, dynamic> chatData)
-      : _chatData = chatData;
+  const _$GetMessagesImpl(this.chatData);
 
-  final Map<String, dynamic> _chatData;
   @override
-  Map<String, dynamic> get chatData {
-    if (_chatData is EqualUnmodifiableMapView) return _chatData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_chatData);
-  }
+  final ChatModel chatData;
 
   @override
   String toString() {
@@ -406,12 +456,12 @@ class _$GetMessagesImpl implements _GetMessages {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetMessagesImpl &&
-            const DeepCollectionEquality().equals(other._chatData, _chatData));
+            (identical(other.chatData, chatData) ||
+                other.chatData == chatData));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_chatData));
+  int get hashCode => Object.hash(runtimeType, chatData);
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -425,7 +475,10 @@ class _$GetMessagesImpl implements _GetMessages {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -438,9 +491,12 @@ class _$GetMessagesImpl implements _GetMessages {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return getMessages(chatData);
   }
@@ -449,7 +505,9 @@ class _$GetMessagesImpl implements _GetMessages {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -462,9 +520,12 @@ class _$GetMessagesImpl implements _GetMessages {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return getMessages?.call(chatData);
   }
@@ -473,7 +534,9 @@ class _$GetMessagesImpl implements _GetMessages {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -486,9 +549,12 @@ class _$GetMessagesImpl implements _GetMessages {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (getMessages != null) {
@@ -502,6 +568,7 @@ class _$GetMessagesImpl implements _GetMessages {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -513,8 +580,11 @@ class _$GetMessagesImpl implements _GetMessages {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return getMessages(this);
   }
@@ -524,6 +594,7 @@ class _$GetMessagesImpl implements _GetMessages {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -535,8 +606,11 @@ class _$GetMessagesImpl implements _GetMessages {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return getMessages?.call(this);
   }
@@ -546,6 +620,7 @@ class _$GetMessagesImpl implements _GetMessages {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -557,8 +632,11 @@ class _$GetMessagesImpl implements _GetMessages {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (getMessages != null) {
@@ -569,15 +647,276 @@ class _$GetMessagesImpl implements _GetMessages {
 }
 
 abstract class _GetMessages implements ChatEvent {
-  const factory _GetMessages(final Map<String, dynamic> chatData) =
-      _$GetMessagesImpl;
+  const factory _GetMessages(final ChatModel chatData) = _$GetMessagesImpl;
 
-  Map<String, dynamic> get chatData;
+  ChatModel get chatData;
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetMessagesImplCopyWith<_$GetMessagesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadMessagesImplCopyWith<$Res> {
+  factory _$$LoadMessagesImplCopyWith(
+          _$LoadMessagesImpl value, $Res Function(_$LoadMessagesImpl) then) =
+      __$$LoadMessagesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<QueryDocumentSnapshot<Map<String, dynamic>>> docs});
+}
+
+/// @nodoc
+class __$$LoadMessagesImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$LoadMessagesImpl>
+    implements _$$LoadMessagesImplCopyWith<$Res> {
+  __$$LoadMessagesImplCopyWithImpl(
+      _$LoadMessagesImpl _value, $Res Function(_$LoadMessagesImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? docs = null,
+  }) {
+    return _then(_$LoadMessagesImpl(
+      null == docs
+          ? _value._docs
+          : docs // ignore: cast_nullable_to_non_nullable
+              as List<QueryDocumentSnapshot<Map<String, dynamic>>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadMessagesImpl implements _LoadMessages {
+  const _$LoadMessagesImpl(
+      final List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+      : _docs = docs;
+
+  final List<QueryDocumentSnapshot<Map<String, dynamic>>> _docs;
+  @override
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> get docs {
+    if (_docs is EqualUnmodifiableListView) return _docs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_docs);
+  }
+
+  @override
+  String toString() {
+    return 'ChatEvent.loadMessages(docs: $docs)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadMessagesImpl &&
+            const DeepCollectionEquality().equals(other._docs, _docs));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_docs));
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadMessagesImplCopyWith<_$LoadMessagesImpl> get copyWith =>
+      __$$LoadMessagesImplCopyWithImpl<_$LoadMessagesImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
+  }) {
+    return loadMessages(docs);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
+  }) {
+    return loadMessages?.call(docs);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
+    required TResult orElse(),
+  }) {
+    if (loadMessages != null) {
+      return loadMessages(docs);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
+  }) {
+    return loadMessages(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
+  }) {
+    return loadMessages?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
+    required TResult orElse(),
+  }) {
+    if (loadMessages != null) {
+      return loadMessages(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMessages implements ChatEvent {
+  const factory _LoadMessages(
+          final List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) =
+      _$LoadMessagesImpl;
+
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> get docs;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadMessagesImplCopyWith<_$LoadMessagesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -650,7 +989,10 @@ class _$SendMessageImpl implements _SendMessage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -663,9 +1005,12 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return sendMessage(message);
   }
@@ -674,7 +1019,9 @@ class _$SendMessageImpl implements _SendMessage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -687,9 +1034,12 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return sendMessage?.call(message);
   }
@@ -698,7 +1048,9 @@ class _$SendMessageImpl implements _SendMessage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -711,9 +1063,12 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -727,6 +1082,7 @@ class _$SendMessageImpl implements _SendMessage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -738,8 +1094,11 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return sendMessage(this);
   }
@@ -749,6 +1108,7 @@ class _$SendMessageImpl implements _SendMessage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -760,8 +1120,11 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return sendMessage?.call(this);
   }
@@ -771,6 +1134,7 @@ class _$SendMessageImpl implements _SendMessage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -782,8 +1146,11 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -874,7 +1241,10 @@ class _$SendImageImpl implements _SendImage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -887,9 +1257,12 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return sendImage(path);
   }
@@ -898,7 +1271,9 @@ class _$SendImageImpl implements _SendImage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -911,9 +1286,12 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return sendImage?.call(path);
   }
@@ -922,7 +1300,9 @@ class _$SendImageImpl implements _SendImage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -935,9 +1315,12 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (sendImage != null) {
@@ -951,6 +1334,7 @@ class _$SendImageImpl implements _SendImage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -962,8 +1346,11 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return sendImage(this);
   }
@@ -973,6 +1360,7 @@ class _$SendImageImpl implements _SendImage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -984,8 +1372,11 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return sendImage?.call(this);
   }
@@ -995,6 +1386,7 @@ class _$SendImageImpl implements _SendImage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -1006,8 +1398,11 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (sendImage != null) {
@@ -1107,7 +1502,10 @@ class _$AddReactionImpl implements _AddReaction {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -1120,9 +1518,12 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return addReaction(messageId, emoji);
   }
@@ -1131,7 +1532,9 @@ class _$AddReactionImpl implements _AddReaction {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -1144,9 +1547,12 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return addReaction?.call(messageId, emoji);
   }
@@ -1155,7 +1561,9 @@ class _$AddReactionImpl implements _AddReaction {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -1168,9 +1576,12 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (addReaction != null) {
@@ -1184,6 +1595,7 @@ class _$AddReactionImpl implements _AddReaction {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -1195,8 +1607,11 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return addReaction(this);
   }
@@ -1206,6 +1621,7 @@ class _$AddReactionImpl implements _AddReaction {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -1217,8 +1633,11 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return addReaction?.call(this);
   }
@@ -1228,6 +1647,7 @@ class _$AddReactionImpl implements _AddReaction {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -1239,8 +1659,11 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (addReaction != null) {
@@ -1348,7 +1771,10 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -1361,9 +1787,12 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return sendAudioFile(file, waveList);
   }
@@ -1372,7 +1801,9 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -1385,9 +1816,12 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return sendAudioFile?.call(file, waveList);
   }
@@ -1396,7 +1830,9 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -1409,9 +1845,12 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (sendAudioFile != null) {
@@ -1425,6 +1864,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -1436,8 +1876,11 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return sendAudioFile(this);
   }
@@ -1447,6 +1890,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -1458,8 +1902,11 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return sendAudioFile?.call(this);
   }
@@ -1469,6 +1916,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -1480,8 +1928,11 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (sendAudioFile != null) {
@@ -1574,7 +2025,10 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -1587,9 +2041,12 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return sendVideoFile(path);
   }
@@ -1598,7 +2055,9 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -1611,9 +2070,12 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return sendVideoFile?.call(path);
   }
@@ -1622,7 +2084,9 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -1635,9 +2099,12 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (sendVideoFile != null) {
@@ -1651,6 +2118,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -1662,8 +2130,11 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return sendVideoFile(this);
   }
@@ -1673,6 +2144,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -1684,8 +2156,11 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return sendVideoFile?.call(this);
   }
@@ -1695,6 +2170,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -1706,8 +2182,11 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (sendVideoFile != null) {
@@ -1798,7 +2277,10 @@ class _$SendLinkImpl implements _SendLink {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -1811,9 +2293,12 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return sendLink(link);
   }
@@ -1822,7 +2307,9 @@ class _$SendLinkImpl implements _SendLink {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -1835,9 +2322,12 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return sendLink?.call(link);
   }
@@ -1846,7 +2336,9 @@ class _$SendLinkImpl implements _SendLink {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -1859,9 +2351,12 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (sendLink != null) {
@@ -1875,6 +2370,7 @@ class _$SendLinkImpl implements _SendLink {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -1886,8 +2382,11 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return sendLink(this);
   }
@@ -1897,6 +2396,7 @@ class _$SendLinkImpl implements _SendLink {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -1908,8 +2408,11 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return sendLink?.call(this);
   }
@@ -1919,6 +2422,7 @@ class _$SendLinkImpl implements _SendLink {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -1930,8 +2434,11 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (sendLink != null) {
@@ -2023,7 +2530,10 @@ class _$SendStickerImpl implements _SendSticker {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -2036,9 +2546,12 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return sendSticker(stickerPath);
   }
@@ -2047,7 +2560,9 @@ class _$SendStickerImpl implements _SendSticker {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -2060,9 +2575,12 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return sendSticker?.call(stickerPath);
   }
@@ -2071,7 +2589,9 @@ class _$SendStickerImpl implements _SendSticker {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -2084,9 +2604,12 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (sendSticker != null) {
@@ -2100,6 +2623,7 @@ class _$SendStickerImpl implements _SendSticker {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -2111,8 +2635,11 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return sendSticker(this);
   }
@@ -2122,6 +2649,7 @@ class _$SendStickerImpl implements _SendSticker {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -2133,8 +2661,11 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return sendSticker?.call(this);
   }
@@ -2144,6 +2675,7 @@ class _$SendStickerImpl implements _SendSticker {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -2155,8 +2687,11 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (sendSticker != null) {
@@ -2248,7 +2783,10 @@ class _$SendDocumentImpl implements _SendDocument {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -2261,9 +2799,12 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return sendDocument(path);
   }
@@ -2272,7 +2813,9 @@ class _$SendDocumentImpl implements _SendDocument {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -2285,9 +2828,12 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return sendDocument?.call(path);
   }
@@ -2296,7 +2842,9 @@ class _$SendDocumentImpl implements _SendDocument {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -2309,9 +2857,12 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (sendDocument != null) {
@@ -2325,6 +2876,7 @@ class _$SendDocumentImpl implements _SendDocument {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -2336,8 +2888,11 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return sendDocument(this);
   }
@@ -2347,6 +2902,7 @@ class _$SendDocumentImpl implements _SendDocument {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -2358,8 +2914,11 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return sendDocument?.call(this);
   }
@@ -2369,6 +2928,7 @@ class _$SendDocumentImpl implements _SendDocument {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -2380,8 +2940,11 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (sendDocument != null) {
@@ -2489,7 +3052,10 @@ class _$CreatePollImpl implements _CreatePoll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -2502,9 +3068,12 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return createPoll(question, options);
   }
@@ -2513,7 +3082,9 @@ class _$CreatePollImpl implements _CreatePoll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -2526,9 +3097,12 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return createPoll?.call(question, options);
   }
@@ -2537,7 +3111,9 @@ class _$CreatePollImpl implements _CreatePoll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -2550,9 +3126,12 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (createPoll != null) {
@@ -2566,6 +3145,7 @@ class _$CreatePollImpl implements _CreatePoll {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -2577,8 +3157,11 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return createPoll(this);
   }
@@ -2588,6 +3171,7 @@ class _$CreatePollImpl implements _CreatePoll {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -2599,8 +3183,11 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return createPoll?.call(this);
   }
@@ -2610,6 +3197,7 @@ class _$CreatePollImpl implements _CreatePoll {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -2621,8 +3209,11 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (createPoll != null) {
@@ -2743,7 +3334,10 @@ class _$VotePollImpl implements _VotePoll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -2756,9 +3350,12 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return votePoll(messageId, option, votes);
   }
@@ -2767,7 +3364,9 @@ class _$VotePollImpl implements _VotePoll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -2780,9 +3379,12 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return votePoll?.call(messageId, option, votes);
   }
@@ -2791,7 +3393,9 @@ class _$VotePollImpl implements _VotePoll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -2804,9 +3408,12 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (votePoll != null) {
@@ -2820,6 +3427,7 @@ class _$VotePollImpl implements _VotePoll {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -2831,8 +3439,11 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return votePoll(this);
   }
@@ -2842,6 +3453,7 @@ class _$VotePollImpl implements _VotePoll {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -2853,8 +3465,11 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return votePoll?.call(this);
   }
@@ -2864,6 +3479,7 @@ class _$VotePollImpl implements _VotePoll {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -2875,8 +3491,11 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (votePoll != null) {
@@ -2909,7 +3528,7 @@ abstract class _$$DeleteMessageImplCopyWith<$Res> {
           _$DeleteMessageImpl value, $Res Function(_$DeleteMessageImpl) then) =
       __$$DeleteMessageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String messageId});
+  $Res call({List<String> messageIds});
 }
 
 /// @nodoc
@@ -2925,13 +3544,13 @@ class __$$DeleteMessageImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? messageId = null,
+    Object? messageIds = null,
   }) {
     return _then(_$DeleteMessageImpl(
-      messageId: null == messageId
-          ? _value.messageId
-          : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
+      messageIds: null == messageIds
+          ? _value._messageIds
+          : messageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -2939,14 +3558,20 @@ class __$$DeleteMessageImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteMessageImpl implements _DeleteMessage {
-  const _$DeleteMessageImpl({required this.messageId});
+  const _$DeleteMessageImpl({required final List<String> messageIds})
+      : _messageIds = messageIds;
 
+  final List<String> _messageIds;
   @override
-  final String messageId;
+  List<String> get messageIds {
+    if (_messageIds is EqualUnmodifiableListView) return _messageIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messageIds);
+  }
 
   @override
   String toString() {
-    return 'ChatEvent.deleteMessage(messageId: $messageId)';
+    return 'ChatEvent.deleteMessage(messageIds: $messageIds)';
   }
 
   @override
@@ -2954,12 +3579,13 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteMessageImpl &&
-            (identical(other.messageId, messageId) ||
-                other.messageId == messageId));
+            const DeepCollectionEquality()
+                .equals(other._messageIds, _messageIds));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, messageId);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_messageIds));
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2973,7 +3599,10 @@ class _$DeleteMessageImpl implements _DeleteMessage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -2986,18 +3615,23 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
-    return deleteMessage(messageId);
+    return deleteMessage(messageIds);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -3010,18 +3644,23 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
-    return deleteMessage?.call(messageId);
+    return deleteMessage?.call(messageIds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -3034,13 +3673,16 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
-      return deleteMessage(messageId);
+      return deleteMessage(messageIds);
     }
     return orElse();
   }
@@ -3050,6 +3692,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -3061,8 +3704,11 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return deleteMessage(this);
   }
@@ -3072,6 +3718,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -3083,8 +3730,11 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return deleteMessage?.call(this);
   }
@@ -3094,6 +3744,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -3105,8 +3756,11 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
@@ -3117,15 +3771,277 @@ class _$DeleteMessageImpl implements _DeleteMessage {
 }
 
 abstract class _DeleteMessage implements ChatEvent {
-  const factory _DeleteMessage({required final String messageId}) =
+  const factory _DeleteMessage({required final List<String> messageIds}) =
       _$DeleteMessageImpl;
 
-  String get messageId;
+  List<String> get messageIds;
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteMessageImplCopyWith<_$DeleteMessageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteMessageForMeImplCopyWith<$Res> {
+  factory _$$DeleteMessageForMeImplCopyWith(_$DeleteMessageForMeImpl value,
+          $Res Function(_$DeleteMessageForMeImpl) then) =
+      __$$DeleteMessageForMeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> messageIds});
+}
+
+/// @nodoc
+class __$$DeleteMessageForMeImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$DeleteMessageForMeImpl>
+    implements _$$DeleteMessageForMeImplCopyWith<$Res> {
+  __$$DeleteMessageForMeImplCopyWithImpl(_$DeleteMessageForMeImpl _value,
+      $Res Function(_$DeleteMessageForMeImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messageIds = null,
+  }) {
+    return _then(_$DeleteMessageForMeImpl(
+      messageIds: null == messageIds
+          ? _value._messageIds
+          : messageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteMessageForMeImpl implements _DeleteMessageForMe {
+  const _$DeleteMessageForMeImpl({required final List<String> messageIds})
+      : _messageIds = messageIds;
+
+  final List<String> _messageIds;
+  @override
+  List<String> get messageIds {
+    if (_messageIds is EqualUnmodifiableListView) return _messageIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messageIds);
+  }
+
+  @override
+  String toString() {
+    return 'ChatEvent.deleteMessageForMe(messageIds: $messageIds)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteMessageForMeImpl &&
+            const DeepCollectionEquality()
+                .equals(other._messageIds, _messageIds));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_messageIds));
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteMessageForMeImplCopyWith<_$DeleteMessageForMeImpl> get copyWith =>
+      __$$DeleteMessageForMeImplCopyWithImpl<_$DeleteMessageForMeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
+  }) {
+    return deleteMessageForMe(messageIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
+  }) {
+    return deleteMessageForMe?.call(messageIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
+    required TResult orElse(),
+  }) {
+    if (deleteMessageForMe != null) {
+      return deleteMessageForMe(messageIds);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
+  }) {
+    return deleteMessageForMe(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
+  }) {
+    return deleteMessageForMe?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
+    required TResult orElse(),
+  }) {
+    if (deleteMessageForMe != null) {
+      return deleteMessageForMe(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteMessageForMe implements ChatEvent {
+  const factory _DeleteMessageForMe({required final List<String> messageIds}) =
+      _$DeleteMessageForMeImpl;
+
+  List<String> get messageIds;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteMessageForMeImplCopyWith<_$DeleteMessageForMeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3200,7 +4116,10 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -3213,9 +4132,12 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
     return editStatusToTyping(isTyping);
   }
@@ -3224,7 +4146,9 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -3237,9 +4161,12 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
     return editStatusToTyping?.call(isTyping);
   }
@@ -3248,7 +4175,9 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -3261,9 +4190,12 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
     if (editStatusToTyping != null) {
@@ -3277,6 +4209,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -3288,8 +4221,11 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
     return editStatusToTyping(this);
   }
@@ -3299,6 +4235,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -3310,8 +4247,11 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
     return editStatusToTyping?.call(this);
   }
@@ -3321,6 +4261,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -3332,8 +4273,11 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
     if (editStatusToTyping != null) {
@@ -3357,20 +4301,20 @@ abstract class _EditStatusToTyping implements ChatEvent {
 }
 
 /// @nodoc
-abstract class _$$MarkMessageAsSeenImplCopyWith<$Res> {
-  factory _$$MarkMessageAsSeenImplCopyWith(_$MarkMessageAsSeenImpl value,
-          $Res Function(_$MarkMessageAsSeenImpl) then) =
-      __$$MarkMessageAsSeenImplCopyWithImpl<$Res>;
+abstract class _$$MuteChatImplCopyWith<$Res> {
+  factory _$$MuteChatImplCopyWith(
+          _$MuteChatImpl value, $Res Function(_$MuteChatImpl) then) =
+      __$$MuteChatImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String messageId});
+  $Res call({bool status});
 }
 
 /// @nodoc
-class __$$MarkMessageAsSeenImplCopyWithImpl<$Res>
-    extends _$ChatEventCopyWithImpl<$Res, _$MarkMessageAsSeenImpl>
-    implements _$$MarkMessageAsSeenImplCopyWith<$Res> {
-  __$$MarkMessageAsSeenImplCopyWithImpl(_$MarkMessageAsSeenImpl _value,
-      $Res Function(_$MarkMessageAsSeenImpl) _then)
+class __$$MuteChatImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$MuteChatImpl>
+    implements _$$MuteChatImplCopyWith<$Res> {
+  __$$MuteChatImplCopyWithImpl(
+      _$MuteChatImpl _value, $Res Function(_$MuteChatImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ChatEvent
@@ -3378,56 +4322,57 @@ class __$$MarkMessageAsSeenImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? messageId = null,
+    Object? status = null,
   }) {
-    return _then(_$MarkMessageAsSeenImpl(
-      messageId: null == messageId
-          ? _value.messageId
-          : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$MuteChatImpl(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
-  const _$MarkMessageAsSeenImpl({required this.messageId});
+class _$MuteChatImpl implements _MuteChat {
+  const _$MuteChatImpl({required this.status});
 
   @override
-  final String messageId;
+  final bool status;
 
   @override
   String toString() {
-    return 'ChatEvent.markMessageAsSeen(messageId: $messageId)';
+    return 'ChatEvent.muteChat(status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MarkMessageAsSeenImpl &&
-            (identical(other.messageId, messageId) ||
-                other.messageId == messageId));
+            other is _$MuteChatImpl &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, messageId);
+  int get hashCode => Object.hash(runtimeType, status);
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MarkMessageAsSeenImplCopyWith<_$MarkMessageAsSeenImpl> get copyWith =>
-      __$$MarkMessageAsSeenImplCopyWithImpl<_$MarkMessageAsSeenImpl>(
-          this, _$identity);
+  _$$MuteChatImplCopyWith<_$MuteChatImpl> get copyWith =>
+      __$$MuteChatImplCopyWithImpl<_$MuteChatImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Map<String, dynamic> chatData) getMessages,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -3440,18 +4385,23 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
   }) {
-    return markMessageAsSeen(messageId);
+    return muteChat(status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Map<String, dynamic> chatData)? getMessages,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -3464,18 +4414,23 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
   }) {
-    return markMessageAsSeen?.call(messageId);
+    return muteChat?.call(status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Map<String, dynamic> chatData)? getMessages,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -3488,13 +4443,16 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
     required TResult orElse(),
   }) {
-    if (markMessageAsSeen != null) {
-      return markMessageAsSeen(messageId);
+    if (muteChat != null) {
+      return muteChat(status);
     }
     return orElse();
   }
@@ -3504,6 +4462,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_SendImage value) sendImage,
     required TResult Function(_AddReaction value) addReaction,
@@ -3515,10 +4474,13 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
   }) {
-    return markMessageAsSeen(this);
+    return muteChat(this);
   }
 
   @override
@@ -3526,6 +4488,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_SendImage value)? sendImage,
     TResult? Function(_AddReaction value)? addReaction,
@@ -3537,10 +4500,13 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
   }) {
-    return markMessageAsSeen?.call(this);
+    return muteChat?.call(this);
   }
 
   @override
@@ -3548,6 +4514,7 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_SendImage value)? sendImage,
     TResult Function(_AddReaction value)? addReaction,
@@ -3559,68 +4526,590 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
     required TResult orElse(),
   }) {
-    if (markMessageAsSeen != null) {
-      return markMessageAsSeen(this);
+    if (muteChat != null) {
+      return muteChat(this);
     }
     return orElse();
   }
 }
 
-abstract class _MarkMessageAsSeen implements ChatEvent {
-  const factory _MarkMessageAsSeen({required final String messageId}) =
-      _$MarkMessageAsSeenImpl;
+abstract class _MuteChat implements ChatEvent {
+  const factory _MuteChat({required final bool status}) = _$MuteChatImpl;
 
-  String get messageId;
+  bool get status;
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MarkMessageAsSeenImplCopyWith<_$MarkMessageAsSeenImpl> get copyWith =>
+  _$$MuteChatImplCopyWith<_$MuteChatImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BlockUserImplCopyWith<$Res> {
+  factory _$$BlockUserImplCopyWith(
+          _$BlockUserImpl value, $Res Function(_$BlockUserImpl) then) =
+      __$$BlockUserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$BlockUserImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$BlockUserImpl>
+    implements _$$BlockUserImplCopyWith<$Res> {
+  __$$BlockUserImplCopyWithImpl(
+      _$BlockUserImpl _value, $Res Function(_$BlockUserImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$BlockUserImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BlockUserImpl implements _BlockUser {
+  const _$BlockUserImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'ChatEvent.blockUser(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlockUserImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlockUserImplCopyWith<_$BlockUserImpl> get copyWith =>
+      __$$BlockUserImplCopyWithImpl<_$BlockUserImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
+  }) {
+    return blockUser(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
+  }) {
+    return blockUser?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
+    required TResult orElse(),
+  }) {
+    if (blockUser != null) {
+      return blockUser(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
+  }) {
+    return blockUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
+  }) {
+    return blockUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
+    required TResult orElse(),
+  }) {
+    if (blockUser != null) {
+      return blockUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BlockUser implements ChatEvent {
+  const factory _BlockUser({required final String uid}) = _$BlockUserImpl;
+
+  String get uid;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlockUserImplCopyWith<_$BlockUserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ReportUserImplCopyWith<$Res> {
+  factory _$$ReportUserImplCopyWith(
+          _$ReportUserImpl value, $Res Function(_$ReportUserImpl) then) =
+      __$$ReportUserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$ReportUserImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$ReportUserImpl>
+    implements _$$ReportUserImplCopyWith<$Res> {
+  __$$ReportUserImplCopyWithImpl(
+      _$ReportUserImpl _value, $Res Function(_$ReportUserImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$ReportUserImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ReportUserImpl implements _ReportUser {
+  const _$ReportUserImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'ChatEvent.reportUser(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ReportUserImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ReportUserImplCopyWith<_$ReportUserImpl> get copyWith =>
+      __$$ReportUserImplCopyWithImpl<_$ReportUserImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
+  }) {
+    return reportUser(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
+  }) {
+    return reportUser?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
+    required TResult orElse(),
+  }) {
+    if (reportUser != null) {
+      return reportUser(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
+  }) {
+    return reportUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
+  }) {
+    return reportUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
+    required TResult orElse(),
+  }) {
+    if (reportUser != null) {
+      return reportUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ReportUser implements ChatEvent {
+  const factory _ReportUser({required final String uid}) = _$ReportUserImpl;
+
+  String get uid;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReportUserImplCopyWith<_$ReportUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$ChatState {
-  Map<String, dynamic>? get chatData => throw _privateConstructorUsedError;
+  ChatModel? get chatData => throw _privateConstructorUsedError;
   Stream<QuerySnapshot<Map<String, dynamic>>>? get messageData =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String get isError => throw _privateConstructorUsedError;
   int get wallpaperIndex => throw _privateConstructorUsedError;
+  bool get isSavedContact => throw _privateConstructorUsedError;
+  List<ChatModel> get commonGroups => throw _privateConstructorUsedError;
+  List<MessageModel> get messages => throw _privateConstructorUsedError;
+  bool get inputLoading => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Map<String, dynamic>? chatData,
+            ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
             String isError,
-            int wallpaperIndex)
+            int wallpaperIndex,
+            bool isSavedContact,
+            List<ChatModel> commonGroups,
+            List<MessageModel> messages,
+            bool inputLoading)
         chatData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            Map<String, dynamic>? chatData,
+            ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
             String isError,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            bool isSavedContact,
+            List<ChatModel> commonGroups,
+            List<MessageModel> messages,
+            bool inputLoading)?
         chatData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            Map<String, dynamic>? chatData,
+            ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
             String isError,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            bool isSavedContact,
+            List<ChatModel> commonGroups,
+            List<MessageModel> messages,
+            bool inputLoading)?
         chatData,
     required TResult orElse(),
   }) =>
@@ -3655,11 +5144,15 @@ abstract class $ChatStateCopyWith<$Res> {
       _$ChatStateCopyWithImpl<$Res, ChatState>;
   @useResult
   $Res call(
-      {Map<String, dynamic>? chatData,
+      {ChatModel? chatData,
       Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       bool isLoading,
       String isError,
-      int wallpaperIndex});
+      int wallpaperIndex,
+      bool isSavedContact,
+      List<ChatModel> commonGroups,
+      List<MessageModel> messages,
+      bool inputLoading});
 }
 
 /// @nodoc
@@ -3682,12 +5175,16 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
     Object? isLoading = null,
     Object? isError = null,
     Object? wallpaperIndex = null,
+    Object? isSavedContact = null,
+    Object? commonGroups = null,
+    Object? messages = null,
+    Object? inputLoading = null,
   }) {
     return _then(_value.copyWith(
       chatData: freezed == chatData
           ? _value.chatData
           : chatData // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as ChatModel?,
       messageData: freezed == messageData
           ? _value.messageData
           : messageData // ignore: cast_nullable_to_non_nullable
@@ -3704,6 +5201,22 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
           ? _value.wallpaperIndex
           : wallpaperIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isSavedContact: null == isSavedContact
+          ? _value.isSavedContact
+          : isSavedContact // ignore: cast_nullable_to_non_nullable
+              as bool,
+      commonGroups: null == commonGroups
+          ? _value.commonGroups
+          : commonGroups // ignore: cast_nullable_to_non_nullable
+              as List<ChatModel>,
+      messages: null == messages
+          ? _value.messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<MessageModel>,
+      inputLoading: null == inputLoading
+          ? _value.inputLoading
+          : inputLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -3717,11 +5230,15 @@ abstract class _$$ChatDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<String, dynamic>? chatData,
+      {ChatModel? chatData,
       Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       bool isLoading,
       String isError,
-      int wallpaperIndex});
+      int wallpaperIndex,
+      bool isSavedContact,
+      List<ChatModel> commonGroups,
+      List<MessageModel> messages,
+      bool inputLoading});
 }
 
 /// @nodoc
@@ -3742,12 +5259,16 @@ class __$$ChatDataImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? wallpaperIndex = null,
+    Object? isSavedContact = null,
+    Object? commonGroups = null,
+    Object? messages = null,
+    Object? inputLoading = null,
   }) {
     return _then(_$ChatDataImpl(
       chatData: freezed == chatData
-          ? _value._chatData
+          ? _value.chatData
           : chatData // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as ChatModel?,
       messageData: freezed == messageData
           ? _value.messageData
           : messageData // ignore: cast_nullable_to_non_nullable
@@ -3764,6 +5285,22 @@ class __$$ChatDataImplCopyWithImpl<$Res>
           ? _value.wallpaperIndex
           : wallpaperIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isSavedContact: null == isSavedContact
+          ? _value.isSavedContact
+          : isSavedContact // ignore: cast_nullable_to_non_nullable
+              as bool,
+      commonGroups: null == commonGroups
+          ? _value._commonGroups
+          : commonGroups // ignore: cast_nullable_to_non_nullable
+              as List<ChatModel>,
+      messages: null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<MessageModel>,
+      inputLoading: null == inputLoading
+          ? _value.inputLoading
+          : inputLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -3772,24 +5309,21 @@ class __$$ChatDataImplCopyWithImpl<$Res>
 
 class _$ChatDataImpl implements _ChatData {
   const _$ChatDataImpl(
-      {final Map<String, dynamic>? chatData = null,
+      {this.chatData = null,
       this.messageData = null,
       this.isLoading = false,
       this.isError = "",
-      this.wallpaperIndex = 0})
-      : _chatData = chatData;
+      this.wallpaperIndex = 0,
+      this.isSavedContact = false,
+      final List<ChatModel> commonGroups = const [],
+      final List<MessageModel> messages = const [],
+      this.inputLoading = false})
+      : _commonGroups = commonGroups,
+        _messages = messages;
 
-  final Map<String, dynamic>? _chatData;
   @override
   @JsonKey()
-  Map<String, dynamic>? get chatData {
-    final value = _chatData;
-    if (value == null) return null;
-    if (_chatData is EqualUnmodifiableMapView) return _chatData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
+  final ChatModel? chatData;
   @override
   @JsonKey()
   final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData;
@@ -3802,10 +5336,34 @@ class _$ChatDataImpl implements _ChatData {
   @override
   @JsonKey()
   final int wallpaperIndex;
+  @override
+  @JsonKey()
+  final bool isSavedContact;
+  final List<ChatModel> _commonGroups;
+  @override
+  @JsonKey()
+  List<ChatModel> get commonGroups {
+    if (_commonGroups is EqualUnmodifiableListView) return _commonGroups;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_commonGroups);
+  }
+
+  final List<MessageModel> _messages;
+  @override
+  @JsonKey()
+  List<MessageModel> get messages {
+    if (_messages is EqualUnmodifiableListView) return _messages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messages);
+  }
+
+  @override
+  @JsonKey()
+  final bool inputLoading;
 
   @override
   String toString() {
-    return 'ChatState.chatData(chatData: $chatData, messageData: $messageData, isLoading: $isLoading, isError: $isError, wallpaperIndex: $wallpaperIndex)';
+    return 'ChatState.chatData(chatData: $chatData, messageData: $messageData, isLoading: $isLoading, isError: $isError, wallpaperIndex: $wallpaperIndex, isSavedContact: $isSavedContact, commonGroups: $commonGroups, messages: $messages, inputLoading: $inputLoading)';
   }
 
   @override
@@ -3813,24 +5371,36 @@ class _$ChatDataImpl implements _ChatData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChatDataImpl &&
-            const DeepCollectionEquality().equals(other._chatData, _chatData) &&
+            (identical(other.chatData, chatData) ||
+                other.chatData == chatData) &&
             (identical(other.messageData, messageData) ||
                 other.messageData == messageData) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.wallpaperIndex, wallpaperIndex) ||
-                other.wallpaperIndex == wallpaperIndex));
+                other.wallpaperIndex == wallpaperIndex) &&
+            (identical(other.isSavedContact, isSavedContact) ||
+                other.isSavedContact == isSavedContact) &&
+            const DeepCollectionEquality()
+                .equals(other._commonGroups, _commonGroups) &&
+            const DeepCollectionEquality().equals(other._messages, _messages) &&
+            (identical(other.inputLoading, inputLoading) ||
+                other.inputLoading == inputLoading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_chatData),
+      chatData,
       messageData,
       isLoading,
       isError,
-      wallpaperIndex);
+      wallpaperIndex,
+      isSavedContact,
+      const DeepCollectionEquality().hash(_commonGroups),
+      const DeepCollectionEquality().hash(_messages),
+      inputLoading);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -3844,47 +5414,59 @@ class _$ChatDataImpl implements _ChatData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Map<String, dynamic>? chatData,
+            ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
             String isError,
-            int wallpaperIndex)
+            int wallpaperIndex,
+            bool isSavedContact,
+            List<ChatModel> commonGroups,
+            List<MessageModel> messages,
+            bool inputLoading)
         chatData,
   }) {
-    return chatData(
-        this.chatData, messageData, isLoading, isError, wallpaperIndex);
+    return chatData(this.chatData, messageData, isLoading, isError,
+        wallpaperIndex, isSavedContact, commonGroups, messages, inputLoading);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            Map<String, dynamic>? chatData,
+            ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
             String isError,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            bool isSavedContact,
+            List<ChatModel> commonGroups,
+            List<MessageModel> messages,
+            bool inputLoading)?
         chatData,
   }) {
-    return chatData?.call(
-        this.chatData, messageData, isLoading, isError, wallpaperIndex);
+    return chatData?.call(this.chatData, messageData, isLoading, isError,
+        wallpaperIndex, isSavedContact, commonGroups, messages, inputLoading);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            Map<String, dynamic>? chatData,
+            ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
             String isError,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            bool isSavedContact,
+            List<ChatModel> commonGroups,
+            List<MessageModel> messages,
+            bool inputLoading)?
         chatData,
     required TResult orElse(),
   }) {
     if (chatData != null) {
-      return chatData(
-          this.chatData, messageData, isLoading, isError, wallpaperIndex);
+      return chatData(this.chatData, messageData, isLoading, isError,
+          wallpaperIndex, isSavedContact, commonGroups, messages, inputLoading);
     }
     return orElse();
   }
@@ -3920,14 +5502,18 @@ class _$ChatDataImpl implements _ChatData {
 
 abstract class _ChatData implements ChatState {
   const factory _ChatData(
-      {final Map<String, dynamic>? chatData,
+      {final ChatModel? chatData,
       final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       final bool isLoading,
       final String isError,
-      final int wallpaperIndex}) = _$ChatDataImpl;
+      final int wallpaperIndex,
+      final bool isSavedContact,
+      final List<ChatModel> commonGroups,
+      final List<MessageModel> messages,
+      final bool inputLoading}) = _$ChatDataImpl;
 
   @override
-  Map<String, dynamic>? get chatData;
+  ChatModel? get chatData;
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>>? get messageData;
   @override
@@ -3936,6 +5522,14 @@ abstract class _ChatData implements ChatState {
   String get isError;
   @override
   int get wallpaperIndex;
+  @override
+  bool get isSavedContact;
+  @override
+  List<ChatModel> get commonGroups;
+  @override
+  List<MessageModel> get messages;
+  @override
+  bool get inputLoading;
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.

@@ -1,15 +1,19 @@
-import 'package:chat_app/core/fonts.dart';
-import 'package:chat_app/core/size.dart';
-import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/home/view_models/bloc/home_bloc.dart';
+import 'package:chat_app/core/fonts.dart';
+import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
 
-class LeaveGroupDialog extends StatelessWidget {
-  const LeaveGroupDialog({super.key});
+class ReportUserDialog extends StatelessWidget {
+  const ReportUserDialog({
+    super.key,
+    required this.uid,
+    required this.userName,
+  });
+  final String uid;
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +28,11 @@ class LeaveGroupDialog extends StatelessWidget {
           Icon(Icons.logout, size: 50, color: Colors.red),
           height10,
           Text(
-            "Leave this group?",
+            "Report $userName?",
             style: AppFonts.titleFont(context),
           ),
           Text(
-            "Are you sure you want to leave this group?\nYou wo't receive any more messages form this chat.",
+            "Are you sure you want to report this user?",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 15),
           ),
@@ -53,7 +57,7 @@ class LeaveGroupDialog extends StatelessWidget {
                 flex: 1,
                 child: MaterialButton(
                   onPressed: () {
-                    context.read<GroupBloc>().add(GroupEvent.exitGroup());
+                    context.read<ChatBloc>().add(ChatEvent.blockUser(uid: uid));
                     context.pop();
                     context.pop();
                     context.pop();
@@ -63,7 +67,7 @@ class LeaveGroupDialog extends StatelessWidget {
                   shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none),
-                  child: Text("Leave"),
+                  child: Text("Report"),
                 ),
               ),
             ],

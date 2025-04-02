@@ -2,6 +2,7 @@ import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/calls_screen/view_models/bloc/calling_bloc.dart';
 import 'package:chat_app/localization/locals.dart';
+import 'package:chat_app/route/navigation_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,20 +54,60 @@ class CallDetailsPage extends StatelessWidget {
                     ],
                   ),
                   Spacer(),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 7, horizontal: 20),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 0.3),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Icon(Icons.call),
+                  InkWell(
+                    onTap: () {
+                      if (state.selectedCall!.callType == "group") {
+                        context.read<CallingBloc>().add(
+                            CallingEvent.startGroupVoiceCalling(
+                                chatId: state.selectedCall?.groupId ?? "",
+                                groupName: state.selectedCall?.groupName ?? "",
+                                image: state.selectedCall?.groupImage ?? "",
+                                participants: List<String>.from(
+                                    state.selectedCall?.participantsID ?? [])));
+                        NavigationUtils.voiceCallPage(context);
+                        return;
+                      }
+                      context.read<CallingBloc>().add(
+                          CallingEvent.startVideoCalling(
+                              receiver: state.selectedCall!.userModels!));
+                      NavigationUtils.voiceCallPage(context);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 7, horizontal: 20),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 0.3),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Icon(Icons.call),
+                    ),
                   ),
                   width10,
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 7, horizontal: 20),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 0.3),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Icon(Icons.videocam_outlined),
+                  InkWell(
+                    onTap: () {
+                      if (state.selectedCall!.callType == "group") {
+                        context.read<CallingBloc>().add(
+                            CallingEvent.startGroupVideoCalling(
+                                chatId: state.selectedCall?.groupId ?? "",
+                                groupName: state.selectedCall?.groupName ?? "",
+                                image: state.selectedCall?.groupImage ?? "",
+                                participants: List<String>.from(
+                                    state.selectedCall?.participantsID ?? [])));
+                        NavigationUtils.videoCallPage(context);
+                        return;
+                      }
+                      context.read<CallingBloc>().add(
+                          CallingEvent.startVideoCalling(
+                              receiver: state.selectedCall!.userModels!));
+                      NavigationUtils.videoCallPage(context);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 7, horizontal: 20),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 0.3),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Icon(Icons.videocam_outlined),
+                    ),
                   ),
                   width5
                 ],

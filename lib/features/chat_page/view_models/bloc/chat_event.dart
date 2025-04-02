@@ -3,8 +3,9 @@ part of 'chat_bloc.dart';
 @freezed
 class ChatEvent with _$ChatEvent {
   const factory ChatEvent.started() = _Started;
-  const factory ChatEvent.getMessages(Map<String, dynamic> chatData) =
-      _GetMessages;
+  const factory ChatEvent.getMessages(ChatModel chatData) = _GetMessages;
+  const factory ChatEvent.loadMessages(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) = _LoadMessages;
   const factory ChatEvent.sendMessage(String message) = _SendMessage;
   const factory ChatEvent.sendImage(String path) = _SendImage;
   const factory ChatEvent.addReaction(String messageId, String emoji) =
@@ -22,10 +23,13 @@ class ChatEvent with _$ChatEvent {
       {required String messageId,
       required String option,
       required Map<String, dynamic> votes}) = _VotePoll;
-  const factory ChatEvent.deleteMessage({required String messageId}) =
+  const factory ChatEvent.deleteMessage({required List<String> messageIds}) =
       _DeleteMessage;
+  const factory ChatEvent.deleteMessageForMe(
+      {required List<String> messageIds}) = _DeleteMessageForMe;
   const factory ChatEvent.editStatusToTyping({required bool isTyping}) =
       _EditStatusToTyping;
-  const factory ChatEvent.markMessageAsSeen({required String messageId}) =
-      _MarkMessageAsSeen;
+  const factory ChatEvent.muteChat({required bool status}) = _MuteChat;
+  const factory ChatEvent.blockUser({required String uid}) = _BlockUser;
+  const factory ChatEvent.reportUser({required String uid}) = _ReportUser;
 }

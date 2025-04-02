@@ -189,8 +189,8 @@ mixin LocaleData {
     addToContactText: "Add to Contacts",
     muteNotificationsText: "Mute Notifications",
     aboutChatTitleText: "About and phone number",
-    blockUserText: "Block User",
-    reportUserText: "Report User",
+    blockUserText: "Block %a",
+    reportUserText: "Report %a",
     //group chat page
     groupChatHitText: "Type a message...",
     addMembersText: "Add Members",

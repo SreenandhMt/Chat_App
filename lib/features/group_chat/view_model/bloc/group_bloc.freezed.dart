@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$GroupEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -28,14 +28,28 @@ mixin _$GroupEvent {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -45,12 +59,12 @@ mixin _$GroupEvent {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -60,14 +74,27 @@ mixin _$GroupEvent {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -77,12 +104,12 @@ mixin _$GroupEvent {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -92,14 +119,27 @@ mixin _$GroupEvent {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -109,7 +149,7 @@ mixin _$GroupEvent {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,12 +165,22 @@ mixin _$GroupEvent {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -148,12 +198,22 @@ mixin _$GroupEvent {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -171,12 +231,22 @@ mixin _$GroupEvent {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -212,7 +282,7 @@ abstract class _$$LoadDataImplCopyWith<$Res> {
           _$LoadDataImpl value, $Res Function(_$LoadDataImpl) then) =
       __$$LoadDataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Map<String, dynamic> chat});
+  $Res call({ChatModel chat});
 }
 
 /// @nodoc
@@ -232,9 +302,9 @@ class __$$LoadDataImplCopyWithImpl<$Res>
   }) {
     return _then(_$LoadDataImpl(
       chat: null == chat
-          ? _value._chat
+          ? _value.chat
           : chat // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as ChatModel,
     ));
   }
 }
@@ -242,16 +312,10 @@ class __$$LoadDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadDataImpl implements _LoadData {
-  const _$LoadDataImpl({required final Map<String, dynamic> chat})
-      : _chat = chat;
+  const _$LoadDataImpl({required this.chat});
 
-  final Map<String, dynamic> _chat;
   @override
-  Map<String, dynamic> get chat {
-    if (_chat is EqualUnmodifiableMapView) return _chat;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_chat);
-  }
+  final ChatModel chat;
 
   @override
   String toString() {
@@ -263,12 +327,11 @@ class _$LoadDataImpl implements _LoadData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadDataImpl &&
-            const DeepCollectionEquality().equals(other._chat, _chat));
+            (identical(other.chat, chat) || other.chat == chat));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_chat));
+  int get hashCode => Object.hash(runtimeType, chat);
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -281,7 +344,7 @@ class _$LoadDataImpl implements _LoadData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -291,14 +354,28 @@ class _$LoadDataImpl implements _LoadData {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -308,7 +385,7 @@ class _$LoadDataImpl implements _LoadData {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return loadData(chat);
   }
@@ -316,7 +393,7 @@ class _$LoadDataImpl implements _LoadData {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -326,14 +403,27 @@ class _$LoadDataImpl implements _LoadData {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -343,7 +433,7 @@ class _$LoadDataImpl implements _LoadData {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return loadData?.call(chat);
   }
@@ -351,7 +441,7 @@ class _$LoadDataImpl implements _LoadData {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -361,14 +451,27 @@ class _$LoadDataImpl implements _LoadData {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -378,7 +481,7 @@ class _$LoadDataImpl implements _LoadData {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (loadData != null) {
@@ -400,12 +503,22 @@ class _$LoadDataImpl implements _LoadData {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -426,12 +539,22 @@ class _$LoadDataImpl implements _LoadData {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -452,12 +575,22 @@ class _$LoadDataImpl implements _LoadData {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -471,10 +604,9 @@ class _$LoadDataImpl implements _LoadData {
 }
 
 abstract class _LoadData implements GroupEvent {
-  const factory _LoadData({required final Map<String, dynamic> chat}) =
-      _$LoadDataImpl;
+  const factory _LoadData({required final ChatModel chat}) = _$LoadDataImpl;
 
-  Map<String, dynamic> get chat;
+  ChatModel get chat;
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -551,7 +683,7 @@ class _$SendMessageImpl implements _SendMessage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -561,14 +693,28 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -578,7 +724,7 @@ class _$SendMessageImpl implements _SendMessage {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return sendMessage(message);
   }
@@ -586,7 +732,7 @@ class _$SendMessageImpl implements _SendMessage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -596,14 +742,27 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -613,7 +772,7 @@ class _$SendMessageImpl implements _SendMessage {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return sendMessage?.call(message);
   }
@@ -621,7 +780,7 @@ class _$SendMessageImpl implements _SendMessage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -631,14 +790,27 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -648,7 +820,7 @@ class _$SendMessageImpl implements _SendMessage {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -670,12 +842,22 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -696,12 +878,22 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -722,12 +914,22 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -820,7 +1022,7 @@ class _$SendImageImpl implements _SendImage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -830,14 +1032,28 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -847,7 +1063,7 @@ class _$SendImageImpl implements _SendImage {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return sendImage(path);
   }
@@ -855,7 +1071,7 @@ class _$SendImageImpl implements _SendImage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -865,14 +1081,27 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -882,7 +1111,7 @@ class _$SendImageImpl implements _SendImage {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return sendImage?.call(path);
   }
@@ -890,7 +1119,7 @@ class _$SendImageImpl implements _SendImage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -900,14 +1129,27 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -917,7 +1159,7 @@ class _$SendImageImpl implements _SendImage {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (sendImage != null) {
@@ -939,12 +1181,22 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -965,12 +1217,22 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -991,12 +1253,22 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -1098,7 +1370,7 @@ class _$AddReactionImpl implements _AddReaction {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -1108,14 +1380,28 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -1125,7 +1411,7 @@ class _$AddReactionImpl implements _AddReaction {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return addReaction(messageId, emoji);
   }
@@ -1133,7 +1419,7 @@ class _$AddReactionImpl implements _AddReaction {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -1143,14 +1429,27 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -1160,7 +1459,7 @@ class _$AddReactionImpl implements _AddReaction {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return addReaction?.call(messageId, emoji);
   }
@@ -1168,7 +1467,7 @@ class _$AddReactionImpl implements _AddReaction {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -1178,14 +1477,27 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -1195,7 +1507,7 @@ class _$AddReactionImpl implements _AddReaction {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (addReaction != null) {
@@ -1217,12 +1529,22 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -1243,12 +1565,22 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -1269,12 +1601,22 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -1384,7 +1726,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -1394,14 +1736,28 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -1411,7 +1767,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return sendAudioFile(file, waveList);
   }
@@ -1419,7 +1775,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -1429,14 +1785,27 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -1446,7 +1815,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return sendAudioFile?.call(file, waveList);
   }
@@ -1454,7 +1823,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -1464,14 +1833,27 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -1481,7 +1863,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (sendAudioFile != null) {
@@ -1503,12 +1885,22 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -1529,12 +1921,22 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -1555,12 +1957,22 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -1655,7 +2067,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -1665,14 +2077,28 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -1682,7 +2108,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return sendVideoFile(path);
   }
@@ -1690,7 +2116,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -1700,14 +2126,27 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -1717,7 +2156,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return sendVideoFile?.call(path);
   }
@@ -1725,7 +2164,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -1735,14 +2174,27 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -1752,7 +2204,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (sendVideoFile != null) {
@@ -1774,12 +2226,22 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -1800,12 +2262,22 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -1826,12 +2298,22 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -1924,7 +2406,7 @@ class _$SendLinkImpl implements _SendLink {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -1934,14 +2416,28 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -1951,7 +2447,7 @@ class _$SendLinkImpl implements _SendLink {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return sendLink(link);
   }
@@ -1959,7 +2455,7 @@ class _$SendLinkImpl implements _SendLink {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -1969,14 +2465,27 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -1986,7 +2495,7 @@ class _$SendLinkImpl implements _SendLink {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return sendLink?.call(link);
   }
@@ -1994,7 +2503,7 @@ class _$SendLinkImpl implements _SendLink {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -2004,14 +2513,27 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -2021,7 +2543,7 @@ class _$SendLinkImpl implements _SendLink {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (sendLink != null) {
@@ -2043,12 +2565,22 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -2069,12 +2601,22 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -2095,12 +2637,22 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -2193,7 +2745,7 @@ class _$SendDocumentImpl implements _SendDocument {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -2203,14 +2755,28 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -2220,7 +2786,7 @@ class _$SendDocumentImpl implements _SendDocument {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return sendDocument(path);
   }
@@ -2228,7 +2794,7 @@ class _$SendDocumentImpl implements _SendDocument {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -2238,14 +2804,27 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -2255,7 +2834,7 @@ class _$SendDocumentImpl implements _SendDocument {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return sendDocument?.call(path);
   }
@@ -2263,7 +2842,7 @@ class _$SendDocumentImpl implements _SendDocument {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -2273,14 +2852,27 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -2290,7 +2882,7 @@ class _$SendDocumentImpl implements _SendDocument {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (sendDocument != null) {
@@ -2312,12 +2904,22 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -2338,12 +2940,22 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -2364,12 +2976,22 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -2479,7 +3101,7 @@ class _$CreatePollImpl implements _CreatePoll {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -2489,14 +3111,28 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -2506,7 +3142,7 @@ class _$CreatePollImpl implements _CreatePoll {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return createPoll(question, options);
   }
@@ -2514,7 +3150,7 @@ class _$CreatePollImpl implements _CreatePoll {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -2524,14 +3160,27 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -2541,7 +3190,7 @@ class _$CreatePollImpl implements _CreatePoll {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return createPoll?.call(question, options);
   }
@@ -2549,7 +3198,7 @@ class _$CreatePollImpl implements _CreatePoll {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -2559,14 +3208,27 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -2576,7 +3238,7 @@ class _$CreatePollImpl implements _CreatePoll {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (createPoll != null) {
@@ -2598,12 +3260,22 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -2624,12 +3296,22 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -2650,12 +3332,22 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -2752,7 +3444,7 @@ class _$SendStickerImpl implements _SendSticker {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -2762,14 +3454,28 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -2779,7 +3485,7 @@ class _$SendStickerImpl implements _SendSticker {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return sendSticker(stickerPath);
   }
@@ -2787,7 +3493,7 @@ class _$SendStickerImpl implements _SendSticker {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -2797,14 +3503,27 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -2814,7 +3533,7 @@ class _$SendStickerImpl implements _SendSticker {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return sendSticker?.call(stickerPath);
   }
@@ -2822,7 +3541,7 @@ class _$SendStickerImpl implements _SendSticker {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -2832,14 +3551,27 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -2849,7 +3581,7 @@ class _$SendStickerImpl implements _SendSticker {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (sendSticker != null) {
@@ -2871,12 +3603,22 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -2897,12 +3639,22 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -2923,12 +3675,22 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -2951,6 +3713,3061 @@ abstract class _SendSticker implements GroupEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SendStickerImplCopyWith<_$SendStickerImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$KickUserImplCopyWith<$Res> {
+  factory _$$KickUserImplCopyWith(
+          _$KickUserImpl value, $Res Function(_$KickUserImpl) then) =
+      __$$KickUserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$KickUserImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$KickUserImpl>
+    implements _$$KickUserImplCopyWith<$Res> {
+  __$$KickUserImplCopyWithImpl(
+      _$KickUserImpl _value, $Res Function(_$KickUserImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$KickUserImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$KickUserImpl implements _KickUser {
+  const _$KickUserImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'GroupEvent.kickUser(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$KickUserImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$KickUserImplCopyWith<_$KickUserImpl> get copyWith =>
+      __$$KickUserImplCopyWithImpl<_$KickUserImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return kickUser(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return kickUser?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (kickUser != null) {
+      return kickUser(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return kickUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return kickUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (kickUser != null) {
+      return kickUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _KickUser implements GroupEvent {
+  const factory _KickUser({required final String uid}) = _$KickUserImpl;
+
+  String get uid;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$KickUserImplCopyWith<_$KickUserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ExitGroupImplCopyWith<$Res> {
+  factory _$$ExitGroupImplCopyWith(
+          _$ExitGroupImpl value, $Res Function(_$ExitGroupImpl) then) =
+      __$$ExitGroupImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ExitGroupImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$ExitGroupImpl>
+    implements _$$ExitGroupImplCopyWith<$Res> {
+  __$$ExitGroupImplCopyWithImpl(
+      _$ExitGroupImpl _value, $Res Function(_$ExitGroupImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ExitGroupImpl implements _ExitGroup {
+  const _$ExitGroupImpl();
+
+  @override
+  String toString() {
+    return 'GroupEvent.exitGroup()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ExitGroupImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return exitGroup();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return exitGroup?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (exitGroup != null) {
+      return exitGroup();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return exitGroup(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return exitGroup?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (exitGroup != null) {
+      return exitGroup(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ExitGroup implements GroupEvent {
+  const factory _ExitGroup() = _$ExitGroupImpl;
+}
+
+/// @nodoc
+abstract class _$$DeleteGroupImplCopyWith<$Res> {
+  factory _$$DeleteGroupImplCopyWith(
+          _$DeleteGroupImpl value, $Res Function(_$DeleteGroupImpl) then) =
+      __$$DeleteGroupImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$DeleteGroupImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$DeleteGroupImpl>
+    implements _$$DeleteGroupImplCopyWith<$Res> {
+  __$$DeleteGroupImplCopyWithImpl(
+      _$DeleteGroupImpl _value, $Res Function(_$DeleteGroupImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$DeleteGroupImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteGroupImpl implements _DeleteGroup {
+  const _$DeleteGroupImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'GroupEvent.deleteGroup(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteGroupImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteGroupImplCopyWith<_$DeleteGroupImpl> get copyWith =>
+      __$$DeleteGroupImplCopyWithImpl<_$DeleteGroupImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return deleteGroup(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return deleteGroup?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (deleteGroup != null) {
+      return deleteGroup(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return deleteGroup(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return deleteGroup?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (deleteGroup != null) {
+      return deleteGroup(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteGroup implements GroupEvent {
+  const factory _DeleteGroup({required final String uid}) = _$DeleteGroupImpl;
+
+  String get uid;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteGroupImplCopyWith<_$DeleteGroupImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MakeAdminImplCopyWith<$Res> {
+  factory _$$MakeAdminImplCopyWith(
+          _$MakeAdminImpl value, $Res Function(_$MakeAdminImpl) then) =
+      __$$MakeAdminImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$MakeAdminImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$MakeAdminImpl>
+    implements _$$MakeAdminImplCopyWith<$Res> {
+  __$$MakeAdminImplCopyWithImpl(
+      _$MakeAdminImpl _value, $Res Function(_$MakeAdminImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$MakeAdminImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MakeAdminImpl implements _MakeAdmin {
+  const _$MakeAdminImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'GroupEvent.makeAdmin(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MakeAdminImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MakeAdminImplCopyWith<_$MakeAdminImpl> get copyWith =>
+      __$$MakeAdminImplCopyWithImpl<_$MakeAdminImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return makeAdmin(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return makeAdmin?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (makeAdmin != null) {
+      return makeAdmin(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return makeAdmin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return makeAdmin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (makeAdmin != null) {
+      return makeAdmin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MakeAdmin implements GroupEvent {
+  const factory _MakeAdmin({required final String uid}) = _$MakeAdminImpl;
+
+  String get uid;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MakeAdminImplCopyWith<_$MakeAdminImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RemoveAdminImplCopyWith<$Res> {
+  factory _$$RemoveAdminImplCopyWith(
+          _$RemoveAdminImpl value, $Res Function(_$RemoveAdminImpl) then) =
+      __$$RemoveAdminImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$RemoveAdminImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$RemoveAdminImpl>
+    implements _$$RemoveAdminImplCopyWith<$Res> {
+  __$$RemoveAdminImplCopyWithImpl(
+      _$RemoveAdminImpl _value, $Res Function(_$RemoveAdminImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$RemoveAdminImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RemoveAdminImpl implements _RemoveAdmin {
+  const _$RemoveAdminImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'GroupEvent.removeAdmin(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RemoveAdminImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RemoveAdminImplCopyWith<_$RemoveAdminImpl> get copyWith =>
+      __$$RemoveAdminImplCopyWithImpl<_$RemoveAdminImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return removeAdmin(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return removeAdmin?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (removeAdmin != null) {
+      return removeAdmin(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return removeAdmin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return removeAdmin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (removeAdmin != null) {
+      return removeAdmin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RemoveAdmin implements GroupEvent {
+  const factory _RemoveAdmin({required final String uid}) = _$RemoveAdminImpl;
+
+  String get uid;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RemoveAdminImplCopyWith<_$RemoveAdminImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BlockUserImplCopyWith<$Res> {
+  factory _$$BlockUserImplCopyWith(
+          _$BlockUserImpl value, $Res Function(_$BlockUserImpl) then) =
+      __$$BlockUserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$BlockUserImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$BlockUserImpl>
+    implements _$$BlockUserImplCopyWith<$Res> {
+  __$$BlockUserImplCopyWithImpl(
+      _$BlockUserImpl _value, $Res Function(_$BlockUserImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$BlockUserImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BlockUserImpl implements _BlockUser {
+  const _$BlockUserImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'GroupEvent.blockUser(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlockUserImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlockUserImplCopyWith<_$BlockUserImpl> get copyWith =>
+      __$$BlockUserImplCopyWithImpl<_$BlockUserImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return blockUser(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return blockUser?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (blockUser != null) {
+      return blockUser(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return blockUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return blockUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (blockUser != null) {
+      return blockUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BlockUser implements GroupEvent {
+  const factory _BlockUser({required final String uid}) = _$BlockUserImpl;
+
+  String get uid;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlockUserImplCopyWith<_$BlockUserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MuteNotificationImplCopyWith<$Res> {
+  factory _$$MuteNotificationImplCopyWith(_$MuteNotificationImpl value,
+          $Res Function(_$MuteNotificationImpl) then) =
+      __$$MuteNotificationImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$MuteNotificationImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$MuteNotificationImpl>
+    implements _$$MuteNotificationImplCopyWith<$Res> {
+  __$$MuteNotificationImplCopyWithImpl(_$MuteNotificationImpl _value,
+      $Res Function(_$MuteNotificationImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$MuteNotificationImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MuteNotificationImpl implements _MuteNotification {
+  const _$MuteNotificationImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'GroupEvent.muteNotification(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MuteNotificationImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MuteNotificationImplCopyWith<_$MuteNotificationImpl> get copyWith =>
+      __$$MuteNotificationImplCopyWithImpl<_$MuteNotificationImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return muteNotification(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return muteNotification?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (muteNotification != null) {
+      return muteNotification(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return muteNotification(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return muteNotification?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (muteNotification != null) {
+      return muteNotification(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MuteNotification implements GroupEvent {
+  const factory _MuteNotification({required final String uid}) =
+      _$MuteNotificationImpl;
+
+  String get uid;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MuteNotificationImplCopyWith<_$MuteNotificationImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UnmuteNotificationImplCopyWith<$Res> {
+  factory _$$UnmuteNotificationImplCopyWith(_$UnmuteNotificationImpl value,
+          $Res Function(_$UnmuteNotificationImpl) then) =
+      __$$UnmuteNotificationImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$UnmuteNotificationImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$UnmuteNotificationImpl>
+    implements _$$UnmuteNotificationImplCopyWith<$Res> {
+  __$$UnmuteNotificationImplCopyWithImpl(_$UnmuteNotificationImpl _value,
+      $Res Function(_$UnmuteNotificationImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$UnmuteNotificationImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UnmuteNotificationImpl implements _UnmuteNotification {
+  const _$UnmuteNotificationImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'GroupEvent.unmuteNotification(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UnmuteNotificationImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UnmuteNotificationImplCopyWith<_$UnmuteNotificationImpl> get copyWith =>
+      __$$UnmuteNotificationImplCopyWithImpl<_$UnmuteNotificationImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return unmuteNotification(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return unmuteNotification?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (unmuteNotification != null) {
+      return unmuteNotification(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return unmuteNotification(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return unmuteNotification?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (unmuteNotification != null) {
+      return unmuteNotification(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UnmuteNotification implements GroupEvent {
+  const factory _UnmuteNotification({required final String uid}) =
+      _$UnmuteNotificationImpl;
+
+  String get uid;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnmuteNotificationImplCopyWith<_$UnmuteNotificationImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EditPermissionImplCopyWith<$Res> {
+  factory _$$EditPermissionImplCopyWith(_$EditPermissionImpl value,
+          $Res Function(_$EditPermissionImpl) then) =
+      __$$EditPermissionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {bool? memberCanEdit, bool? memberCanAddMember, bool? memberCanMessage});
+}
+
+/// @nodoc
+class __$$EditPermissionImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$EditPermissionImpl>
+    implements _$$EditPermissionImplCopyWith<$Res> {
+  __$$EditPermissionImplCopyWithImpl(
+      _$EditPermissionImpl _value, $Res Function(_$EditPermissionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? memberCanEdit = freezed,
+    Object? memberCanAddMember = freezed,
+    Object? memberCanMessage = freezed,
+  }) {
+    return _then(_$EditPermissionImpl(
+      memberCanEdit: freezed == memberCanEdit
+          ? _value.memberCanEdit
+          : memberCanEdit // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      memberCanAddMember: freezed == memberCanAddMember
+          ? _value.memberCanAddMember
+          : memberCanAddMember // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      memberCanMessage: freezed == memberCanMessage
+          ? _value.memberCanMessage
+          : memberCanMessage // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EditPermissionImpl implements _EditPermission {
+  const _$EditPermissionImpl(
+      {this.memberCanEdit = null,
+      this.memberCanAddMember = null,
+      this.memberCanMessage = null});
+
+  @override
+  @JsonKey()
+  final bool? memberCanEdit;
+  @override
+  @JsonKey()
+  final bool? memberCanAddMember;
+  @override
+  @JsonKey()
+  final bool? memberCanMessage;
+
+  @override
+  String toString() {
+    return 'GroupEvent.editPermission(memberCanEdit: $memberCanEdit, memberCanAddMember: $memberCanAddMember, memberCanMessage: $memberCanMessage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EditPermissionImpl &&
+            (identical(other.memberCanEdit, memberCanEdit) ||
+                other.memberCanEdit == memberCanEdit) &&
+            (identical(other.memberCanAddMember, memberCanAddMember) ||
+                other.memberCanAddMember == memberCanAddMember) &&
+            (identical(other.memberCanMessage, memberCanMessage) ||
+                other.memberCanMessage == memberCanMessage));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, memberCanEdit, memberCanAddMember, memberCanMessage);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditPermissionImplCopyWith<_$EditPermissionImpl> get copyWith =>
+      __$$EditPermissionImplCopyWithImpl<_$EditPermissionImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return editPermission(memberCanEdit, memberCanAddMember, memberCanMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return editPermission?.call(
+        memberCanEdit, memberCanAddMember, memberCanMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (editPermission != null) {
+      return editPermission(
+          memberCanEdit, memberCanAddMember, memberCanMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return editPermission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return editPermission?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (editPermission != null) {
+      return editPermission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EditPermission implements GroupEvent {
+  const factory _EditPermission(
+      {final bool? memberCanEdit,
+      final bool? memberCanAddMember,
+      final bool? memberCanMessage}) = _$EditPermissionImpl;
+
+  bool? get memberCanEdit;
+  bool? get memberCanAddMember;
+  bool? get memberCanMessage;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$EditPermissionImplCopyWith<_$EditPermissionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3049,7 +6866,7 @@ class _$VotePollImpl implements _VotePoll {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -3059,14 +6876,28 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -3076,7 +6907,7 @@ class _$VotePollImpl implements _VotePoll {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return votePoll(messageId, option, votes);
   }
@@ -3084,7 +6915,7 @@ class _$VotePollImpl implements _VotePoll {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -3094,14 +6925,27 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -3111,7 +6955,7 @@ class _$VotePollImpl implements _VotePoll {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return votePoll?.call(messageId, option, votes);
   }
@@ -3119,7 +6963,7 @@ class _$VotePollImpl implements _VotePoll {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -3129,14 +6973,27 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -3146,7 +7003,7 @@ class _$VotePollImpl implements _VotePoll {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (votePoll != null) {
@@ -3168,12 +7025,22 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -3194,12 +7061,22 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -3220,12 +7097,22 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -3261,7 +7148,7 @@ abstract class _$$DeleteMessageImplCopyWith<$Res> {
           _$DeleteMessageImpl value, $Res Function(_$DeleteMessageImpl) then) =
       __$$DeleteMessageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String messageId});
+  $Res call({List<String> messageId});
 }
 
 /// @nodoc
@@ -3281,9 +7168,9 @@ class __$$DeleteMessageImplCopyWithImpl<$Res>
   }) {
     return _then(_$DeleteMessageImpl(
       messageId: null == messageId
-          ? _value.messageId
+          ? _value._messageId
           : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
     ));
   }
 }
@@ -3291,10 +7178,16 @@ class __$$DeleteMessageImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteMessageImpl implements _DeleteMessage {
-  const _$DeleteMessageImpl({required this.messageId});
+  const _$DeleteMessageImpl({required final List<String> messageId})
+      : _messageId = messageId;
 
+  final List<String> _messageId;
   @override
-  final String messageId;
+  List<String> get messageId {
+    if (_messageId is EqualUnmodifiableListView) return _messageId;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messageId);
+  }
 
   @override
   String toString() {
@@ -3306,12 +7199,13 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteMessageImpl &&
-            (identical(other.messageId, messageId) ||
-                other.messageId == messageId));
+            const DeepCollectionEquality()
+                .equals(other._messageId, _messageId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, messageId);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_messageId));
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -3324,7 +7218,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -3334,14 +7228,28 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -3351,7 +7259,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return deleteMessage(messageId);
   }
@@ -3359,7 +7267,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -3369,14 +7277,27 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -3386,7 +7307,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return deleteMessage?.call(messageId);
   }
@@ -3394,7 +7315,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -3404,14 +7325,27 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -3421,7 +7355,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
@@ -3443,12 +7377,22 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -3469,12 +7413,22 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -3495,12 +7449,22 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -3514,15 +7478,364 @@ class _$DeleteMessageImpl implements _DeleteMessage {
 }
 
 abstract class _DeleteMessage implements GroupEvent {
-  const factory _DeleteMessage({required final String messageId}) =
+  const factory _DeleteMessage({required final List<String> messageId}) =
       _$DeleteMessageImpl;
 
-  String get messageId;
+  List<String> get messageId;
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteMessageImplCopyWith<_$DeleteMessageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteChatForMeImplCopyWith<$Res> {
+  factory _$$DeleteChatForMeImplCopyWith(_$DeleteChatForMeImpl value,
+          $Res Function(_$DeleteChatForMeImpl) then) =
+      __$$DeleteChatForMeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> messageIds});
+}
+
+/// @nodoc
+class __$$DeleteChatForMeImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$DeleteChatForMeImpl>
+    implements _$$DeleteChatForMeImplCopyWith<$Res> {
+  __$$DeleteChatForMeImplCopyWithImpl(
+      _$DeleteChatForMeImpl _value, $Res Function(_$DeleteChatForMeImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messageIds = null,
+  }) {
+    return _then(_$DeleteChatForMeImpl(
+      messageIds: null == messageIds
+          ? _value._messageIds
+          : messageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteChatForMeImpl implements _DeleteChatForMe {
+  const _$DeleteChatForMeImpl({required final List<String> messageIds})
+      : _messageIds = messageIds;
+
+  final List<String> _messageIds;
+  @override
+  List<String> get messageIds {
+    if (_messageIds is EqualUnmodifiableListView) return _messageIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messageIds);
+  }
+
+  @override
+  String toString() {
+    return 'GroupEvent.deleteChatForMe(messageIds: $messageIds)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteChatForMeImpl &&
+            const DeepCollectionEquality()
+                .equals(other._messageIds, _messageIds));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_messageIds));
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteChatForMeImplCopyWith<_$DeleteChatForMeImpl> get copyWith =>
+      __$$DeleteChatForMeImplCopyWithImpl<_$DeleteChatForMeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return deleteChatForMe(messageIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return deleteChatForMe?.call(messageIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (deleteChatForMe != null) {
+      return deleteChatForMe(messageIds);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return deleteChatForMe(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return deleteChatForMe?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (deleteChatForMe != null) {
+      return deleteChatForMe(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteChatForMe implements GroupEvent {
+  const factory _DeleteChatForMe({required final List<String> messageIds}) =
+      _$DeleteChatForMeImpl;
+
+  List<String> get messageIds;
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteChatForMeImplCopyWith<_$DeleteChatForMeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3596,7 +7909,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -3606,14 +7919,28 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -3623,7 +7950,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return editStatusToTyping(isTyping);
   }
@@ -3631,7 +7958,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -3641,14 +7968,27 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -3658,7 +7998,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return editStatusToTyping?.call(isTyping);
   }
@@ -3666,7 +8006,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -3676,14 +8016,27 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -3693,7 +8046,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (editStatusToTyping != null) {
@@ -3715,12 +8068,22 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -3741,12 +8104,22 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -3767,12 +8140,22 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -3799,20 +8182,20 @@ abstract class _EditStatusToTyping implements GroupEvent {
 }
 
 /// @nodoc
-abstract class _$$MarkMessageAsSeenImplCopyWith<$Res> {
-  factory _$$MarkMessageAsSeenImplCopyWith(_$MarkMessageAsSeenImpl value,
-          $Res Function(_$MarkMessageAsSeenImpl) then) =
-      __$$MarkMessageAsSeenImplCopyWithImpl<$Res>;
+abstract class _$$LoadMessageModelImplCopyWith<$Res> {
+  factory _$$LoadMessageModelImplCopyWith(_$LoadMessageModelImpl value,
+          $Res Function(_$LoadMessageModelImpl) then) =
+      __$$LoadMessageModelImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String messageId});
+  $Res call({List<QueryDocumentSnapshot<Map<String, dynamic>>> docs});
 }
 
 /// @nodoc
-class __$$MarkMessageAsSeenImplCopyWithImpl<$Res>
-    extends _$GroupEventCopyWithImpl<$Res, _$MarkMessageAsSeenImpl>
-    implements _$$MarkMessageAsSeenImplCopyWith<$Res> {
-  __$$MarkMessageAsSeenImplCopyWithImpl(_$MarkMessageAsSeenImpl _value,
-      $Res Function(_$MarkMessageAsSeenImpl) _then)
+class __$$LoadMessageModelImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$LoadMessageModelImpl>
+    implements _$$LoadMessageModelImplCopyWith<$Res> {
+  __$$LoadMessageModelImplCopyWithImpl(_$LoadMessageModelImpl _value,
+      $Res Function(_$LoadMessageModelImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of GroupEvent
@@ -3820,55 +8203,62 @@ class __$$MarkMessageAsSeenImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? messageId = null,
+    Object? docs = null,
   }) {
-    return _then(_$MarkMessageAsSeenImpl(
-      messageId: null == messageId
-          ? _value.messageId
-          : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$LoadMessageModelImpl(
+      docs: null == docs
+          ? _value._docs
+          : docs // ignore: cast_nullable_to_non_nullable
+              as List<QueryDocumentSnapshot<Map<String, dynamic>>>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
-  const _$MarkMessageAsSeenImpl({required this.messageId});
+class _$LoadMessageModelImpl implements _LoadMessageModel {
+  const _$LoadMessageModelImpl(
+      {required final List<QueryDocumentSnapshot<Map<String, dynamic>>> docs})
+      : _docs = docs;
 
+  final List<QueryDocumentSnapshot<Map<String, dynamic>>> _docs;
   @override
-  final String messageId;
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> get docs {
+    if (_docs is EqualUnmodifiableListView) return _docs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_docs);
+  }
 
   @override
   String toString() {
-    return 'GroupEvent.markMessageAsSeen(messageId: $messageId)';
+    return 'GroupEvent.loadMessageModel(docs: $docs)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MarkMessageAsSeenImpl &&
-            (identical(other.messageId, messageId) ||
-                other.messageId == messageId));
+            other is _$LoadMessageModelImpl &&
+            const DeepCollectionEquality().equals(other._docs, _docs));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, messageId);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_docs));
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MarkMessageAsSeenImplCopyWith<_$MarkMessageAsSeenImpl> get copyWith =>
-      __$$MarkMessageAsSeenImplCopyWithImpl<_$MarkMessageAsSeenImpl>(
+  _$$LoadMessageModelImplCopyWith<_$LoadMessageModelImpl> get copyWith =>
+      __$$LoadMessageModelImplCopyWithImpl<_$LoadMessageModelImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -3878,14 +8268,28 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -3895,15 +8299,15 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
-    return markMessageAsSeen(messageId);
+    return loadMessageModel(docs);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -3913,14 +8317,27 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -3930,15 +8347,15 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
-    return markMessageAsSeen?.call(messageId);
+    return loadMessageModel?.call(docs);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -3948,14 +8365,27 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -3965,11 +8395,11 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
-    if (markMessageAsSeen != null) {
-      return markMessageAsSeen(messageId);
+    if (loadMessageModel != null) {
+      return loadMessageModel(docs);
     }
     return orElse();
   }
@@ -3987,17 +8417,27 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
   }) {
-    return markMessageAsSeen(this);
+    return loadMessageModel(this);
   }
 
   @override
@@ -4013,17 +8453,27 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
   }) {
-    return markMessageAsSeen?.call(this);
+    return loadMessageModel?.call(this);
   }
 
   @override
@@ -4039,269 +8489,46 @@ class _$MarkMessageAsSeenImpl implements _MarkMessageAsSeen {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
     required TResult orElse(),
   }) {
-    if (markMessageAsSeen != null) {
-      return markMessageAsSeen(this);
+    if (loadMessageModel != null) {
+      return loadMessageModel(this);
     }
     return orElse();
   }
 }
 
-abstract class _MarkMessageAsSeen implements GroupEvent {
-  const factory _MarkMessageAsSeen({required final String messageId}) =
-      _$MarkMessageAsSeenImpl;
+abstract class _LoadMessageModel implements GroupEvent {
+  const factory _LoadMessageModel(
+      {required final List<QueryDocumentSnapshot<Map<String, dynamic>>>
+          docs}) = _$LoadMessageModelImpl;
 
-  String get messageId;
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> get docs;
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MarkMessageAsSeenImplCopyWith<_$MarkMessageAsSeenImpl> get copyWith =>
+  _$$LoadMessageModelImplCopyWith<_$LoadMessageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ExitGroupImplCopyWith<$Res> {
-  factory _$$ExitGroupImplCopyWith(
-          _$ExitGroupImpl value, $Res Function(_$ExitGroupImpl) then) =
-      __$$ExitGroupImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ExitGroupImplCopyWithImpl<$Res>
-    extends _$GroupEventCopyWithImpl<$Res, _$ExitGroupImpl>
-    implements _$$ExitGroupImplCopyWith<$Res> {
-  __$$ExitGroupImplCopyWithImpl(
-      _$ExitGroupImpl _value, $Res Function(_$ExitGroupImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of GroupEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$ExitGroupImpl implements _ExitGroup {
-  const _$ExitGroupImpl();
-
-  @override
-  String toString() {
-    return 'GroupEvent.exitGroup()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ExitGroupImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
-    required TResult Function(String message) sendMessage,
-    required TResult Function(String path) sendImage,
-    required TResult Function(String messageId, String emoji) addReaction,
-    required TResult Function(File file, List<double> waveList) sendAudioFile,
-    required TResult Function(String path) sendVideoFile,
-    required TResult Function(String link) sendLink,
-    required TResult Function(String path) sendDocument,
-    required TResult Function(String question, List<String> options) createPoll,
-    required TResult Function(String stickerPath) sendSticker,
-    required TResult Function(
-            String messageId, String option, Map<String, dynamic> votes)
-        votePoll,
-    required TResult Function(String messageId) deleteMessage,
-    required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
-    required TResult Function(
-            String groupName,
-            String groupDescription,
-            String groupImagePath,
-            bool memberCanEdit,
-            bool memberCanAddMember,
-            bool memberCanMessage)
-        createGroupLoad,
-    required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
-  }) {
-    return exitGroup();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
-    TResult? Function(String message)? sendMessage,
-    TResult? Function(String path)? sendImage,
-    TResult? Function(String messageId, String emoji)? addReaction,
-    TResult? Function(File file, List<double> waveList)? sendAudioFile,
-    TResult? Function(String path)? sendVideoFile,
-    TResult? Function(String link)? sendLink,
-    TResult? Function(String path)? sendDocument,
-    TResult? Function(String question, List<String> options)? createPoll,
-    TResult? Function(String stickerPath)? sendSticker,
-    TResult? Function(
-            String messageId, String option, Map<String, dynamic> votes)?
-        votePoll,
-    TResult? Function(String messageId)? deleteMessage,
-    TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
-    TResult? Function(
-            String groupName,
-            String groupDescription,
-            String groupImagePath,
-            bool memberCanEdit,
-            bool memberCanAddMember,
-            bool memberCanMessage)?
-        createGroupLoad,
-    TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
-  }) {
-    return exitGroup?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
-    TResult Function(String message)? sendMessage,
-    TResult Function(String path)? sendImage,
-    TResult Function(String messageId, String emoji)? addReaction,
-    TResult Function(File file, List<double> waveList)? sendAudioFile,
-    TResult Function(String path)? sendVideoFile,
-    TResult Function(String link)? sendLink,
-    TResult Function(String path)? sendDocument,
-    TResult Function(String question, List<String> options)? createPoll,
-    TResult Function(String stickerPath)? sendSticker,
-    TResult Function(
-            String messageId, String option, Map<String, dynamic> votes)?
-        votePoll,
-    TResult Function(String messageId)? deleteMessage,
-    TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
-    TResult Function(
-            String groupName,
-            String groupDescription,
-            String groupImagePath,
-            bool memberCanEdit,
-            bool memberCanAddMember,
-            bool memberCanMessage)?
-        createGroupLoad,
-    TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
-    required TResult orElse(),
-  }) {
-    if (exitGroup != null) {
-      return exitGroup();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_LoadData value) loadData,
-    required TResult Function(_SendMessage value) sendMessage,
-    required TResult Function(_SendImage value) sendImage,
-    required TResult Function(_AddReaction value) addReaction,
-    required TResult Function(_SendAudioFile value) sendAudioFile,
-    required TResult Function(_SendVideoFile value) sendVideoFile,
-    required TResult Function(_SendLink value) sendLink,
-    required TResult Function(_SendDocument value) sendDocument,
-    required TResult Function(_CreatePoll value) createPoll,
-    required TResult Function(_SendSticker value) sendSticker,
-    required TResult Function(_VotePoll value) votePoll,
-    required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
-    required TResult Function(_ReloadGroup value) reloadGroup,
-    required TResult Function(_CreateGroupLoad value) createGroupLoad,
-    required TResult Function(_CreateGroup value) createGroup,
-    required TResult Function(_AddMember value) addMember,
-  }) {
-    return exitGroup(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadData value)? loadData,
-    TResult? Function(_SendMessage value)? sendMessage,
-    TResult? Function(_SendImage value)? sendImage,
-    TResult? Function(_AddReaction value)? addReaction,
-    TResult? Function(_SendAudioFile value)? sendAudioFile,
-    TResult? Function(_SendVideoFile value)? sendVideoFile,
-    TResult? Function(_SendLink value)? sendLink,
-    TResult? Function(_SendDocument value)? sendDocument,
-    TResult? Function(_CreatePoll value)? createPoll,
-    TResult? Function(_SendSticker value)? sendSticker,
-    TResult? Function(_VotePoll value)? votePoll,
-    TResult? Function(_DeleteMessage value)? deleteMessage,
-    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
-    TResult? Function(_ReloadGroup value)? reloadGroup,
-    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
-    TResult? Function(_CreateGroup value)? createGroup,
-    TResult? Function(_AddMember value)? addMember,
-  }) {
-    return exitGroup?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadData value)? loadData,
-    TResult Function(_SendMessage value)? sendMessage,
-    TResult Function(_SendImage value)? sendImage,
-    TResult Function(_AddReaction value)? addReaction,
-    TResult Function(_SendAudioFile value)? sendAudioFile,
-    TResult Function(_SendVideoFile value)? sendVideoFile,
-    TResult Function(_SendLink value)? sendLink,
-    TResult Function(_SendDocument value)? sendDocument,
-    TResult Function(_CreatePoll value)? createPoll,
-    TResult Function(_SendSticker value)? sendSticker,
-    TResult Function(_VotePoll value)? votePoll,
-    TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
-    TResult Function(_ReloadGroup value)? reloadGroup,
-    TResult Function(_CreateGroupLoad value)? createGroupLoad,
-    TResult Function(_CreateGroup value)? createGroup,
-    TResult Function(_AddMember value)? addMember,
-    required TResult orElse(),
-  }) {
-    if (exitGroup != null) {
-      return exitGroup(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ExitGroup implements GroupEvent {
-  const factory _ExitGroup() = _$ExitGroupImpl;
 }
 
 /// @nodoc
@@ -4309,8 +8536,6 @@ abstract class _$$ReloadGroupImplCopyWith<$Res> {
   factory _$$ReloadGroupImplCopyWith(
           _$ReloadGroupImpl value, $Res Function(_$ReloadGroupImpl) then) =
       __$$ReloadGroupImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String stickerPath});
 }
 
 /// @nodoc
@@ -4323,57 +8548,31 @@ class __$$ReloadGroupImplCopyWithImpl<$Res>
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? stickerPath = null,
-  }) {
-    return _then(_$ReloadGroupImpl(
-      stickerPath: null == stickerPath
-          ? _value.stickerPath
-          : stickerPath // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$ReloadGroupImpl implements _ReloadGroup {
-  const _$ReloadGroupImpl({required this.stickerPath});
-
-  @override
-  final String stickerPath;
+  const _$ReloadGroupImpl();
 
   @override
   String toString() {
-    return 'GroupEvent.reloadGroup(stickerPath: $stickerPath)';
+    return 'GroupEvent.reloadGroup()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ReloadGroupImpl &&
-            (identical(other.stickerPath, stickerPath) ||
-                other.stickerPath == stickerPath));
+        (other.runtimeType == runtimeType && other is _$ReloadGroupImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, stickerPath);
-
-  /// Create a copy of GroupEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ReloadGroupImplCopyWith<_$ReloadGroupImpl> get copyWith =>
-      __$$ReloadGroupImplCopyWithImpl<_$ReloadGroupImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -4383,14 +8582,28 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -4400,15 +8613,15 @@ class _$ReloadGroupImpl implements _ReloadGroup {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
-    return reloadGroup(stickerPath);
+    return reloadGroup();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -4418,14 +8631,27 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -4435,15 +8661,15 @@ class _$ReloadGroupImpl implements _ReloadGroup {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
-    return reloadGroup?.call(stickerPath);
+    return reloadGroup?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -4453,14 +8679,27 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -4470,11 +8709,11 @@ class _$ReloadGroupImpl implements _ReloadGroup {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (reloadGroup != null) {
-      return reloadGroup(stickerPath);
+      return reloadGroup();
     }
     return orElse();
   }
@@ -4492,12 +8731,22 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -4518,12 +8767,22 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -4544,12 +8803,22 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -4563,16 +8832,311 @@ class _$ReloadGroupImpl implements _ReloadGroup {
 }
 
 abstract class _ReloadGroup implements GroupEvent {
-  const factory _ReloadGroup({required final String stickerPath}) =
-      _$ReloadGroupImpl;
+  const factory _ReloadGroup() = _$ReloadGroupImpl;
+}
 
-  String get stickerPath;
+/// @nodoc
+abstract class _$$LoadGroupInfoImplCopyWith<$Res> {
+  factory _$$LoadGroupInfoImplCopyWith(
+          _$LoadGroupInfoImpl value, $Res Function(_$LoadGroupInfoImpl) then) =
+      __$$LoadGroupInfoImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadGroupInfoImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$LoadGroupInfoImpl>
+    implements _$$LoadGroupInfoImplCopyWith<$Res> {
+  __$$LoadGroupInfoImplCopyWithImpl(
+      _$LoadGroupInfoImpl _value, $Res Function(_$LoadGroupInfoImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ReloadGroupImplCopyWith<_$ReloadGroupImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+
+class _$LoadGroupInfoImpl implements _LoadGroupInfo {
+  const _$LoadGroupInfoImpl();
+
+  @override
+  String toString() {
+    return 'GroupEvent.loadGroupInfo()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadGroupInfoImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+  }) {
+    return loadGroupInfo();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+  }) {
+    return loadGroupInfo?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    required TResult orElse(),
+  }) {
+    if (loadGroupInfo != null) {
+      return loadGroupInfo();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+  }) {
+    return loadGroupInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+  }) {
+    return loadGroupInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    required TResult orElse(),
+  }) {
+    if (loadGroupInfo != null) {
+      return loadGroupInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadGroupInfo implements GroupEvent {
+  const factory _LoadGroupInfo() = _$LoadGroupInfoImpl;
 }
 
 /// @nodoc
@@ -4703,7 +9267,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -4713,14 +9277,28 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -4730,7 +9308,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return createGroupLoad(groupName, groupDescription, groupImagePath,
         memberCanEdit, memberCanAddMember, memberCanMessage);
@@ -4739,7 +9317,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -4749,14 +9327,27 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -4766,7 +9357,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return createGroupLoad?.call(groupName, groupDescription, groupImagePath,
         memberCanEdit, memberCanAddMember, memberCanMessage);
@@ -4775,7 +9366,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -4785,14 +9376,27 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -4802,7 +9406,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (createGroupLoad != null) {
@@ -4825,12 +9429,22 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -4851,12 +9465,22 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -4877,12 +9501,22 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -4994,7 +9628,7 @@ class _$CreateGroupImpl implements _CreateGroup {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -5004,14 +9638,28 @@ class _$CreateGroupImpl implements _CreateGroup {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -5021,7 +9669,7 @@ class _$CreateGroupImpl implements _CreateGroup {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return createGroup(participants);
   }
@@ -5029,7 +9677,7 @@ class _$CreateGroupImpl implements _CreateGroup {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -5039,14 +9687,27 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -5056,7 +9717,7 @@ class _$CreateGroupImpl implements _CreateGroup {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return createGroup?.call(participants);
   }
@@ -5064,7 +9725,7 @@ class _$CreateGroupImpl implements _CreateGroup {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -5074,14 +9735,27 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -5091,7 +9765,7 @@ class _$CreateGroupImpl implements _CreateGroup {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (createGroup != null) {
@@ -5113,12 +9787,22 @@ class _$CreateGroupImpl implements _CreateGroup {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -5139,12 +9823,22 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -5165,12 +9859,22 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -5202,7 +9906,7 @@ abstract class _$$AddMemberImplCopyWith<$Res> {
           _$AddMemberImpl value, $Res Function(_$AddMemberImpl) then) =
       __$$AddMemberImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<String> members});
+  $Res call({List<UserModels> members});
 }
 
 /// @nodoc
@@ -5224,7 +9928,7 @@ class __$$AddMemberImplCopyWithImpl<$Res>
       members: null == members
           ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<UserModels>,
     ));
   }
 }
@@ -5232,12 +9936,12 @@ class __$$AddMemberImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddMemberImpl implements _AddMember {
-  const _$AddMemberImpl({required final List<String> members})
+  const _$AddMemberImpl({required final List<UserModels> members})
       : _members = members;
 
-  final List<String> _members;
+  final List<UserModels> _members;
   @override
-  List<String> get members {
+  List<UserModels> get members {
     if (_members is EqualUnmodifiableListView) return _members;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_members);
@@ -5271,7 +9975,7 @@ class _$AddMemberImpl implements _AddMember {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> chat) loadData,
+    required TResult Function(ChatModel chat) loadData,
     required TResult Function(String message) sendMessage,
     required TResult Function(String path) sendImage,
     required TResult Function(String messageId, String emoji) addReaction,
@@ -5281,14 +9985,28 @@ class _$AddMemberImpl implements _AddMember {
     required TResult Function(String path) sendDocument,
     required TResult Function(String question, List<String> options) createPoll,
     required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
-    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
     required TResult Function(bool isTyping) editStatusToTyping,
-    required TResult Function(String messageId) markMessageAsSeen,
-    required TResult Function() exitGroup,
-    required TResult Function(String stickerPath) reloadGroup,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
     required TResult Function(
             String groupName,
             String groupDescription,
@@ -5298,7 +10016,7 @@ class _$AddMemberImpl implements _AddMember {
             bool memberCanMessage)
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
-    required TResult Function(List<String> members) addMember,
+    required TResult Function(List<UserModels> members) addMember,
   }) {
     return addMember(members);
   }
@@ -5306,7 +10024,7 @@ class _$AddMemberImpl implements _AddMember {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> chat)? loadData,
+    TResult? Function(ChatModel chat)? loadData,
     TResult? Function(String message)? sendMessage,
     TResult? Function(String path)? sendImage,
     TResult? Function(String messageId, String emoji)? addReaction,
@@ -5316,14 +10034,27 @@ class _$AddMemberImpl implements _AddMember {
     TResult? Function(String path)? sendDocument,
     TResult? Function(String question, List<String> options)? createPoll,
     TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
     TResult? Function(bool isTyping)? editStatusToTyping,
-    TResult? Function(String messageId)? markMessageAsSeen,
-    TResult? Function()? exitGroup,
-    TResult? Function(String stickerPath)? reloadGroup,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
     TResult? Function(
             String groupName,
             String groupDescription,
@@ -5333,7 +10064,7 @@ class _$AddMemberImpl implements _AddMember {
             bool memberCanMessage)?
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
-    TResult? Function(List<String> members)? addMember,
+    TResult? Function(List<UserModels> members)? addMember,
   }) {
     return addMember?.call(members);
   }
@@ -5341,7 +10072,7 @@ class _$AddMemberImpl implements _AddMember {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> chat)? loadData,
+    TResult Function(ChatModel chat)? loadData,
     TResult Function(String message)? sendMessage,
     TResult Function(String path)? sendImage,
     TResult Function(String messageId, String emoji)? addReaction,
@@ -5351,14 +10082,27 @@ class _$AddMemberImpl implements _AddMember {
     TResult Function(String path)? sendDocument,
     TResult Function(String question, List<String> options)? createPoll,
     TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
-    TResult Function(String messageId)? deleteMessage,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
     TResult Function(bool isTyping)? editStatusToTyping,
-    TResult Function(String messageId)? markMessageAsSeen,
-    TResult Function()? exitGroup,
-    TResult Function(String stickerPath)? reloadGroup,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
     TResult Function(
             String groupName,
             String groupDescription,
@@ -5368,7 +10112,7 @@ class _$AddMemberImpl implements _AddMember {
             bool memberCanMessage)?
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
-    TResult Function(List<String> members)? addMember,
+    TResult Function(List<UserModels> members)? addMember,
     required TResult orElse(),
   }) {
     if (addMember != null) {
@@ -5390,12 +10134,22 @@ class _$AddMemberImpl implements _AddMember {
     required TResult Function(_SendDocument value) sendDocument,
     required TResult Function(_CreatePoll value) createPoll,
     required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
     required TResult Function(_EditStatusToTyping value) editStatusToTyping,
-    required TResult Function(_MarkMessageAsSeen value) markMessageAsSeen,
-    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
     required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
@@ -5416,12 +10170,22 @@ class _$AddMemberImpl implements _AddMember {
     TResult? Function(_SendDocument value)? sendDocument,
     TResult? Function(_CreatePoll value)? createPoll,
     TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult? Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
     TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
@@ -5442,12 +10206,22 @@ class _$AddMemberImpl implements _AddMember {
     TResult Function(_SendDocument value)? sendDocument,
     TResult Function(_CreatePoll value)? createPoll,
     TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
     TResult Function(_EditStatusToTyping value)? editStatusToTyping,
-    TResult Function(_MarkMessageAsSeen value)? markMessageAsSeen,
-    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
     TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
@@ -5461,10 +10235,10 @@ class _$AddMemberImpl implements _AddMember {
 }
 
 abstract class _AddMember implements GroupEvent {
-  const factory _AddMember({required final List<String> members}) =
+  const factory _AddMember({required final List<UserModels> members}) =
       _$AddMemberImpl;
 
-  List<String> get members;
+  List<UserModels> get members;
 
   /// Create a copy of GroupEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -5489,9 +10263,14 @@ mixin _$GroupState {
         createGroupData,
     required TResult Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)
         groupData,
   }) =>
       throw _privateConstructorUsedError;
@@ -5509,9 +10288,14 @@ mixin _$GroupState {
         createGroupData,
     TResult? Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)?
         groupData,
   }) =>
       throw _privateConstructorUsedError;
@@ -5529,9 +10313,14 @@ mixin _$GroupState {
         createGroupData,
     TResult Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)?
         groupData,
     required TResult orElse(),
   }) =>
@@ -5765,9 +10554,14 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
         createGroupData,
     required TResult Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)
         groupData,
   }) {
     return createGroupData(
@@ -5796,9 +10590,14 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
         createGroupData,
     TResult? Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)?
         groupData,
   }) {
     return createGroupData?.call(
@@ -5827,9 +10626,14 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
         createGroupData,
     TResult Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)?
         groupData,
     required TResult orElse(),
   }) {
@@ -5914,9 +10718,14 @@ abstract class _$$GroupDataImplCopyWith<$Res> {
   @useResult
   $Res call(
       {ChatModel? groupData,
-      Map<String, UserModels> groupMembers,
+      Map<String, UserModels>? groupMembers,
+      Map<String, UserModels> allGroupMembers,
+      Map<String, UserModels>? blockedGroupMembers,
       Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-      int wallpaperIndex});
+      int wallpaperIndex,
+      List<MessageModel> messages,
+      bool isLoading,
+      bool inputLoading});
 }
 
 /// @nodoc
@@ -5933,19 +10742,32 @@ class __$$GroupDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? groupData = freezed,
-    Object? groupMembers = null,
+    Object? groupMembers = freezed,
+    Object? allGroupMembers = null,
+    Object? blockedGroupMembers = freezed,
     Object? messageData = freezed,
     Object? wallpaperIndex = null,
+    Object? messages = null,
+    Object? isLoading = null,
+    Object? inputLoading = null,
   }) {
     return _then(_$GroupDataImpl(
       groupData: freezed == groupData
           ? _value.groupData
           : groupData // ignore: cast_nullable_to_non_nullable
               as ChatModel?,
-      groupMembers: null == groupMembers
+      groupMembers: freezed == groupMembers
           ? _value._groupMembers
           : groupMembers // ignore: cast_nullable_to_non_nullable
+              as Map<String, UserModels>?,
+      allGroupMembers: null == allGroupMembers
+          ? _value._allGroupMembers
+          : allGroupMembers // ignore: cast_nullable_to_non_nullable
               as Map<String, UserModels>,
+      blockedGroupMembers: freezed == blockedGroupMembers
+          ? _value._blockedGroupMembers
+          : blockedGroupMembers // ignore: cast_nullable_to_non_nullable
+              as Map<String, UserModels>?,
       messageData: freezed == messageData
           ? _value.messageData
           : messageData // ignore: cast_nullable_to_non_nullable
@@ -5954,6 +10776,18 @@ class __$$GroupDataImplCopyWithImpl<$Res>
           ? _value.wallpaperIndex
           : wallpaperIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      messages: null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<MessageModel>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      inputLoading: null == inputLoading
+          ? _value.inputLoading
+          : inputLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -5963,21 +10797,54 @@ class __$$GroupDataImplCopyWithImpl<$Res>
 class _$GroupDataImpl implements GroupData {
   const _$GroupDataImpl(
       {this.groupData = null,
-      final Map<String, UserModels> groupMembers = const {},
+      final Map<String, UserModels>? groupMembers = null,
+      final Map<String, UserModels> allGroupMembers = const {},
+      final Map<String, UserModels>? blockedGroupMembers = null,
       this.messageData = null,
-      this.wallpaperIndex = 0})
-      : _groupMembers = groupMembers;
+      this.wallpaperIndex = 0,
+      final List<MessageModel> messages = const [],
+      this.isLoading = false,
+      this.inputLoading = false})
+      : _groupMembers = groupMembers,
+        _allGroupMembers = allGroupMembers,
+        _blockedGroupMembers = blockedGroupMembers,
+        _messages = messages;
 
   @override
   @JsonKey()
   final ChatModel? groupData;
-  final Map<String, UserModels> _groupMembers;
+  final Map<String, UserModels>? _groupMembers;
   @override
   @JsonKey()
-  Map<String, UserModels> get groupMembers {
+  Map<String, UserModels>? get groupMembers {
+    final value = _groupMembers;
+    if (value == null) return null;
     if (_groupMembers is EqualUnmodifiableMapView) return _groupMembers;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_groupMembers);
+    return EqualUnmodifiableMapView(value);
+  }
+
+//it current available members
+  final Map<String, UserModels> _allGroupMembers;
+//it current available members
+  @override
+  @JsonKey()
+  Map<String, UserModels> get allGroupMembers {
+    if (_allGroupMembers is EqualUnmodifiableMapView) return _allGroupMembers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_allGroupMembers);
+  }
+
+  final Map<String, UserModels>? _blockedGroupMembers;
+  @override
+  @JsonKey()
+  Map<String, UserModels>? get blockedGroupMembers {
+    final value = _blockedGroupMembers;
+    if (value == null) return null;
+    if (_blockedGroupMembers is EqualUnmodifiableMapView)
+      return _blockedGroupMembers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
   }
 
   @override
@@ -5986,10 +10853,25 @@ class _$GroupDataImpl implements GroupData {
   @override
   @JsonKey()
   final int wallpaperIndex;
+  final List<MessageModel> _messages;
+  @override
+  @JsonKey()
+  List<MessageModel> get messages {
+    if (_messages is EqualUnmodifiableListView) return _messages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messages);
+  }
+
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final bool inputLoading;
 
   @override
   String toString() {
-    return 'GroupState.groupData(groupData: $groupData, groupMembers: $groupMembers, messageData: $messageData, wallpaperIndex: $wallpaperIndex)';
+    return 'GroupState.groupData(groupData: $groupData, groupMembers: $groupMembers, allGroupMembers: $allGroupMembers, blockedGroupMembers: $blockedGroupMembers, messageData: $messageData, wallpaperIndex: $wallpaperIndex, messages: $messages, isLoading: $isLoading, inputLoading: $inputLoading)';
   }
 
   @override
@@ -6001,10 +10883,19 @@ class _$GroupDataImpl implements GroupData {
                 other.groupData == groupData) &&
             const DeepCollectionEquality()
                 .equals(other._groupMembers, _groupMembers) &&
+            const DeepCollectionEquality()
+                .equals(other._allGroupMembers, _allGroupMembers) &&
+            const DeepCollectionEquality()
+                .equals(other._blockedGroupMembers, _blockedGroupMembers) &&
             (identical(other.messageData, messageData) ||
                 other.messageData == messageData) &&
             (identical(other.wallpaperIndex, wallpaperIndex) ||
-                other.wallpaperIndex == wallpaperIndex));
+                other.wallpaperIndex == wallpaperIndex) &&
+            const DeepCollectionEquality().equals(other._messages, _messages) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.inputLoading, inputLoading) ||
+                other.inputLoading == inputLoading));
   }
 
   @override
@@ -6012,8 +10903,13 @@ class _$GroupDataImpl implements GroupData {
       runtimeType,
       groupData,
       const DeepCollectionEquality().hash(_groupMembers),
+      const DeepCollectionEquality().hash(_allGroupMembers),
+      const DeepCollectionEquality().hash(_blockedGroupMembers),
       messageData,
-      wallpaperIndex);
+      wallpaperIndex,
+      const DeepCollectionEquality().hash(_messages),
+      isLoading,
+      inputLoading);
 
   /// Create a copy of GroupState
   /// with the given fields replaced by the non-null parameter values.
@@ -6038,12 +10934,26 @@ class _$GroupDataImpl implements GroupData {
         createGroupData,
     required TResult Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)
         groupData,
   }) {
-    return groupData(this.groupData, groupMembers, messageData, wallpaperIndex);
+    return groupData(
+        this.groupData,
+        groupMembers,
+        allGroupMembers,
+        blockedGroupMembers,
+        messageData,
+        wallpaperIndex,
+        messages,
+        isLoading,
+        inputLoading);
   }
 
   @override
@@ -6061,13 +10971,26 @@ class _$GroupDataImpl implements GroupData {
         createGroupData,
     TResult? Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)?
         groupData,
   }) {
     return groupData?.call(
-        this.groupData, groupMembers, messageData, wallpaperIndex);
+        this.groupData,
+        groupMembers,
+        allGroupMembers,
+        blockedGroupMembers,
+        messageData,
+        wallpaperIndex,
+        messages,
+        isLoading,
+        inputLoading);
   }
 
   @override
@@ -6085,15 +11008,28 @@ class _$GroupDataImpl implements GroupData {
         createGroupData,
     TResult Function(
             ChatModel? groupData,
-            Map<String, UserModels> groupMembers,
+            Map<String, UserModels>? groupMembers,
+            Map<String, UserModels> allGroupMembers,
+            Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-            int wallpaperIndex)?
+            int wallpaperIndex,
+            List<MessageModel> messages,
+            bool isLoading,
+            bool inputLoading)?
         groupData,
     required TResult orElse(),
   }) {
     if (groupData != null) {
       return groupData(
-          this.groupData, groupMembers, messageData, wallpaperIndex);
+          this.groupData,
+          groupMembers,
+          allGroupMembers,
+          blockedGroupMembers,
+          messageData,
+          wallpaperIndex,
+          messages,
+          isLoading,
+          inputLoading);
     }
     return orElse();
   }
@@ -6133,14 +11069,24 @@ class _$GroupDataImpl implements GroupData {
 abstract class GroupData implements GroupState {
   const factory GroupData(
       {final ChatModel? groupData,
-      final Map<String, UserModels> groupMembers,
+      final Map<String, UserModels>? groupMembers,
+      final Map<String, UserModels> allGroupMembers,
+      final Map<String, UserModels>? blockedGroupMembers,
       final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
-      final int wallpaperIndex}) = _$GroupDataImpl;
+      final int wallpaperIndex,
+      final List<MessageModel> messages,
+      final bool isLoading,
+      final bool inputLoading}) = _$GroupDataImpl;
 
   ChatModel? get groupData;
-  Map<String, UserModels> get groupMembers;
+  Map<String, UserModels>? get groupMembers; //it current available members
+  Map<String, UserModels> get allGroupMembers;
+  Map<String, UserModels>? get blockedGroupMembers;
   Stream<QuerySnapshot<Map<String, dynamic>>>? get messageData;
   int get wallpaperIndex;
+  List<MessageModel> get messages;
+  bool get isLoading;
+  bool get inputLoading;
 
   /// Create a copy of GroupState
   /// with the given fields replaced by the non-null parameter values.

@@ -1,3 +1,4 @@
+import 'package:chat_app/core/status_updater.dart';
 import 'package:chat_app/core/theme.dart';
 import 'package:chat_app/core/timestamp_adapter.dart';
 import 'package:chat_app/features/auth/view_models/bloc/auth_bloc.dart';
@@ -23,11 +24,15 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final statusManager = OnlineStatusManager();
+  statusManager.init();
   await Hive.initFlutter();
   if (!Hive.isBoxOpen('setting')) {
     await Hive.openBox('setting');
   }
   await Hive.openBox('chatsCount');
+  await Hive.openBox('category');
   runApp(const MyApp());
 }
 
@@ -79,7 +84,6 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp.router(
         title: 'Comet Chat',
         debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.dark,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         supportedLocales: localization.supportedLocales,

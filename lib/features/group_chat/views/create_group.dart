@@ -23,119 +23,126 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
   bool memberCanAddMember = false,
       memberCanEdit = false,
       memberCanMessage = false;
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('New Group'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GroupWidget(),
-          height10,
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10),
-            child: Text("Members can:"),
-          ),
-          height10,
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            leading: Padding(
-              padding: const EdgeInsets.only(right: 10, left: 5),
-              child: Icon(
-                Icons.edit_outlined,
-                size: 25,
+    return Form(
+      key: _formKey,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('New Group'),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GroupWidget(),
+            height10,
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10),
+              child: Text("Members can:"),
+            ),
+            height10,
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              leading: Padding(
+                padding: const EdgeInsets.only(right: 10, left: 5),
+                child: Icon(
+                  Icons.edit_outlined,
+                  size: 25,
+                ),
+              ),
+              title: Text(
+                "Edit group settings",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              subtitle: Text(
+                  "This includes the name, icon, description, and the ability to pin, keep or unkeep message."),
+              trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Switch(
+                    value: memberCanEdit,
+                    onChanged: (value) {
+                      memberCanEdit = value;
+                      setState(() {});
+                    },
+                    trackColor: memberCanEdit
+                        ? null
+                        : WidgetStatePropertyAll(
+                            AppColors.backgroundColor(context)),
+                    activeColor: AppColors.backgroundColor(context),
+                    activeTrackColor: AppColors.secondary(context),
+                  )
+                ],
               ),
             ),
-            title: Text(
-              "Edit group settings",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            height10,
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              leading: Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 5),
+                  child: Icon(Icons.message_rounded)),
+              title: Text(
+                "Send Message",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              trailing: Switch(
+                value: memberCanMessage,
+                onChanged: (value) {
+                  memberCanMessage = value;
+                  setState(() {});
+                },
+                trackColor: memberCanMessage
+                    ? null
+                    : WidgetStatePropertyAll(
+                        AppColors.backgroundColor(context)),
+                activeColor: AppColors.backgroundColor(context),
+                activeTrackColor: AppColors.secondary(context),
+              ),
             ),
-            subtitle: Text(
-                "This includes the name, icon, description, and the ability to pin, keep or unkeep message."),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Switch(
-                  value: memberCanEdit,
-                  onChanged: (value) {
-                    memberCanEdit = value;
-                    setState(() {});
-                  },
-                  trackColor: memberCanEdit
-                      ? null
-                      : WidgetStatePropertyAll(
-                          AppColors.backgroundColor(context)),
-                  activeColor: AppColors.backgroundColor(context),
-                  activeTrackColor: AppColors.secondary(context),
-                )
-              ],
+            height5,
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              leading: Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 5),
+                  child: Icon(Icons.person_add_alt_1_outlined)),
+              title: Text(
+                "Add members",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              trailing: Switch(
+                value: memberCanAddMember,
+                onChanged: (value) {
+                  memberCanAddMember = value;
+                  setState(() {});
+                },
+                trackColor: memberCanAddMember
+                    ? null
+                    : WidgetStatePropertyAll(
+                        AppColors.backgroundColor(context)),
+                activeColor: AppColors.backgroundColor(context),
+                activeTrackColor: AppColors.secondary(context),
+              ),
             ),
-          ),
-          height10,
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            leading: Padding(
-                padding: const EdgeInsets.only(right: 10, left: 5),
-                child: Icon(Icons.message_rounded)),
-            title: Text(
-              "Send Message",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-            trailing: Switch(
-              value: memberCanMessage,
-              onChanged: (value) {
-                memberCanMessage = value;
-                setState(() {});
+            Spacer(),
+            AppButton(
+              title: "Create",
+              onPressed: () {
+                if (!_formKey.currentState!.validate()) return;
+                context.read<GroupBloc>().add(
+                      GroupEvent.createGroupLoad(
+                          groupName: _groupNameController.text,
+                          groupDescription: "",
+                          groupImagePath: _avatarPath,
+                          memberCanEdit: memberCanEdit,
+                          memberCanAddMember: memberCanAddMember,
+                          memberCanMessage: memberCanMessage),
+                    );
+                NavigationUtils.addMembers(context);
               },
-              trackColor: memberCanMessage
-                  ? null
-                  : WidgetStatePropertyAll(AppColors.backgroundColor(context)),
-              activeColor: AppColors.backgroundColor(context),
-              activeTrackColor: AppColors.secondary(context),
-            ),
-          ),
-          height5,
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            leading: Padding(
-                padding: const EdgeInsets.only(right: 10, left: 5),
-                child: Icon(Icons.person_add_alt_1_outlined)),
-            title: Text(
-              "Add members",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-            trailing: Switch(
-              value: memberCanAddMember,
-              onChanged: (value) {
-                memberCanAddMember = value;
-                setState(() {});
-              },
-              trackColor: memberCanAddMember
-                  ? null
-                  : WidgetStatePropertyAll(AppColors.backgroundColor(context)),
-              activeColor: AppColors.backgroundColor(context),
-              activeTrackColor: AppColors.secondary(context),
-            ),
-          ),
-          Spacer(),
-          AppButton(
-            title: "Create",
-            onPressed: () {
-              context.read<GroupBloc>().add(
-                    GroupEvent.createGroupLoad(
-                        groupName: _groupNameController.text,
-                        groupDescription: "",
-                        groupImagePath: _avatarPath,
-                        memberCanEdit: memberCanEdit,
-                        memberCanAddMember: memberCanAddMember,
-                        memberCanMessage: memberCanMessage),
-                  );
-              NavigationUtils.addMembers(context);
-            },
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -161,6 +168,7 @@ class _GroupWidgetState extends State<GroupWidget> {
                   await FilePicker.platform.pickFiles(type: FileType.image);
               if (result != null) {
                 _avatarPath = result.files.first.path!;
+                setState(() {});
               }
             },
             child: CircleAvatar(
@@ -174,6 +182,12 @@ class _GroupWidgetState extends State<GroupWidget> {
             child: TextFormField(
               controller: _groupNameController,
               onChanged: (value) => setState(() {}),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Please enter group name";
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 hintText: "Group name",
                 border: OutlineInputBorder(

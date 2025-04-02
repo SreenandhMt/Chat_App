@@ -44,10 +44,19 @@ class NavigationUtils {
       context.push("/calls/details");
   static videoCallPage(BuildContext context) => context.push("/video-call");
   static voiceCallPage(BuildContext context) => context.push("/voice-call");
+
+  //media player
+  static imageView(BuildContext context, String url) =>
+      context.push("/image/${Uri.encodeComponent(url)}");
+  static videoView(BuildContext context, String url) =>
+      context.push("/video/${Uri.encodeComponent(url)}");
+
   //invite friends
   static inviteFriendsPage(BuildContext context) => context.push("/invite");
+
   //settings
   static settingsPage(BuildContext context) => context.push("/settings");
+
   //security
   static securityPage(BuildContext context) =>
       context.push("/settings/security");

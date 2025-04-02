@@ -32,9 +32,27 @@ class ChatWidget extends StatelessWidget {
       }
     }
     final size = MediaQuery.sizeOf(context);
-    // if (messageModel.messageType == "typing" && messageModel.isSender) {
-    //   return const SizedBox.shrink();
-    // }
+    if (messageModel.messageType == "typing" && messageModel.isSender) {
+      return const SizedBox.shrink();
+    }
+    if (messageModel.messageType == "log") {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.all(5),
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+                color: Colors.grey, borderRadius: BorderRadius.circular(5)),
+            child: Text(
+              messageModel.message ?? "",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+            ),
+          )
+        ],
+      );
+    }
     return Align(
       alignment:
           messageModel.isSender ? Alignment.centerRight : Alignment.centerLeft,
@@ -104,20 +122,13 @@ class ChatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (messageType == "sticker") {
-      return StickerWidget(
-        isSender: isSender,
-        sticker: messageModel.message,
-        time: messageModel.time,
-        isGroup: isGroup,
-      );
-    }
     if (messageType == "video") {
       return ChatVideoWidget(
           video: message!,
           isSender: isSender,
           isGroup: isGroup,
           videoSize: size,
+          thumbnail: messageModel.thumbnail ?? "",
           time: messageModel.time);
     }
     if (messageType == "sticker") {

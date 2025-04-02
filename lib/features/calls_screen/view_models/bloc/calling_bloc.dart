@@ -59,14 +59,22 @@ class CallingBloc extends Bloc<CallingEvent, CallingState> {
     });
     on<_StartGroupVideoCalling>((event, emit) async {
       emit(state.copyWith(currentCall: null));
-      final response = await CallingService.groupVideoCall(event.group);
+      final response = await CallingService.groupVideoCall(
+          chatId: event.chatId,
+          groupName: event.groupName,
+          image: event.image,
+          participants: event.participants);
       final convert =
           await CallingService.convertCallModel(callData: response.map!);
       emit(state.copyWith(currentCall: convert));
     });
     on<_StartGroupVoiceCalling>((event, emit) async {
       emit(state.copyWith(currentCall: null));
-      final response = await CallingService.groupCall(event.group);
+      final response = await CallingService.groupCall(
+          chatId: event.chatId,
+          groupName: event.groupName,
+          image: event.image,
+          participants: event.participants);
       final convert =
           await CallingService.convertCallModel(callData: response.map!);
       emit(state.copyWith(currentCall: convert));

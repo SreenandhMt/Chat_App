@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,7 +10,6 @@ import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/views/introduction_page.dart';
 import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 
-import '../../home/view_models/bloc/home_bloc.dart';
 import '../view_models/bloc/contact_bloc.dart';
 
 class AddMembersPage extends StatelessWidget {
@@ -55,15 +53,16 @@ class AddMembersPage extends StatelessWidget {
                             onChanged: (value) {
                               if (state.selectedContacts
                                   .contains(contacts[index - 1].uid)) {
-                                log("2");
                                 context.read<ContactBloc>().add(
                                     ContactEvent.removeMembersList(
-                                        id: contacts[index - 1].uid));
+                                        id: contacts[index - 1].uid,
+                                        model: contacts[index - 1]));
                                 return;
                               }
                               context.read<ContactBloc>().add(
                                   ContactEvent.addMembersList(
-                                      id: contacts[index - 1].uid));
+                                      id: contacts[index - 1].uid,
+                                      model: contacts[index - 1]));
                             }),
                       );
                     },
@@ -75,13 +74,25 @@ class AddMembersPage extends StatelessWidget {
                   onPressed: () {
                     if (state.alreadyJoinedUsers.isNotEmpty) {
                       context.read<GroupBloc>().add(GroupEvent.addMember(
-                          members: state.selectedContacts));
+                          members: state.selectedContactModels));
                       context.pop();
+                      return;
+                    }
+                    if (state.selectedContacts.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Select any user"),
+                        closeIconColor: Colors.black,
+                        showCloseIcon: true,
+                        margin: EdgeInsets.all(10),
+                        behavior: SnackBarBehavior.floating,
+                        shape: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none),
+                      ));
                       return;
                     }
                     context.read<GroupBloc>().add(GroupEvent.createGroup(
                         participants: state.selectedContacts));
-                    context.read<HomeBloc>().add(HomeEvent.getAllData());
                     context.pop();
                     context.pop();
                   },

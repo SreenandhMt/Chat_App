@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
@@ -7,6 +8,7 @@ import 'package:chat_app/features/home/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:get_thumbnail_video/video_thumbnail.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:image/image.dart' as img;
 import 'package:video_player/video_player.dart';
@@ -39,6 +41,22 @@ class ChatServices {
     });
   }
 
+  static Future<List<ChatModel>> commonGroups(String uid) async {
+    var querySnapshot = await _firestore
+        .collection("chats")
+        .where("isGroup", isEqualTo: true)
+        .where('participants',
+            arrayContainsAny: [uid, _auth.currentUser!.uid]).get();
+
+    List<DocumentSnapshot<Map<String, dynamic>>> filteredDocs =
+        querySnapshot.docs.where((doc) {
+      List<dynamic> arrayField = doc['participants'];
+      return arrayField.contains(uid) &&
+          arrayField.contains(_auth.currentUser!.uid);
+    }).toList();
+    return filteredDocs.map((e) => ChatModel.fromJson(e.data()!, 0)).toList();
+  }
+
   static void sendMessage(ChatModel chatModel, String message,
       {String userName = ""}) async {
     final messageId = DateTime.now().microsecondsSinceEpoch.toString();
@@ -64,19 +82,34 @@ class ChatServices {
         date);
   }
 
-  static void sendImage(ChatModel chatModel, String path,
+  static void sendLog(ChatModel chatModel, String message) async {
+    final messageId = DateTime.now().microsecondsSinceEpoch.toString();
+    final date = DateTime.now().millisecondsSinceEpoch;
+    await _firestore
+        .collection("chats")
+        .doc(chatModel.chatId)
+        .collection("messages")
+        .doc(messageId)
+        .set({
+      "id": messageId,
+      "message": message,
+      "senderId": _auth.currentUser!.uid,
+      "isSeenBy": [],
+      "messageType": "log",
+      "reactions": {},
+      "timestamp": date
+    });
+  }
+
+  static Future<void> sendImage(ChatModel chatModel, String path,
       {String? lastMessage}) async {
     final file = File(path);
-    final bytes = await file.readAsBytes();
-    img.Image? image = img.decodeImage(bytes);
 
     final ref = await _storage
         .ref(DateTime.now().microsecondsSinceEpoch.toString())
         .putFile(file);
     final imageUrl = await ref.ref.getDownloadURL();
 
-    final width = image!.width;
-    final height = image.height;
     final messageId = DateTime.now().microsecondsSinceEpoch.toString();
     final date = DateTime.now().millisecondsSinceEpoch;
     await _firestore
@@ -91,15 +124,13 @@ class ChatServices {
       "isSeenBy": [],
       "messageType": "image",
       "reactions": {},
-      "width": width,
-      "height": height,
       "timestamp": date
     });
     updateMessageCount(
         chatModel, lastMessage ?? "Image", _auth.currentUser!.uid, date);
   }
 
-  static void sendSticker(ChatModel chatModel, String path,
+  static Future<void> sendSticker(ChatModel chatModel, String path,
       {String? lastMessage}) async {
     final file = File(path);
 
@@ -129,32 +160,40 @@ class ChatServices {
 
   static Future<void> sendVideo(ChatModel chatModel, String path,
       {String? lastMessage}) async {
-    final file = File(path);
-    final ref = await _storage
-        .ref(DateTime.now().microsecondsSinceEpoch.toString())
-        .putFile(file);
-    final url = await ref.ref.getDownloadURL();
-    final size = await getVideoSize(url);
-    final messageId = DateTime.now().microsecondsSinceEpoch.toString();
-    final date = DateTime.now().millisecondsSinceEpoch;
-    await _firestore
-        .collection("chats")
-        .doc(chatModel.chatId)
-        .collection("messages")
-        .doc(messageId)
-        .set({
-      "id": messageId,
-      "message": url,
-      "senderId": _auth.currentUser!.uid,
-      "isSeenBy": [],
-      "messageType": "video",
-      "reactions": {},
-      "width": size.width,
-      "height": size.height,
-      "timestamp": date
-    });
-    updateMessageCount(
-        chatModel, lastMessage ?? "Video", _auth.currentUser!.uid, date);
+    try {
+      final file = File(path);
+      final image = await VideoThumbnail.thumbnailFile(video: path);
+
+      final ref = await _storage
+          .ref(DateTime.now().microsecondsSinceEpoch.toString())
+          .putFile(file);
+      final url = await ref.ref.getDownloadURL();
+      final imageRef = await _storage
+          .ref(DateTime.now().microsecondsSinceEpoch.toString())
+          .putFile(File(image.path));
+      final imageUrl = await imageRef.ref.getDownloadURL();
+      final messageId = DateTime.now().microsecondsSinceEpoch.toString();
+      final date = DateTime.now().millisecondsSinceEpoch;
+      await _firestore
+          .collection("chats")
+          .doc(chatModel.chatId)
+          .collection("messages")
+          .doc(messageId)
+          .set({
+        "id": messageId,
+        "message": url,
+        "senderId": _auth.currentUser!.uid,
+        "isSeenBy": [],
+        "thumbnail": imageUrl,
+        "messageType": "video",
+        "reactions": {},
+        "timestamp": date
+      });
+      updateMessageCount(
+          chatModel, lastMessage ?? "Video", _auth.currentUser!.uid, date);
+    } catch (e) {
+      log("send video callService $e");
+    }
   }
 
   static Future<void> sendAudioFile(
@@ -187,7 +226,7 @@ class ChatServices {
         chatModel, lastMessage ?? "Audio", _auth.currentUser!.uid, date);
   }
 
-  static void sendDocument(ChatModel chatModel, String path,
+  static Future<void> sendDocument(ChatModel chatModel, String path,
       {String? lastMessage}) async {
     final file = File(path);
     final ref = await _storage
@@ -216,7 +255,7 @@ class ChatServices {
         chatModel, lastMessage ?? "Document", _auth.currentUser!.uid, date);
   }
 
-  static void sendPoll(
+  static Future<void> sendPoll(
       ChatModel chatModel, String question, List<String> options,
       {String? lastMessage}) async {
     final id = DateTime.now().microsecondsSinceEpoch.toString();
@@ -244,7 +283,7 @@ class ChatServices {
         chatModel, lastMessage ?? "Poll", _auth.currentUser!.uid, date);
   }
 
-  static void sendLink(ChatModel chatModel, String link,
+  static Future<void> sendLink(ChatModel chatModel, String link,
       {String? lastMessage}) async {
     final title = await UrlPreviewLoader.getMetaTagContent(link, 'og:title') ??
         await UrlPreviewLoader.getTitle(link);
@@ -278,8 +317,8 @@ class ChatServices {
         chatModel, lastMessage ?? link, _auth.currentUser!.uid, date);
   }
 
-  static void votePoll(ChatModel chatModel, String messageId, String option,
-      Map<String, dynamic> votes) async {
+  static Future<void> votePoll(ChatModel chatModel, String messageId,
+      String option, Map<String, dynamic> votes) async {
     votes.forEach((key, value) {
       if (votes[key] is List && votes[key].contains(_auth.currentUser!.uid)) {
         _firestore
@@ -304,7 +343,24 @@ class ChatServices {
     });
   }
 
-  static void deleteMessage(ChatModel chatModel, String messageId) async {
+  static Future<void> deleteChatForMe(
+      ChatModel chatModel, String messageId) async {
+    try {
+      await _firestore
+          .collection("chats")
+          .doc(chatModel.chatId)
+          .collection("messages")
+          .doc(messageId)
+          .update({
+        "hidechat": FieldValue.arrayUnion([_auth.currentUser!.uid])
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  static Future<void> deleteMessage(
+      ChatModel chatModel, String messageId) async {
     await _firestore
         .collection("chats")
         .doc(chatModel.chatId)
@@ -313,6 +369,36 @@ class ChatServices {
         .update({
       "message": "This message has been deleted",
       "messageType": "delete"
+    });
+  }
+
+  static void blockUser(ChatModel chatModel, String receiver) async {
+    try {
+      final participants = List<String>.from(chatModel.participants);
+      participants.remove(_auth.currentUser!.uid);
+      await _firestore.collection("chats").doc(chatModel.chatId).update({
+        "participants": participants,
+        "leaved": FieldValue.arrayUnion([_auth.currentUser!.uid]),
+      });
+
+      await _firestore.collection("users").doc(_auth.currentUser!.uid).update({
+        "blocked": FieldValue.arrayUnion([receiver]),
+      });
+      sendLog(chatModel, "${_auth.currentUser!.displayName ?? ""} Blocked You");
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  static Future<void> muteChat(ChatModel chatModel) async {
+    await _firestore.collection("chats").doc(chatModel.chatId).update({
+      "muted": FieldValue.arrayUnion([_auth.currentUser!.uid]),
+    });
+  }
+
+  static Future<void> unmuteChat(ChatModel chatModel) async {
+    await _firestore.collection("chats").doc(chatModel.chatId).update({
+      "muted": FieldValue.arrayRemove([_auth.currentUser!.uid]),
     });
   }
 
@@ -344,7 +430,8 @@ class ChatServices {
     );
   }
 
-  static void markMessageAsSeen(ChatModel chatModel, String messageId) async {
+  static Future<void> markMessageAsSeen(
+      ChatModel chatModel, String messageId) async {
     if (chatModel.participants.contains(messageId)) return;
     final chatDoc = await _firestore
         .collection("chats")
@@ -372,17 +459,5 @@ class ChatServices {
         .collection("messages")
         .doc(messageId)
         .update({"reactions.${_auth.currentUser!.uid}": emoji});
-  }
-
-  static Future<Size> getVideoSize(String videoUrl) async {
-    final VideoPlayerController controller =
-        VideoPlayerController.networkUrl(Uri.parse(videoUrl));
-
-    await controller.initialize();
-    double width = controller.value.size.width;
-    double height = controller.value.size.height;
-
-    controller.dispose();
-    return Size(width, height);
   }
 }

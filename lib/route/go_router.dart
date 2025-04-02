@@ -1,5 +1,5 @@
-import 'package:chat_app/core/fonts.dart';
-import 'package:chat_app/core/size.dart';
+import 'package:chat_app/components/image_view.dart';
+import 'package:chat_app/components/video_view.dart';
 import 'package:chat_app/features/auth/views/create_profile_page.dart';
 import 'package:chat_app/features/auth/views/introduction_page.dart';
 import 'package:chat_app/features/auth/views/number_verification_page.dart';
@@ -106,6 +106,18 @@ class AppRouter {
           builder: (context, state) => AddMembersPage(),
         ),
       ],
+    ),
+    GoRoute(
+      path: "/image/:url",
+      builder: (context, state) => ImageViewPage(
+          isGroup: false,
+          url: Uri.decodeComponent(state.pathParameters["url"] ?? "")),
+    ),
+    GoRoute(
+      path: "/video/:url",
+      builder: (context, state) => VideoViewPage(
+          isGroup: false,
+          url: Uri.decodeComponent(state.pathParameters["url"] ?? "")),
     ),
     GoRoute(
       path: "/splash",

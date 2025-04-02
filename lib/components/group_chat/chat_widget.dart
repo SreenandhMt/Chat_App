@@ -33,6 +33,26 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
         reactions.add(reactionMap[userId]!);
       }
     }
+    if (widget.messageModel.messageType == "log") {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(10)),
+            child: Text(
+              widget.messageModel.message ?? "",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+            ),
+          )
+        ],
+      );
+    }
     if (widget.messageModel.isSender) {
       return Align(
         alignment: widget.messageModel.isSender
@@ -40,9 +60,11 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
             : Alignment.centerLeft,
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            minHeight: 69,
+            minHeight: 30,
             maxWidth: size.width * 0.79,
-            minWidth: size.width * 0.3,
+            minWidth: widget.messageModel.messageType == "typing"
+                ? 10
+                : size.width * 0.3,
           ),
           child: Stack(
             children: [
@@ -103,7 +125,7 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
               Text(
                 widget.sender == null ? "Removed User" : widget.sender!.name,
                 style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: Colors.yellow),
               ),
@@ -114,9 +136,11 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
                     : Alignment.centerLeft,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    minHeight: 70,
+                    minHeight: 30,
                     maxWidth: size.width * 0.79,
-                    minWidth: size.width * 0.3,
+                    minWidth: widget.messageModel.messageType == "typing"
+                        ? 10
+                        : size.width * 0.3,
                   ),
                   child: Stack(
                     children: [
@@ -136,23 +160,25 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
                                   widget.messageModel.height!.toDouble()),
                         ),
                       ),
-                      Positioned(
-                          bottom: 0,
-                          right: 20,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: AppColors.grey(context),
-                                borderRadius: BorderRadius.circular(20)),
-                            padding: EdgeInsets.only(
-                                left: 5, right: 5, bottom: 3, top: 3),
-                            child: Row(
-                              spacing: 4,
-                              children: List.generate(
-                                reactions.length <= 4 ? reactions.length : 4,
-                                (index) => Text(reactions[index]),
+                      if (reactions.isNotEmpty &&
+                          widget.messageModel.messageType != "delete")
+                        Positioned(
+                            bottom: 0,
+                            right: 20,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: AppColors.grey(context),
+                                  borderRadius: BorderRadius.circular(20)),
+                              padding: EdgeInsets.only(
+                                  left: 5, right: 5, bottom: 3, top: 3),
+                              child: Row(
+                                spacing: 4,
+                                children: List.generate(
+                                  reactions.length <= 4 ? reactions.length : 4,
+                                  (index) => Text(reactions[index]),
+                                ),
                               ),
-                            ),
-                          ))
+                            ))
                     ],
                   ),
                 ),

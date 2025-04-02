@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:chat_app/components/chat_page/reaction_overlay.dart';
 import 'package:chat_app/core/wallpaper_colors.dart';
-import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/chat_page/models/message_model.dart';
 import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,9 +35,11 @@ class _ChattingPageState extends State<ChattingPage> {
   late StreamSubscription<bool> stream;
   bool isRecoding = false;
   List<String> selectedMessages = [];
+  List<MessageModel> selectedMessagesModels = [];
   String? sticker;
   OverlayEntry? overlayEntry;
   int currentMessage = 0;
+  String oldDate = "";
 
   @override
   void initState() {
@@ -68,146 +70,161 @@ class _ChattingPageState extends State<ChattingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ChatBloc, ChatState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state.chatData == null) {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-          final user = state.chatData!["user"] as UserModels;
-          return Scaffold(
-            backgroundColor: wallpaperColor(context)[state.wallpaperIndex],
-            appBar: appBar(
-              context,
-              hideReactions: hideReactions,
-              selectedMessages: selectedMessages,
-              userModel: user,
-              clearMessage: () {
-                hideReactions();
-                selectedMessages.clear();
-                setState(() {});
-              },
-            ),
-            body: PopScope(
-              canPop: isEmojiKeyboardHide,
-              onPopInvoked: (didPop) {
-                setState(() {
-                  isEmojiKeyboardHide = true;
-                });
-              },
-              child: Container(
-                decoration: BoxDecoration(),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: state.messageData == null
-                          ? SizedBox()
-                          : StreamBuilder(
-                              stream: state.messageData,
-                              builder: (context, snapshot) {
-                                if (!snapshot.hasData) {
-                                  return SizedBox();
-                                }
-                                return ListView(
-                                  reverse: true,
-                                  dragStartBehavior: DragStartBehavior.down,
-                                  controller: scrollController,
-                                  children: List.generate(
-                                    snapshot.data!.docs.length,
-                                    (index) {
-                                      final message = MessageModel.fromJson(
-                                          snapshot.data!.docs[index].data());
-                                      context.read<ChatBloc>().add(
-                                          ChatEvent.markMessageAsSeen(
-                                              messageId: message.id));
+    return BlocConsumer<ChatBloc, ChatState>(listener: (context, state) {
+      if (state.messageData != null) {
+        state.messageData!.listen(
+          (event) {
+            context.read<ChatBloc>().add(ChatEvent.loadMessages(event.docs));
+          },
+        );
+      }
+    }, builder: (context, state) {
+      if (state.chatData == null) {
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      }
+      final user = state.chatData!.userModel!;
+      return Scaffold(
+        backgroundColor: wallpaperColor(context)[state.wallpaperIndex],
+        appBar: appBar(
+          context,
+          hideReactions: hideReactions,
+          selectedMessages: selectedMessages,
+          models: selectedMessagesModels,
+          userModel: user,
+          clearMessage: () {
+            hideReactions();
+            selectedMessages.clear();
+            selectedMessagesModels.clear();
+            setState(() {});
+          },
+        ),
+        body: PopScope(
+          canPop: isEmojiKeyboardHide,
+          onPopInvoked: (didPop) {
+            setState(() {
+              isEmojiKeyboardHide = true;
+            });
+          },
+          child: Container(
+            decoration: BoxDecoration(),
+            child: Column(
+              children: [
+                Expanded(
+                  child: state.messageData == null
+                      ? SizedBox()
+                      : ListView(
+                          reverse: true,
+                          dragStartBehavior: DragStartBehavior.down,
+                          controller: scrollController,
+                          children: List.generate(
+                            state.messages.length,
+                            (index) {
+                              final message = state.messages[index];
 
-                                      return GestureDetector(
-                                        onTap: () => setState(() {
-                                          if (message.messageType != "delete") {
-                                            hideReactions();
-                                            selectedMessages.remove(message.id);
-                                          }
-                                        }),
-                                        onLongPressStart: (details) =>
-                                            setState(() {
-                                          if (message.messageType != "delete") {
-                                            if (!message.isSender) {
-                                              showReactions(
-                                                  context,
-                                                  Offset(
-                                                    70,
-                                                    details.globalPosition.dy -
-                                                        30,
-                                                  ),
-                                                  message.id);
-                                            }
-                                            if (selectedMessages
-                                                .contains(message.id)) {
-                                              selectedMessages
-                                                  .remove(message.id);
-                                            } else {
-                                              selectedMessages.add(message.id);
-                                            }
-                                          }
-                                        }),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: selectedMessages
-                                                    .contains(message.id)
-                                                ? AppColors.primary(context)
-                                                    .withOpacity(0.1)
-                                                : null,
-                                            borderRadius:
-                                                BorderRadius.circular(2),
-                                          ),
-                                          child:
-                                              ChatWidget(messageModel: message),
-                                        ),
-                                      );
-                                    },
+                              return Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () => clickedMessage(message),
+                                    onLongPressStart: (details) =>
+                                        onLongPressStart(message, details),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: selectedMessages
+                                                .contains(message.id)
+                                            ? AppColors.primary(context)
+                                                // ignore: deprecated_member_use
+                                                .withOpacity(0.1)
+                                            : null,
+                                        borderRadius: BorderRadius.circular(2),
+                                      ),
+                                      child: ChatWidget(messageModel: message),
+                                    ),
                                   ),
-                                );
-                              }),
-                    ),
-                    ChatInput(
-                        onSubmit: () {
-                          if (isValidUrl(controller.text)) {
-                            context
-                                .read<ChatBloc>()
-                                .add(ChatEvent.sendLink(controller.text));
-                            controller.clear();
-                            return;
-                          }
-                          context
-                              .read<ChatBloc>()
-                              .add(ChatEvent.sendMessage(controller.text));
-                          controller.clear();
-                          return;
-                        },
-                        showEmojiKeyboard: showEmojiKeyboard,
-                        controller: controller,
-                        stickerSelected: (content) async {
-                          if (content.mimeType != "image/gif") {
-                            final stickerImage =
-                                await _convertUriToFile(content.data!);
-                            context.read<ChatBloc>().add(ChatEvent.sendSticker(
-                                stickerPath: stickerImage!));
-                          }
-                        }),
-                    CustomEmojiKeyboard(
-                      emojiController: controller,
-                      isHide: isEmojiKeyboardHide,
-                    ),
-                  ],
+                                ],
+                              );
+                            },
+                          ),
+                        ),
                 ),
-              ),
+                ChatInput(
+                    inputLoading: state.inputLoading,
+                    onSubmit: () {
+                      if (isValidUrl(controller.text)) {
+                        context
+                            .read<ChatBloc>()
+                            .add(ChatEvent.sendLink(controller.text));
+                        controller.clear();
+                        return;
+                      }
+                      context
+                          .read<ChatBloc>()
+                          .add(ChatEvent.sendMessage(controller.text));
+                      controller.clear();
+                      return;
+                    },
+                    showEmojiKeyboard: showEmojiKeyboard,
+                    controller: controller,
+                    stickerSelected: (content) async {
+                      if (content.mimeType != "image/gif") {
+                        final stickerImage =
+                            await _convertUriToFile(content.data!);
+                        context.read<ChatBloc>().add(
+                            ChatEvent.sendSticker(stickerPath: stickerImage!));
+                      }
+                    }),
+                CustomEmojiKeyboard(
+                  emojiController: controller,
+                  isHide: isEmojiKeyboardHide,
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        ),
+      );
+    });
+  }
+
+  void clickedMessage(MessageModel message) {
+    if (message.messageType == "log") return;
+    final id = message.id;
+    if (selectedMessages.isEmpty) return;
+    if (!selectedMessages.contains(id)) {
+      selectedMessages.add(id);
+      selectedMessagesModels.add(message);
+      setState(() {});
+      return;
+    }
+    setState(() {
+      hideReactions();
+      final index = selectedMessages.indexOf(id);
+      selectedMessages.remove(id);
+      selectedMessagesModels.removeAt(index);
+    });
+  }
+
+  void onLongPressStart(MessageModel message, details) {
+    if (message.messageType == "log") return;
+    setState(() {
+      if (!message.isSender) {
+        showReactions(
+          context,
+          Offset(70, details.globalPosition.dy - 30),
+          message.id,
+        );
+      }
+      if (selectedMessages.contains(message.id)) {
+        final index = selectedMessages.indexOf(message.id);
+        selectedMessages.remove(message.id);
+        selectedMessagesModels.removeAt(index);
+      } else {
+        selectedMessages.add(message.id);
+        selectedMessagesModels.add(message);
+      }
+    });
   }
 
   bool isValidUrl(String text) {

@@ -1,14 +1,20 @@
+import 'package:chat_app/components/add_list_bottom_sheet.dart';
+import 'package:chat_app/components/chat_page/dialogs/block_user_dialog.dart';
+import 'package:chat_app/components/chat_page/dialogs/report_user_dialog.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
 import 'package:chat_app/localization/locals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/colors.dart';
 import '../../../route/navigation_utils.dart';
-import '../../auth/models/user_models.dart';
+import '../../calls_screen/view_models/bloc/calling_bloc.dart';
+import '../../group_chat/view_model/bloc/group_bloc.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
@@ -25,7 +31,7 @@ class UserProfile extends StatelessWidget {
               ),
             );
           }
-          final user = state.chatData!["user"] as UserModels;
+          final user = state.chatData!.userModel!;
           return Scaffold(
             appBar: AppBar(),
             backgroundColor: AppColors.themeColor(context),
@@ -59,8 +65,12 @@ class UserProfile extends StatelessWidget {
                           width5,
                           Expanded(
                             child: InkWell(
-                              onTap: () =>
-                                  NavigationUtils.voiceCallPage(context),
+                              onTap: () {
+                                context.read<CallingBloc>().add(
+                                    CallingEvent.startVoiceCalling(
+                                        receiver: state.chatData!.userModel!));
+                                NavigationUtils.voiceCallPage(context);
+                              },
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -81,8 +91,12 @@ class UserProfile extends StatelessWidget {
                           ),
                           Expanded(
                             child: InkWell(
-                              onTap: () =>
-                                  NavigationUtils.videoCallPage(context),
+                              onTap: () {
+                                context.read<CallingBloc>().add(
+                                    CallingEvent.startVideoCalling(
+                                        receiver: state.chatData!.userModel!));
+                                NavigationUtils.videoCallPage(context);
+                              },
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -128,35 +142,47 @@ class UserProfile extends StatelessWidget {
                     ],
                   ),
                 ),
-                height10,
-                Container(
-                  decoration:
-                      BoxDecoration(color: AppColors.backgroundColor(context)),
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  child: Column(
-                    children: [
-                      InkWell(
-                        child: Row(
-                          children: [
-                            width20,
-                            Icon(
-                              Icons.person_add_alt,
-                              size: 30,
-                            ),
-                            width15,
-                            Text(
-                              LocaleData.addToContactText.getString(context),
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                if (state.isSavedContact) ...[
+                  height10,
+                  Container(
+                    decoration: BoxDecoration(
+                        color: AppColors.backgroundColor(context)),
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            var status = await Permission.contacts.request();
+                            if (status.isGranted) {
+                              FlutterContacts.openExternalInsert(Contact(
+                                id: user.uid,
+                                displayName: user.name,
+                                phones: [Phone(user.phoneNumber)],
+                              ));
+                            }
+                          },
+                          child: Row(
+                            children: [
+                              width20,
+                              Icon(
+                                Icons.person_add_alt,
+                                size: 30,
                               ),
-                            ),
-                          ],
+                              width15,
+                              Text(
+                                LocaleData.addToContactText.getString(context),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                      ],
+                    ),
+                  )
+                ],
                 height10,
                 Container(
                   decoration:
@@ -183,8 +209,12 @@ class UserProfile extends StatelessWidget {
                             ),
                             Spacer(),
                             Switch(
-                              value: false,
-                              onChanged: (value) {},
+                              value: state.chatData!.muted,
+                              onChanged: (value) {
+                                context
+                                    .read<ChatBloc>()
+                                    .add(ChatEvent.muteChat(status: value));
+                              },
                             ),
                             width10,
                           ],
@@ -270,11 +300,100 @@ class UserProfile extends StatelessWidget {
                 ),
                 height10,
                 Container(
+                  decoration:
+                      BoxDecoration(color: AppColors.backgroundColor(context)),
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 10,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text("Common Groups"),
+                        ),
+                        ...List.generate(
+                          state.commonGroups.length,
+                          (index) {
+                            final group = state.commonGroups[index];
+                            return InkWell(
+                              onTap: () async {
+                                if (group.isGroup) {
+                                  context
+                                      .read<GroupBloc>()
+                                      .add(GroupEvent.loadData(chat: group));
+                                  NavigationUtils.groupChattingPage(context);
+                                  return;
+                                }
+                              },
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(group.groupImage ?? ""),
+                                ),
+                                title: Text(
+                                  group.groupName ?? "",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 20,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ]),
+                ),
+                height10,
+                Container(
+                    color: AppColors.backgroundColor(context),
+                    child: Column(children: [
+                      height20,
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) =>
+                                  AddToList(chatId: state.chatData!.chatId));
+                        },
+                        child: Row(
+                          children: [
+                            width20,
+                            Icon(
+                              Icons.people_alt_outlined,
+                              size: 30,
+                            ),
+                            width15,
+                            Text(
+                              "Add to List",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      height20,
+                    ])),
+                height10,
+                Container(
                   color: AppColors.backgroundColor(context),
                   child: Column(
                     children: [
                       height20,
                       InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                              child: BlockUserDialog(
+                                  uid: user.uid, userName: user.name),
+                            ),
+                          );
+                        },
                         child: Row(
                           children: [
                             width20,
@@ -285,7 +404,9 @@ class UserProfile extends StatelessWidget {
                             ),
                             width15,
                             Text(
-                              LocaleData.blockUserText.getString(context),
+                              context.formatString(
+                                  LocaleData.blockUserText.getString(context),
+                                  [user.name]),
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -296,6 +417,15 @@ class UserProfile extends StatelessWidget {
                       ),
                       height20,
                       InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                              child: ReportUserDialog(
+                                  uid: user.uid, userName: user.name),
+                            ),
+                          );
+                        },
                         child: Row(
                           children: [
                             width20,
@@ -306,7 +436,9 @@ class UserProfile extends StatelessWidget {
                             ),
                             width15,
                             Text(
-                              LocaleData.reportUserText.getString(context),
+                              context.formatString(
+                                  LocaleData.reportUserText.getString(context),
+                                  [user.name]),
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,

@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModels {
   final String uid;
   final String phoneNumber;
   final String name;
   final String about;
   final String status;
-  final String lastSeen;
+  final Timestamp lastSeen;
   final String? imageUrl;
   final Map<String, dynamic>? contacts;
 
