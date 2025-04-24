@@ -8,12 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
+import '../../../core/error_snackbar.dart';
+
 class CallDetailsPage extends StatelessWidget {
   const CallDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CallingBloc, CallingState>(builder: (context, state) {
+    return BlocConsumer<CallingBloc, CallingState>(listener: (context, state) {
+      if (state.errorMsg != null) {
+        showExpandableSnackBar(context, state.errorMsg!.message,
+            state.errorMsg!.details, state.errorMsg!.code);
+        context.read<CallingBloc>().add(CallingEvent.clearErrorMessage());
+      }
+    }, builder: (context, state) {
       if (state.selectedCall == null) {
         return Center(
           child: CircularProgressIndicator(),

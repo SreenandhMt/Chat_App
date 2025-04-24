@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:chat_app/components/chat_page/reaction_overlay.dart';
+import 'package:chat_app/core/error_snackbar.dart';
+import 'package:chat_app/core/loading.dart';
 import 'package:chat_app/core/wallpaper_colors.dart';
 import 'package:chat_app/features/chat_page/models/message_model.dart';
 import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:chat_app/components/chat_page/chat_widget.dart';
@@ -33,7 +36,7 @@ class _ChattingPageState extends State<ChattingPage> {
   TextEditingController controller = TextEditingController();
   final scrollController = ScrollController();
   late StreamSubscription<bool> stream;
-  bool isRecoding = false;
+  bool isRecoding = false, listening = false;
   List<String> selectedMessages = [];
   List<MessageModel> selectedMessagesModels = [];
   String? sticker;
@@ -71,10 +74,18 @@ class _ChattingPageState extends State<ChattingPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChatBloc, ChatState>(listener: (context, state) {
-      if (state.messageData != null) {
+      if (state.isError != null) {
+        showExpandableSnackBar(context, state.isError!.message,
+            "Error Chat Page: ${state.isError!.details}", state.isError!.code);
+        context.read<ChatBloc>().add(ChatEvent.clearError());
+      }
+      if (state.messageData != null && !listening) {
+        listening = true;
         state.messageData!.listen(
           (event) {
-            context.read<ChatBloc>().add(ChatEvent.loadMessages(event.docs));
+            if (mounted) {
+              context.read<ChatBloc>().add(ChatEvent.loadMessages(event.docs));
+            }
           },
         );
       }
@@ -85,6 +96,9 @@ class _ChattingPageState extends State<ChattingPage> {
             child: CircularProgressIndicator(),
           ),
         );
+      }
+      if (state.chatData?.userModel == null) {
+        return Scaffold(body: Center(child: Text("User data not available")));
       }
       final user = state.chatData!.userModel!;
       return Scaffold(
@@ -111,75 +125,138 @@ class _ChattingPageState extends State<ChattingPage> {
           },
           child: Container(
             decoration: BoxDecoration(),
-            child: Column(
+            child: Stack(
               children: [
-                Expanded(
-                  child: state.messageData == null
-                      ? SizedBox()
-                      : ListView(
-                          reverse: true,
-                          dragStartBehavior: DragStartBehavior.down,
-                          controller: scrollController,
-                          children: List.generate(
-                            state.messages.length,
-                            (index) {
-                              final message = state.messages[index];
-
-                              return Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () => clickedMessage(message),
-                                    onLongPressStart: (details) =>
-                                        onLongPressStart(message, details),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: selectedMessages
-                                                .contains(message.id)
-                                            ? AppColors.primary(context)
-                                                // ignore: deprecated_member_use
-                                                .withOpacity(0.1)
-                                            : null,
-                                        borderRadius: BorderRadius.circular(2),
-                                      ),
-                                      child: ChatWidget(messageModel: message),
+                Column(
+                  children: [
+                    Expanded(
+                      child: state.messageData == null
+                          ? SizedBox()
+                          : ListView(
+                              reverse: true,
+                              dragStartBehavior: DragStartBehavior.down,
+                              controller: scrollController,
+                              children: state.messages.entries.map((entry) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            entry.key,
+                                            style: GoogleFonts.nunito(),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
+                                    ...entry.value.map((chat) {
+                                      final message = chat;
+                                      return Column(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () =>
+                                                clickedMessage(message),
+                                            onLongPressStart: (details) =>
+                                                onLongPressStart(
+                                                    message, details),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: selectedMessages
+                                                        .contains(message.id)
+                                                    ? AppColors.primary(context)
+                                                        // ignore: deprecated_member_use
+                                                        .withOpacity(0.1)
+                                                    : null,
+                                                borderRadius:
+                                                    BorderRadius.circular(2),
+                                              ),
+                                              child: ChatWidget(
+                                                  messageModel: message),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }),
+                                  ],
+                                );
+                              }).toList(),
+                              // List.generate(
+                              //   state.messages.length,
+                              //   (index) {
+                              //     final message = state.messages[index];
+
+                              //     return Column(
+                              //       children: [
+                              //         GestureDetector(
+                              //           onTap: () => clickedMessage(message),
+                              //           onLongPressStart: (details) =>
+                              //               onLongPressStart(message, details),
+                              //           child: Container(
+                              //             decoration: BoxDecoration(
+                              //               color: selectedMessages
+                              //                       .contains(message.id)
+                              //                   ? AppColors.primary(context)
+                              //                       // ignore: deprecated_member_use
+                              //                       .withOpacity(0.1)
+                              //                   : null,
+                              //               borderRadius: BorderRadius.circular(2),
+                              //             ),
+                              //             child: ChatWidget(messageModel: message),
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     );
+                              //   },
+                              // ),
+                            ),
+                    ),
+                    ChatInput(
+                        inputLoading: state.inputLoading,
+                        emojiHide: isEmojiKeyboardHide,
+                        hideEmoji: () {
+                          isEmojiKeyboardHide = true;
+                          if (mounted) {
+                            setState(() {});
+                          }
+                        },
+                        onSubmit: () {
+                          if (isValidUrl(controller.text)) {
+                            context
+                                .read<ChatBloc>()
+                                .add(ChatEvent.sendLink(controller.text));
+                            controller.clear();
+                            return;
+                          }
+                          context
+                              .read<ChatBloc>()
+                              .add(ChatEvent.sendMessage(controller.text));
+                          controller.clear();
+                          return;
+                        },
+                        showEmojiKeyboard: showEmojiKeyboard,
+                        controller: controller,
+                        stickerSelected: (content) async {
+                          if (content.mimeType != "image/gif") {
+                            final stickerImage =
+                                await _convertUriToFile(content.data!);
+                            context.read<ChatBloc>().add(ChatEvent.sendSticker(
+                                stickerPath: stickerImage!));
+                          }
+                        }),
+                    CustomEmojiKeyboard(
+                      emojiController: controller,
+                      isHide: isEmojiKeyboardHide,
+                    ),
+                  ],
                 ),
-                ChatInput(
-                    inputLoading: state.inputLoading,
-                    onSubmit: () {
-                      if (isValidUrl(controller.text)) {
-                        context
-                            .read<ChatBloc>()
-                            .add(ChatEvent.sendLink(controller.text));
-                        controller.clear();
-                        return;
-                      }
-                      context
-                          .read<ChatBloc>()
-                          .add(ChatEvent.sendMessage(controller.text));
-                      controller.clear();
-                      return;
-                    },
-                    showEmojiKeyboard: showEmojiKeyboard,
-                    controller: controller,
-                    stickerSelected: (content) async {
-                      if (content.mimeType != "image/gif") {
-                        final stickerImage =
-                            await _convertUriToFile(content.data!);
-                        context.read<ChatBloc>().add(
-                            ChatEvent.sendSticker(stickerPath: stickerImage!));
-                      }
-                    }),
-                CustomEmojiKeyboard(
-                  emojiController: controller,
-                  isHide: isEmojiKeyboardHide,
-                ),
+                //loading
+                if (state.isLoading) Positioned.fill(child: AppLoadingWidget())
               ],
             ),
           ),
@@ -280,7 +357,19 @@ class _ChattingPageState extends State<ChattingPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ModalRoute.of(context)?.addScopedWillPopCallback(() async {
+      if (isEmojiKeyboardHide) {
+        context.read<ChatBloc>().add(ChatEvent.clearState());
+      }
+      return true;
+    });
+  }
+
+  @override
   void dispose() {
+    listening = false;
     hideReactions();
     stream.cancel();
     super.dispose();

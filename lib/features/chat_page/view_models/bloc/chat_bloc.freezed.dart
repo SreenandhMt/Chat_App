@@ -41,6 +41,8 @@ mixin _$ChatEvent {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +69,8 @@ mixin _$ChatEvent {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -93,6 +97,8 @@ mixin _$ChatEvent {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +123,8 @@ mixin _$ChatEvent {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -140,6 +148,8 @@ mixin _$ChatEvent {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -163,6 +173,8 @@ mixin _$ChatEvent {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -252,6 +264,8 @@ class _$StartedImpl implements _Started {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return started();
   }
@@ -281,6 +295,8 @@ class _$StartedImpl implements _Started {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return started?.call();
   }
@@ -310,6 +326,8 @@ class _$StartedImpl implements _Started {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -340,6 +358,8 @@ class _$StartedImpl implements _Started {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return started(this);
   }
@@ -366,6 +386,8 @@ class _$StartedImpl implements _Started {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return started?.call(this);
   }
@@ -392,6 +414,8 @@ class _$StartedImpl implements _Started {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -497,6 +521,8 @@ class _$GetMessagesImpl implements _GetMessages {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return getMessages(chatData);
   }
@@ -526,6 +552,8 @@ class _$GetMessagesImpl implements _GetMessages {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return getMessages?.call(chatData);
   }
@@ -555,6 +583,8 @@ class _$GetMessagesImpl implements _GetMessages {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (getMessages != null) {
@@ -585,6 +615,8 @@ class _$GetMessagesImpl implements _GetMessages {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return getMessages(this);
   }
@@ -611,6 +643,8 @@ class _$GetMessagesImpl implements _GetMessages {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return getMessages?.call(this);
   }
@@ -637,6 +671,8 @@ class _$GetMessagesImpl implements _GetMessages {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (getMessages != null) {
@@ -757,6 +793,8 @@ class _$LoadMessagesImpl implements _LoadMessages {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return loadMessages(docs);
   }
@@ -786,6 +824,8 @@ class _$LoadMessagesImpl implements _LoadMessages {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return loadMessages?.call(docs);
   }
@@ -815,6 +855,8 @@ class _$LoadMessagesImpl implements _LoadMessages {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (loadMessages != null) {
@@ -845,6 +887,8 @@ class _$LoadMessagesImpl implements _LoadMessages {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return loadMessages(this);
   }
@@ -871,6 +915,8 @@ class _$LoadMessagesImpl implements _LoadMessages {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return loadMessages?.call(this);
   }
@@ -897,6 +943,8 @@ class _$LoadMessagesImpl implements _LoadMessages {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (loadMessages != null) {
@@ -1011,6 +1059,8 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return sendMessage(message);
   }
@@ -1040,6 +1090,8 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return sendMessage?.call(message);
   }
@@ -1069,6 +1121,8 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -1099,6 +1153,8 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return sendMessage(this);
   }
@@ -1125,6 +1181,8 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return sendMessage?.call(this);
   }
@@ -1151,6 +1209,8 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -1263,6 +1323,8 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return sendImage(path);
   }
@@ -1292,6 +1354,8 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return sendImage?.call(path);
   }
@@ -1321,6 +1385,8 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (sendImage != null) {
@@ -1351,6 +1417,8 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return sendImage(this);
   }
@@ -1377,6 +1445,8 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return sendImage?.call(this);
   }
@@ -1403,6 +1473,8 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (sendImage != null) {
@@ -1524,6 +1596,8 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return addReaction(messageId, emoji);
   }
@@ -1553,6 +1627,8 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return addReaction?.call(messageId, emoji);
   }
@@ -1582,6 +1658,8 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (addReaction != null) {
@@ -1612,6 +1690,8 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return addReaction(this);
   }
@@ -1638,6 +1718,8 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return addReaction?.call(this);
   }
@@ -1664,6 +1746,8 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (addReaction != null) {
@@ -1793,6 +1877,8 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return sendAudioFile(file, waveList);
   }
@@ -1822,6 +1908,8 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return sendAudioFile?.call(file, waveList);
   }
@@ -1851,6 +1939,8 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (sendAudioFile != null) {
@@ -1881,6 +1971,8 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return sendAudioFile(this);
   }
@@ -1907,6 +1999,8 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return sendAudioFile?.call(this);
   }
@@ -1933,6 +2027,8 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (sendAudioFile != null) {
@@ -2047,6 +2143,8 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return sendVideoFile(path);
   }
@@ -2076,6 +2174,8 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return sendVideoFile?.call(path);
   }
@@ -2105,6 +2205,8 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (sendVideoFile != null) {
@@ -2135,6 +2237,8 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return sendVideoFile(this);
   }
@@ -2161,6 +2265,8 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return sendVideoFile?.call(this);
   }
@@ -2187,6 +2293,8 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (sendVideoFile != null) {
@@ -2299,6 +2407,8 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return sendLink(link);
   }
@@ -2328,6 +2438,8 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return sendLink?.call(link);
   }
@@ -2357,6 +2469,8 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (sendLink != null) {
@@ -2387,6 +2501,8 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return sendLink(this);
   }
@@ -2413,6 +2529,8 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return sendLink?.call(this);
   }
@@ -2439,6 +2557,8 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (sendLink != null) {
@@ -2552,6 +2672,8 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return sendSticker(stickerPath);
   }
@@ -2581,6 +2703,8 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return sendSticker?.call(stickerPath);
   }
@@ -2610,6 +2734,8 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (sendSticker != null) {
@@ -2640,6 +2766,8 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return sendSticker(this);
   }
@@ -2666,6 +2794,8 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return sendSticker?.call(this);
   }
@@ -2692,6 +2822,8 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (sendSticker != null) {
@@ -2805,6 +2937,8 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return sendDocument(path);
   }
@@ -2834,6 +2968,8 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return sendDocument?.call(path);
   }
@@ -2863,6 +2999,8 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (sendDocument != null) {
@@ -2893,6 +3031,8 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return sendDocument(this);
   }
@@ -2919,6 +3059,8 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return sendDocument?.call(this);
   }
@@ -2945,6 +3087,8 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (sendDocument != null) {
@@ -3074,6 +3218,8 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return createPoll(question, options);
   }
@@ -3103,6 +3249,8 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return createPoll?.call(question, options);
   }
@@ -3132,6 +3280,8 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (createPoll != null) {
@@ -3162,6 +3312,8 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return createPoll(this);
   }
@@ -3188,6 +3340,8 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return createPoll?.call(this);
   }
@@ -3214,6 +3368,8 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (createPoll != null) {
@@ -3356,6 +3512,8 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return votePoll(messageId, option, votes);
   }
@@ -3385,6 +3543,8 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return votePoll?.call(messageId, option, votes);
   }
@@ -3414,6 +3574,8 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (votePoll != null) {
@@ -3444,6 +3606,8 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return votePoll(this);
   }
@@ -3470,6 +3634,8 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return votePoll?.call(this);
   }
@@ -3496,6 +3662,8 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (votePoll != null) {
@@ -3621,6 +3789,8 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return deleteMessage(messageIds);
   }
@@ -3650,6 +3820,8 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return deleteMessage?.call(messageIds);
   }
@@ -3679,6 +3851,8 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
@@ -3709,6 +3883,8 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return deleteMessage(this);
   }
@@ -3735,6 +3911,8 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return deleteMessage?.call(this);
   }
@@ -3761,6 +3939,8 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
@@ -3883,6 +4063,8 @@ class _$DeleteMessageForMeImpl implements _DeleteMessageForMe {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return deleteMessageForMe(messageIds);
   }
@@ -3912,6 +4094,8 @@ class _$DeleteMessageForMeImpl implements _DeleteMessageForMe {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return deleteMessageForMe?.call(messageIds);
   }
@@ -3941,6 +4125,8 @@ class _$DeleteMessageForMeImpl implements _DeleteMessageForMe {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (deleteMessageForMe != null) {
@@ -3971,6 +4157,8 @@ class _$DeleteMessageForMeImpl implements _DeleteMessageForMe {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return deleteMessageForMe(this);
   }
@@ -3997,6 +4185,8 @@ class _$DeleteMessageForMeImpl implements _DeleteMessageForMe {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return deleteMessageForMe?.call(this);
   }
@@ -4023,6 +4213,8 @@ class _$DeleteMessageForMeImpl implements _DeleteMessageForMe {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (deleteMessageForMe != null) {
@@ -4138,6 +4330,8 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return editStatusToTyping(isTyping);
   }
@@ -4167,6 +4361,8 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return editStatusToTyping?.call(isTyping);
   }
@@ -4196,6 +4392,8 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (editStatusToTyping != null) {
@@ -4226,6 +4424,8 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return editStatusToTyping(this);
   }
@@ -4252,6 +4452,8 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return editStatusToTyping?.call(this);
   }
@@ -4278,6 +4480,8 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (editStatusToTyping != null) {
@@ -4391,6 +4595,8 @@ class _$MuteChatImpl implements _MuteChat {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return muteChat(status);
   }
@@ -4420,6 +4626,8 @@ class _$MuteChatImpl implements _MuteChat {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return muteChat?.call(status);
   }
@@ -4449,6 +4657,8 @@ class _$MuteChatImpl implements _MuteChat {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (muteChat != null) {
@@ -4479,6 +4689,8 @@ class _$MuteChatImpl implements _MuteChat {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return muteChat(this);
   }
@@ -4505,6 +4717,8 @@ class _$MuteChatImpl implements _MuteChat {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return muteChat?.call(this);
   }
@@ -4531,6 +4745,8 @@ class _$MuteChatImpl implements _MuteChat {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (muteChat != null) {
@@ -4643,6 +4859,8 @@ class _$BlockUserImpl implements _BlockUser {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return blockUser(uid);
   }
@@ -4672,6 +4890,8 @@ class _$BlockUserImpl implements _BlockUser {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return blockUser?.call(uid);
   }
@@ -4701,6 +4921,8 @@ class _$BlockUserImpl implements _BlockUser {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (blockUser != null) {
@@ -4731,6 +4953,8 @@ class _$BlockUserImpl implements _BlockUser {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return blockUser(this);
   }
@@ -4757,6 +4981,8 @@ class _$BlockUserImpl implements _BlockUser {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return blockUser?.call(this);
   }
@@ -4783,6 +5009,8 @@ class _$BlockUserImpl implements _BlockUser {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (blockUser != null) {
@@ -4895,6 +5123,8 @@ class _$ReportUserImpl implements _ReportUser {
     required TResult Function(bool status) muteChat,
     required TResult Function(String uid) blockUser,
     required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
   }) {
     return reportUser(uid);
   }
@@ -4924,6 +5154,8 @@ class _$ReportUserImpl implements _ReportUser {
     TResult? Function(bool status)? muteChat,
     TResult? Function(String uid)? blockUser,
     TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
   }) {
     return reportUser?.call(uid);
   }
@@ -4953,6 +5185,8 @@ class _$ReportUserImpl implements _ReportUser {
     TResult Function(bool status)? muteChat,
     TResult Function(String uid)? blockUser,
     TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
     required TResult orElse(),
   }) {
     if (reportUser != null) {
@@ -4983,6 +5217,8 @@ class _$ReportUserImpl implements _ReportUser {
     required TResult Function(_MuteChat value) muteChat,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
   }) {
     return reportUser(this);
   }
@@ -5009,6 +5245,8 @@ class _$ReportUserImpl implements _ReportUser {
     TResult? Function(_MuteChat value)? muteChat,
     TResult? Function(_BlockUser value)? blockUser,
     TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
   }) {
     return reportUser?.call(this);
   }
@@ -5035,6 +5273,8 @@ class _$ReportUserImpl implements _ReportUser {
     TResult Function(_MuteChat value)? muteChat,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
     required TResult orElse(),
   }) {
     if (reportUser != null) {
@@ -5057,16 +5297,475 @@ abstract class _ReportUser implements ChatEvent {
 }
 
 /// @nodoc
+abstract class _$$ClearStateImplCopyWith<$Res> {
+  factory _$$ClearStateImplCopyWith(
+          _$ClearStateImpl value, $Res Function(_$ClearStateImpl) then) =
+      __$$ClearStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearStateImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$ClearStateImpl>
+    implements _$$ClearStateImplCopyWith<$Res> {
+  __$$ClearStateImplCopyWithImpl(
+      _$ClearStateImpl _value, $Res Function(_$ClearStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearStateImpl implements _ClearState {
+  const _$ClearStateImpl();
+
+  @override
+  String toString() {
+    return 'ChatEvent.clearState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
+  }) {
+    return clearState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
+  }) {
+    return clearState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
+    required TResult orElse(),
+  }) {
+    if (clearState != null) {
+      return clearState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
+  }) {
+    return clearState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
+  }) {
+    return clearState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
+    required TResult orElse(),
+  }) {
+    if (clearState != null) {
+      return clearState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearState implements ChatEvent {
+  const factory _ClearState() = _$ClearStateImpl;
+}
+
+/// @nodoc
+abstract class _$$ClearErrorImplCopyWith<$Res> {
+  factory _$$ClearErrorImplCopyWith(
+          _$ClearErrorImpl value, $Res Function(_$ClearErrorImpl) then) =
+      __$$ClearErrorImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearErrorImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$ClearErrorImpl>
+    implements _$$ClearErrorImplCopyWith<$Res> {
+  __$$ClearErrorImplCopyWithImpl(
+      _$ClearErrorImpl _value, $Res Function(_$ClearErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearErrorImpl implements _ClearError {
+  const _$ClearErrorImpl();
+
+  @override
+  String toString() {
+    return 'ChatEvent.clearError()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearErrorImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ChatModel chatData) getMessages,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessages,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageIds) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteMessageForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(bool status) muteChat,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) reportUser,
+    required TResult Function() clearState,
+    required TResult Function() clearError,
+  }) {
+    return clearError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(ChatModel chatData)? getMessages,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageIds)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteMessageForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(bool status)? muteChat,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? reportUser,
+    TResult? Function()? clearState,
+    TResult? Function()? clearError,
+  }) {
+    return clearError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ChatModel chatData)? getMessages,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessages,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageIds)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteMessageForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(bool status)? muteChat,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? reportUser,
+    TResult Function()? clearState,
+    TResult Function()? clearError,
+    required TResult orElse(),
+  }) {
+    if (clearError != null) {
+      return clearError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetMessages value) getMessages,
+    required TResult Function(_LoadMessages value) loadMessages,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteMessageForMe value) deleteMessageForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_MuteChat value) muteChat,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ReportUser value) reportUser,
+    required TResult Function(_ClearState value) clearState,
+    required TResult Function(_ClearError value) clearError,
+  }) {
+    return clearError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetMessages value)? getMessages,
+    TResult? Function(_LoadMessages value)? loadMessages,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_MuteChat value)? muteChat,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_ReportUser value)? reportUser,
+    TResult? Function(_ClearState value)? clearState,
+    TResult? Function(_ClearError value)? clearError,
+  }) {
+    return clearError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetMessages value)? getMessages,
+    TResult Function(_LoadMessages value)? loadMessages,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteMessageForMe value)? deleteMessageForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_MuteChat value)? muteChat,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ReportUser value)? reportUser,
+    TResult Function(_ClearState value)? clearState,
+    TResult Function(_ClearError value)? clearError,
+    required TResult orElse(),
+  }) {
+    if (clearError != null) {
+      return clearError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearError implements ChatEvent {
+  const factory _ClearError() = _$ClearErrorImpl;
+}
+
+/// @nodoc
 mixin _$ChatState {
   ChatModel? get chatData => throw _privateConstructorUsedError;
   Stream<QuerySnapshot<Map<String, dynamic>>>? get messageData =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  String get isError => throw _privateConstructorUsedError;
+  AppException? get isError => throw _privateConstructorUsedError;
   int get wallpaperIndex => throw _privateConstructorUsedError;
   bool get isSavedContact => throw _privateConstructorUsedError;
   List<ChatModel> get commonGroups => throw _privateConstructorUsedError;
-  List<MessageModel> get messages => throw _privateConstructorUsedError;
+  Map<String, List<MessageModel>> get messages =>
+      throw _privateConstructorUsedError;
   bool get inputLoading => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -5074,11 +5773,11 @@ mixin _$ChatState {
             ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError,
+            AppException? isError,
             int wallpaperIndex,
             bool isSavedContact,
             List<ChatModel> commonGroups,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool inputLoading)
         chatData,
   }) =>
@@ -5089,11 +5788,11 @@ mixin _$ChatState {
             ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError,
+            AppException? isError,
             int wallpaperIndex,
             bool isSavedContact,
             List<ChatModel> commonGroups,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool inputLoading)?
         chatData,
   }) =>
@@ -5104,11 +5803,11 @@ mixin _$ChatState {
             ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError,
+            AppException? isError,
             int wallpaperIndex,
             bool isSavedContact,
             List<ChatModel> commonGroups,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool inputLoading)?
         chatData,
     required TResult orElse(),
@@ -5147,11 +5846,11 @@ abstract class $ChatStateCopyWith<$Res> {
       {ChatModel? chatData,
       Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       bool isLoading,
-      String isError,
+      AppException? isError,
       int wallpaperIndex,
       bool isSavedContact,
       List<ChatModel> commonGroups,
-      List<MessageModel> messages,
+      Map<String, List<MessageModel>> messages,
       bool inputLoading});
 }
 
@@ -5173,7 +5872,7 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
     Object? chatData = freezed,
     Object? messageData = freezed,
     Object? isLoading = null,
-    Object? isError = null,
+    Object? isError = freezed,
     Object? wallpaperIndex = null,
     Object? isSavedContact = null,
     Object? commonGroups = null,
@@ -5193,10 +5892,10 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isError: null == isError
+      isError: freezed == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AppException?,
       wallpaperIndex: null == wallpaperIndex
           ? _value.wallpaperIndex
           : wallpaperIndex // ignore: cast_nullable_to_non_nullable
@@ -5212,7 +5911,7 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
       messages: null == messages
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
-              as List<MessageModel>,
+              as Map<String, List<MessageModel>>,
       inputLoading: null == inputLoading
           ? _value.inputLoading
           : inputLoading // ignore: cast_nullable_to_non_nullable
@@ -5233,11 +5932,11 @@ abstract class _$$ChatDataImplCopyWith<$Res>
       {ChatModel? chatData,
       Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       bool isLoading,
-      String isError,
+      AppException? isError,
       int wallpaperIndex,
       bool isSavedContact,
       List<ChatModel> commonGroups,
-      List<MessageModel> messages,
+      Map<String, List<MessageModel>> messages,
       bool inputLoading});
 }
 
@@ -5257,7 +5956,7 @@ class __$$ChatDataImplCopyWithImpl<$Res>
     Object? chatData = freezed,
     Object? messageData = freezed,
     Object? isLoading = null,
-    Object? isError = null,
+    Object? isError = freezed,
     Object? wallpaperIndex = null,
     Object? isSavedContact = null,
     Object? commonGroups = null,
@@ -5277,10 +5976,10 @@ class __$$ChatDataImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isError: null == isError
+      isError: freezed == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AppException?,
       wallpaperIndex: null == wallpaperIndex
           ? _value.wallpaperIndex
           : wallpaperIndex // ignore: cast_nullable_to_non_nullable
@@ -5296,7 +5995,7 @@ class __$$ChatDataImplCopyWithImpl<$Res>
       messages: null == messages
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
-              as List<MessageModel>,
+              as Map<String, List<MessageModel>>,
       inputLoading: null == inputLoading
           ? _value.inputLoading
           : inputLoading // ignore: cast_nullable_to_non_nullable
@@ -5312,11 +6011,11 @@ class _$ChatDataImpl implements _ChatData {
       {this.chatData = null,
       this.messageData = null,
       this.isLoading = false,
-      this.isError = "",
+      this.isError = null,
       this.wallpaperIndex = 0,
       this.isSavedContact = false,
       final List<ChatModel> commonGroups = const [],
-      final List<MessageModel> messages = const [],
+      final Map<String, List<MessageModel>> messages = const {},
       this.inputLoading = false})
       : _commonGroups = commonGroups,
         _messages = messages;
@@ -5332,7 +6031,7 @@ class _$ChatDataImpl implements _ChatData {
   final bool isLoading;
   @override
   @JsonKey()
-  final String isError;
+  final AppException? isError;
   @override
   @JsonKey()
   final int wallpaperIndex;
@@ -5348,13 +6047,13 @@ class _$ChatDataImpl implements _ChatData {
     return EqualUnmodifiableListView(_commonGroups);
   }
 
-  final List<MessageModel> _messages;
+  final Map<String, List<MessageModel>> _messages;
   @override
   @JsonKey()
-  List<MessageModel> get messages {
-    if (_messages is EqualUnmodifiableListView) return _messages;
+  Map<String, List<MessageModel>> get messages {
+    if (_messages is EqualUnmodifiableMapView) return _messages;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_messages);
+    return EqualUnmodifiableMapView(_messages);
   }
 
   @override
@@ -5417,11 +6116,11 @@ class _$ChatDataImpl implements _ChatData {
             ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError,
+            AppException? isError,
             int wallpaperIndex,
             bool isSavedContact,
             List<ChatModel> commonGroups,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool inputLoading)
         chatData,
   }) {
@@ -5436,11 +6135,11 @@ class _$ChatDataImpl implements _ChatData {
             ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError,
+            AppException? isError,
             int wallpaperIndex,
             bool isSavedContact,
             List<ChatModel> commonGroups,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool inputLoading)?
         chatData,
   }) {
@@ -5455,11 +6154,11 @@ class _$ChatDataImpl implements _ChatData {
             ChatModel? chatData,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             bool isLoading,
-            String isError,
+            AppException? isError,
             int wallpaperIndex,
             bool isSavedContact,
             List<ChatModel> commonGroups,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool inputLoading)?
         chatData,
     required TResult orElse(),
@@ -5505,11 +6204,11 @@ abstract class _ChatData implements ChatState {
       {final ChatModel? chatData,
       final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       final bool isLoading,
-      final String isError,
+      final AppException? isError,
       final int wallpaperIndex,
       final bool isSavedContact,
       final List<ChatModel> commonGroups,
-      final List<MessageModel> messages,
+      final Map<String, List<MessageModel>> messages,
       final bool inputLoading}) = _$ChatDataImpl;
 
   @override
@@ -5519,7 +6218,7 @@ abstract class _ChatData implements ChatState {
   @override
   bool get isLoading;
   @override
-  String get isError;
+  AppException? get isError;
   @override
   int get wallpaperIndex;
   @override
@@ -5527,7 +6226,7 @@ abstract class _ChatData implements ChatState {
   @override
   List<ChatModel> get commonGroups;
   @override
-  List<MessageModel> get messages;
+  Map<String, List<MessageModel>> get messages;
   @override
   bool get inputLoading;
 

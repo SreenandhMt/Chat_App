@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/features/calls_screen/models/call_model.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/fonts.dart';
 import '../../core/size.dart';
@@ -62,7 +62,6 @@ class _MainPageConfigurationState extends State<MainPageConfiguration> {
         .snapshots()
         .listen((event) async {
       if (event.docs.isNotEmpty) {
-        log(event.docs.first.data().toString());
         callModel = await CallingService.convertCallModel(
             callData: event.docs.first.data());
         setState(() {
@@ -82,7 +81,6 @@ class _MainPageConfigurationState extends State<MainPageConfiguration> {
 
   @override
   Widget build(BuildContext context) {
-    log("ss");
     final activeCall = context.watch<CallingBloc>().state.currentCall;
     if (activeCall != null &&
         _timer == null &&
@@ -235,10 +233,10 @@ class _MainPageConfigurationState extends State<MainPageConfiguration> {
                                       context.read<CallingBloc>().add(
                                           CallingEvent.endNormalCall(
                                               callId: callModel!.historyId));
-                                      context.read<CallingBloc>().add(
-                                          CallingEvent.setCurrentCall(
-                                              callModel: callModel!));
                                     }
+                                    context
+                                        .read<CallingBloc>()
+                                        .add(CallingEvent.clearCurrentCall());
                                   },
                                   color: Colors.red,
                                   height: 45,
@@ -288,12 +286,29 @@ class _MainPageConfigurationState extends State<MainPageConfiguration> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.navigationShell.currentIndex,
         onTap: (value) => widget.navigationShell.goBranch(value),
+        selectedLabelStyle: GoogleFonts.nunito(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: AppColors.primary(context),
+        ),
+        unselectedLabelStyle: GoogleFonts.nunito(
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          color: null,
+        ),
         items: [
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.chat_bubble), label: "Chats"),
+              activeIcon: Icon(CupertinoIcons.chat_bubble_fill),
+              icon: Icon(CupertinoIcons.chat_bubble),
+              label: "Chats"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.circle_outlined), label: "Status"),
-          BottomNavigationBarItem(icon: Icon(Icons.call), label: "Calls"),
+              activeIcon: Icon(CupertinoIcons.app_fill),
+              icon: Icon(CupertinoIcons.app),
+              label: "Status"),
+          BottomNavigationBarItem(
+              activeIcon: Icon(CupertinoIcons.phone_solid),
+              icon: Icon(CupertinoIcons.phone),
+              label: "Calls"),
         ],
       ),
     );

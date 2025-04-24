@@ -160,6 +160,7 @@ class _AppAudioPlayerState extends State<AppAudioPlayer>
 
   @override
   Widget build(BuildContext context) {
+    final color = widget.isSender ? Colors.white : null;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.chatColor(context, widget.isSender),
@@ -192,9 +193,7 @@ class _AppAudioPlayerState extends State<AppAudioPlayer>
                       ? "${_formatDuration(duration)} / ${_formatDuration(position)}"
                       : _formatDuration(duration),
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500),
+                      color: color, fontSize: 15, fontWeight: FontWeight.w500),
                 ),
               ],
             ),

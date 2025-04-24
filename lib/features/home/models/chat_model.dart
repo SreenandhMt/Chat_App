@@ -1,6 +1,9 @@
-import 'package:chat_app/features/auth/models/user_models.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:chat_app/features/auth/models/user_models.dart';
+import 'package:intl/intl.dart';
 
 class ChatModel {
   final String chatId;
@@ -28,6 +31,7 @@ class ChatModel {
   final List<Map<String, dynamic>>? joinedDate;
   final bool muted;
   final List<String> isSeenBy;
+  final String date;
 
   factory ChatModel.fromJson(Map<String, dynamic> json, int? count,
           {UserModels? userModel}) =>
@@ -63,6 +67,10 @@ class ChatModel {
             : true,
         isSeenBy: List<String>.from(json["isSeenBy"] ?? []),
         userModel: userModel,
+        date: json["lastMessageTime"] != null
+            ? formatChatTime(
+                DateTime.fromMicrosecondsSinceEpoch(json["lastMessageTime"]))
+            : formatChatTime(DateTime.now()),
       );
 
   ChatModel(
@@ -89,7 +97,8 @@ class ChatModel {
       required this.joinedDate,
       required this.muted,
       required this.isSeenBy,
-      required this.userModel});
+      required this.userModel,
+      required this.date});
 
   ChatModel copyWith({
     String? chatId,
@@ -146,6 +155,24 @@ class ChatModel {
         joinedDate: joinedDate,
         muted: muted ?? this.muted,
         isSeenBy: isSeenBy,
-        userModel: userModel ?? this.userModel);
+        userModel: userModel ?? this.userModel,
+        date: date);
+  }
+
+  static String formatChatTime(DateTime date) {
+    final now = DateTime.now();
+
+    final dateOnly = DateTime(date.year, date.month, date.day);
+    final nowDateOnly = DateTime(now.year, now.month, now.day);
+
+    final difference = nowDateOnly.difference(dateOnly).inDays;
+
+    if (difference == 0) {
+      return DateFormat('hh:mm a').format(date);
+    } else if (difference == 1) {
+      return "Yesterday";
+    } else {
+      return DateFormat('dd/MM/yy').format(date);
+    }
   }
 }

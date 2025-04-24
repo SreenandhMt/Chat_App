@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:chat_app/core/all_fonts.dart';
 import 'package:chat_app/core/color_list.dart';
 import 'package:chat_app/core/colors.dart';
+import 'package:chat_app/core/loading.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/status/models/status_model.dart';
@@ -12,6 +13,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../core/error_snackbar.dart';
 
 final _auth = FirebaseAuth.instance;
 
@@ -71,6 +74,10 @@ class _StatusViewState extends State<StatusView> {
   }
 
   void _startTimer(List<StatusModel> status, {int? index}) {
+    final state = context.read<StatusBloc>().state;
+    final user = state.selectedStatus["user"] as UserModels?;
+    final status = state.selectedStatus["status"] as List<StatusModel>;
+    final isMe = user == null ? true : false;
     _timer?.cancel();
     final page = _pageController.page!.toInt() + (index ?? 0);
     _progress[page] = 0.0;
@@ -100,6 +107,14 @@ class _StatusViewState extends State<StatusView> {
             _startTimer(status, index: 1);
           });
         } else {
+          if (!isMe &&
+              !status[_pageController.page!.toInt()]
+                  .views
+                  .contains(_auth.currentUser!.uid)) {
+            context.read<StatusBloc>().add(StatusEvent.updateViews(
+                uid: user.uid,
+                statusId: status[_pageController.page!.toInt()].id));
+          }
           context.pop();
         }
       }
@@ -108,11 +123,19 @@ class _StatusViewState extends State<StatusView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StatusBloc, StatusState>(builder: (context, state) {
+    return BlocConsumer<StatusBloc, StatusState>(listener: (context, state) {
+      if (state.error != null) {
+        showExpandableSnackBar(context, state.error!.message,
+            "Error Status: ${state.error!.details}", state.error!.code);
+        context.read<StatusBloc>().add(StatusEvent.clearErrorMessage());
+      }
+    }, builder: (context, state) {
       final user = state.selectedStatus["user"] as UserModels?;
-      final status = state.selectedStatus["status"] as List<StatusModel>;
+      final status = state.selectedStatus["status"] as List<StatusModel>?;
+      if (status == null) {
+        return AppLoadingWidget();
+      }
       final bool isMe = user == null;
-
       return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size(double.infinity, 60),

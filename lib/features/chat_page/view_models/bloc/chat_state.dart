@@ -6,11 +6,11 @@ class ChatState with _$ChatState {
     @Default(null) ChatModel? chatData,
     @Default(null) Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
     @Default(false) bool isLoading,
-    @Default("") String isError,
+    @Default(null) AppException? isError,
     @Default(0) int wallpaperIndex,
     @Default(false) bool isSavedContact,
     @Default([]) List<ChatModel> commonGroups,
-    @Default([]) List<MessageModel> messages,
+    @Default({}) Map<String, List<MessageModel>> messages,
     @Default(false) bool inputLoading,
   }) = _ChatData;
 }

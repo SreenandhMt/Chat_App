@@ -23,6 +23,7 @@ class AppLockSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<SettingsBloc>().add(SettingsEvent.getAppLock());
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
         return Form(
@@ -90,7 +91,7 @@ class AppLockSettings extends StatelessWidget {
                       ),
                     ),
                     Spacer(flex: 10),
-                    if (state.appLock != null)
+                    if (state.appLock != null) ...[
                       Text(
                         "Forget Pin",
                         style: GoogleFonts.quicksand(
@@ -99,6 +100,8 @@ class AppLockSettings extends StatelessWidget {
                           color: AppColors.primary(context),
                         ),
                       ),
+                      height10,
+                    ],
                     AppButton(
                       title: state.appLock != null ? "Conform" : "Next",
                       onPressed: () {

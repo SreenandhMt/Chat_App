@@ -5,6 +5,6 @@ class AppLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: CircularProgressIndicator());
+    return Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }

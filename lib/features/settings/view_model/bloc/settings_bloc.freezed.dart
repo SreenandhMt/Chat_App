@@ -22,8 +22,10 @@ mixin _$SettingsEvent {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -40,8 +42,9 @@ mixin _$SettingsEvent {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -56,8 +59,9 @@ mixin _$SettingsEvent {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -73,6 +77,7 @@ mixin _$SettingsEvent {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -90,6 +95,7 @@ mixin _$SettingsEvent {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -106,6 +112,7 @@ mixin _$SettingsEvent {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -184,8 +191,10 @@ class _$InitImpl implements _Init {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -205,8 +214,9 @@ class _$InitImpl implements _Init {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -224,8 +234,9 @@ class _$InitImpl implements _Init {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -247,6 +258,7 @@ class _$InitImpl implements _Init {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -267,6 +279,7 @@ class _$InitImpl implements _Init {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -286,6 +299,7 @@ class _$InitImpl implements _Init {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -379,8 +393,10 @@ class _$CreateAppLockImpl implements _CreateAppLock {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -400,8 +416,9 @@ class _$CreateAppLockImpl implements _CreateAppLock {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -419,8 +436,9 @@ class _$CreateAppLockImpl implements _CreateAppLock {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -442,6 +460,7 @@ class _$CreateAppLockImpl implements _CreateAppLock {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -462,6 +481,7 @@ class _$CreateAppLockImpl implements _CreateAppLock {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -481,6 +501,7 @@ class _$CreateAppLockImpl implements _CreateAppLock {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -555,8 +576,10 @@ class _$GetAppLockImpl implements _GetAppLock {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -576,8 +599,9 @@ class _$GetAppLockImpl implements _GetAppLock {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -595,8 +619,9 @@ class _$GetAppLockImpl implements _GetAppLock {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -618,6 +643,7 @@ class _$GetAppLockImpl implements _GetAppLock {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -638,6 +664,7 @@ class _$GetAppLockImpl implements _GetAppLock {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -657,6 +684,7 @@ class _$GetAppLockImpl implements _GetAppLock {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -723,8 +751,10 @@ class _$DeleteAppLockImpl implements _DeleteAppLock {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -744,8 +774,9 @@ class _$DeleteAppLockImpl implements _DeleteAppLock {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -763,8 +794,9 @@ class _$DeleteAppLockImpl implements _DeleteAppLock {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -786,6 +818,7 @@ class _$DeleteAppLockImpl implements _DeleteAppLock {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -806,6 +839,7 @@ class _$DeleteAppLockImpl implements _DeleteAppLock {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -825,6 +859,7 @@ class _$DeleteAppLockImpl implements _DeleteAppLock {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -844,6 +879,181 @@ class _$DeleteAppLockImpl implements _DeleteAppLock {
 
 abstract class _DeleteAppLock implements SettingsEvent {
   const factory _DeleteAppLock() = _$DeleteAppLockImpl;
+}
+
+/// @nodoc
+abstract class _$$ForgetAppLockImplCopyWith<$Res> {
+  factory _$$ForgetAppLockImplCopyWith(
+          _$ForgetAppLockImpl value, $Res Function(_$ForgetAppLockImpl) then) =
+      __$$ForgetAppLockImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ForgetAppLockImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$ForgetAppLockImpl>
+    implements _$$ForgetAppLockImplCopyWith<$Res> {
+  __$$ForgetAppLockImplCopyWithImpl(
+      _$ForgetAppLockImpl _value, $Res Function(_$ForgetAppLockImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ForgetAppLockImpl implements _ForgetAppLock {
+  const _$ForgetAppLockImpl();
+
+  @override
+  String toString() {
+    return 'SettingsEvent.forgetAppLock()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ForgetAppLockImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(int pin) createAppLock,
+    required TResult Function() getAppLock,
+    required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
+    required TResult Function() getLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
+    required TResult Function() getWallpaperIndex,
+    required TResult Function(int index) changeWallpaper,
+    required TResult Function() getNotificationSettings,
+    required TResult Function(NotificationType type, bool status)
+        turnNotification,
+    required TResult Function(String? name, String? profileImagePath)
+        editProfile,
+    required TResult Function(String path) setProfilePath,
+  }) {
+    return forgetAppLock();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(int pin)? createAppLock,
+    TResult? Function()? getAppLock,
+    TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
+    TResult? Function()? getLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
+    TResult? Function()? getWallpaperIndex,
+    TResult? Function(int index)? changeWallpaper,
+    TResult? Function()? getNotificationSettings,
+    TResult? Function(NotificationType type, bool status)? turnNotification,
+    TResult? Function(String? name, String? profileImagePath)? editProfile,
+    TResult? Function(String path)? setProfilePath,
+  }) {
+    return forgetAppLock?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(int pin)? createAppLock,
+    TResult Function()? getAppLock,
+    TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
+    TResult Function()? getLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
+    TResult Function()? getWallpaperIndex,
+    TResult Function(int index)? changeWallpaper,
+    TResult Function()? getNotificationSettings,
+    TResult Function(NotificationType type, bool status)? turnNotification,
+    TResult Function(String? name, String? profileImagePath)? editProfile,
+    TResult Function(String path)? setProfilePath,
+    required TResult orElse(),
+  }) {
+    if (forgetAppLock != null) {
+      return forgetAppLock();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_CreateAppLock value) createAppLock,
+    required TResult Function(_GetAppLock value) getAppLock,
+    required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
+    required TResult Function(_GetLanguage value) getLanguage,
+    required TResult Function(_ChangeLanguage value) changeLanguage,
+    required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
+    required TResult Function(_ChangeWallpaper value) changeWallpaper,
+    required TResult Function(_GetNotificationSettings value)
+        getNotificationSettings,
+    required TResult Function(_TurnNotification value) turnNotification,
+    required TResult Function(_EditProfile value) editProfile,
+    required TResult Function(_SetProfilePath value) setProfilePath,
+  }) {
+    return forgetAppLock(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_CreateAppLock value)? createAppLock,
+    TResult? Function(_GetAppLock value)? getAppLock,
+    TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
+    TResult? Function(_GetLanguage value)? getLanguage,
+    TResult? Function(_ChangeLanguage value)? changeLanguage,
+    TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
+    TResult? Function(_ChangeWallpaper value)? changeWallpaper,
+    TResult? Function(_GetNotificationSettings value)? getNotificationSettings,
+    TResult? Function(_TurnNotification value)? turnNotification,
+    TResult? Function(_EditProfile value)? editProfile,
+    TResult? Function(_SetProfilePath value)? setProfilePath,
+  }) {
+    return forgetAppLock?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_CreateAppLock value)? createAppLock,
+    TResult Function(_GetAppLock value)? getAppLock,
+    TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
+    TResult Function(_GetLanguage value)? getLanguage,
+    TResult Function(_ChangeLanguage value)? changeLanguage,
+    TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
+    TResult Function(_ChangeWallpaper value)? changeWallpaper,
+    TResult Function(_GetNotificationSettings value)? getNotificationSettings,
+    TResult Function(_TurnNotification value)? turnNotification,
+    TResult Function(_EditProfile value)? editProfile,
+    TResult Function(_SetProfilePath value)? setProfilePath,
+    required TResult orElse(),
+  }) {
+    if (forgetAppLock != null) {
+      return forgetAppLock(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ForgetAppLock implements SettingsEvent {
+  const factory _ForgetAppLock() = _$ForgetAppLockImpl;
 }
 
 /// @nodoc
@@ -891,8 +1101,10 @@ class _$GetLanguageImpl implements _GetLanguage {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -912,8 +1124,9 @@ class _$GetLanguageImpl implements _GetLanguage {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -931,8 +1144,9 @@ class _$GetLanguageImpl implements _GetLanguage {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -954,6 +1168,7 @@ class _$GetLanguageImpl implements _GetLanguage {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -974,6 +1189,7 @@ class _$GetLanguageImpl implements _GetLanguage {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -993,6 +1209,7 @@ class _$GetLanguageImpl implements _GetLanguage {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1020,7 +1237,7 @@ abstract class _$$ChangeLanguageImplCopyWith<$Res> {
           $Res Function(_$ChangeLanguageImpl) then) =
       __$$ChangeLanguageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String languageCode});
+  $Res call({String languageCode, String languageName});
 }
 
 /// @nodoc
@@ -1037,11 +1254,16 @@ class __$$ChangeLanguageImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? languageCode = null,
+    Object? languageName = null,
   }) {
     return _then(_$ChangeLanguageImpl(
       languageCode: null == languageCode
           ? _value.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      languageName: null == languageName
+          ? _value.languageName
+          : languageName // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1050,14 +1272,17 @@ class __$$ChangeLanguageImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ChangeLanguageImpl implements _ChangeLanguage {
-  const _$ChangeLanguageImpl({required this.languageCode});
+  const _$ChangeLanguageImpl(
+      {required this.languageCode, required this.languageName});
 
   @override
   final String languageCode;
+  @override
+  final String languageName;
 
   @override
   String toString() {
-    return 'SettingsEvent.changeLanguage(languageCode: $languageCode)';
+    return 'SettingsEvent.changeLanguage(languageCode: $languageCode, languageName: $languageName)';
   }
 
   @override
@@ -1066,11 +1291,13 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
         (other.runtimeType == runtimeType &&
             other is _$ChangeLanguageImpl &&
             (identical(other.languageCode, languageCode) ||
-                other.languageCode == languageCode));
+                other.languageCode == languageCode) &&
+            (identical(other.languageName, languageName) ||
+                other.languageName == languageName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, languageCode);
+  int get hashCode => Object.hash(runtimeType, languageCode, languageName);
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1088,8 +1315,10 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -1099,7 +1328,7 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
         editProfile,
     required TResult Function(String path) setProfilePath,
   }) {
-    return changeLanguage(languageCode);
+    return changeLanguage(languageCode, languageName);
   }
 
   @override
@@ -1109,8 +1338,9 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -1118,7 +1348,7 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
     TResult? Function(String? name, String? profileImagePath)? editProfile,
     TResult? Function(String path)? setProfilePath,
   }) {
-    return changeLanguage?.call(languageCode);
+    return changeLanguage?.call(languageCode, languageName);
   }
 
   @override
@@ -1128,8 +1358,9 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -1139,7 +1370,7 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
     required TResult orElse(),
   }) {
     if (changeLanguage != null) {
-      return changeLanguage(languageCode);
+      return changeLanguage(languageCode, languageName);
     }
     return orElse();
   }
@@ -1151,6 +1382,7 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -1171,6 +1403,7 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1190,6 +1423,7 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1208,10 +1442,12 @@ class _$ChangeLanguageImpl implements _ChangeLanguage {
 }
 
 abstract class _ChangeLanguage implements SettingsEvent {
-  const factory _ChangeLanguage({required final String languageCode}) =
-      _$ChangeLanguageImpl;
+  const factory _ChangeLanguage(
+      {required final String languageCode,
+      required final String languageName}) = _$ChangeLanguageImpl;
 
   String get languageCode;
+  String get languageName;
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1265,8 +1501,10 @@ class _$GetWallpaperIndexImpl implements _GetWallpaperIndex {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -1286,8 +1524,9 @@ class _$GetWallpaperIndexImpl implements _GetWallpaperIndex {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -1305,8 +1544,9 @@ class _$GetWallpaperIndexImpl implements _GetWallpaperIndex {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -1328,6 +1568,7 @@ class _$GetWallpaperIndexImpl implements _GetWallpaperIndex {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -1348,6 +1589,7 @@ class _$GetWallpaperIndexImpl implements _GetWallpaperIndex {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1367,6 +1609,7 @@ class _$GetWallpaperIndexImpl implements _GetWallpaperIndex {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1461,8 +1704,10 @@ class _$ChangeWallpaperImpl implements _ChangeWallpaper {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -1482,8 +1727,9 @@ class _$ChangeWallpaperImpl implements _ChangeWallpaper {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -1501,8 +1747,9 @@ class _$ChangeWallpaperImpl implements _ChangeWallpaper {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -1524,6 +1771,7 @@ class _$ChangeWallpaperImpl implements _ChangeWallpaper {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -1544,6 +1792,7 @@ class _$ChangeWallpaperImpl implements _ChangeWallpaper {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1563,6 +1812,7 @@ class _$ChangeWallpaperImpl implements _ChangeWallpaper {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1641,8 +1891,10 @@ class _$GetNotificationSettingsImpl implements _GetNotificationSettings {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -1662,8 +1914,9 @@ class _$GetNotificationSettingsImpl implements _GetNotificationSettings {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -1681,8 +1934,9 @@ class _$GetNotificationSettingsImpl implements _GetNotificationSettings {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -1704,6 +1958,7 @@ class _$GetNotificationSettingsImpl implements _GetNotificationSettings {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -1724,6 +1979,7 @@ class _$GetNotificationSettingsImpl implements _GetNotificationSettings {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1743,6 +1999,7 @@ class _$GetNotificationSettingsImpl implements _GetNotificationSettings {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1845,8 +2102,10 @@ class _$TurnNotificationImpl implements _TurnNotification {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -1866,8 +2125,9 @@ class _$TurnNotificationImpl implements _TurnNotification {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -1885,8 +2145,9 @@ class _$TurnNotificationImpl implements _TurnNotification {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -1908,6 +2169,7 @@ class _$TurnNotificationImpl implements _TurnNotification {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -1928,6 +2190,7 @@ class _$TurnNotificationImpl implements _TurnNotification {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -1947,6 +2210,7 @@ class _$TurnNotificationImpl implements _TurnNotification {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -2060,8 +2324,10 @@ class _$EditProfileImpl implements _EditProfile {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -2081,8 +2347,9 @@ class _$EditProfileImpl implements _EditProfile {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -2100,8 +2367,9 @@ class _$EditProfileImpl implements _EditProfile {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -2123,6 +2391,7 @@ class _$EditProfileImpl implements _EditProfile {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -2143,6 +2412,7 @@ class _$EditProfileImpl implements _EditProfile {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -2162,6 +2432,7 @@ class _$EditProfileImpl implements _EditProfile {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -2266,8 +2537,10 @@ class _$SetProfilePathImpl implements _SetProfilePath {
     required TResult Function(int pin) createAppLock,
     required TResult Function() getAppLock,
     required TResult Function() deleteAppLock,
+    required TResult Function() forgetAppLock,
     required TResult Function() getLanguage,
-    required TResult Function(String languageCode) changeLanguage,
+    required TResult Function(String languageCode, String languageName)
+        changeLanguage,
     required TResult Function() getWallpaperIndex,
     required TResult Function(int index) changeWallpaper,
     required TResult Function() getNotificationSettings,
@@ -2287,8 +2560,9 @@ class _$SetProfilePathImpl implements _SetProfilePath {
     TResult? Function(int pin)? createAppLock,
     TResult? Function()? getAppLock,
     TResult? Function()? deleteAppLock,
+    TResult? Function()? forgetAppLock,
     TResult? Function()? getLanguage,
-    TResult? Function(String languageCode)? changeLanguage,
+    TResult? Function(String languageCode, String languageName)? changeLanguage,
     TResult? Function()? getWallpaperIndex,
     TResult? Function(int index)? changeWallpaper,
     TResult? Function()? getNotificationSettings,
@@ -2306,8 +2580,9 @@ class _$SetProfilePathImpl implements _SetProfilePath {
     TResult Function(int pin)? createAppLock,
     TResult Function()? getAppLock,
     TResult Function()? deleteAppLock,
+    TResult Function()? forgetAppLock,
     TResult Function()? getLanguage,
-    TResult Function(String languageCode)? changeLanguage,
+    TResult Function(String languageCode, String languageName)? changeLanguage,
     TResult Function()? getWallpaperIndex,
     TResult Function(int index)? changeWallpaper,
     TResult Function()? getNotificationSettings,
@@ -2329,6 +2604,7 @@ class _$SetProfilePathImpl implements _SetProfilePath {
     required TResult Function(_CreateAppLock value) createAppLock,
     required TResult Function(_GetAppLock value) getAppLock,
     required TResult Function(_DeleteAppLock value) deleteAppLock,
+    required TResult Function(_ForgetAppLock value) forgetAppLock,
     required TResult Function(_GetLanguage value) getLanguage,
     required TResult Function(_ChangeLanguage value) changeLanguage,
     required TResult Function(_GetWallpaperIndex value) getWallpaperIndex,
@@ -2349,6 +2625,7 @@ class _$SetProfilePathImpl implements _SetProfilePath {
     TResult? Function(_CreateAppLock value)? createAppLock,
     TResult? Function(_GetAppLock value)? getAppLock,
     TResult? Function(_DeleteAppLock value)? deleteAppLock,
+    TResult? Function(_ForgetAppLock value)? forgetAppLock,
     TResult? Function(_GetLanguage value)? getLanguage,
     TResult? Function(_ChangeLanguage value)? changeLanguage,
     TResult? Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -2368,6 +2645,7 @@ class _$SetProfilePathImpl implements _SetProfilePath {
     TResult Function(_CreateAppLock value)? createAppLock,
     TResult Function(_GetAppLock value)? getAppLock,
     TResult Function(_DeleteAppLock value)? deleteAppLock,
+    TResult Function(_ForgetAppLock value)? forgetAppLock,
     TResult Function(_GetLanguage value)? getLanguage,
     TResult Function(_ChangeLanguage value)? changeLanguage,
     TResult Function(_GetWallpaperIndex value)? getWallpaperIndex,
@@ -2402,6 +2680,7 @@ abstract class _SetProfilePath implements SettingsEvent {
 mixin _$SettingsState {
   int? get appLock => throw _privateConstructorUsedError;
   String get languageCode => throw _privateConstructorUsedError;
+  String get languageName => throw _privateConstructorUsedError;
   int get wallpaperIndex => throw _privateConstructorUsedError;
   List<NotificationModel>? get notificationSetting =>
       throw _privateConstructorUsedError;
@@ -2412,6 +2691,7 @@ mixin _$SettingsState {
     required TResult Function(
             int? appLock,
             String languageCode,
+            String languageName,
             int wallpaperIndex,
             List<NotificationModel>? notificationSetting,
             UserModels? userModel,
@@ -2424,6 +2704,7 @@ mixin _$SettingsState {
     TResult? Function(
             int? appLock,
             String languageCode,
+            String languageName,
             int wallpaperIndex,
             List<NotificationModel>? notificationSetting,
             UserModels? userModel,
@@ -2436,6 +2717,7 @@ mixin _$SettingsState {
     TResult Function(
             int? appLock,
             String languageCode,
+            String languageName,
             int wallpaperIndex,
             List<NotificationModel>? notificationSetting,
             UserModels? userModel,
@@ -2477,6 +2759,7 @@ abstract class $SettingsStateCopyWith<$Res> {
   $Res call(
       {int? appLock,
       String languageCode,
+      String languageName,
       int wallpaperIndex,
       List<NotificationModel>? notificationSetting,
       UserModels? userModel,
@@ -2500,6 +2783,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   $Res call({
     Object? appLock = freezed,
     Object? languageCode = null,
+    Object? languageName = null,
     Object? wallpaperIndex = null,
     Object? notificationSetting = freezed,
     Object? userModel = freezed,
@@ -2513,6 +2797,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
       languageCode: null == languageCode
           ? _value.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      languageName: null == languageName
+          ? _value.languageName
+          : languageName // ignore: cast_nullable_to_non_nullable
               as String,
       wallpaperIndex: null == wallpaperIndex
           ? _value.wallpaperIndex
@@ -2545,6 +2833,7 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
   $Res call(
       {int? appLock,
       String languageCode,
+      String languageName,
       int wallpaperIndex,
       List<NotificationModel>? notificationSetting,
       UserModels? userModel,
@@ -2566,6 +2855,7 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? appLock = freezed,
     Object? languageCode = null,
+    Object? languageName = null,
     Object? wallpaperIndex = null,
     Object? notificationSetting = freezed,
     Object? userModel = freezed,
@@ -2579,6 +2869,10 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
       languageCode: null == languageCode
           ? _value.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      languageName: null == languageName
+          ? _value.languageName
+          : languageName // ignore: cast_nullable_to_non_nullable
               as String,
       wallpaperIndex: null == wallpaperIndex
           ? _value.wallpaperIndex
@@ -2606,6 +2900,7 @@ class _$SettingsStateImpl implements _SettingsState {
   const _$SettingsStateImpl(
       {this.appLock = null,
       this.languageCode = "en",
+      this.languageName = "English",
       this.wallpaperIndex = 0,
       final List<NotificationModel>? notificationSetting = null,
       this.userModel = null,
@@ -2618,6 +2913,9 @@ class _$SettingsStateImpl implements _SettingsState {
   @override
   @JsonKey()
   final String languageCode;
+  @override
+  @JsonKey()
+  final String languageName;
   @override
   @JsonKey()
   final int wallpaperIndex;
@@ -2642,7 +2940,7 @@ class _$SettingsStateImpl implements _SettingsState {
 
   @override
   String toString() {
-    return 'SettingsState.settingsState(appLock: $appLock, languageCode: $languageCode, wallpaperIndex: $wallpaperIndex, notificationSetting: $notificationSetting, userModel: $userModel, path: $path)';
+    return 'SettingsState.settingsState(appLock: $appLock, languageCode: $languageCode, languageName: $languageName, wallpaperIndex: $wallpaperIndex, notificationSetting: $notificationSetting, userModel: $userModel, path: $path)';
   }
 
   @override
@@ -2653,6 +2951,8 @@ class _$SettingsStateImpl implements _SettingsState {
             (identical(other.appLock, appLock) || other.appLock == appLock) &&
             (identical(other.languageCode, languageCode) ||
                 other.languageCode == languageCode) &&
+            (identical(other.languageName, languageName) ||
+                other.languageName == languageName) &&
             (identical(other.wallpaperIndex, wallpaperIndex) ||
                 other.wallpaperIndex == wallpaperIndex) &&
             const DeepCollectionEquality()
@@ -2667,6 +2967,7 @@ class _$SettingsStateImpl implements _SettingsState {
       runtimeType,
       appLock,
       languageCode,
+      languageName,
       wallpaperIndex,
       const DeepCollectionEquality().hash(_notificationSetting),
       userModel,
@@ -2686,13 +2987,14 @@ class _$SettingsStateImpl implements _SettingsState {
     required TResult Function(
             int? appLock,
             String languageCode,
+            String languageName,
             int wallpaperIndex,
             List<NotificationModel>? notificationSetting,
             UserModels? userModel,
             String? path)
         settingsState,
   }) {
-    return settingsState(appLock, languageCode, wallpaperIndex,
+    return settingsState(appLock, languageCode, languageName, wallpaperIndex,
         notificationSetting, userModel, path);
   }
 
@@ -2702,14 +3004,15 @@ class _$SettingsStateImpl implements _SettingsState {
     TResult? Function(
             int? appLock,
             String languageCode,
+            String languageName,
             int wallpaperIndex,
             List<NotificationModel>? notificationSetting,
             UserModels? userModel,
             String? path)?
         settingsState,
   }) {
-    return settingsState?.call(appLock, languageCode, wallpaperIndex,
-        notificationSetting, userModel, path);
+    return settingsState?.call(appLock, languageCode, languageName,
+        wallpaperIndex, notificationSetting, userModel, path);
   }
 
   @override
@@ -2718,6 +3021,7 @@ class _$SettingsStateImpl implements _SettingsState {
     TResult Function(
             int? appLock,
             String languageCode,
+            String languageName,
             int wallpaperIndex,
             List<NotificationModel>? notificationSetting,
             UserModels? userModel,
@@ -2726,7 +3030,7 @@ class _$SettingsStateImpl implements _SettingsState {
     required TResult orElse(),
   }) {
     if (settingsState != null) {
-      return settingsState(appLock, languageCode, wallpaperIndex,
+      return settingsState(appLock, languageCode, languageName, wallpaperIndex,
           notificationSetting, userModel, path);
     }
     return orElse();
@@ -2765,6 +3069,7 @@ abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
       {final int? appLock,
       final String languageCode,
+      final String languageName,
       final int wallpaperIndex,
       final List<NotificationModel>? notificationSetting,
       final UserModels? userModel,
@@ -2774,6 +3079,8 @@ abstract class _SettingsState implements SettingsState {
   int? get appLock;
   @override
   String get languageCode;
+  @override
+  String get languageName;
   @override
   int get wallpaperIndex;
   @override

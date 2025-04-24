@@ -38,6 +38,7 @@ mixin _$CallingEvent {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -48,6 +49,7 @@ mixin _$CallingEvent {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +73,7 @@ mixin _$CallingEvent {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -79,6 +82,7 @@ mixin _$CallingEvent {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -102,6 +106,7 @@ mixin _$CallingEvent {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -110,6 +115,7 @@ mixin _$CallingEvent {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -130,6 +136,7 @@ mixin _$CallingEvent {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -139,6 +146,7 @@ mixin _$CallingEvent {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -156,6 +164,7 @@ mixin _$CallingEvent {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -165,6 +174,7 @@ mixin _$CallingEvent {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -182,6 +192,7 @@ mixin _$CallingEvent {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -190,6 +201,7 @@ mixin _$CallingEvent {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -277,6 +289,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -287,6 +300,7 @@ class _$StartedImpl implements _Started {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return started();
   }
@@ -313,6 +327,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -321,6 +336,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return started?.call();
   }
@@ -347,6 +363,7 @@ class _$StartedImpl implements _Started {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -355,6 +372,7 @@ class _$StartedImpl implements _Started {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -381,6 +399,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -390,6 +409,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return started(this);
   }
@@ -410,6 +430,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -419,6 +440,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return started?.call(this);
   }
@@ -439,6 +461,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -447,6 +470,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -521,6 +545,7 @@ class _$CallHistoryImpl implements _CallHistory {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -531,6 +556,7 @@ class _$CallHistoryImpl implements _CallHistory {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return callHistory();
   }
@@ -557,6 +583,7 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -565,6 +592,7 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return callHistory?.call();
   }
@@ -591,6 +619,7 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -599,6 +628,7 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (callHistory != null) {
@@ -625,6 +655,7 @@ class _$CallHistoryImpl implements _CallHistory {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -634,6 +665,7 @@ class _$CallHistoryImpl implements _CallHistory {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return callHistory(this);
   }
@@ -654,6 +686,7 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -663,6 +696,7 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return callHistory?.call(this);
   }
@@ -683,6 +717,7 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -691,6 +726,7 @@ class _$CallHistoryImpl implements _CallHistory {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (callHistory != null) {
@@ -765,6 +801,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -775,6 +812,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return getCallStream();
   }
@@ -801,6 +839,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -809,6 +848,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return getCallStream?.call();
   }
@@ -835,6 +875,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -843,6 +884,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (getCallStream != null) {
@@ -869,6 +911,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -878,6 +921,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return getCallStream(this);
   }
@@ -898,6 +942,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -907,6 +952,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return getCallStream?.call(this);
   }
@@ -927,6 +973,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -935,6 +982,7 @@ class _$GetCallStreamImpl implements _GetCallStream {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (getCallStream != null) {
@@ -1038,6 +1086,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -1048,6 +1097,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return startVideoCalling(receiver);
   }
@@ -1074,6 +1124,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -1082,6 +1133,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return startVideoCalling?.call(receiver);
   }
@@ -1108,6 +1160,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -1116,6 +1169,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (startVideoCalling != null) {
@@ -1142,6 +1196,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -1151,6 +1206,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return startVideoCalling(this);
   }
@@ -1171,6 +1227,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -1180,6 +1237,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return startVideoCalling?.call(this);
   }
@@ -1200,6 +1258,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -1208,6 +1267,7 @@ class _$StartVideoCallingImpl implements _StartVideoCalling {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (startVideoCalling != null) {
@@ -1320,6 +1380,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -1330,6 +1391,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return startVoiceCalling(receiver);
   }
@@ -1356,6 +1418,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -1364,6 +1427,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return startVoiceCalling?.call(receiver);
   }
@@ -1390,6 +1454,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -1398,6 +1463,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (startVoiceCalling != null) {
@@ -1424,6 +1490,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -1433,6 +1500,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return startVoiceCalling(this);
   }
@@ -1453,6 +1521,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -1462,6 +1531,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return startVoiceCalling?.call(this);
   }
@@ -1482,6 +1552,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -1490,6 +1561,7 @@ class _$StartVoiceCallingImpl implements _StartVoiceCalling {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (startVoiceCalling != null) {
@@ -1600,6 +1672,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -1610,6 +1683,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return endNormalCall(callId);
   }
@@ -1636,6 +1710,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -1644,6 +1719,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return endNormalCall?.call(callId);
   }
@@ -1670,6 +1746,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -1678,6 +1755,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (endNormalCall != null) {
@@ -1704,6 +1782,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -1713,6 +1792,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return endNormalCall(this);
   }
@@ -1733,6 +1813,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -1742,6 +1823,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return endNormalCall?.call(this);
   }
@@ -1762,6 +1844,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -1770,6 +1853,7 @@ class _$EndNormalCallImpl implements _EndNormalCall {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (endNormalCall != null) {
@@ -1924,6 +2008,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -1934,6 +2019,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return startGroupVideoCalling(chatId, image, groupName, participants);
   }
@@ -1960,6 +2046,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -1968,6 +2055,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return startGroupVideoCalling?.call(chatId, image, groupName, participants);
   }
@@ -1994,6 +2082,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -2002,6 +2091,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (startGroupVideoCalling != null) {
@@ -2028,6 +2118,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -2037,6 +2128,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return startGroupVideoCalling(this);
   }
@@ -2057,6 +2149,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -2066,6 +2159,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return startGroupVideoCalling?.call(this);
   }
@@ -2086,6 +2180,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -2094,6 +2189,7 @@ class _$StartGroupVideoCallingImpl implements _StartGroupVideoCalling {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (startGroupVideoCalling != null) {
@@ -2254,6 +2350,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -2264,6 +2361,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return startGroupVoiceCalling(chatId, image, groupName, participants);
   }
@@ -2290,6 +2388,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -2298,6 +2397,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return startGroupVoiceCalling?.call(chatId, image, groupName, participants);
   }
@@ -2324,6 +2424,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -2332,6 +2433,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (startGroupVoiceCalling != null) {
@@ -2358,6 +2460,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -2367,6 +2470,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return startGroupVoiceCalling(this);
   }
@@ -2387,6 +2491,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -2396,6 +2501,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return startGroupVoiceCalling?.call(this);
   }
@@ -2416,6 +2522,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -2424,6 +2531,7 @@ class _$StartGroupVoiceCallingImpl implements _StartGroupVoiceCalling {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (startGroupVoiceCalling != null) {
@@ -2540,6 +2648,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -2550,6 +2659,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return endGroupCall(callId);
   }
@@ -2576,6 +2686,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -2584,6 +2695,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return endGroupCall?.call(callId);
   }
@@ -2610,6 +2722,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -2618,6 +2731,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (endGroupCall != null) {
@@ -2644,6 +2758,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -2653,6 +2768,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return endGroupCall(this);
   }
@@ -2673,6 +2789,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -2682,6 +2799,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return endGroupCall?.call(this);
   }
@@ -2702,6 +2820,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -2710,6 +2829,7 @@ class _$EndGroupCallImpl implements _EndGroupCall {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (endGroupCall != null) {
@@ -2822,6 +2942,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -2832,6 +2953,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return selectCallModel(callModel);
   }
@@ -2858,6 +2980,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -2866,6 +2989,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return selectCallModel?.call(callModel);
   }
@@ -2892,6 +3016,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -2900,6 +3025,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (selectCallModel != null) {
@@ -2926,6 +3052,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -2935,6 +3062,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return selectCallModel(this);
   }
@@ -2955,6 +3083,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -2964,6 +3093,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return selectCallModel?.call(this);
   }
@@ -2984,6 +3114,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -2992,6 +3123,7 @@ class _$SelectCallModelImpl implements _SelectCallModel {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (selectCallModel != null) {
@@ -3111,6 +3243,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -3121,6 +3254,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return updateActiveCalls(docs);
   }
@@ -3147,6 +3281,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -3155,6 +3290,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return updateActiveCalls?.call(docs);
   }
@@ -3181,6 +3317,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -3189,6 +3326,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (updateActiveCalls != null) {
@@ -3215,6 +3353,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -3224,6 +3363,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return updateActiveCalls(this);
   }
@@ -3244,6 +3384,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -3253,6 +3394,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return updateActiveCalls?.call(this);
   }
@@ -3273,6 +3415,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -3281,6 +3424,7 @@ class _$UpdateActiveCallsImpl implements _UpdateActiveCalls {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (updateActiveCalls != null) {
@@ -3393,6 +3537,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -3403,6 +3548,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return updateCurrentCall(docs);
   }
@@ -3429,6 +3575,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -3437,6 +3584,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return updateCurrentCall?.call(docs);
   }
@@ -3463,6 +3611,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -3471,6 +3620,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (updateCurrentCall != null) {
@@ -3497,6 +3647,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -3506,6 +3657,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return updateCurrentCall(this);
   }
@@ -3526,6 +3678,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -3535,6 +3688,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return updateCurrentCall?.call(this);
   }
@@ -3555,6 +3709,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -3563,6 +3718,7 @@ class _$UpdateCurrentCallImpl implements _UpdateCurrentCall {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (updateCurrentCall != null) {
@@ -3676,6 +3832,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -3686,6 +3843,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return setCurrentCall(callModel);
   }
@@ -3712,6 +3870,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -3720,6 +3879,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return setCurrentCall?.call(callModel);
   }
@@ -3746,6 +3906,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -3754,6 +3915,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (setCurrentCall != null) {
@@ -3780,6 +3942,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -3789,6 +3952,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return setCurrentCall(this);
   }
@@ -3809,6 +3973,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -3818,6 +3983,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return setCurrentCall?.call(this);
   }
@@ -3838,6 +4004,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -3846,6 +4013,7 @@ class _$SetCurrentCallImpl implements _SetCurrentCall {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (setCurrentCall != null) {
@@ -3866,6 +4034,262 @@ abstract class _SetCurrentCall implements CallingEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SetCurrentCallImplCopyWith<_$SetCurrentCallImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClearCurrentCallImplCopyWith<$Res> {
+  factory _$$ClearCurrentCallImplCopyWith(_$ClearCurrentCallImpl value,
+          $Res Function(_$ClearCurrentCallImpl) then) =
+      __$$ClearCurrentCallImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearCurrentCallImplCopyWithImpl<$Res>
+    extends _$CallingEventCopyWithImpl<$Res, _$ClearCurrentCallImpl>
+    implements _$$ClearCurrentCallImplCopyWith<$Res> {
+  __$$ClearCurrentCallImplCopyWithImpl(_$ClearCurrentCallImpl _value,
+      $Res Function(_$ClearCurrentCallImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CallingEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearCurrentCallImpl implements _ClearCurrentCall {
+  const _$ClearCurrentCallImpl();
+
+  @override
+  String toString() {
+    return 'CallingEvent.clearCurrentCall()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearCurrentCallImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() callHistory,
+    required TResult Function() getCallStream,
+    required TResult Function(UserModels receiver) startVideoCalling,
+    required TResult Function(UserModels receiver) startVoiceCalling,
+    required TResult Function(String callId) endNormalCall,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
+    required TResult Function(String callId) endGroupCall,
+    required TResult Function(CallModel callModel) selectCallModel,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        updateActiveCalls,
+    required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
+        updateCurrentCall,
+    required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
+    required TResult Function(String callId) pickUpReceiverNormalCall,
+    required TResult Function(String id) updateAgoraId,
+    required TResult Function(int remoteUid, int localUid) addRemoteUser,
+    required TResult Function(int remoteUid, int localUid) removeRemoteUser,
+    required TResult Function(int remoteUid, int localUid, bool muted)
+        onUserMuteVideo,
+    required TResult Function(int remoteUid, int localUid, bool muted)
+        onUserMuteAudio,
+    required TResult Function() onLocalUserJoined,
+    required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
+  }) {
+    return clearCurrentCall();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? callHistory,
+    TResult? Function()? getCallStream,
+    TResult? Function(UserModels receiver)? startVideoCalling,
+    TResult? Function(UserModels receiver)? startVoiceCalling,
+    TResult? Function(String callId)? endNormalCall,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
+    TResult? Function(String callId)? endGroupCall,
+    TResult? Function(CallModel callModel)? selectCallModel,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        updateActiveCalls,
+    TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
+        updateCurrentCall,
+    TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
+    TResult? Function(String callId)? pickUpReceiverNormalCall,
+    TResult? Function(String id)? updateAgoraId,
+    TResult? Function(int remoteUid, int localUid)? addRemoteUser,
+    TResult? Function(int remoteUid, int localUid)? removeRemoteUser,
+    TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteVideo,
+    TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
+    TResult? Function()? onLocalUserJoined,
+    TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
+  }) {
+    return clearCurrentCall?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? callHistory,
+    TResult Function()? getCallStream,
+    TResult Function(UserModels receiver)? startVideoCalling,
+    TResult Function(UserModels receiver)? startVoiceCalling,
+    TResult Function(String callId)? endNormalCall,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
+    TResult Function(String callId)? endGroupCall,
+    TResult Function(CallModel callModel)? selectCallModel,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        updateActiveCalls,
+    TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
+        updateCurrentCall,
+    TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
+    TResult Function(String callId)? pickUpReceiverNormalCall,
+    TResult Function(String id)? updateAgoraId,
+    TResult Function(int remoteUid, int localUid)? addRemoteUser,
+    TResult Function(int remoteUid, int localUid)? removeRemoteUser,
+    TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteVideo,
+    TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
+    TResult Function()? onLocalUserJoined,
+    TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
+    required TResult orElse(),
+  }) {
+    if (clearCurrentCall != null) {
+      return clearCurrentCall();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CallHistory value) callHistory,
+    required TResult Function(_GetCallStream value) getCallStream,
+    required TResult Function(_StartVideoCalling value) startVideoCalling,
+    required TResult Function(_StartVoiceCalling value) startVoiceCalling,
+    required TResult Function(_EndNormalCall value) endNormalCall,
+    required TResult Function(_StartGroupVideoCalling value)
+        startGroupVideoCalling,
+    required TResult Function(_StartGroupVoiceCalling value)
+        startGroupVoiceCalling,
+    required TResult Function(_EndGroupCall value) endGroupCall,
+    required TResult Function(_SelectCallModel value) selectCallModel,
+    required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
+    required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
+    required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
+    required TResult Function(_PickUpReceiverNormalCall value)
+        pickUpReceiverNormalCall,
+    required TResult Function(_UpdateAgoraId value) updateAgoraId,
+    required TResult Function(_AddRemoteUser value) addRemoteUser,
+    required TResult Function(_RemoveRemoteUser value) removeRemoteUser,
+    required TResult Function(_OnUserMuteVideo value) onUserMuteVideo,
+    required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
+    required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
+    required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
+  }) {
+    return clearCurrentCall(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_CallHistory value)? callHistory,
+    TResult? Function(_GetCallStream value)? getCallStream,
+    TResult? Function(_StartVideoCalling value)? startVideoCalling,
+    TResult? Function(_StartVoiceCalling value)? startVoiceCalling,
+    TResult? Function(_EndNormalCall value)? endNormalCall,
+    TResult? Function(_StartGroupVideoCalling value)? startGroupVideoCalling,
+    TResult? Function(_StartGroupVoiceCalling value)? startGroupVoiceCalling,
+    TResult? Function(_EndGroupCall value)? endGroupCall,
+    TResult? Function(_SelectCallModel value)? selectCallModel,
+    TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
+    TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
+    TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
+    TResult? Function(_PickUpReceiverNormalCall value)?
+        pickUpReceiverNormalCall,
+    TResult? Function(_UpdateAgoraId value)? updateAgoraId,
+    TResult? Function(_AddRemoteUser value)? addRemoteUser,
+    TResult? Function(_RemoveRemoteUser value)? removeRemoteUser,
+    TResult? Function(_OnUserMuteVideo value)? onUserMuteVideo,
+    TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
+    TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
+    TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
+  }) {
+    return clearCurrentCall?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CallHistory value)? callHistory,
+    TResult Function(_GetCallStream value)? getCallStream,
+    TResult Function(_StartVideoCalling value)? startVideoCalling,
+    TResult Function(_StartVoiceCalling value)? startVoiceCalling,
+    TResult Function(_EndNormalCall value)? endNormalCall,
+    TResult Function(_StartGroupVideoCalling value)? startGroupVideoCalling,
+    TResult Function(_StartGroupVoiceCalling value)? startGroupVoiceCalling,
+    TResult Function(_EndGroupCall value)? endGroupCall,
+    TResult Function(_SelectCallModel value)? selectCallModel,
+    TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
+    TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
+    TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
+    TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
+    TResult Function(_UpdateAgoraId value)? updateAgoraId,
+    TResult Function(_AddRemoteUser value)? addRemoteUser,
+    TResult Function(_RemoveRemoteUser value)? removeRemoteUser,
+    TResult Function(_OnUserMuteVideo value)? onUserMuteVideo,
+    TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
+    TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
+    TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
+    required TResult orElse(),
+  }) {
+    if (clearCurrentCall != null) {
+      return clearCurrentCall(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearCurrentCall implements CallingEvent {
+  const factory _ClearCurrentCall() = _$ClearCurrentCallImpl;
 }
 
 /// @nodoc
@@ -3959,6 +4383,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -3969,6 +4394,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return pickUpReceiverNormalCall(callId);
   }
@@ -3995,6 +4421,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -4003,6 +4430,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return pickUpReceiverNormalCall?.call(callId);
   }
@@ -4029,6 +4457,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -4037,6 +4466,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (pickUpReceiverNormalCall != null) {
@@ -4063,6 +4493,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -4072,6 +4503,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return pickUpReceiverNormalCall(this);
   }
@@ -4092,6 +4524,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -4101,6 +4534,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return pickUpReceiverNormalCall?.call(this);
   }
@@ -4121,6 +4555,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -4129,6 +4564,7 @@ class _$PickUpReceiverNormalCallImpl implements _PickUpReceiverNormalCall {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (pickUpReceiverNormalCall != null) {
@@ -4239,6 +4675,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -4249,6 +4686,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return updateAgoraId(id);
   }
@@ -4275,6 +4713,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -4283,6 +4722,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return updateAgoraId?.call(id);
   }
@@ -4309,6 +4749,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -4317,6 +4758,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (updateAgoraId != null) {
@@ -4343,6 +4785,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -4352,6 +4795,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return updateAgoraId(this);
   }
@@ -4372,6 +4816,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -4381,6 +4826,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return updateAgoraId?.call(this);
   }
@@ -4401,6 +4847,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -4409,6 +4856,7 @@ class _$UpdateAgoraIdImpl implements _UpdateAgoraId {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (updateAgoraId != null) {
@@ -4529,6 +4977,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -4539,6 +4988,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return addRemoteUser(remoteUid, localUid);
   }
@@ -4565,6 +5015,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -4573,6 +5024,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return addRemoteUser?.call(remoteUid, localUid);
   }
@@ -4599,6 +5051,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -4607,6 +5060,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (addRemoteUser != null) {
@@ -4633,6 +5087,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -4642,6 +5097,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return addRemoteUser(this);
   }
@@ -4662,6 +5118,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -4671,6 +5128,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return addRemoteUser?.call(this);
   }
@@ -4691,6 +5149,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -4699,6 +5158,7 @@ class _$AddRemoteUserImpl implements _AddRemoteUser {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (addRemoteUser != null) {
@@ -4823,6 +5283,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -4833,6 +5294,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return removeRemoteUser(remoteUid, localUid);
   }
@@ -4859,6 +5321,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -4867,6 +5330,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return removeRemoteUser?.call(remoteUid, localUid);
   }
@@ -4893,6 +5357,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -4901,6 +5366,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (removeRemoteUser != null) {
@@ -4927,6 +5393,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -4936,6 +5403,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return removeRemoteUser(this);
   }
@@ -4956,6 +5424,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -4965,6 +5434,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return removeRemoteUser?.call(this);
   }
@@ -4985,6 +5455,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -4993,6 +5464,7 @@ class _$RemoveRemoteUserImpl implements _RemoveRemoteUser {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (removeRemoteUser != null) {
@@ -5125,6 +5597,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -5135,6 +5608,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return onUserMuteVideo(remoteUid, localUid, muted);
   }
@@ -5161,6 +5635,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -5169,6 +5644,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return onUserMuteVideo?.call(remoteUid, localUid, muted);
   }
@@ -5195,6 +5671,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -5203,6 +5680,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (onUserMuteVideo != null) {
@@ -5229,6 +5707,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -5238,6 +5717,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return onUserMuteVideo(this);
   }
@@ -5258,6 +5738,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -5267,6 +5748,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return onUserMuteVideo?.call(this);
   }
@@ -5287,6 +5769,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -5295,6 +5778,7 @@ class _$OnUserMuteVideoImpl implements _OnUserMuteVideo {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (onUserMuteVideo != null) {
@@ -5429,6 +5913,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -5439,6 +5924,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return onUserMuteAudio(remoteUid, localUid, muted);
   }
@@ -5465,6 +5951,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -5473,6 +5960,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return onUserMuteAudio?.call(remoteUid, localUid, muted);
   }
@@ -5499,6 +5987,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -5507,6 +5996,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (onUserMuteAudio != null) {
@@ -5533,6 +6023,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -5542,6 +6033,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return onUserMuteAudio(this);
   }
@@ -5562,6 +6054,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -5571,6 +6064,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return onUserMuteAudio?.call(this);
   }
@@ -5591,6 +6085,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -5599,6 +6094,7 @@ class _$OnUserMuteAudioImpl implements _OnUserMuteAudio {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (onUserMuteAudio != null) {
@@ -5686,6 +6182,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -5696,6 +6193,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return onLocalUserJoined();
   }
@@ -5722,6 +6220,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -5730,6 +6229,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return onLocalUserJoined?.call();
   }
@@ -5756,6 +6256,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -5764,6 +6265,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (onLocalUserJoined != null) {
@@ -5790,6 +6292,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -5799,6 +6302,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return onLocalUserJoined(this);
   }
@@ -5819,6 +6323,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -5828,6 +6333,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return onLocalUserJoined?.call(this);
   }
@@ -5848,6 +6354,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -5856,6 +6363,7 @@ class _$OnLocalUserJoinedImpl implements _OnLocalUserJoined {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (onLocalUserJoined != null) {
@@ -5930,6 +6438,7 @@ class _$OnLeaveImpl implements _OnLeave {
     required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
         updateCurrentCall,
     required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
     required TResult Function(String callId) pickUpReceiverNormalCall,
     required TResult Function(String id) updateAgoraId,
     required TResult Function(int remoteUid, int localUid) addRemoteUser,
@@ -5940,6 +6449,7 @@ class _$OnLeaveImpl implements _OnLeave {
         onUserMuteAudio,
     required TResult Function() onLocalUserJoined,
     required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
   }) {
     return onLeave();
   }
@@ -5966,6 +6476,7 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
     TResult? Function(String callId)? pickUpReceiverNormalCall,
     TResult? Function(String id)? updateAgoraId,
     TResult? Function(int remoteUid, int localUid)? addRemoteUser,
@@ -5974,6 +6485,7 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult? Function()? onLocalUserJoined,
     TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
   }) {
     return onLeave?.call();
   }
@@ -6000,6 +6512,7 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
         updateCurrentCall,
     TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
     TResult Function(String callId)? pickUpReceiverNormalCall,
     TResult Function(String id)? updateAgoraId,
     TResult Function(int remoteUid, int localUid)? addRemoteUser,
@@ -6008,6 +6521,7 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
     TResult Function()? onLocalUserJoined,
     TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (onLeave != null) {
@@ -6034,6 +6548,7 @@ class _$OnLeaveImpl implements _OnLeave {
     required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
     required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
     required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
     required TResult Function(_PickUpReceiverNormalCall value)
         pickUpReceiverNormalCall,
     required TResult Function(_UpdateAgoraId value) updateAgoraId,
@@ -6043,6 +6558,7 @@ class _$OnLeaveImpl implements _OnLeave {
     required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
     required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
     required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return onLeave(this);
   }
@@ -6063,6 +6579,7 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult? Function(_PickUpReceiverNormalCall value)?
         pickUpReceiverNormalCall,
     TResult? Function(_UpdateAgoraId value)? updateAgoraId,
@@ -6072,6 +6589,7 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return onLeave?.call(this);
   }
@@ -6092,6 +6610,7 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
     TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
     TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
     TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
     TResult Function(_UpdateAgoraId value)? updateAgoraId,
     TResult Function(_AddRemoteUser value)? addRemoteUser,
@@ -6100,6 +6619,7 @@ class _$OnLeaveImpl implements _OnLeave {
     TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
     TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
     TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (onLeave != null) {
@@ -6114,10 +6634,266 @@ abstract class _OnLeave implements CallingEvent {
 }
 
 /// @nodoc
+abstract class _$$ClearErrorMessageImplCopyWith<$Res> {
+  factory _$$ClearErrorMessageImplCopyWith(_$ClearErrorMessageImpl value,
+          $Res Function(_$ClearErrorMessageImpl) then) =
+      __$$ClearErrorMessageImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearErrorMessageImplCopyWithImpl<$Res>
+    extends _$CallingEventCopyWithImpl<$Res, _$ClearErrorMessageImpl>
+    implements _$$ClearErrorMessageImplCopyWith<$Res> {
+  __$$ClearErrorMessageImplCopyWithImpl(_$ClearErrorMessageImpl _value,
+      $Res Function(_$ClearErrorMessageImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CallingEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearErrorMessageImpl implements _ClearErrorMessage {
+  const _$ClearErrorMessageImpl();
+
+  @override
+  String toString() {
+    return 'CallingEvent.clearErrorMessage()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearErrorMessageImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() callHistory,
+    required TResult Function() getCallStream,
+    required TResult Function(UserModels receiver) startVideoCalling,
+    required TResult Function(UserModels receiver) startVoiceCalling,
+    required TResult Function(String callId) endNormalCall,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVideoCalling,
+    required TResult Function(String chatId, String image, String groupName,
+            List<String> participants)
+        startGroupVoiceCalling,
+    required TResult Function(String callId) endGroupCall,
+    required TResult Function(CallModel callModel) selectCallModel,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        updateActiveCalls,
+    required TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)
+        updateCurrentCall,
+    required TResult Function(CallModel callModel) setCurrentCall,
+    required TResult Function() clearCurrentCall,
+    required TResult Function(String callId) pickUpReceiverNormalCall,
+    required TResult Function(String id) updateAgoraId,
+    required TResult Function(int remoteUid, int localUid) addRemoteUser,
+    required TResult Function(int remoteUid, int localUid) removeRemoteUser,
+    required TResult Function(int remoteUid, int localUid, bool muted)
+        onUserMuteVideo,
+    required TResult Function(int remoteUid, int localUid, bool muted)
+        onUserMuteAudio,
+    required TResult Function() onLocalUserJoined,
+    required TResult Function() onLeave,
+    required TResult Function() clearErrorMessage,
+  }) {
+    return clearErrorMessage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? callHistory,
+    TResult? Function()? getCallStream,
+    TResult? Function(UserModels receiver)? startVideoCalling,
+    TResult? Function(UserModels receiver)? startVoiceCalling,
+    TResult? Function(String callId)? endNormalCall,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult? Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
+    TResult? Function(String callId)? endGroupCall,
+    TResult? Function(CallModel callModel)? selectCallModel,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        updateActiveCalls,
+    TResult? Function(DocumentSnapshot<Map<String, dynamic>> docs)?
+        updateCurrentCall,
+    TResult? Function(CallModel callModel)? setCurrentCall,
+    TResult? Function()? clearCurrentCall,
+    TResult? Function(String callId)? pickUpReceiverNormalCall,
+    TResult? Function(String id)? updateAgoraId,
+    TResult? Function(int remoteUid, int localUid)? addRemoteUser,
+    TResult? Function(int remoteUid, int localUid)? removeRemoteUser,
+    TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteVideo,
+    TResult? Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
+    TResult? Function()? onLocalUserJoined,
+    TResult? Function()? onLeave,
+    TResult? Function()? clearErrorMessage,
+  }) {
+    return clearErrorMessage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? callHistory,
+    TResult Function()? getCallStream,
+    TResult Function(UserModels receiver)? startVideoCalling,
+    TResult Function(UserModels receiver)? startVoiceCalling,
+    TResult Function(String callId)? endNormalCall,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVideoCalling,
+    TResult Function(String chatId, String image, String groupName,
+            List<String> participants)?
+        startGroupVoiceCalling,
+    TResult Function(String callId)? endGroupCall,
+    TResult Function(CallModel callModel)? selectCallModel,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        updateActiveCalls,
+    TResult Function(DocumentSnapshot<Map<String, dynamic>> docs)?
+        updateCurrentCall,
+    TResult Function(CallModel callModel)? setCurrentCall,
+    TResult Function()? clearCurrentCall,
+    TResult Function(String callId)? pickUpReceiverNormalCall,
+    TResult Function(String id)? updateAgoraId,
+    TResult Function(int remoteUid, int localUid)? addRemoteUser,
+    TResult Function(int remoteUid, int localUid)? removeRemoteUser,
+    TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteVideo,
+    TResult Function(int remoteUid, int localUid, bool muted)? onUserMuteAudio,
+    TResult Function()? onLocalUserJoined,
+    TResult Function()? onLeave,
+    TResult Function()? clearErrorMessage,
+    required TResult orElse(),
+  }) {
+    if (clearErrorMessage != null) {
+      return clearErrorMessage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CallHistory value) callHistory,
+    required TResult Function(_GetCallStream value) getCallStream,
+    required TResult Function(_StartVideoCalling value) startVideoCalling,
+    required TResult Function(_StartVoiceCalling value) startVoiceCalling,
+    required TResult Function(_EndNormalCall value) endNormalCall,
+    required TResult Function(_StartGroupVideoCalling value)
+        startGroupVideoCalling,
+    required TResult Function(_StartGroupVoiceCalling value)
+        startGroupVoiceCalling,
+    required TResult Function(_EndGroupCall value) endGroupCall,
+    required TResult Function(_SelectCallModel value) selectCallModel,
+    required TResult Function(_UpdateActiveCalls value) updateActiveCalls,
+    required TResult Function(_UpdateCurrentCall value) updateCurrentCall,
+    required TResult Function(_SetCurrentCall value) setCurrentCall,
+    required TResult Function(_ClearCurrentCall value) clearCurrentCall,
+    required TResult Function(_PickUpReceiverNormalCall value)
+        pickUpReceiverNormalCall,
+    required TResult Function(_UpdateAgoraId value) updateAgoraId,
+    required TResult Function(_AddRemoteUser value) addRemoteUser,
+    required TResult Function(_RemoveRemoteUser value) removeRemoteUser,
+    required TResult Function(_OnUserMuteVideo value) onUserMuteVideo,
+    required TResult Function(_OnUserMuteAudio value) onUserMuteAudio,
+    required TResult Function(_OnLocalUserJoined value) onLocalUserJoined,
+    required TResult Function(_OnLeave value) onLeave,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
+  }) {
+    return clearErrorMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_CallHistory value)? callHistory,
+    TResult? Function(_GetCallStream value)? getCallStream,
+    TResult? Function(_StartVideoCalling value)? startVideoCalling,
+    TResult? Function(_StartVoiceCalling value)? startVoiceCalling,
+    TResult? Function(_EndNormalCall value)? endNormalCall,
+    TResult? Function(_StartGroupVideoCalling value)? startGroupVideoCalling,
+    TResult? Function(_StartGroupVoiceCalling value)? startGroupVoiceCalling,
+    TResult? Function(_EndGroupCall value)? endGroupCall,
+    TResult? Function(_SelectCallModel value)? selectCallModel,
+    TResult? Function(_UpdateActiveCalls value)? updateActiveCalls,
+    TResult? Function(_UpdateCurrentCall value)? updateCurrentCall,
+    TResult? Function(_SetCurrentCall value)? setCurrentCall,
+    TResult? Function(_ClearCurrentCall value)? clearCurrentCall,
+    TResult? Function(_PickUpReceiverNormalCall value)?
+        pickUpReceiverNormalCall,
+    TResult? Function(_UpdateAgoraId value)? updateAgoraId,
+    TResult? Function(_AddRemoteUser value)? addRemoteUser,
+    TResult? Function(_RemoveRemoteUser value)? removeRemoteUser,
+    TResult? Function(_OnUserMuteVideo value)? onUserMuteVideo,
+    TResult? Function(_OnUserMuteAudio value)? onUserMuteAudio,
+    TResult? Function(_OnLocalUserJoined value)? onLocalUserJoined,
+    TResult? Function(_OnLeave value)? onLeave,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
+  }) {
+    return clearErrorMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CallHistory value)? callHistory,
+    TResult Function(_GetCallStream value)? getCallStream,
+    TResult Function(_StartVideoCalling value)? startVideoCalling,
+    TResult Function(_StartVoiceCalling value)? startVoiceCalling,
+    TResult Function(_EndNormalCall value)? endNormalCall,
+    TResult Function(_StartGroupVideoCalling value)? startGroupVideoCalling,
+    TResult Function(_StartGroupVoiceCalling value)? startGroupVoiceCalling,
+    TResult Function(_EndGroupCall value)? endGroupCall,
+    TResult Function(_SelectCallModel value)? selectCallModel,
+    TResult Function(_UpdateActiveCalls value)? updateActiveCalls,
+    TResult Function(_UpdateCurrentCall value)? updateCurrentCall,
+    TResult Function(_SetCurrentCall value)? setCurrentCall,
+    TResult Function(_ClearCurrentCall value)? clearCurrentCall,
+    TResult Function(_PickUpReceiverNormalCall value)? pickUpReceiverNormalCall,
+    TResult Function(_UpdateAgoraId value)? updateAgoraId,
+    TResult Function(_AddRemoteUser value)? addRemoteUser,
+    TResult Function(_RemoveRemoteUser value)? removeRemoteUser,
+    TResult Function(_OnUserMuteVideo value)? onUserMuteVideo,
+    TResult Function(_OnUserMuteAudio value)? onUserMuteAudio,
+    TResult Function(_OnLocalUserJoined value)? onLocalUserJoined,
+    TResult Function(_OnLeave value)? onLeave,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
+    required TResult orElse(),
+  }) {
+    if (clearErrorMessage != null) {
+      return clearErrorMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearErrorMessage implements CallingEvent {
+  const factory _ClearErrorMessage() = _$ClearErrorMessageImpl;
+}
+
+/// @nodoc
 mixin _$CallingState {
   dynamic get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
-  String get errorMsg => throw _privateConstructorUsedError;
+  AppException? get errorMsg => throw _privateConstructorUsedError;
   String get callingPageMsg => throw _privateConstructorUsedError;
   Stream<QuerySnapshot<Map<String, dynamic>>>? get stream =>
       throw _privateConstructorUsedError;
@@ -6134,7 +6910,7 @@ mixin _$CallingState {
     required TResult Function(
             dynamic isLoading,
             bool isError,
-            String errorMsg,
+            AppException? errorMsg,
             String callingPageMsg,
             Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
             CallModel? currentCall,
@@ -6153,7 +6929,7 @@ mixin _$CallingState {
     TResult? Function(
             dynamic isLoading,
             bool isError,
-            String errorMsg,
+            AppException? errorMsg,
             String callingPageMsg,
             Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
             CallModel? currentCall,
@@ -6172,7 +6948,7 @@ mixin _$CallingState {
     TResult Function(
             dynamic isLoading,
             bool isError,
-            String errorMsg,
+            AppException? errorMsg,
             String callingPageMsg,
             Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
             CallModel? currentCall,
@@ -6220,7 +6996,7 @@ abstract class $CallingStateCopyWith<$Res> {
   $Res call(
       {dynamic isLoading,
       bool isError,
-      String errorMsg,
+      AppException? errorMsg,
       String callingPageMsg,
       Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
       CallModel? currentCall,
@@ -6250,7 +7026,7 @@ class _$CallingStateCopyWithImpl<$Res, $Val extends CallingState>
   $Res call({
     Object? isLoading = freezed,
     Object? isError = null,
-    Object? errorMsg = null,
+    Object? errorMsg = freezed,
     Object? callingPageMsg = null,
     Object? stream = freezed,
     Object? currentCall = freezed,
@@ -6271,10 +7047,10 @@ class _$CallingStateCopyWithImpl<$Res, $Val extends CallingState>
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMsg: null == errorMsg
+      errorMsg: freezed == errorMsg
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AppException?,
       callingPageMsg: null == callingPageMsg
           ? _value.callingPageMsg
           : callingPageMsg // ignore: cast_nullable_to_non_nullable
@@ -6330,7 +7106,7 @@ abstract class _$$CallingPageStateImplCopyWith<$Res>
   $Res call(
       {dynamic isLoading,
       bool isError,
-      String errorMsg,
+      AppException? errorMsg,
       String callingPageMsg,
       Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
       CallModel? currentCall,
@@ -6358,7 +7134,7 @@ class __$$CallingPageStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = freezed,
     Object? isError = null,
-    Object? errorMsg = null,
+    Object? errorMsg = freezed,
     Object? callingPageMsg = null,
     Object? stream = freezed,
     Object? currentCall = freezed,
@@ -6376,10 +7152,10 @@ class __$$CallingPageStateImplCopyWithImpl<$Res>
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMsg: null == errorMsg
+      errorMsg: freezed == errorMsg
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AppException?,
       callingPageMsg: null == callingPageMsg
           ? _value.callingPageMsg
           : callingPageMsg // ignore: cast_nullable_to_non_nullable
@@ -6430,7 +7206,7 @@ class _$CallingPageStateImpl implements _CallingPageState {
   const _$CallingPageStateImpl(
       {this.isLoading = false,
       this.isError = false,
-      this.errorMsg = "",
+      this.errorMsg = null,
       this.callingPageMsg = "",
       this.stream = null,
       this.currentCall = null,
@@ -6455,7 +7231,7 @@ class _$CallingPageStateImpl implements _CallingPageState {
   final bool isError;
   @override
   @JsonKey()
-  final String errorMsg;
+  final AppException? errorMsg;
   @override
   @JsonKey()
   final String callingPageMsg;
@@ -6585,7 +7361,7 @@ class _$CallingPageStateImpl implements _CallingPageState {
     required TResult Function(
             dynamic isLoading,
             bool isError,
-            String errorMsg,
+            AppException? errorMsg,
             String callingPageMsg,
             Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
             CallModel? currentCall,
@@ -6620,7 +7396,7 @@ class _$CallingPageStateImpl implements _CallingPageState {
     TResult? Function(
             dynamic isLoading,
             bool isError,
-            String errorMsg,
+            AppException? errorMsg,
             String callingPageMsg,
             Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
             CallModel? currentCall,
@@ -6655,7 +7431,7 @@ class _$CallingPageStateImpl implements _CallingPageState {
     TResult Function(
             dynamic isLoading,
             bool isError,
-            String errorMsg,
+            AppException? errorMsg,
             String callingPageMsg,
             Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
             CallModel? currentCall,
@@ -6721,7 +7497,7 @@ abstract class _CallingPageState implements CallingState {
   const factory _CallingPageState(
       {final dynamic isLoading,
       final bool isError,
-      final String errorMsg,
+      final AppException? errorMsg,
       final String callingPageMsg,
       final Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
       final CallModel? currentCall,
@@ -6738,7 +7514,7 @@ abstract class _CallingPageState implements CallingState {
   @override
   bool get isError;
   @override
-  String get errorMsg;
+  AppException? get errorMsg;
   @override
   String get callingPageMsg;
   @override

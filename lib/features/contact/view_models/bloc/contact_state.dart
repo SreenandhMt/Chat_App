@@ -9,6 +9,7 @@ class ContactState with _$ContactState {
     @Default([]) List<UserModels> selectedContactModels,
     @Default([]) List<String> alreadyJoinedUsers,
     @Default(false) bool isLoading,
+    @Default(null) AppException? isError,
     @Default(null) ChatModel? chatModel,
     @Default(null) String? showMessage,
   }) = _ContactData;

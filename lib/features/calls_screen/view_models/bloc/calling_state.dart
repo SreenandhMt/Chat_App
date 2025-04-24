@@ -5,7 +5,7 @@ class CallingState with _$CallingState {
   const factory CallingState.callingPageState(
       {@Default(false) isLoading,
       @Default(false) bool isError,
-      @Default("") String errorMsg,
+      @Default(null) AppException? errorMsg,
       @Default("") String callingPageMsg,
       @Default(null) Stream<QuerySnapshot<Map<String, dynamic>>>? stream,
       @Default(null) CallModel? currentCall,

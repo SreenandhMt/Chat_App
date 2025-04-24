@@ -1234,6 +1234,7 @@ mixin _$ContactState {
       throw _privateConstructorUsedError;
   List<String> get alreadyJoinedUsers => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  AppException? get isError => throw _privateConstructorUsedError;
   ChatModel? get chatModel => throw _privateConstructorUsedError;
   String? get showMessage => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1245,6 +1246,7 @@ mixin _$ContactState {
             List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
             bool isLoading,
+            AppException? isError,
             ChatModel? chatModel,
             String? showMessage)
         contactData,
@@ -1259,6 +1261,7 @@ mixin _$ContactState {
             List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
             bool isLoading,
+            AppException? isError,
             ChatModel? chatModel,
             String? showMessage)?
         contactData,
@@ -1273,6 +1276,7 @@ mixin _$ContactState {
             List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
             bool isLoading,
+            AppException? isError,
             ChatModel? chatModel,
             String? showMessage)?
         contactData,
@@ -1316,6 +1320,7 @@ abstract class $ContactStateCopyWith<$Res> {
       List<UserModels> selectedContactModels,
       List<String> alreadyJoinedUsers,
       bool isLoading,
+      AppException? isError,
       ChatModel? chatModel,
       String? showMessage});
 }
@@ -1341,6 +1346,7 @@ class _$ContactStateCopyWithImpl<$Res, $Val extends ContactState>
     Object? selectedContactModels = null,
     Object? alreadyJoinedUsers = null,
     Object? isLoading = null,
+    Object? isError = freezed,
     Object? chatModel = freezed,
     Object? showMessage = freezed,
   }) {
@@ -1369,6 +1375,10 @@ class _$ContactStateCopyWithImpl<$Res, $Val extends ContactState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isError: freezed == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as AppException?,
       chatModel: freezed == chatModel
           ? _value.chatModel
           : chatModel // ignore: cast_nullable_to_non_nullable
@@ -1396,6 +1406,7 @@ abstract class _$$ContactDataImplCopyWith<$Res>
       List<UserModels> selectedContactModels,
       List<String> alreadyJoinedUsers,
       bool isLoading,
+      AppException? isError,
       ChatModel? chatModel,
       String? showMessage});
 }
@@ -1419,6 +1430,7 @@ class __$$ContactDataImplCopyWithImpl<$Res>
     Object? selectedContactModels = null,
     Object? alreadyJoinedUsers = null,
     Object? isLoading = null,
+    Object? isError = freezed,
     Object? chatModel = freezed,
     Object? showMessage = freezed,
   }) {
@@ -1447,6 +1459,10 @@ class __$$ContactDataImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isError: freezed == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as AppException?,
       chatModel: freezed == chatModel
           ? _value.chatModel
           : chatModel // ignore: cast_nullable_to_non_nullable
@@ -1469,6 +1485,7 @@ class _$ContactDataImpl implements _ContactData {
       final List<UserModels> selectedContactModels = const [],
       final List<String> alreadyJoinedUsers = const [],
       this.isLoading = false,
+      this.isError = null,
       this.chatModel = null,
       this.showMessage = null})
       : _contacts = contacts,
@@ -1531,6 +1548,9 @@ class _$ContactDataImpl implements _ContactData {
   final bool isLoading;
   @override
   @JsonKey()
+  final AppException? isError;
+  @override
+  @JsonKey()
   final ChatModel? chatModel;
   @override
   @JsonKey()
@@ -1538,7 +1558,7 @@ class _$ContactDataImpl implements _ContactData {
 
   @override
   String toString() {
-    return 'ContactState.contactData(contacts: $contacts, registeredContacts: $registeredContacts, selectedContacts: $selectedContacts, selectedContactModels: $selectedContactModels, alreadyJoinedUsers: $alreadyJoinedUsers, isLoading: $isLoading, chatModel: $chatModel, showMessage: $showMessage)';
+    return 'ContactState.contactData(contacts: $contacts, registeredContacts: $registeredContacts, selectedContacts: $selectedContacts, selectedContactModels: $selectedContactModels, alreadyJoinedUsers: $alreadyJoinedUsers, isLoading: $isLoading, isError: $isError, chatModel: $chatModel, showMessage: $showMessage)';
   }
 
   @override
@@ -1557,6 +1577,7 @@ class _$ContactDataImpl implements _ContactData {
                 .equals(other._alreadyJoinedUsers, _alreadyJoinedUsers) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.chatModel, chatModel) ||
                 other.chatModel == chatModel) &&
             (identical(other.showMessage, showMessage) ||
@@ -1572,6 +1593,7 @@ class _$ContactDataImpl implements _ContactData {
       const DeepCollectionEquality().hash(_selectedContactModels),
       const DeepCollectionEquality().hash(_alreadyJoinedUsers),
       isLoading,
+      isError,
       chatModel,
       showMessage);
 
@@ -1593,6 +1615,7 @@ class _$ContactDataImpl implements _ContactData {
             List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
             bool isLoading,
+            AppException? isError,
             ChatModel? chatModel,
             String? showMessage)
         contactData,
@@ -1604,6 +1627,7 @@ class _$ContactDataImpl implements _ContactData {
         selectedContactModels,
         alreadyJoinedUsers,
         isLoading,
+        isError,
         chatModel,
         showMessage);
   }
@@ -1618,6 +1642,7 @@ class _$ContactDataImpl implements _ContactData {
             List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
             bool isLoading,
+            AppException? isError,
             ChatModel? chatModel,
             String? showMessage)?
         contactData,
@@ -1629,6 +1654,7 @@ class _$ContactDataImpl implements _ContactData {
         selectedContactModels,
         alreadyJoinedUsers,
         isLoading,
+        isError,
         chatModel,
         showMessage);
   }
@@ -1643,6 +1669,7 @@ class _$ContactDataImpl implements _ContactData {
             List<UserModels> selectedContactModels,
             List<String> alreadyJoinedUsers,
             bool isLoading,
+            AppException? isError,
             ChatModel? chatModel,
             String? showMessage)?
         contactData,
@@ -1656,6 +1683,7 @@ class _$ContactDataImpl implements _ContactData {
           selectedContactModels,
           alreadyJoinedUsers,
           isLoading,
+          isError,
           chatModel,
           showMessage);
     }
@@ -1699,6 +1727,7 @@ abstract class _ContactData implements ContactState {
       final List<UserModels> selectedContactModels,
       final List<String> alreadyJoinedUsers,
       final bool isLoading,
+      final AppException? isError,
       final ChatModel? chatModel,
       final String? showMessage}) = _$ContactDataImpl;
 
@@ -1714,6 +1743,8 @@ abstract class _ContactData implements ContactState {
   List<String> get alreadyJoinedUsers;
   @override
   bool get isLoading;
+  @override
+  AppException? get isError;
   @override
   ChatModel? get chatModel;
   @override

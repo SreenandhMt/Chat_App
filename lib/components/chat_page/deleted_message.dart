@@ -18,6 +18,7 @@ class DeletedMessageLog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final color = isSender ? Colors.white : null;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.chatColor(context, isSender),
@@ -37,11 +38,12 @@ class DeletedMessageLog extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 0),
             child: Row(
               children: [
-                Icon(Icons.block),
+                Icon(Icons.block, color: color),
                 width5,
                 Text(
                   text,
-                  style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                  style: TextStyle(
+                      fontSize: 16, fontStyle: FontStyle.italic, color: color),
                 ),
                 width5,
               ],

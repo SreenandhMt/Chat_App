@@ -1,19 +1,17 @@
-import 'dart:developer';
+// ignore_for_file: use_build_context_synchronously
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:chat_app/components/calling_page/video_call_widget.dart';
 import 'package:chat_app/components/calling_page/voice_call_widget.dart';
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
-import 'package:chat_app/features/calls_screen/models/remote_user_model.dart';
 import 'package:chat_app/features/calls_screen/services/agora_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:permission_handler/permission_handler.dart';
 
+import '../../../core/error_snackbar.dart';
 import '../../../core/fonts.dart';
 import '../../../core/size.dart';
 import '../models/call_model.dart';
@@ -31,15 +29,23 @@ class _VideoCallPageState extends State<VideoCallPage> {
   bool cameraMute = false;
   bool audioMute = false;
   bool streamInit = false;
+  bool agoraInit = false;
 
   @override
   void initState() {
+    callStream();
     super.initState();
   }
 
   Future<void> initAgora(String token) async {
     isStartInit = true;
-    AgoraService.instance.joinVideoCall(token, context);
+    AgoraService.instance.joinVideoCall(token, context).then(
+      (value) {
+        setState(() {
+          agoraInit = true;
+        });
+      },
+    );
   }
 
   @override
@@ -50,32 +56,44 @@ class _VideoCallPageState extends State<VideoCallPage> {
 
   Future<void> _dispose() async {}
 
+  void callStream() {
+    final state = context.read<CallingBloc>().state;
+    if (state.currentCall != null) {
+      streamInit = true;
+      FirebaseFirestore.instance
+          .collection("calls")
+          .doc(state.currentCall?.historyId)
+          .snapshots()
+          .listen(
+        (event) {
+          if (!event.exists) {
+            if (mounted && context.canPop()) {
+              streamInit = false;
+              context.read<CallingBloc>().add(CallingEvent.clearCurrentCall());
+              context.pop();
+            }
+            return;
+          }
+          context
+              .read<CallingBloc>()
+              .add(CallingEvent.updateCurrentCall(docs: event));
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return BlocConsumer<CallingBloc, CallingState>(
       listener: (context, state) {
+        if (state.errorMsg != null) {
+          showExpandableSnackBar(context, state.errorMsg!.message,
+              state.errorMsg!.details, state.errorMsg!.code);
+          context.read<CallingBloc>().add(CallingEvent.clearErrorMessage());
+        }
         if (state.currentCall != null && !streamInit) {
-          FirebaseFirestore.instance
-              .collection("calls")
-              .doc(state.currentCall?.historyId)
-              .snapshots()
-              .listen(
-            (event) {
-              if (!event.exists) {
-                // doc is deleted
-                //call ending function on remote user
-                if (mounted && Navigator.canPop(context)) {
-                  context.pop();
-                }
-                return;
-              }
-              context
-                  .read<CallingBloc>()
-                  .add(CallingEvent.updateCurrentCall(docs: event));
-            },
-          );
-          streamInit = true;
+          callStream();
         }
       },
       builder: (context, state) {
@@ -86,8 +104,9 @@ class _VideoCallPageState extends State<VideoCallPage> {
             state.currentCall!.status == "ringing") {
           return CallRinging(callModel: state.currentCall!);
         } else {
-          if (state.localUserJoined) {
+          if (!agoraInit && state.currentCall!.isCaller) {
             initAgora(state.currentCall!.token);
+            return Center(child: CircularProgressIndicator());
           }
           if (AgoraService.engine == null) {
             return Center(
@@ -133,7 +152,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
                                             height: remoteUsers.length >= 5
                                                 ? (size.height / 2) * 0.7
                                                 : (size.height / 2) * 0.8,
-                                            rtcEngine: AgoraService.engine!)
+                                            rtcEngine: AgoraService.engine)
                                     : remoteUsers[remoteUsers.length <= 2
                                                 ? index
                                                 : index - 1]
@@ -293,7 +312,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
                           if (state.currentCall?.callType == "group") {
                             if (remoteUsers.isNotEmpty) {
                               context.pop();
-                              //TODO End the engine
+                              AgoraService.instance.leaveChannel(context);
                               return;
                             }
                             context.read<CallingBloc>().add(
@@ -301,12 +320,14 @@ class _VideoCallPageState extends State<VideoCallPage> {
                                     callId: state.currentCall!.historyId,
                                   ),
                                 );
+                            AgoraService.instance.leaveChannel(context);
                           } else {
                             context.read<CallingBloc>().add(
                                   CallingEvent.endNormalCall(
                                     callId: state.currentCall!.historyId,
                                   ),
                                 );
+                            AgoraService.instance.leaveChannel(context);
                           }
                         },
                         child: CircleAvatar(
@@ -362,7 +383,6 @@ class CallRiggingState extends State<CallRinging> {
     return Scaffold(
       body: Column(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Spacer(),
@@ -380,7 +400,7 @@ class CallRiggingState extends State<CallRinging> {
             ),
             radius: 50,
           ),
-          Spacer(),
+          Spacer(flex: 3),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

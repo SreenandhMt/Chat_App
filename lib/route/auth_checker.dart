@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:chat_app/features/settings/service/setting_service.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

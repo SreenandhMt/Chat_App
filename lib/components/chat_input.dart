@@ -20,6 +20,8 @@ class ChatInput extends StatefulWidget {
     required this.stickerSelected,
     required this.controller,
     required this.showEmojiKeyboard,
+    required this.emojiHide,
+    required this.hideEmoji,
     this.onSubmit,
     this.isGroup = false,
   });
@@ -27,6 +29,8 @@ class ChatInput extends StatefulWidget {
   final void Function(KeyboardInsertedContent) stickerSelected;
   final TextEditingController controller;
   final void Function() showEmojiKeyboard;
+  final bool emojiHide;
+  final void Function() hideEmoji;
   final void Function()? onSubmit;
   final bool isGroup;
 
@@ -93,6 +97,7 @@ class _ChatInputState extends State<ChatInput> {
                 Row(
                   spacing: 15,
                   children: [
+                    width5,
                     PopupMenuButton(
                         itemBuilder: (context) => [
                               PopupMenuItem(
@@ -165,8 +170,8 @@ class _ChatInputState extends State<ChatInput> {
                                   onTap: () async {
                                     showDialog(
                                       context: context,
-                                      builder: (context) =>
-                                          PollCreatingWidget(),
+                                      builder: (context) => PollCreatingWidget(
+                                          isGroup: widget.isGroup),
                                     );
                                   },
                                 ),
@@ -179,12 +184,17 @@ class _ChatInputState extends State<ChatInput> {
                         },
                         icon: Icon(CupertinoIcons.mic)),
                     InkWell(
-                        onTap: () {
+                      onTap: () {
+                        if (widget.emojiHide) {
                           widget.showEmojiKeyboard();
-                        },
-                        child: Icon(CupertinoIcons.smiley)),
-                    Icon(Icons.sticky_note_2_outlined),
-                    Icon(CupertinoIcons.sparkles),
+                        } else {
+                          widget.hideEmoji();
+                        }
+                      },
+                      child: Icon(widget.emojiHide
+                          ? CupertinoIcons.smiley
+                          : CupertinoIcons.smiley_fill),
+                    ),
                     Spacer(),
                     InkWell(
                       onTap: widget.onSubmit,

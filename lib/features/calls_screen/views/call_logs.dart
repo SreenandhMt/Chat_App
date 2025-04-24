@@ -1,3 +1,4 @@
+import 'package:chat_app/core/error_snackbar.dart';
 import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/features/calls_screen/view_models/bloc/calling_bloc.dart';
 import 'package:chat_app/localization/locals.dart';
@@ -12,7 +13,13 @@ class CallLogsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<CallingBloc>().add(CallingEvent.callHistory());
-    return BlocBuilder<CallingBloc, CallingState>(builder: (context, state) {
+    return BlocConsumer<CallingBloc, CallingState>(listener: (context, state) {
+      if (state.errorMsg != null) {
+        showExpandableSnackBar(context, state.errorMsg!.message,
+            state.errorMsg!.details, state.errorMsg!.code);
+        context.read<CallingBloc>().add(CallingEvent.clearErrorMessage());
+      }
+    }, builder: (context, state) {
       return Scaffold(
           appBar: AppBar(
             title: Text(

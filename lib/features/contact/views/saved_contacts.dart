@@ -1,3 +1,4 @@
+import 'package:chat_app/core/error_snackbar.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/contact/view_models/bloc/contact_bloc.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,14 @@ class _InviteSavedContactsState extends State<InviteSavedContacts> {
           if (state.showMessage != null) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.showMessage!)));
+            context.read<ContactBloc>().add(ContactEvent.clearMessage());
+          }
+          if (state.isError != null) {
+            showExpandableSnackBar(
+                context,
+                state.isError!.message,
+                "Error Contact: ${state.isError!.details}",
+                state.isError!.code);
             context.read<ContactBloc>().add(ContactEvent.clearMessage());
           }
         },

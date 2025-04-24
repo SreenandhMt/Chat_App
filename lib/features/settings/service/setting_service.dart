@@ -28,15 +28,28 @@ class SettingService {
     box.delete("appLock");
   }
 
+  static void forgetAppLock() {
+    box.delete("appLock");
+  }
+
   //localization
-  static void changeLanguage(String languageCode) {
+  static void changeLanguage(String languageCode, String languageName) {
     box.put("Language", languageCode);
+    box.put("LanguageName", languageCode);
   }
 
   static String getLanguage() {
     final data = box.get("Language");
     if (data == null) {
       return "en";
+    }
+    return data;
+  }
+
+  static String getLanguageName() {
+    final data = box.get("LanguageName");
+    if (data == null) {
+      return "English";
     }
     return data;
   }

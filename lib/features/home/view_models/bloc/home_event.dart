@@ -9,4 +9,6 @@ class HomeEvent with _$HomeEvent {
   const factory HomeEvent.loadUserData(
           {required List<QueryDocumentSnapshot<Map<String, dynamic>>> docs}) =
       _LoadUserData;
+
+  const factory HomeEvent.clearError() = _ClearError;
 }

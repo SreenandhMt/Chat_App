@@ -22,6 +22,7 @@ class ChatImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = isSender ? Colors.white : null;
     final screenSize = MediaQuery.sizeOf(context);
     return InkWell(
       onTap: () {
@@ -69,7 +70,7 @@ class ChatImageWidget extends StatelessWidget {
                     ),
                   Text(
                     time,
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 12, color: color),
                   ),
                 ],
               ),

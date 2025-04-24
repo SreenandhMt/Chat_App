@@ -14,6 +14,7 @@ import 'package:chat_app/localization/locals.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 
 import '../../../components/add_list_bottom_sheet.dart';
+import '../../../core/error_snackbar.dart';
 import '../../contact/view_models/bloc/contact_bloc.dart';
 
 class GroupInfoPage extends StatelessWidget {
@@ -22,7 +23,18 @@ class GroupInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<GroupBloc>().add(GroupEvent.loadGroupInfo());
-    return BlocBuilder<GroupBloc, GroupState>(builder: (context, state) {
+    return BlocConsumer<GroupBloc, GroupState>(listener: (context, state) {
+      if (state is GroupData) {
+        if (state.isError != null) {
+          showExpandableSnackBar(
+              context,
+              state.isError!.message,
+              "Error Group Chat: ${state.isError!.details}",
+              state.isError!.code);
+          context.read<GroupBloc>().add(GroupEvent.clearError());
+        }
+      }
+    }, builder: (context, state) {
       return state.when(
         groupData: (groupData,
             groupMembers,
@@ -32,7 +44,8 @@ class GroupInfoPage extends StatelessWidget {
             wallpaperIndex,
             messages,
             isLoading,
-            inputLoading) {
+            inputLoading,
+            isError) {
           if (groupMembers == null && blockedGroupMembers == null) {
             return Center(
               child: CircularProgressIndicator(),

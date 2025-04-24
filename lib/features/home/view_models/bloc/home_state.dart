@@ -4,7 +4,7 @@ part of 'home_bloc.dart';
 class HomeState with _$HomeState {
   factory HomeState.loadedData({
     @Default(true) bool isLoading,
-    @Default("") String errorMessage,
+    @Default(null) AppException? error,
     @Default([]) List<ChatModel> chatsModels,
     @Default(null) Stream<QuerySnapshot<Map<String, dynamic>>>? chatsStream,
     @Default([]) List<String> categoryList,

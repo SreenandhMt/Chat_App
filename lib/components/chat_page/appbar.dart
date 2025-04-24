@@ -75,8 +75,6 @@ PreferredSize appBar(
                     NavigationUtils.voiceCallPage(context);
                   },
                   icon: Icon(CupertinoIcons.phone)),
-              // width10,
-              IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.info)),
             ] else ...[
               if (selectedMessages.length > 1) ...[
                 IconButton(

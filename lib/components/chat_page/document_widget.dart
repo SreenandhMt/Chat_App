@@ -99,6 +99,7 @@ class _DocumentWidgetState extends State<DocumentWidget> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final image = getFileUrl(widget.messageModel.documentType!);
+    final color = widget.isSender ? Colors.white : null;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.chatColor(context, widget.isSender),
@@ -121,7 +122,7 @@ class _DocumentWidgetState extends State<DocumentWidget> {
                   Icon(
                     CupertinoIcons.doc,
                     size: 30,
-                    color: AppColors.themeColor(context),
+                    color: color,
                   )
                 else
                   ClipRRect(
@@ -139,9 +140,9 @@ class _DocumentWidgetState extends State<DocumentWidget> {
                       Text(
                         widget.messageModel.documentName!,
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: color),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -150,17 +151,29 @@ class _DocumentWidgetState extends State<DocumentWidget> {
                         child: Row(
                           spacing: 5,
                           children: [
-                            Text("15, Oct, 2025"),
+                            Text(
+                              "15, Oct, 2025",
+                              style: TextStyle(color: color),
+                            ),
                             Icon(
                               Icons.circle,
                               size: 5,
+                              color: color,
                             ),
-                            Text(formatFileSize(fileSize)),
+                            Text(
+                              formatFileSize(fileSize),
+                              style: TextStyle(color: color),
+                            ),
                             Icon(
                               Icons.circle,
                               size: 5,
+                              color: color,
                             ),
-                            Text(widget.messageModel.documentType!, maxLines: 1)
+                            Text(
+                              widget.messageModel.documentType!,
+                              maxLines: 1,
+                              style: TextStyle(color: color),
+                            )
                           ],
                         ),
                       )
@@ -198,7 +211,7 @@ class _DocumentWidgetState extends State<DocumentWidget> {
                   ),
                 Text(
                   widget.messageModel.time,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12, color: color),
                 ),
               ],
             ),

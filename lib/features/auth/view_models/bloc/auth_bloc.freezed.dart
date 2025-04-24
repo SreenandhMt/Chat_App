@@ -26,6 +26,7 @@ mixin _$AuthEvent {
         createProfile,
     required TResult Function() resendOTP,
     required TResult Function() signOut,
+    required TResult Function() resetErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,6 +38,7 @@ mixin _$AuthEvent {
         createProfile,
     TResult? Function()? resendOTP,
     TResult? Function()? signOut,
+    TResult? Function()? resetErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +50,7 @@ mixin _$AuthEvent {
         createProfile,
     TResult Function()? resendOTP,
     TResult Function()? signOut,
+    TResult Function()? resetErrorMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +63,7 @@ mixin _$AuthEvent {
     required TResult Function(_CreateProfile value) createProfile,
     required TResult Function(_ResendOTP value) resendOTP,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_ResetErrorMessage value) resetErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +74,7 @@ mixin _$AuthEvent {
     TResult? Function(_CreateProfile value)? createProfile,
     TResult? Function(_ResendOTP value)? resendOTP,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_ResetErrorMessage value)? resetErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +85,7 @@ mixin _$AuthEvent {
     TResult Function(_CreateProfile value)? createProfile,
     TResult Function(_ResendOTP value)? resendOTP,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_ResetErrorMessage value)? resetErrorMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +160,7 @@ class _$StartedImpl implements _Started {
         createProfile,
     required TResult Function() resendOTP,
     required TResult Function() signOut,
+    required TResult Function() resetErrorMessage,
   }) {
     return started();
   }
@@ -168,6 +175,7 @@ class _$StartedImpl implements _Started {
         createProfile,
     TResult? Function()? resendOTP,
     TResult? Function()? signOut,
+    TResult? Function()? resetErrorMessage,
   }) {
     return started?.call();
   }
@@ -182,6 +190,7 @@ class _$StartedImpl implements _Started {
         createProfile,
     TResult Function()? resendOTP,
     TResult Function()? signOut,
+    TResult Function()? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -200,6 +209,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_CreateProfile value) createProfile,
     required TResult Function(_ResendOTP value) resendOTP,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_ResetErrorMessage value) resetErrorMessage,
   }) {
     return started(this);
   }
@@ -213,6 +223,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_CreateProfile value)? createProfile,
     TResult? Function(_ResendOTP value)? resendOTP,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_ResetErrorMessage value)? resetErrorMessage,
   }) {
     return started?.call(this);
   }
@@ -226,6 +237,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_CreateProfile value)? createProfile,
     TResult Function(_ResendOTP value)? resendOTP,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_ResetErrorMessage value)? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -318,6 +330,7 @@ class _$SigninWithPhoneNumberImpl implements _SigninWithPhoneNumber {
         createProfile,
     required TResult Function() resendOTP,
     required TResult Function() signOut,
+    required TResult Function() resetErrorMessage,
   }) {
     return signinWithPhoneNumber(phoneNumber);
   }
@@ -332,6 +345,7 @@ class _$SigninWithPhoneNumberImpl implements _SigninWithPhoneNumber {
         createProfile,
     TResult? Function()? resendOTP,
     TResult? Function()? signOut,
+    TResult? Function()? resetErrorMessage,
   }) {
     return signinWithPhoneNumber?.call(phoneNumber);
   }
@@ -346,6 +360,7 @@ class _$SigninWithPhoneNumberImpl implements _SigninWithPhoneNumber {
         createProfile,
     TResult Function()? resendOTP,
     TResult Function()? signOut,
+    TResult Function()? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (signinWithPhoneNumber != null) {
@@ -364,6 +379,7 @@ class _$SigninWithPhoneNumberImpl implements _SigninWithPhoneNumber {
     required TResult Function(_CreateProfile value) createProfile,
     required TResult Function(_ResendOTP value) resendOTP,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_ResetErrorMessage value) resetErrorMessage,
   }) {
     return signinWithPhoneNumber(this);
   }
@@ -377,6 +393,7 @@ class _$SigninWithPhoneNumberImpl implements _SigninWithPhoneNumber {
     TResult? Function(_CreateProfile value)? createProfile,
     TResult? Function(_ResendOTP value)? resendOTP,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_ResetErrorMessage value)? resetErrorMessage,
   }) {
     return signinWithPhoneNumber?.call(this);
   }
@@ -390,6 +407,7 @@ class _$SigninWithPhoneNumberImpl implements _SigninWithPhoneNumber {
     TResult Function(_CreateProfile value)? createProfile,
     TResult Function(_ResendOTP value)? resendOTP,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_ResetErrorMessage value)? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (signinWithPhoneNumber != null) {
@@ -488,6 +506,7 @@ class _$VerifyOTPImpl implements _VerifyOTP {
         createProfile,
     required TResult Function() resendOTP,
     required TResult Function() signOut,
+    required TResult Function() resetErrorMessage,
   }) {
     return verifyOTP(otp);
   }
@@ -502,6 +521,7 @@ class _$VerifyOTPImpl implements _VerifyOTP {
         createProfile,
     TResult? Function()? resendOTP,
     TResult? Function()? signOut,
+    TResult? Function()? resetErrorMessage,
   }) {
     return verifyOTP?.call(otp);
   }
@@ -516,6 +536,7 @@ class _$VerifyOTPImpl implements _VerifyOTP {
         createProfile,
     TResult Function()? resendOTP,
     TResult Function()? signOut,
+    TResult Function()? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (verifyOTP != null) {
@@ -534,6 +555,7 @@ class _$VerifyOTPImpl implements _VerifyOTP {
     required TResult Function(_CreateProfile value) createProfile,
     required TResult Function(_ResendOTP value) resendOTP,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_ResetErrorMessage value) resetErrorMessage,
   }) {
     return verifyOTP(this);
   }
@@ -547,6 +569,7 @@ class _$VerifyOTPImpl implements _VerifyOTP {
     TResult? Function(_CreateProfile value)? createProfile,
     TResult? Function(_ResendOTP value)? resendOTP,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_ResetErrorMessage value)? resetErrorMessage,
   }) {
     return verifyOTP?.call(this);
   }
@@ -560,6 +583,7 @@ class _$VerifyOTPImpl implements _VerifyOTP {
     TResult Function(_CreateProfile value)? createProfile,
     TResult Function(_ResendOTP value)? resendOTP,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_ResetErrorMessage value)? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (verifyOTP != null) {
@@ -676,6 +700,7 @@ class _$CreateProfileImpl implements _CreateProfile {
         createProfile,
     required TResult Function() resendOTP,
     required TResult Function() signOut,
+    required TResult Function() resetErrorMessage,
   }) {
     return createProfile(firstName, lastName, filePath);
   }
@@ -690,6 +715,7 @@ class _$CreateProfileImpl implements _CreateProfile {
         createProfile,
     TResult? Function()? resendOTP,
     TResult? Function()? signOut,
+    TResult? Function()? resetErrorMessage,
   }) {
     return createProfile?.call(firstName, lastName, filePath);
   }
@@ -704,6 +730,7 @@ class _$CreateProfileImpl implements _CreateProfile {
         createProfile,
     TResult Function()? resendOTP,
     TResult Function()? signOut,
+    TResult Function()? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (createProfile != null) {
@@ -722,6 +749,7 @@ class _$CreateProfileImpl implements _CreateProfile {
     required TResult Function(_CreateProfile value) createProfile,
     required TResult Function(_ResendOTP value) resendOTP,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_ResetErrorMessage value) resetErrorMessage,
   }) {
     return createProfile(this);
   }
@@ -735,6 +763,7 @@ class _$CreateProfileImpl implements _CreateProfile {
     TResult? Function(_CreateProfile value)? createProfile,
     TResult? Function(_ResendOTP value)? resendOTP,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_ResetErrorMessage value)? resetErrorMessage,
   }) {
     return createProfile?.call(this);
   }
@@ -748,6 +777,7 @@ class _$CreateProfileImpl implements _CreateProfile {
     TResult Function(_CreateProfile value)? createProfile,
     TResult Function(_ResendOTP value)? resendOTP,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_ResetErrorMessage value)? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (createProfile != null) {
@@ -821,6 +851,7 @@ class _$ResendOTPImpl implements _ResendOTP {
         createProfile,
     required TResult Function() resendOTP,
     required TResult Function() signOut,
+    required TResult Function() resetErrorMessage,
   }) {
     return resendOTP();
   }
@@ -835,6 +866,7 @@ class _$ResendOTPImpl implements _ResendOTP {
         createProfile,
     TResult? Function()? resendOTP,
     TResult? Function()? signOut,
+    TResult? Function()? resetErrorMessage,
   }) {
     return resendOTP?.call();
   }
@@ -849,6 +881,7 @@ class _$ResendOTPImpl implements _ResendOTP {
         createProfile,
     TResult Function()? resendOTP,
     TResult Function()? signOut,
+    TResult Function()? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (resendOTP != null) {
@@ -867,6 +900,7 @@ class _$ResendOTPImpl implements _ResendOTP {
     required TResult Function(_CreateProfile value) createProfile,
     required TResult Function(_ResendOTP value) resendOTP,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_ResetErrorMessage value) resetErrorMessage,
   }) {
     return resendOTP(this);
   }
@@ -880,6 +914,7 @@ class _$ResendOTPImpl implements _ResendOTP {
     TResult? Function(_CreateProfile value)? createProfile,
     TResult? Function(_ResendOTP value)? resendOTP,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_ResetErrorMessage value)? resetErrorMessage,
   }) {
     return resendOTP?.call(this);
   }
@@ -893,6 +928,7 @@ class _$ResendOTPImpl implements _ResendOTP {
     TResult Function(_CreateProfile value)? createProfile,
     TResult Function(_ResendOTP value)? resendOTP,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_ResetErrorMessage value)? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (resendOTP != null) {
@@ -955,6 +991,7 @@ class _$SignOutImpl implements _SignOut {
         createProfile,
     required TResult Function() resendOTP,
     required TResult Function() signOut,
+    required TResult Function() resetErrorMessage,
   }) {
     return signOut();
   }
@@ -969,6 +1006,7 @@ class _$SignOutImpl implements _SignOut {
         createProfile,
     TResult? Function()? resendOTP,
     TResult? Function()? signOut,
+    TResult? Function()? resetErrorMessage,
   }) {
     return signOut?.call();
   }
@@ -983,6 +1021,7 @@ class _$SignOutImpl implements _SignOut {
         createProfile,
     TResult Function()? resendOTP,
     TResult Function()? signOut,
+    TResult Function()? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -1001,6 +1040,7 @@ class _$SignOutImpl implements _SignOut {
     required TResult Function(_CreateProfile value) createProfile,
     required TResult Function(_ResendOTP value) resendOTP,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_ResetErrorMessage value) resetErrorMessage,
   }) {
     return signOut(this);
   }
@@ -1014,6 +1054,7 @@ class _$SignOutImpl implements _SignOut {
     TResult? Function(_CreateProfile value)? createProfile,
     TResult? Function(_ResendOTP value)? resendOTP,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_ResetErrorMessage value)? resetErrorMessage,
   }) {
     return signOut?.call(this);
   }
@@ -1027,6 +1068,7 @@ class _$SignOutImpl implements _SignOut {
     TResult Function(_CreateProfile value)? createProfile,
     TResult Function(_ResendOTP value)? resendOTP,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_ResetErrorMessage value)? resetErrorMessage,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -1041,9 +1083,149 @@ abstract class _SignOut implements AuthEvent {
 }
 
 /// @nodoc
+abstract class _$$ResetErrorMessageImplCopyWith<$Res> {
+  factory _$$ResetErrorMessageImplCopyWith(_$ResetErrorMessageImpl value,
+          $Res Function(_$ResetErrorMessageImpl) then) =
+      __$$ResetErrorMessageImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetErrorMessageImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$ResetErrorMessageImpl>
+    implements _$$ResetErrorMessageImplCopyWith<$Res> {
+  __$$ResetErrorMessageImplCopyWithImpl(_$ResetErrorMessageImpl _value,
+      $Res Function(_$ResetErrorMessageImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ResetErrorMessageImpl implements _ResetErrorMessage {
+  const _$ResetErrorMessageImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.resetErrorMessage()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResetErrorMessageImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String phoneNumber) signinWithPhoneNumber,
+    required TResult Function(String otp) verifyOTP,
+    required TResult Function(
+            String firstName, String? lastName, String? filePath)
+        createProfile,
+    required TResult Function() resendOTP,
+    required TResult Function() signOut,
+    required TResult Function() resetErrorMessage,
+  }) {
+    return resetErrorMessage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String phoneNumber)? signinWithPhoneNumber,
+    TResult? Function(String otp)? verifyOTP,
+    TResult? Function(String firstName, String? lastName, String? filePath)?
+        createProfile,
+    TResult? Function()? resendOTP,
+    TResult? Function()? signOut,
+    TResult? Function()? resetErrorMessage,
+  }) {
+    return resetErrorMessage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String phoneNumber)? signinWithPhoneNumber,
+    TResult Function(String otp)? verifyOTP,
+    TResult Function(String firstName, String? lastName, String? filePath)?
+        createProfile,
+    TResult Function()? resendOTP,
+    TResult Function()? signOut,
+    TResult Function()? resetErrorMessage,
+    required TResult orElse(),
+  }) {
+    if (resetErrorMessage != null) {
+      return resetErrorMessage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SigninWithPhoneNumber value)
+        signinWithPhoneNumber,
+    required TResult Function(_VerifyOTP value) verifyOTP,
+    required TResult Function(_CreateProfile value) createProfile,
+    required TResult Function(_ResendOTP value) resendOTP,
+    required TResult Function(_SignOut value) signOut,
+    required TResult Function(_ResetErrorMessage value) resetErrorMessage,
+  }) {
+    return resetErrorMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SigninWithPhoneNumber value)? signinWithPhoneNumber,
+    TResult? Function(_VerifyOTP value)? verifyOTP,
+    TResult? Function(_CreateProfile value)? createProfile,
+    TResult? Function(_ResendOTP value)? resendOTP,
+    TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_ResetErrorMessage value)? resetErrorMessage,
+  }) {
+    return resetErrorMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SigninWithPhoneNumber value)? signinWithPhoneNumber,
+    TResult Function(_VerifyOTP value)? verifyOTP,
+    TResult Function(_CreateProfile value)? createProfile,
+    TResult Function(_ResendOTP value)? resendOTP,
+    TResult Function(_SignOut value)? signOut,
+    TResult Function(_ResetErrorMessage value)? resetErrorMessage,
+    required TResult orElse(),
+  }) {
+    if (resetErrorMessage != null) {
+      return resetErrorMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetErrorMessage implements AuthEvent {
+  const factory _ResetErrorMessage() = _$ResetErrorMessageImpl;
+}
+
+/// @nodoc
 mixin _$AuthState {
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
+  AppException? get errorMessage => throw _privateConstructorUsedError;
   bool get phoneNumberSuccess => throw _privateConstructorUsedError;
   String? get verificationId => throw _privateConstructorUsedError;
   bool get optSuccess => throw _privateConstructorUsedError;
@@ -1052,7 +1234,7 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function(
             bool isLoading,
-            String? errorMessage,
+            AppException? errorMessage,
             bool phoneNumberSuccess,
             String? verificationId,
             bool optSuccess,
@@ -1064,7 +1246,7 @@ mixin _$AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             bool isLoading,
-            String? errorMessage,
+            AppException? errorMessage,
             bool phoneNumberSuccess,
             String? verificationId,
             bool optSuccess,
@@ -1076,7 +1258,7 @@ mixin _$AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             bool isLoading,
-            String? errorMessage,
+            AppException? errorMessage,
             bool phoneNumberSuccess,
             String? verificationId,
             bool optSuccess,
@@ -1116,7 +1298,7 @@ abstract class $AuthStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      String? errorMessage,
+      AppException? errorMessage,
       bool phoneNumberSuccess,
       String? verificationId,
       bool optSuccess,
@@ -1153,7 +1335,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as AppException?,
       phoneNumberSuccess: null == phoneNumberSuccess
           ? _value.phoneNumberSuccess
           : phoneNumberSuccess // ignore: cast_nullable_to_non_nullable
@@ -1184,7 +1366,7 @@ abstract class _$$AuthStatusImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      String? errorMessage,
+      AppException? errorMessage,
       bool phoneNumberSuccess,
       String? verificationId,
       bool optSuccess,
@@ -1219,7 +1401,7 @@ class __$$AuthStatusImplCopyWithImpl<$Res>
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as AppException?,
       phoneNumberSuccess: null == phoneNumberSuccess
           ? _value.phoneNumberSuccess
           : phoneNumberSuccess // ignore: cast_nullable_to_non_nullable
@@ -1245,7 +1427,7 @@ class __$$AuthStatusImplCopyWithImpl<$Res>
 class _$AuthStatusImpl implements _AuthStatus {
   const _$AuthStatusImpl(
       {this.isLoading = false,
-      this.errorMessage,
+      this.errorMessage = null,
       this.phoneNumberSuccess = false,
       this.verificationId = null,
       this.optSuccess = false,
@@ -1255,7 +1437,8 @@ class _$AuthStatusImpl implements _AuthStatus {
   @JsonKey()
   final bool isLoading;
   @override
-  final String? errorMessage;
+  @JsonKey()
+  final AppException? errorMessage;
   @override
   @JsonKey()
   final bool phoneNumberSuccess;
@@ -1310,7 +1493,7 @@ class _$AuthStatusImpl implements _AuthStatus {
   TResult when<TResult extends Object?>({
     required TResult Function(
             bool isLoading,
-            String? errorMessage,
+            AppException? errorMessage,
             bool phoneNumberSuccess,
             String? verificationId,
             bool optSuccess,
@@ -1326,7 +1509,7 @@ class _$AuthStatusImpl implements _AuthStatus {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             bool isLoading,
-            String? errorMessage,
+            AppException? errorMessage,
             bool phoneNumberSuccess,
             String? verificationId,
             bool optSuccess,
@@ -1342,7 +1525,7 @@ class _$AuthStatusImpl implements _AuthStatus {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             bool isLoading,
-            String? errorMessage,
+            AppException? errorMessage,
             bool phoneNumberSuccess,
             String? verificationId,
             bool optSuccess,
@@ -1389,7 +1572,7 @@ class _$AuthStatusImpl implements _AuthStatus {
 abstract class _AuthStatus implements AuthState {
   const factory _AuthStatus(
       {final bool isLoading,
-      final String? errorMessage,
+      final AppException? errorMessage,
       final bool phoneNumberSuccess,
       final String? verificationId,
       final bool optSuccess,
@@ -1398,7 +1581,7 @@ abstract class _AuthStatus implements AuthState {
   @override
   bool get isLoading;
   @override
-  String? get errorMessage;
+  AppException? get errorMessage;
   @override
   bool get phoneNumberSuccess;
   @override

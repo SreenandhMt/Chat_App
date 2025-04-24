@@ -5,6 +5,7 @@ import 'package:chat_app/components/app_search_bar.dart';
 import 'package:chat_app/components/home/user_widget.dart';
 import 'package:chat_app/core/assets.dart';
 import 'package:chat_app/core/colors.dart';
+import 'package:chat_app/core/error_snackbar.dart';
 import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
@@ -102,6 +103,11 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
+        if (state.error != null) {
+          showExpandableSnackBar(context, state.error!.message,
+              "Error Home Page: ${state.error!.details}", state.error!.code);
+          context.read<HomeBloc>().add(HomeEvent.clearError());
+        }
         if (state.chatsStream != null) {
           state.chatsStream!.listen((snapshot) {
             if (snapshot.docs.isNotEmpty) {

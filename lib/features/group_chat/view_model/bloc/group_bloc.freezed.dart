@@ -39,6 +39,7 @@ mixin _$GroupEvent {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -60,6 +61,7 @@ mixin _$GroupEvent {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +87,7 @@ mixin _$GroupEvent {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -105,6 +108,7 @@ mixin _$GroupEvent {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -130,6 +134,7 @@ mixin _$GroupEvent {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -150,6 +155,7 @@ mixin _$GroupEvent {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -174,6 +180,7 @@ mixin _$GroupEvent {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -184,6 +191,7 @@ mixin _$GroupEvent {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -207,6 +215,7 @@ mixin _$GroupEvent {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -217,6 +226,7 @@ mixin _$GroupEvent {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -240,6 +250,7 @@ mixin _$GroupEvent {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -250,6 +261,7 @@ mixin _$GroupEvent {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -365,6 +377,7 @@ class _$LoadDataImpl implements _LoadData {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -386,6 +399,7 @@ class _$LoadDataImpl implements _LoadData {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return loadData(chat);
   }
@@ -414,6 +428,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -434,6 +449,7 @@ class _$LoadDataImpl implements _LoadData {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return loadData?.call(chat);
   }
@@ -462,6 +478,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -482,6 +499,7 @@ class _$LoadDataImpl implements _LoadData {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (loadData != null) {
@@ -512,6 +530,7 @@ class _$LoadDataImpl implements _LoadData {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -522,6 +541,7 @@ class _$LoadDataImpl implements _LoadData {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return loadData(this);
   }
@@ -548,6 +568,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -558,6 +579,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return loadData?.call(this);
   }
@@ -584,6 +606,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -594,6 +617,7 @@ class _$LoadDataImpl implements _LoadData {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (loadData != null) {
@@ -704,6 +728,7 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -725,6 +750,7 @@ class _$SendMessageImpl implements _SendMessage {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return sendMessage(message);
   }
@@ -753,6 +779,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -773,6 +800,7 @@ class _$SendMessageImpl implements _SendMessage {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return sendMessage?.call(message);
   }
@@ -801,6 +829,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -821,6 +850,7 @@ class _$SendMessageImpl implements _SendMessage {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -851,6 +881,7 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -861,6 +892,7 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return sendMessage(this);
   }
@@ -887,6 +919,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -897,6 +930,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return sendMessage?.call(this);
   }
@@ -923,6 +957,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -933,6 +968,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -1043,6 +1079,7 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -1064,6 +1101,7 @@ class _$SendImageImpl implements _SendImage {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return sendImage(path);
   }
@@ -1092,6 +1130,7 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1112,6 +1151,7 @@ class _$SendImageImpl implements _SendImage {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return sendImage?.call(path);
   }
@@ -1140,6 +1180,7 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1160,6 +1201,7 @@ class _$SendImageImpl implements _SendImage {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (sendImage != null) {
@@ -1190,6 +1232,7 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -1200,6 +1243,7 @@ class _$SendImageImpl implements _SendImage {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return sendImage(this);
   }
@@ -1226,6 +1270,7 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -1236,6 +1281,7 @@ class _$SendImageImpl implements _SendImage {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return sendImage?.call(this);
   }
@@ -1262,6 +1308,7 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -1272,6 +1319,7 @@ class _$SendImageImpl implements _SendImage {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (sendImage != null) {
@@ -1391,6 +1439,7 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -1412,6 +1461,7 @@ class _$AddReactionImpl implements _AddReaction {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return addReaction(messageId, emoji);
   }
@@ -1440,6 +1490,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1460,6 +1511,7 @@ class _$AddReactionImpl implements _AddReaction {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return addReaction?.call(messageId, emoji);
   }
@@ -1488,6 +1540,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1508,6 +1561,7 @@ class _$AddReactionImpl implements _AddReaction {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (addReaction != null) {
@@ -1538,6 +1592,7 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -1548,6 +1603,7 @@ class _$AddReactionImpl implements _AddReaction {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return addReaction(this);
   }
@@ -1574,6 +1630,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -1584,6 +1641,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return addReaction?.call(this);
   }
@@ -1610,6 +1668,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -1620,6 +1679,7 @@ class _$AddReactionImpl implements _AddReaction {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (addReaction != null) {
@@ -1747,6 +1807,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -1768,6 +1829,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return sendAudioFile(file, waveList);
   }
@@ -1796,6 +1858,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1816,6 +1879,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return sendAudioFile?.call(file, waveList);
   }
@@ -1844,6 +1908,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -1864,6 +1929,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (sendAudioFile != null) {
@@ -1894,6 +1960,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -1904,6 +1971,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return sendAudioFile(this);
   }
@@ -1930,6 +1998,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -1940,6 +2009,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return sendAudioFile?.call(this);
   }
@@ -1966,6 +2036,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -1976,6 +2047,7 @@ class _$SendAudioFileImpl implements _SendAudioFile {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (sendAudioFile != null) {
@@ -2088,6 +2160,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -2109,6 +2182,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return sendVideoFile(path);
   }
@@ -2137,6 +2211,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2157,6 +2232,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return sendVideoFile?.call(path);
   }
@@ -2185,6 +2261,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2205,6 +2282,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (sendVideoFile != null) {
@@ -2235,6 +2313,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -2245,6 +2324,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return sendVideoFile(this);
   }
@@ -2271,6 +2351,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -2281,6 +2362,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return sendVideoFile?.call(this);
   }
@@ -2307,6 +2389,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -2317,6 +2400,7 @@ class _$SendVideoFileImpl implements _SendVideoFile {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (sendVideoFile != null) {
@@ -2427,6 +2511,7 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -2448,6 +2533,7 @@ class _$SendLinkImpl implements _SendLink {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return sendLink(link);
   }
@@ -2476,6 +2562,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2496,6 +2583,7 @@ class _$SendLinkImpl implements _SendLink {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return sendLink?.call(link);
   }
@@ -2524,6 +2612,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2544,6 +2633,7 @@ class _$SendLinkImpl implements _SendLink {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (sendLink != null) {
@@ -2574,6 +2664,7 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -2584,6 +2675,7 @@ class _$SendLinkImpl implements _SendLink {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return sendLink(this);
   }
@@ -2610,6 +2702,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -2620,6 +2713,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return sendLink?.call(this);
   }
@@ -2646,6 +2740,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -2656,6 +2751,7 @@ class _$SendLinkImpl implements _SendLink {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (sendLink != null) {
@@ -2766,6 +2862,7 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -2787,6 +2884,7 @@ class _$SendDocumentImpl implements _SendDocument {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return sendDocument(path);
   }
@@ -2815,6 +2913,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2835,6 +2934,7 @@ class _$SendDocumentImpl implements _SendDocument {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return sendDocument?.call(path);
   }
@@ -2863,6 +2963,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -2883,6 +2984,7 @@ class _$SendDocumentImpl implements _SendDocument {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (sendDocument != null) {
@@ -2913,6 +3015,7 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -2923,6 +3026,7 @@ class _$SendDocumentImpl implements _SendDocument {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return sendDocument(this);
   }
@@ -2949,6 +3053,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -2959,6 +3064,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return sendDocument?.call(this);
   }
@@ -2985,6 +3091,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -2995,6 +3102,7 @@ class _$SendDocumentImpl implements _SendDocument {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (sendDocument != null) {
@@ -3122,6 +3230,7 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -3143,6 +3252,7 @@ class _$CreatePollImpl implements _CreatePoll {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return createPoll(question, options);
   }
@@ -3171,6 +3281,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3191,6 +3302,7 @@ class _$CreatePollImpl implements _CreatePoll {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return createPoll?.call(question, options);
   }
@@ -3219,6 +3331,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3239,6 +3352,7 @@ class _$CreatePollImpl implements _CreatePoll {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (createPoll != null) {
@@ -3269,6 +3383,7 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -3279,6 +3394,7 @@ class _$CreatePollImpl implements _CreatePoll {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return createPoll(this);
   }
@@ -3305,6 +3421,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -3315,6 +3432,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return createPoll?.call(this);
   }
@@ -3341,6 +3459,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -3351,6 +3470,7 @@ class _$CreatePollImpl implements _CreatePoll {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (createPoll != null) {
@@ -3465,6 +3585,7 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -3486,6 +3607,7 @@ class _$SendStickerImpl implements _SendSticker {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return sendSticker(stickerPath);
   }
@@ -3514,6 +3636,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3534,6 +3657,7 @@ class _$SendStickerImpl implements _SendSticker {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return sendSticker?.call(stickerPath);
   }
@@ -3562,6 +3686,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3582,6 +3707,7 @@ class _$SendStickerImpl implements _SendSticker {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (sendSticker != null) {
@@ -3612,6 +3738,7 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -3622,6 +3749,7 @@ class _$SendStickerImpl implements _SendSticker {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return sendSticker(this);
   }
@@ -3648,6 +3776,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -3658,6 +3787,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return sendSticker?.call(this);
   }
@@ -3684,6 +3814,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -3694,6 +3825,7 @@ class _$SendStickerImpl implements _SendSticker {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (sendSticker != null) {
@@ -3805,6 +3937,7 @@ class _$KickUserImpl implements _KickUser {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -3826,6 +3959,7 @@ class _$KickUserImpl implements _KickUser {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return kickUser(uid);
   }
@@ -3854,6 +3988,7 @@ class _$KickUserImpl implements _KickUser {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3874,6 +4009,7 @@ class _$KickUserImpl implements _KickUser {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return kickUser?.call(uid);
   }
@@ -3902,6 +4038,7 @@ class _$KickUserImpl implements _KickUser {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -3922,6 +4059,7 @@ class _$KickUserImpl implements _KickUser {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (kickUser != null) {
@@ -3952,6 +4090,7 @@ class _$KickUserImpl implements _KickUser {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -3962,6 +4101,7 @@ class _$KickUserImpl implements _KickUser {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return kickUser(this);
   }
@@ -3988,6 +4128,7 @@ class _$KickUserImpl implements _KickUser {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -3998,6 +4139,7 @@ class _$KickUserImpl implements _KickUser {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return kickUser?.call(this);
   }
@@ -4024,6 +4166,7 @@ class _$KickUserImpl implements _KickUser {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -4034,6 +4177,7 @@ class _$KickUserImpl implements _KickUser {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (kickUser != null) {
@@ -4117,6 +4261,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -4138,6 +4283,7 @@ class _$ExitGroupImpl implements _ExitGroup {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return exitGroup();
   }
@@ -4166,6 +4312,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4186,6 +4333,7 @@ class _$ExitGroupImpl implements _ExitGroup {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return exitGroup?.call();
   }
@@ -4214,6 +4362,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4234,6 +4383,7 @@ class _$ExitGroupImpl implements _ExitGroup {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (exitGroup != null) {
@@ -4264,6 +4414,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -4274,6 +4425,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return exitGroup(this);
   }
@@ -4300,6 +4452,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -4310,6 +4463,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return exitGroup?.call(this);
   }
@@ -4336,6 +4490,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -4346,6 +4501,7 @@ class _$ExitGroupImpl implements _ExitGroup {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (exitGroup != null) {
@@ -4448,6 +4604,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -4469,6 +4626,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return deleteGroup(uid);
   }
@@ -4497,6 +4655,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4517,6 +4676,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return deleteGroup?.call(uid);
   }
@@ -4545,6 +4705,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4565,6 +4726,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (deleteGroup != null) {
@@ -4595,6 +4757,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -4605,6 +4768,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return deleteGroup(this);
   }
@@ -4631,6 +4795,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -4641,6 +4806,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return deleteGroup?.call(this);
   }
@@ -4667,6 +4833,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -4677,6 +4844,7 @@ class _$DeleteGroupImpl implements _DeleteGroup {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (deleteGroup != null) {
@@ -4787,6 +4955,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -4808,6 +4977,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return makeAdmin(uid);
   }
@@ -4836,6 +5006,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4856,6 +5027,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return makeAdmin?.call(uid);
   }
@@ -4884,6 +5056,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -4904,6 +5077,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (makeAdmin != null) {
@@ -4934,6 +5108,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -4944,6 +5119,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return makeAdmin(this);
   }
@@ -4970,6 +5146,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -4980,6 +5157,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return makeAdmin?.call(this);
   }
@@ -5006,6 +5184,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -5016,6 +5195,7 @@ class _$MakeAdminImpl implements _MakeAdmin {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (makeAdmin != null) {
@@ -5126,6 +5306,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -5147,6 +5328,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return removeAdmin(uid);
   }
@@ -5175,6 +5357,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -5195,6 +5378,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return removeAdmin?.call(uid);
   }
@@ -5223,6 +5407,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -5243,6 +5428,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (removeAdmin != null) {
@@ -5273,6 +5459,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -5283,6 +5470,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return removeAdmin(this);
   }
@@ -5309,6 +5497,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -5319,6 +5508,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return removeAdmin?.call(this);
   }
@@ -5345,6 +5535,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -5355,6 +5546,7 @@ class _$RemoveAdminImpl implements _RemoveAdmin {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (removeAdmin != null) {
@@ -5465,6 +5657,7 @@ class _$BlockUserImpl implements _BlockUser {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -5486,6 +5679,7 @@ class _$BlockUserImpl implements _BlockUser {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return blockUser(uid);
   }
@@ -5514,6 +5708,7 @@ class _$BlockUserImpl implements _BlockUser {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -5534,6 +5729,7 @@ class _$BlockUserImpl implements _BlockUser {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return blockUser?.call(uid);
   }
@@ -5562,6 +5758,7 @@ class _$BlockUserImpl implements _BlockUser {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -5582,6 +5779,7 @@ class _$BlockUserImpl implements _BlockUser {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (blockUser != null) {
@@ -5612,6 +5810,7 @@ class _$BlockUserImpl implements _BlockUser {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -5622,6 +5821,7 @@ class _$BlockUserImpl implements _BlockUser {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return blockUser(this);
   }
@@ -5648,6 +5848,7 @@ class _$BlockUserImpl implements _BlockUser {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -5658,6 +5859,7 @@ class _$BlockUserImpl implements _BlockUser {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return blockUser?.call(this);
   }
@@ -5684,6 +5886,7 @@ class _$BlockUserImpl implements _BlockUser {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -5694,6 +5897,7 @@ class _$BlockUserImpl implements _BlockUser {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (blockUser != null) {
@@ -5805,6 +6009,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -5826,6 +6031,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return muteNotification(uid);
   }
@@ -5854,6 +6060,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -5874,6 +6081,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return muteNotification?.call(uid);
   }
@@ -5902,6 +6110,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -5922,6 +6131,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (muteNotification != null) {
@@ -5952,6 +6162,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -5962,6 +6173,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return muteNotification(this);
   }
@@ -5988,6 +6200,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -5998,6 +6211,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return muteNotification?.call(this);
   }
@@ -6024,6 +6238,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -6034,6 +6249,7 @@ class _$MuteNotificationImpl implements _MuteNotification {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (muteNotification != null) {
@@ -6146,6 +6362,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -6167,6 +6384,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return unmuteNotification(uid);
   }
@@ -6195,6 +6413,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -6215,6 +6434,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return unmuteNotification?.call(uid);
   }
@@ -6243,6 +6463,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -6263,6 +6484,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (unmuteNotification != null) {
@@ -6293,6 +6515,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -6303,6 +6526,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return unmuteNotification(this);
   }
@@ -6329,6 +6553,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -6339,6 +6564,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return unmuteNotification?.call(this);
   }
@@ -6365,6 +6591,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -6375,6 +6602,7 @@ class _$UnmuteNotificationImpl implements _UnmuteNotification {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (unmuteNotification != null) {
@@ -6514,6 +6742,7 @@ class _$EditPermissionImpl implements _EditPermission {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -6535,6 +6764,7 @@ class _$EditPermissionImpl implements _EditPermission {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return editPermission(memberCanEdit, memberCanAddMember, memberCanMessage);
   }
@@ -6563,6 +6793,7 @@ class _$EditPermissionImpl implements _EditPermission {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -6583,6 +6814,7 @@ class _$EditPermissionImpl implements _EditPermission {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return editPermission?.call(
         memberCanEdit, memberCanAddMember, memberCanMessage);
@@ -6612,6 +6844,7 @@ class _$EditPermissionImpl implements _EditPermission {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -6632,6 +6865,7 @@ class _$EditPermissionImpl implements _EditPermission {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (editPermission != null) {
@@ -6663,6 +6897,7 @@ class _$EditPermissionImpl implements _EditPermission {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -6673,6 +6908,7 @@ class _$EditPermissionImpl implements _EditPermission {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return editPermission(this);
   }
@@ -6699,6 +6935,7 @@ class _$EditPermissionImpl implements _EditPermission {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -6709,6 +6946,7 @@ class _$EditPermissionImpl implements _EditPermission {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return editPermission?.call(this);
   }
@@ -6735,6 +6973,7 @@ class _$EditPermissionImpl implements _EditPermission {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -6745,6 +6984,7 @@ class _$EditPermissionImpl implements _EditPermission {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (editPermission != null) {
@@ -6769,6 +7009,322 @@ abstract class _EditPermission implements GroupEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditPermissionImplCopyWith<_$EditPermissionImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClearErrorImplCopyWith<$Res> {
+  factory _$$ClearErrorImplCopyWith(
+          _$ClearErrorImpl value, $Res Function(_$ClearErrorImpl) then) =
+      __$$ClearErrorImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearErrorImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$ClearErrorImpl>
+    implements _$$ClearErrorImplCopyWith<$Res> {
+  __$$ClearErrorImplCopyWithImpl(
+      _$ClearErrorImpl _value, $Res Function(_$ClearErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearErrorImpl implements _ClearError {
+  const _$ClearErrorImpl();
+
+  @override
+  String toString() {
+    return 'GroupEvent.clearError()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearErrorImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function() clearError,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
+  }) {
+    return clearError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function()? clearError,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
+  }) {
+    return clearError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function()? clearError,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
+    required TResult orElse(),
+  }) {
+    if (clearError != null) {
+      return clearError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
+  }) {
+    return clearError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
+  }) {
+    return clearError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
+    required TResult orElse(),
+  }) {
+    if (clearError != null) {
+      return clearError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearError implements GroupEvent {
+  const factory _ClearError() = _$ClearErrorImpl;
 }
 
 /// @nodoc
@@ -6887,6 +7443,7 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -6908,6 +7465,7 @@ class _$VotePollImpl implements _VotePoll {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return votePoll(messageId, option, votes);
   }
@@ -6936,6 +7494,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -6956,6 +7515,7 @@ class _$VotePollImpl implements _VotePoll {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return votePoll?.call(messageId, option, votes);
   }
@@ -6984,6 +7544,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -7004,6 +7565,7 @@ class _$VotePollImpl implements _VotePoll {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (votePoll != null) {
@@ -7034,6 +7596,7 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -7044,6 +7607,7 @@ class _$VotePollImpl implements _VotePoll {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return votePoll(this);
   }
@@ -7070,6 +7634,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -7080,6 +7645,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return votePoll?.call(this);
   }
@@ -7106,6 +7672,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -7116,6 +7683,7 @@ class _$VotePollImpl implements _VotePoll {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (votePoll != null) {
@@ -7239,6 +7807,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -7260,6 +7829,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return deleteMessage(messageId);
   }
@@ -7288,6 +7858,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -7308,6 +7879,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return deleteMessage?.call(messageId);
   }
@@ -7336,6 +7908,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -7356,6 +7929,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
@@ -7386,6 +7960,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -7396,6 +7971,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return deleteMessage(this);
   }
@@ -7422,6 +7998,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -7432,6 +8009,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return deleteMessage?.call(this);
   }
@@ -7458,6 +8036,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -7468,6 +8047,7 @@ class _$DeleteMessageImpl implements _DeleteMessage {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
@@ -7588,6 +8168,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -7609,6 +8190,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return deleteChatForMe(messageIds);
   }
@@ -7637,6 +8219,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -7657,6 +8240,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return deleteChatForMe?.call(messageIds);
   }
@@ -7685,6 +8269,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -7705,6 +8290,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (deleteChatForMe != null) {
@@ -7735,6 +8321,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -7745,6 +8332,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return deleteChatForMe(this);
   }
@@ -7771,6 +8359,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -7781,6 +8370,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return deleteChatForMe?.call(this);
   }
@@ -7807,6 +8397,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -7817,6 +8408,7 @@ class _$DeleteChatForMeImpl implements _DeleteChatForMe {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (deleteChatForMe != null) {
@@ -7930,6 +8522,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -7951,6 +8544,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return editStatusToTyping(isTyping);
   }
@@ -7979,6 +8573,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -7999,6 +8594,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return editStatusToTyping?.call(isTyping);
   }
@@ -8027,6 +8623,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -8047,6 +8644,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (editStatusToTyping != null) {
@@ -8077,6 +8675,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -8087,6 +8686,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return editStatusToTyping(this);
   }
@@ -8113,6 +8713,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -8123,6 +8724,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return editStatusToTyping?.call(this);
   }
@@ -8149,6 +8751,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -8159,6 +8762,7 @@ class _$EditStatusToTypingImpl implements _EditStatusToTyping {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (editStatusToTyping != null) {
@@ -8279,6 +8883,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -8300,6 +8905,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return loadMessageModel(docs);
   }
@@ -8328,6 +8934,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -8348,6 +8955,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return loadMessageModel?.call(docs);
   }
@@ -8376,6 +8984,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -8396,6 +9005,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (loadMessageModel != null) {
@@ -8426,6 +9036,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -8436,6 +9047,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return loadMessageModel(this);
   }
@@ -8462,6 +9074,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -8472,6 +9085,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return loadMessageModel?.call(this);
   }
@@ -8498,6 +9112,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -8508,6 +9123,7 @@ class _$LoadMessageModelImpl implements _LoadMessageModel {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (loadMessageModel != null) {
@@ -8593,6 +9209,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -8614,6 +9231,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return reloadGroup();
   }
@@ -8642,6 +9260,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -8662,6 +9281,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return reloadGroup?.call();
   }
@@ -8690,6 +9310,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -8710,6 +9331,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (reloadGroup != null) {
@@ -8740,6 +9362,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -8750,6 +9373,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return reloadGroup(this);
   }
@@ -8776,6 +9400,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -8786,6 +9411,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return reloadGroup?.call(this);
   }
@@ -8812,6 +9438,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -8822,6 +9449,7 @@ class _$ReloadGroupImpl implements _ReloadGroup {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (reloadGroup != null) {
@@ -8897,6 +9525,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -8918,6 +9547,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return loadGroupInfo();
   }
@@ -8946,6 +9576,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -8966,6 +9597,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return loadGroupInfo?.call();
   }
@@ -8994,6 +9626,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -9014,6 +9647,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (loadGroupInfo != null) {
@@ -9044,6 +9678,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -9054,6 +9689,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return loadGroupInfo(this);
   }
@@ -9080,6 +9716,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -9090,6 +9727,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return loadGroupInfo?.call(this);
   }
@@ -9116,6 +9754,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -9126,6 +9765,7 @@ class _$LoadGroupInfoImpl implements _LoadGroupInfo {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (loadGroupInfo != null) {
@@ -9288,6 +9928,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -9309,6 +9950,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return createGroupLoad(groupName, groupDescription, groupImagePath,
         memberCanEdit, memberCanAddMember, memberCanMessage);
@@ -9338,6 +9980,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -9358,6 +10001,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return createGroupLoad?.call(groupName, groupDescription, groupImagePath,
         memberCanEdit, memberCanAddMember, memberCanMessage);
@@ -9387,6 +10031,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -9407,6 +10052,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (createGroupLoad != null) {
@@ -9438,6 +10084,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -9448,6 +10095,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return createGroupLoad(this);
   }
@@ -9474,6 +10122,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -9484,6 +10133,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return createGroupLoad?.call(this);
   }
@@ -9510,6 +10160,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -9520,6 +10171,7 @@ class _$CreateGroupLoadImpl implements _CreateGroupLoad {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (createGroupLoad != null) {
@@ -9649,6 +10301,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -9670,6 +10323,7 @@ class _$CreateGroupImpl implements _CreateGroup {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return createGroup(participants);
   }
@@ -9698,6 +10352,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -9718,6 +10373,7 @@ class _$CreateGroupImpl implements _CreateGroup {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return createGroup?.call(participants);
   }
@@ -9746,6 +10402,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -9766,6 +10423,7 @@ class _$CreateGroupImpl implements _CreateGroup {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (createGroup != null) {
@@ -9796,6 +10454,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -9806,6 +10465,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return createGroup(this);
   }
@@ -9832,6 +10492,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -9842,6 +10503,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return createGroup?.call(this);
   }
@@ -9868,6 +10530,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -9878,6 +10541,7 @@ class _$CreateGroupImpl implements _CreateGroup {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (createGroup != null) {
@@ -9996,6 +10660,7 @@ class _$AddMemberImpl implements _AddMember {
     required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)
         editPermission,
+    required TResult Function() clearError,
     required TResult Function(
             String messageId, String option, Map<String, dynamic> votes)
         votePoll,
@@ -10017,6 +10682,7 @@ class _$AddMemberImpl implements _AddMember {
         createGroupLoad,
     required TResult Function(List<String> participants) createGroup,
     required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
   }) {
     return addMember(members);
   }
@@ -10045,6 +10711,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult? Function()? clearError,
     TResult? Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -10065,6 +10732,7 @@ class _$AddMemberImpl implements _AddMember {
         createGroupLoad,
     TResult? Function(List<String> participants)? createGroup,
     TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
   }) {
     return addMember?.call(members);
   }
@@ -10093,6 +10761,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
             bool? memberCanMessage)?
         editPermission,
+    TResult Function()? clearError,
     TResult Function(
             String messageId, String option, Map<String, dynamic> votes)?
         votePoll,
@@ -10113,6 +10782,7 @@ class _$AddMemberImpl implements _AddMember {
         createGroupLoad,
     TResult Function(List<String> participants)? createGroup,
     TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
     required TResult orElse(),
   }) {
     if (addMember != null) {
@@ -10143,6 +10813,7 @@ class _$AddMemberImpl implements _AddMember {
     required TResult Function(_MuteNotification value) muteNotification,
     required TResult Function(_UnmuteNotification value) unmuteNotification,
     required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
     required TResult Function(_VotePoll value) votePoll,
     required TResult Function(_DeleteMessage value) deleteMessage,
     required TResult Function(_DeleteChatForMe value) deleteChatForMe,
@@ -10153,6 +10824,7 @@ class _$AddMemberImpl implements _AddMember {
     required TResult Function(_CreateGroupLoad value) createGroupLoad,
     required TResult Function(_CreateGroup value) createGroup,
     required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
   }) {
     return addMember(this);
   }
@@ -10179,6 +10851,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult? Function(_MuteNotification value)? muteNotification,
     TResult? Function(_UnmuteNotification value)? unmuteNotification,
     TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
     TResult? Function(_VotePoll value)? votePoll,
     TResult? Function(_DeleteMessage value)? deleteMessage,
     TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -10189,6 +10862,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult? Function(_CreateGroupLoad value)? createGroupLoad,
     TResult? Function(_CreateGroup value)? createGroup,
     TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
   }) {
     return addMember?.call(this);
   }
@@ -10215,6 +10889,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult Function(_MuteNotification value)? muteNotification,
     TResult Function(_UnmuteNotification value)? unmuteNotification,
     TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
     TResult Function(_VotePoll value)? votePoll,
     TResult Function(_DeleteMessage value)? deleteMessage,
     TResult Function(_DeleteChatForMe value)? deleteChatForMe,
@@ -10225,6 +10900,7 @@ class _$AddMemberImpl implements _AddMember {
     TResult Function(_CreateGroupLoad value)? createGroupLoad,
     TResult Function(_CreateGroup value)? createGroup,
     TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
     required TResult orElse(),
   }) {
     if (addMember != null) {
@@ -10248,6 +10924,322 @@ abstract class _AddMember implements GroupEvent {
 }
 
 /// @nodoc
+abstract class _$$ClearStateImplCopyWith<$Res> {
+  factory _$$ClearStateImplCopyWith(
+          _$ClearStateImpl value, $Res Function(_$ClearStateImpl) then) =
+      __$$ClearStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearStateImplCopyWithImpl<$Res>
+    extends _$GroupEventCopyWithImpl<$Res, _$ClearStateImpl>
+    implements _$$ClearStateImplCopyWith<$Res> {
+  __$$ClearStateImplCopyWithImpl(
+      _$ClearStateImpl _value, $Res Function(_$ClearStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearStateImpl implements _ClearState {
+  const _$ClearStateImpl();
+
+  @override
+  String toString() {
+    return 'GroupEvent.clearState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ChatModel chat) loadData,
+    required TResult Function(String message) sendMessage,
+    required TResult Function(String path) sendImage,
+    required TResult Function(String messageId, String emoji) addReaction,
+    required TResult Function(File file, List<double> waveList) sendAudioFile,
+    required TResult Function(String path) sendVideoFile,
+    required TResult Function(String link) sendLink,
+    required TResult Function(String path) sendDocument,
+    required TResult Function(String question, List<String> options) createPoll,
+    required TResult Function(String stickerPath) sendSticker,
+    required TResult Function(String uid) kickUser,
+    required TResult Function() exitGroup,
+    required TResult Function(String uid) deleteGroup,
+    required TResult Function(String uid) makeAdmin,
+    required TResult Function(String uid) removeAdmin,
+    required TResult Function(String uid) blockUser,
+    required TResult Function(String uid) muteNotification,
+    required TResult Function(String uid) unmuteNotification,
+    required TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)
+        editPermission,
+    required TResult Function() clearError,
+    required TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)
+        votePoll,
+    required TResult Function(List<String> messageId) deleteMessage,
+    required TResult Function(List<String> messageIds) deleteChatForMe,
+    required TResult Function(bool isTyping) editStatusToTyping,
+    required TResult Function(
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)
+        loadMessageModel,
+    required TResult Function() reloadGroup,
+    required TResult Function() loadGroupInfo,
+    required TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)
+        createGroupLoad,
+    required TResult Function(List<String> participants) createGroup,
+    required TResult Function(List<UserModels> members) addMember,
+    required TResult Function() clearState,
+  }) {
+    return clearState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ChatModel chat)? loadData,
+    TResult? Function(String message)? sendMessage,
+    TResult? Function(String path)? sendImage,
+    TResult? Function(String messageId, String emoji)? addReaction,
+    TResult? Function(File file, List<double> waveList)? sendAudioFile,
+    TResult? Function(String path)? sendVideoFile,
+    TResult? Function(String link)? sendLink,
+    TResult? Function(String path)? sendDocument,
+    TResult? Function(String question, List<String> options)? createPoll,
+    TResult? Function(String stickerPath)? sendSticker,
+    TResult? Function(String uid)? kickUser,
+    TResult? Function()? exitGroup,
+    TResult? Function(String uid)? deleteGroup,
+    TResult? Function(String uid)? makeAdmin,
+    TResult? Function(String uid)? removeAdmin,
+    TResult? Function(String uid)? blockUser,
+    TResult? Function(String uid)? muteNotification,
+    TResult? Function(String uid)? unmuteNotification,
+    TResult? Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult? Function()? clearError,
+    TResult? Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult? Function(List<String> messageId)? deleteMessage,
+    TResult? Function(List<String> messageIds)? deleteChatForMe,
+    TResult? Function(bool isTyping)? editStatusToTyping,
+    TResult? Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult? Function()? reloadGroup,
+    TResult? Function()? loadGroupInfo,
+    TResult? Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult? Function(List<String> participants)? createGroup,
+    TResult? Function(List<UserModels> members)? addMember,
+    TResult? Function()? clearState,
+  }) {
+    return clearState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ChatModel chat)? loadData,
+    TResult Function(String message)? sendMessage,
+    TResult Function(String path)? sendImage,
+    TResult Function(String messageId, String emoji)? addReaction,
+    TResult Function(File file, List<double> waveList)? sendAudioFile,
+    TResult Function(String path)? sendVideoFile,
+    TResult Function(String link)? sendLink,
+    TResult Function(String path)? sendDocument,
+    TResult Function(String question, List<String> options)? createPoll,
+    TResult Function(String stickerPath)? sendSticker,
+    TResult Function(String uid)? kickUser,
+    TResult Function()? exitGroup,
+    TResult Function(String uid)? deleteGroup,
+    TResult Function(String uid)? makeAdmin,
+    TResult Function(String uid)? removeAdmin,
+    TResult Function(String uid)? blockUser,
+    TResult Function(String uid)? muteNotification,
+    TResult Function(String uid)? unmuteNotification,
+    TResult Function(bool? memberCanEdit, bool? memberCanAddMember,
+            bool? memberCanMessage)?
+        editPermission,
+    TResult Function()? clearError,
+    TResult Function(
+            String messageId, String option, Map<String, dynamic> votes)?
+        votePoll,
+    TResult Function(List<String> messageId)? deleteMessage,
+    TResult Function(List<String> messageIds)? deleteChatForMe,
+    TResult Function(bool isTyping)? editStatusToTyping,
+    TResult Function(List<QueryDocumentSnapshot<Map<String, dynamic>>> docs)?
+        loadMessageModel,
+    TResult Function()? reloadGroup,
+    TResult Function()? loadGroupInfo,
+    TResult Function(
+            String groupName,
+            String groupDescription,
+            String groupImagePath,
+            bool memberCanEdit,
+            bool memberCanAddMember,
+            bool memberCanMessage)?
+        createGroupLoad,
+    TResult Function(List<String> participants)? createGroup,
+    TResult Function(List<UserModels> members)? addMember,
+    TResult Function()? clearState,
+    required TResult orElse(),
+  }) {
+    if (clearState != null) {
+      return clearState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadData value) loadData,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_SendImage value) sendImage,
+    required TResult Function(_AddReaction value) addReaction,
+    required TResult Function(_SendAudioFile value) sendAudioFile,
+    required TResult Function(_SendVideoFile value) sendVideoFile,
+    required TResult Function(_SendLink value) sendLink,
+    required TResult Function(_SendDocument value) sendDocument,
+    required TResult Function(_CreatePoll value) createPoll,
+    required TResult Function(_SendSticker value) sendSticker,
+    required TResult Function(_KickUser value) kickUser,
+    required TResult Function(_ExitGroup value) exitGroup,
+    required TResult Function(_DeleteGroup value) deleteGroup,
+    required TResult Function(_MakeAdmin value) makeAdmin,
+    required TResult Function(_RemoveAdmin value) removeAdmin,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_MuteNotification value) muteNotification,
+    required TResult Function(_UnmuteNotification value) unmuteNotification,
+    required TResult Function(_EditPermission value) editPermission,
+    required TResult Function(_ClearError value) clearError,
+    required TResult Function(_VotePoll value) votePoll,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_DeleteChatForMe value) deleteChatForMe,
+    required TResult Function(_EditStatusToTyping value) editStatusToTyping,
+    required TResult Function(_LoadMessageModel value) loadMessageModel,
+    required TResult Function(_ReloadGroup value) reloadGroup,
+    required TResult Function(_LoadGroupInfo value) loadGroupInfo,
+    required TResult Function(_CreateGroupLoad value) createGroupLoad,
+    required TResult Function(_CreateGroup value) createGroup,
+    required TResult Function(_AddMember value) addMember,
+    required TResult Function(_ClearState value) clearState,
+  }) {
+    return clearState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadData value)? loadData,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_SendImage value)? sendImage,
+    TResult? Function(_AddReaction value)? addReaction,
+    TResult? Function(_SendAudioFile value)? sendAudioFile,
+    TResult? Function(_SendVideoFile value)? sendVideoFile,
+    TResult? Function(_SendLink value)? sendLink,
+    TResult? Function(_SendDocument value)? sendDocument,
+    TResult? Function(_CreatePoll value)? createPoll,
+    TResult? Function(_SendSticker value)? sendSticker,
+    TResult? Function(_KickUser value)? kickUser,
+    TResult? Function(_ExitGroup value)? exitGroup,
+    TResult? Function(_DeleteGroup value)? deleteGroup,
+    TResult? Function(_MakeAdmin value)? makeAdmin,
+    TResult? Function(_RemoveAdmin value)? removeAdmin,
+    TResult? Function(_BlockUser value)? blockUser,
+    TResult? Function(_MuteNotification value)? muteNotification,
+    TResult? Function(_UnmuteNotification value)? unmuteNotification,
+    TResult? Function(_EditPermission value)? editPermission,
+    TResult? Function(_ClearError value)? clearError,
+    TResult? Function(_VotePoll value)? votePoll,
+    TResult? Function(_DeleteMessage value)? deleteMessage,
+    TResult? Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult? Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult? Function(_LoadMessageModel value)? loadMessageModel,
+    TResult? Function(_ReloadGroup value)? reloadGroup,
+    TResult? Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult? Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult? Function(_CreateGroup value)? createGroup,
+    TResult? Function(_AddMember value)? addMember,
+    TResult? Function(_ClearState value)? clearState,
+  }) {
+    return clearState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadData value)? loadData,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_SendImage value)? sendImage,
+    TResult Function(_AddReaction value)? addReaction,
+    TResult Function(_SendAudioFile value)? sendAudioFile,
+    TResult Function(_SendVideoFile value)? sendVideoFile,
+    TResult Function(_SendLink value)? sendLink,
+    TResult Function(_SendDocument value)? sendDocument,
+    TResult Function(_CreatePoll value)? createPoll,
+    TResult Function(_SendSticker value)? sendSticker,
+    TResult Function(_KickUser value)? kickUser,
+    TResult Function(_ExitGroup value)? exitGroup,
+    TResult Function(_DeleteGroup value)? deleteGroup,
+    TResult Function(_MakeAdmin value)? makeAdmin,
+    TResult Function(_RemoveAdmin value)? removeAdmin,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_MuteNotification value)? muteNotification,
+    TResult Function(_UnmuteNotification value)? unmuteNotification,
+    TResult Function(_EditPermission value)? editPermission,
+    TResult Function(_ClearError value)? clearError,
+    TResult Function(_VotePoll value)? votePoll,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_DeleteChatForMe value)? deleteChatForMe,
+    TResult Function(_EditStatusToTyping value)? editStatusToTyping,
+    TResult Function(_LoadMessageModel value)? loadMessageModel,
+    TResult Function(_ReloadGroup value)? reloadGroup,
+    TResult Function(_LoadGroupInfo value)? loadGroupInfo,
+    TResult Function(_CreateGroupLoad value)? createGroupLoad,
+    TResult Function(_CreateGroup value)? createGroup,
+    TResult Function(_AddMember value)? addMember,
+    TResult Function(_ClearState value)? clearState,
+    required TResult orElse(),
+  }) {
+    if (clearState != null) {
+      return clearState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearState implements GroupEvent {
+  const factory _ClearState() = _$ClearStateImpl;
+}
+
+/// @nodoc
 mixin _$GroupState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -10268,9 +11260,10 @@ mixin _$GroupState {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)
+            bool inputLoading,
+            AppException? isError)
         groupData,
   }) =>
       throw _privateConstructorUsedError;
@@ -10293,9 +11286,10 @@ mixin _$GroupState {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)?
+            bool inputLoading,
+            AppException? isError)?
         groupData,
   }) =>
       throw _privateConstructorUsedError;
@@ -10318,9 +11312,10 @@ mixin _$GroupState {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)?
+            bool inputLoading,
+            AppException? isError)?
         groupData,
     required TResult orElse(),
   }) =>
@@ -10559,9 +11554,10 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)
+            bool inputLoading,
+            AppException? isError)
         groupData,
   }) {
     return createGroupData(
@@ -10595,9 +11591,10 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)?
+            bool inputLoading,
+            AppException? isError)?
         groupData,
   }) {
     return createGroupData?.call(
@@ -10631,9 +11628,10 @@ class _$CreateGroupDataImpl implements _CreateGroupData {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)?
+            bool inputLoading,
+            AppException? isError)?
         groupData,
     required TResult orElse(),
   }) {
@@ -10723,9 +11721,10 @@ abstract class _$$GroupDataImplCopyWith<$Res> {
       Map<String, UserModels>? blockedGroupMembers,
       Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       int wallpaperIndex,
-      List<MessageModel> messages,
+      Map<String, List<MessageModel>> messages,
       bool isLoading,
-      bool inputLoading});
+      bool inputLoading,
+      AppException? isError});
 }
 
 /// @nodoc
@@ -10750,6 +11749,7 @@ class __$$GroupDataImplCopyWithImpl<$Res>
     Object? messages = null,
     Object? isLoading = null,
     Object? inputLoading = null,
+    Object? isError = freezed,
   }) {
     return _then(_$GroupDataImpl(
       groupData: freezed == groupData
@@ -10779,7 +11779,7 @@ class __$$GroupDataImplCopyWithImpl<$Res>
       messages: null == messages
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
-              as List<MessageModel>,
+              as Map<String, List<MessageModel>>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -10788,6 +11788,10 @@ class __$$GroupDataImplCopyWithImpl<$Res>
           ? _value.inputLoading
           : inputLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isError: freezed == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as AppException?,
     ));
   }
 }
@@ -10802,9 +11806,10 @@ class _$GroupDataImpl implements GroupData {
       final Map<String, UserModels>? blockedGroupMembers = null,
       this.messageData = null,
       this.wallpaperIndex = 0,
-      final List<MessageModel> messages = const [],
+      final Map<String, List<MessageModel>> messages = const {},
       this.isLoading = false,
-      this.inputLoading = false})
+      this.inputLoading = false,
+      this.isError = null})
       : _groupMembers = groupMembers,
         _allGroupMembers = allGroupMembers,
         _blockedGroupMembers = blockedGroupMembers,
@@ -10824,9 +11829,7 @@ class _$GroupDataImpl implements GroupData {
     return EqualUnmodifiableMapView(value);
   }
 
-//it current available members
   final Map<String, UserModels> _allGroupMembers;
-//it current available members
   @override
   @JsonKey()
   Map<String, UserModels> get allGroupMembers {
@@ -10853,13 +11856,13 @@ class _$GroupDataImpl implements GroupData {
   @override
   @JsonKey()
   final int wallpaperIndex;
-  final List<MessageModel> _messages;
+  final Map<String, List<MessageModel>> _messages;
   @override
   @JsonKey()
-  List<MessageModel> get messages {
-    if (_messages is EqualUnmodifiableListView) return _messages;
+  Map<String, List<MessageModel>> get messages {
+    if (_messages is EqualUnmodifiableMapView) return _messages;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_messages);
+    return EqualUnmodifiableMapView(_messages);
   }
 
   @override
@@ -10868,10 +11871,13 @@ class _$GroupDataImpl implements GroupData {
   @override
   @JsonKey()
   final bool inputLoading;
+  @override
+  @JsonKey()
+  final AppException? isError;
 
   @override
   String toString() {
-    return 'GroupState.groupData(groupData: $groupData, groupMembers: $groupMembers, allGroupMembers: $allGroupMembers, blockedGroupMembers: $blockedGroupMembers, messageData: $messageData, wallpaperIndex: $wallpaperIndex, messages: $messages, isLoading: $isLoading, inputLoading: $inputLoading)';
+    return 'GroupState.groupData(groupData: $groupData, groupMembers: $groupMembers, allGroupMembers: $allGroupMembers, blockedGroupMembers: $blockedGroupMembers, messageData: $messageData, wallpaperIndex: $wallpaperIndex, messages: $messages, isLoading: $isLoading, inputLoading: $inputLoading, isError: $isError)';
   }
 
   @override
@@ -10895,7 +11901,8 @@ class _$GroupDataImpl implements GroupData {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.inputLoading, inputLoading) ||
-                other.inputLoading == inputLoading));
+                other.inputLoading == inputLoading) &&
+            (identical(other.isError, isError) || other.isError == isError));
   }
 
   @override
@@ -10909,7 +11916,8 @@ class _$GroupDataImpl implements GroupData {
       wallpaperIndex,
       const DeepCollectionEquality().hash(_messages),
       isLoading,
-      inputLoading);
+      inputLoading,
+      isError);
 
   /// Create a copy of GroupState
   /// with the given fields replaced by the non-null parameter values.
@@ -10939,9 +11947,10 @@ class _$GroupDataImpl implements GroupData {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)
+            bool inputLoading,
+            AppException? isError)
         groupData,
   }) {
     return groupData(
@@ -10953,7 +11962,8 @@ class _$GroupDataImpl implements GroupData {
         wallpaperIndex,
         messages,
         isLoading,
-        inputLoading);
+        inputLoading,
+        isError);
   }
 
   @override
@@ -10976,9 +11986,10 @@ class _$GroupDataImpl implements GroupData {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)?
+            bool inputLoading,
+            AppException? isError)?
         groupData,
   }) {
     return groupData?.call(
@@ -10990,7 +12001,8 @@ class _$GroupDataImpl implements GroupData {
         wallpaperIndex,
         messages,
         isLoading,
-        inputLoading);
+        inputLoading,
+        isError);
   }
 
   @override
@@ -11013,9 +12025,10 @@ class _$GroupDataImpl implements GroupData {
             Map<String, UserModels>? blockedGroupMembers,
             Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
             int wallpaperIndex,
-            List<MessageModel> messages,
+            Map<String, List<MessageModel>> messages,
             bool isLoading,
-            bool inputLoading)?
+            bool inputLoading,
+            AppException? isError)?
         groupData,
     required TResult orElse(),
   }) {
@@ -11029,7 +12042,8 @@ class _$GroupDataImpl implements GroupData {
           wallpaperIndex,
           messages,
           isLoading,
-          inputLoading);
+          inputLoading,
+          isError);
     }
     return orElse();
   }
@@ -11074,19 +12088,21 @@ abstract class GroupData implements GroupState {
       final Map<String, UserModels>? blockedGroupMembers,
       final Stream<QuerySnapshot<Map<String, dynamic>>>? messageData,
       final int wallpaperIndex,
-      final List<MessageModel> messages,
+      final Map<String, List<MessageModel>> messages,
       final bool isLoading,
-      final bool inputLoading}) = _$GroupDataImpl;
+      final bool inputLoading,
+      final AppException? isError}) = _$GroupDataImpl;
 
   ChatModel? get groupData;
-  Map<String, UserModels>? get groupMembers; //it current available members
+  Map<String, UserModels>? get groupMembers;
   Map<String, UserModels> get allGroupMembers;
   Map<String, UserModels>? get blockedGroupMembers;
   Stream<QuerySnapshot<Map<String, dynamic>>>? get messageData;
   int get wallpaperIndex;
-  List<MessageModel> get messages;
+  Map<String, List<MessageModel>> get messages;
   bool get isLoading;
   bool get inputLoading;
+  AppException? get isError;
 
   /// Create a copy of GroupState
   /// with the given fields replaced by the non-null parameter values.

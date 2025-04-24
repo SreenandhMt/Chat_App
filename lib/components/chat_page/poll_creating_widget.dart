@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/views/introduction_page.dart';
 import 'package:chat_app/features/chat_page/view_models/bloc/chat_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../features/group_chat/view_model/bloc/group_bloc.dart';
 
@@ -137,6 +138,7 @@ class _PollCreatingWidgetState extends State<PollCreatingWidget> {
                               optionControllers.map((e) => e.text).toList(),
                         ),
                       );
+                  context.pop();
                   return;
                 }
                 context.read<ChatBloc>().add(
@@ -145,6 +147,7 @@ class _PollCreatingWidgetState extends State<PollCreatingWidget> {
                         options: optionControllers.map((e) => e.text).toList(),
                       ),
                     );
+                context.pop();
               },
             )
           ],

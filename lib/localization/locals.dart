@@ -142,7 +142,7 @@ mixin LocaleData {
     historyText: "History",
     //settings
     editProfileText: "Edit Profile",
-    securityText: "Security",
+    securityText: "Account & Security",
     securitySubtitleText: "App Lock, Two Step Verification",
     notificationsText: "Notifications",
     notificationsSubtitleText: "Edit your Notification Settings",

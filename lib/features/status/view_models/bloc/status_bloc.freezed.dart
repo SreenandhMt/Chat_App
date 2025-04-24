@@ -27,6 +27,7 @@ mixin _$StatusEvent {
             String text, int colorIndex, int styleIndex, String? caption)
         createTextStatus,
     required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +41,7 @@ mixin _$StatusEvent {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +55,7 @@ mixin _$StatusEvent {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +68,7 @@ mixin _$StatusEvent {
     required TResult Function(_SelectFile value) selectFile,
     required TResult Function(_CreateTextStatus value) createTextStatus,
     required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,6 +80,7 @@ mixin _$StatusEvent {
     TResult? Function(_SelectFile value)? selectFile,
     TResult? Function(_CreateTextStatus value)? createTextStatus,
     TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +92,7 @@ mixin _$StatusEvent {
     TResult Function(_SelectFile value)? selectFile,
     TResult Function(_CreateTextStatus value)? createTextStatus,
     TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -163,6 +169,7 @@ class _$StartedImpl implements _Started {
             String text, int colorIndex, int styleIndex, String? caption)
         createTextStatus,
     required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
   }) {
     return started();
   }
@@ -179,6 +186,7 @@ class _$StartedImpl implements _Started {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
   }) {
     return started?.call();
   }
@@ -195,6 +203,7 @@ class _$StartedImpl implements _Started {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -213,6 +222,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_SelectFile value) selectFile,
     required TResult Function(_CreateTextStatus value) createTextStatus,
     required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return started(this);
   }
@@ -227,6 +237,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_SelectFile value)? selectFile,
     TResult? Function(_CreateTextStatus value)? createTextStatus,
     TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return started?.call(this);
   }
@@ -241,6 +252,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_SelectFile value)? selectFile,
     TResult Function(_CreateTextStatus value)? createTextStatus,
     TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -339,6 +351,7 @@ class _$CreateStatusImpl implements _CreateStatus {
             String text, int colorIndex, int styleIndex, String? caption)
         createTextStatus,
     required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
   }) {
     return createStatus(path, caption);
   }
@@ -355,6 +368,7 @@ class _$CreateStatusImpl implements _CreateStatus {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
   }) {
     return createStatus?.call(path, caption);
   }
@@ -371,6 +385,7 @@ class _$CreateStatusImpl implements _CreateStatus {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (createStatus != null) {
@@ -389,6 +404,7 @@ class _$CreateStatusImpl implements _CreateStatus {
     required TResult Function(_SelectFile value) selectFile,
     required TResult Function(_CreateTextStatus value) createTextStatus,
     required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return createStatus(this);
   }
@@ -403,6 +419,7 @@ class _$CreateStatusImpl implements _CreateStatus {
     TResult? Function(_SelectFile value)? selectFile,
     TResult? Function(_CreateTextStatus value)? createTextStatus,
     TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return createStatus?.call(this);
   }
@@ -417,6 +434,7 @@ class _$CreateStatusImpl implements _CreateStatus {
     TResult Function(_SelectFile value)? selectFile,
     TResult Function(_CreateTextStatus value)? createTextStatus,
     TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (createStatus != null) {
@@ -490,6 +508,7 @@ class _$GetStatusesImpl implements _GetStatuses {
             String text, int colorIndex, int styleIndex, String? caption)
         createTextStatus,
     required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
   }) {
     return getStatuses();
   }
@@ -506,6 +525,7 @@ class _$GetStatusesImpl implements _GetStatuses {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
   }) {
     return getStatuses?.call();
   }
@@ -522,6 +542,7 @@ class _$GetStatusesImpl implements _GetStatuses {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (getStatuses != null) {
@@ -540,6 +561,7 @@ class _$GetStatusesImpl implements _GetStatuses {
     required TResult Function(_SelectFile value) selectFile,
     required TResult Function(_CreateTextStatus value) createTextStatus,
     required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return getStatuses(this);
   }
@@ -554,6 +576,7 @@ class _$GetStatusesImpl implements _GetStatuses {
     TResult? Function(_SelectFile value)? selectFile,
     TResult? Function(_CreateTextStatus value)? createTextStatus,
     TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return getStatuses?.call(this);
   }
@@ -568,6 +591,7 @@ class _$GetStatusesImpl implements _GetStatuses {
     TResult Function(_SelectFile value)? selectFile,
     TResult Function(_CreateTextStatus value)? createTextStatus,
     TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (getStatuses != null) {
@@ -665,6 +689,7 @@ class _$SelectStatusImpl implements _SelectStatus {
             String text, int colorIndex, int styleIndex, String? caption)
         createTextStatus,
     required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
   }) {
     return selectStatus(value);
   }
@@ -681,6 +706,7 @@ class _$SelectStatusImpl implements _SelectStatus {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
   }) {
     return selectStatus?.call(value);
   }
@@ -697,6 +723,7 @@ class _$SelectStatusImpl implements _SelectStatus {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (selectStatus != null) {
@@ -715,6 +742,7 @@ class _$SelectStatusImpl implements _SelectStatus {
     required TResult Function(_SelectFile value) selectFile,
     required TResult Function(_CreateTextStatus value) createTextStatus,
     required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return selectStatus(this);
   }
@@ -729,6 +757,7 @@ class _$SelectStatusImpl implements _SelectStatus {
     TResult? Function(_SelectFile value)? selectFile,
     TResult? Function(_CreateTextStatus value)? createTextStatus,
     TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return selectStatus?.call(this);
   }
@@ -743,6 +772,7 @@ class _$SelectStatusImpl implements _SelectStatus {
     TResult Function(_SelectFile value)? selectFile,
     TResult Function(_CreateTextStatus value)? createTextStatus,
     TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (selectStatus != null) {
@@ -842,6 +872,7 @@ class _$SelectFileImpl implements _SelectFile {
             String text, int colorIndex, int styleIndex, String? caption)
         createTextStatus,
     required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
   }) {
     return selectFile(path);
   }
@@ -858,6 +889,7 @@ class _$SelectFileImpl implements _SelectFile {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
   }) {
     return selectFile?.call(path);
   }
@@ -874,6 +906,7 @@ class _$SelectFileImpl implements _SelectFile {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (selectFile != null) {
@@ -892,6 +925,7 @@ class _$SelectFileImpl implements _SelectFile {
     required TResult Function(_SelectFile value) selectFile,
     required TResult Function(_CreateTextStatus value) createTextStatus,
     required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return selectFile(this);
   }
@@ -906,6 +940,7 @@ class _$SelectFileImpl implements _SelectFile {
     TResult? Function(_SelectFile value)? selectFile,
     TResult? Function(_CreateTextStatus value)? createTextStatus,
     TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return selectFile?.call(this);
   }
@@ -920,6 +955,7 @@ class _$SelectFileImpl implements _SelectFile {
     TResult Function(_SelectFile value)? selectFile,
     TResult Function(_CreateTextStatus value)? createTextStatus,
     TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (selectFile != null) {
@@ -1050,6 +1086,7 @@ class _$CreateTextStatusImpl implements _CreateTextStatus {
             String text, int colorIndex, int styleIndex, String? caption)
         createTextStatus,
     required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
   }) {
     return createTextStatus(text, colorIndex, styleIndex, caption);
   }
@@ -1066,6 +1103,7 @@ class _$CreateTextStatusImpl implements _CreateTextStatus {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
   }) {
     return createTextStatus?.call(text, colorIndex, styleIndex, caption);
   }
@@ -1082,6 +1120,7 @@ class _$CreateTextStatusImpl implements _CreateTextStatus {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (createTextStatus != null) {
@@ -1100,6 +1139,7 @@ class _$CreateTextStatusImpl implements _CreateTextStatus {
     required TResult Function(_SelectFile value) selectFile,
     required TResult Function(_CreateTextStatus value) createTextStatus,
     required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return createTextStatus(this);
   }
@@ -1114,6 +1154,7 @@ class _$CreateTextStatusImpl implements _CreateTextStatus {
     TResult? Function(_SelectFile value)? selectFile,
     TResult? Function(_CreateTextStatus value)? createTextStatus,
     TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return createTextStatus?.call(this);
   }
@@ -1128,6 +1169,7 @@ class _$CreateTextStatusImpl implements _CreateTextStatus {
     TResult Function(_SelectFile value)? selectFile,
     TResult Function(_CreateTextStatus value)? createTextStatus,
     TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (createTextStatus != null) {
@@ -1242,6 +1284,7 @@ class _$UpdateViewsImpl implements _UpdateViews {
             String text, int colorIndex, int styleIndex, String? caption)
         createTextStatus,
     required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
   }) {
     return updateViews(uid, statusId);
   }
@@ -1258,6 +1301,7 @@ class _$UpdateViewsImpl implements _UpdateViews {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
   }) {
     return updateViews?.call(uid, statusId);
   }
@@ -1274,6 +1318,7 @@ class _$UpdateViewsImpl implements _UpdateViews {
             String text, int colorIndex, int styleIndex, String? caption)?
         createTextStatus,
     TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (updateViews != null) {
@@ -1292,6 +1337,7 @@ class _$UpdateViewsImpl implements _UpdateViews {
     required TResult Function(_SelectFile value) selectFile,
     required TResult Function(_CreateTextStatus value) createTextStatus,
     required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
   }) {
     return updateViews(this);
   }
@@ -1306,6 +1352,7 @@ class _$UpdateViewsImpl implements _UpdateViews {
     TResult? Function(_SelectFile value)? selectFile,
     TResult? Function(_CreateTextStatus value)? createTextStatus,
     TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
   }) {
     return updateViews?.call(this);
   }
@@ -1320,6 +1367,7 @@ class _$UpdateViewsImpl implements _UpdateViews {
     TResult Function(_SelectFile value)? selectFile,
     TResult Function(_CreateTextStatus value)? createTextStatus,
     TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
     required TResult orElse(),
   }) {
     if (updateViews != null) {
@@ -1345,7 +1393,156 @@ abstract class _UpdateViews implements StatusEvent {
 }
 
 /// @nodoc
+abstract class _$$ClearErrorMessageImplCopyWith<$Res> {
+  factory _$$ClearErrorMessageImplCopyWith(_$ClearErrorMessageImpl value,
+          $Res Function(_$ClearErrorMessageImpl) then) =
+      __$$ClearErrorMessageImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearErrorMessageImplCopyWithImpl<$Res>
+    extends _$StatusEventCopyWithImpl<$Res, _$ClearErrorMessageImpl>
+    implements _$$ClearErrorMessageImplCopyWith<$Res> {
+  __$$ClearErrorMessageImplCopyWithImpl(_$ClearErrorMessageImpl _value,
+      $Res Function(_$ClearErrorMessageImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of StatusEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearErrorMessageImpl implements _ClearErrorMessage {
+  const _$ClearErrorMessageImpl();
+
+  @override
+  String toString() {
+    return 'StatusEvent.clearErrorMessage()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearErrorMessageImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String path, String? caption) createStatus,
+    required TResult Function() getStatuses,
+    required TResult Function(Map<String, dynamic> value) selectStatus,
+    required TResult Function(String path) selectFile,
+    required TResult Function(
+            String text, int colorIndex, int styleIndex, String? caption)
+        createTextStatus,
+    required TResult Function(String uid, String statusId) updateViews,
+    required TResult Function() clearErrorMessage,
+  }) {
+    return clearErrorMessage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String path, String? caption)? createStatus,
+    TResult? Function()? getStatuses,
+    TResult? Function(Map<String, dynamic> value)? selectStatus,
+    TResult? Function(String path)? selectFile,
+    TResult? Function(
+            String text, int colorIndex, int styleIndex, String? caption)?
+        createTextStatus,
+    TResult? Function(String uid, String statusId)? updateViews,
+    TResult? Function()? clearErrorMessage,
+  }) {
+    return clearErrorMessage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String path, String? caption)? createStatus,
+    TResult Function()? getStatuses,
+    TResult Function(Map<String, dynamic> value)? selectStatus,
+    TResult Function(String path)? selectFile,
+    TResult Function(
+            String text, int colorIndex, int styleIndex, String? caption)?
+        createTextStatus,
+    TResult Function(String uid, String statusId)? updateViews,
+    TResult Function()? clearErrorMessage,
+    required TResult orElse(),
+  }) {
+    if (clearErrorMessage != null) {
+      return clearErrorMessage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateStatus value) createStatus,
+    required TResult Function(_GetStatuses value) getStatuses,
+    required TResult Function(_SelectStatus value) selectStatus,
+    required TResult Function(_SelectFile value) selectFile,
+    required TResult Function(_CreateTextStatus value) createTextStatus,
+    required TResult Function(_UpdateViews value) updateViews,
+    required TResult Function(_ClearErrorMessage value) clearErrorMessage,
+  }) {
+    return clearErrorMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_CreateStatus value)? createStatus,
+    TResult? Function(_GetStatuses value)? getStatuses,
+    TResult? Function(_SelectStatus value)? selectStatus,
+    TResult? Function(_SelectFile value)? selectFile,
+    TResult? Function(_CreateTextStatus value)? createTextStatus,
+    TResult? Function(_UpdateViews value)? updateViews,
+    TResult? Function(_ClearErrorMessage value)? clearErrorMessage,
+  }) {
+    return clearErrorMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateStatus value)? createStatus,
+    TResult Function(_GetStatuses value)? getStatuses,
+    TResult Function(_SelectStatus value)? selectStatus,
+    TResult Function(_SelectFile value)? selectFile,
+    TResult Function(_CreateTextStatus value)? createTextStatus,
+    TResult Function(_UpdateViews value)? updateViews,
+    TResult Function(_ClearErrorMessage value)? clearErrorMessage,
+    required TResult orElse(),
+  }) {
+    if (clearErrorMessage != null) {
+      return clearErrorMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearErrorMessage implements StatusEvent {
+  const factory _ClearErrorMessage() = _$ClearErrorMessageImpl;
+}
+
+/// @nodoc
 mixin _$StatusState {
+  bool get isLoading => throw _privateConstructorUsedError;
+  AppException? get error => throw _privateConstructorUsedError;
   Map<String, dynamic> get statuses => throw _privateConstructorUsedError;
   Map<String, dynamic> get viewedStatus => throw _privateConstructorUsedError;
   List<StatusModel> get myStatus => throw _privateConstructorUsedError;
@@ -1354,6 +1551,8 @@ mixin _$StatusState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
+            bool isLoading,
+            AppException? error,
             Map<String, dynamic> statuses,
             Map<String, dynamic> viewedStatus,
             List<StatusModel> myStatus,
@@ -1365,6 +1564,8 @@ mixin _$StatusState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
+            bool isLoading,
+            AppException? error,
             Map<String, dynamic> statuses,
             Map<String, dynamic> viewedStatus,
             List<StatusModel> myStatus,
@@ -1376,6 +1577,8 @@ mixin _$StatusState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
+            bool isLoading,
+            AppException? error,
             Map<String, dynamic> statuses,
             Map<String, dynamic> viewedStatus,
             List<StatusModel> myStatus,
@@ -1416,7 +1619,9 @@ abstract class $StatusStateCopyWith<$Res> {
       _$StatusStateCopyWithImpl<$Res, StatusState>;
   @useResult
   $Res call(
-      {Map<String, dynamic> statuses,
+      {bool isLoading,
+      AppException? error,
+      Map<String, dynamic> statuses,
       Map<String, dynamic> viewedStatus,
       List<StatusModel> myStatus,
       String selectedFilePath,
@@ -1438,6 +1643,8 @@ class _$StatusStateCopyWithImpl<$Res, $Val extends StatusState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
+    Object? error = freezed,
     Object? statuses = null,
     Object? viewedStatus = null,
     Object? myStatus = null,
@@ -1445,6 +1652,14 @@ class _$StatusStateCopyWithImpl<$Res, $Val extends StatusState>
     Object? selectedStatus = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as AppException?,
       statuses: null == statuses
           ? _value.statuses
           : statuses // ignore: cast_nullable_to_non_nullable
@@ -1478,7 +1693,9 @@ abstract class _$$StatusDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<String, dynamic> statuses,
+      {bool isLoading,
+      AppException? error,
+      Map<String, dynamic> statuses,
       Map<String, dynamic> viewedStatus,
       List<StatusModel> myStatus,
       String selectedFilePath,
@@ -1498,6 +1715,8 @@ class __$$StatusDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
+    Object? error = freezed,
     Object? statuses = null,
     Object? viewedStatus = null,
     Object? myStatus = null,
@@ -1505,6 +1724,14 @@ class __$$StatusDataImplCopyWithImpl<$Res>
     Object? selectedStatus = null,
   }) {
     return _then(_$StatusDataImpl(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as AppException?,
       statuses: null == statuses
           ? _value._statuses
           : statuses // ignore: cast_nullable_to_non_nullable
@@ -1533,7 +1760,9 @@ class __$$StatusDataImplCopyWithImpl<$Res>
 
 class _$StatusDataImpl implements _StatusData {
   const _$StatusDataImpl(
-      {final Map<String, dynamic> statuses = const {},
+      {this.isLoading = false,
+      this.error = null,
+      final Map<String, dynamic> statuses = const {},
       final Map<String, dynamic> viewedStatus = const {},
       final List<StatusModel> myStatus = const [],
       this.selectedFilePath = "",
@@ -1543,6 +1772,12 @@ class _$StatusDataImpl implements _StatusData {
         _myStatus = myStatus,
         _selectedStatus = selectedStatus;
 
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final AppException? error;
   final Map<String, dynamic> _statuses;
   @override
   @JsonKey()
@@ -1584,7 +1819,7 @@ class _$StatusDataImpl implements _StatusData {
 
   @override
   String toString() {
-    return 'StatusState.statuses(statuses: $statuses, viewedStatus: $viewedStatus, myStatus: $myStatus, selectedFilePath: $selectedFilePath, selectedStatus: $selectedStatus)';
+    return 'StatusState.statuses(isLoading: $isLoading, error: $error, statuses: $statuses, viewedStatus: $viewedStatus, myStatus: $myStatus, selectedFilePath: $selectedFilePath, selectedStatus: $selectedStatus)';
   }
 
   @override
@@ -1592,6 +1827,9 @@ class _$StatusDataImpl implements _StatusData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StatusDataImpl &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
             const DeepCollectionEquality()
                 .equals(other._viewedStatus, _viewedStatus) &&
@@ -1605,6 +1843,8 @@ class _$StatusDataImpl implements _StatusData {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      isLoading,
+      error,
       const DeepCollectionEquality().hash(_statuses),
       const DeepCollectionEquality().hash(_viewedStatus),
       const DeepCollectionEquality().hash(_myStatus),
@@ -1623,6 +1863,8 @@ class _$StatusDataImpl implements _StatusData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
+            bool isLoading,
+            AppException? error,
             Map<String, dynamic> statuses,
             Map<String, dynamic> viewedStatus,
             List<StatusModel> myStatus,
@@ -1630,14 +1872,16 @@ class _$StatusDataImpl implements _StatusData {
             Map<String, dynamic> selectedStatus)
         statuses,
   }) {
-    return statuses(this.statuses, viewedStatus, myStatus, selectedFilePath,
-        selectedStatus);
+    return statuses(isLoading, error, this.statuses, viewedStatus, myStatus,
+        selectedFilePath, selectedStatus);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
+            bool isLoading,
+            AppException? error,
             Map<String, dynamic> statuses,
             Map<String, dynamic> viewedStatus,
             List<StatusModel> myStatus,
@@ -1645,14 +1889,16 @@ class _$StatusDataImpl implements _StatusData {
             Map<String, dynamic> selectedStatus)?
         statuses,
   }) {
-    return statuses?.call(this.statuses, viewedStatus, myStatus,
-        selectedFilePath, selectedStatus);
+    return statuses?.call(isLoading, error, this.statuses, viewedStatus,
+        myStatus, selectedFilePath, selectedStatus);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
+            bool isLoading,
+            AppException? error,
             Map<String, dynamic> statuses,
             Map<String, dynamic> viewedStatus,
             List<StatusModel> myStatus,
@@ -1662,8 +1908,8 @@ class _$StatusDataImpl implements _StatusData {
     required TResult orElse(),
   }) {
     if (statuses != null) {
-      return statuses(this.statuses, viewedStatus, myStatus, selectedFilePath,
-          selectedStatus);
+      return statuses(isLoading, error, this.statuses, viewedStatus, myStatus,
+          selectedFilePath, selectedStatus);
     }
     return orElse();
   }
@@ -1699,12 +1945,18 @@ class _$StatusDataImpl implements _StatusData {
 
 abstract class _StatusData implements StatusState {
   const factory _StatusData(
-      {final Map<String, dynamic> statuses,
+      {final bool isLoading,
+      final AppException? error,
+      final Map<String, dynamic> statuses,
       final Map<String, dynamic> viewedStatus,
       final List<StatusModel> myStatus,
       final String selectedFilePath,
       final Map<String, dynamic> selectedStatus}) = _$StatusDataImpl;
 
+  @override
+  bool get isLoading;
+  @override
+  AppException? get error;
   @override
   Map<String, dynamic> get statuses;
   @override

@@ -17,6 +17,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       try {
         final appLock = SettingService.getAppLock();
         final language = SettingService.getLanguage();
+        final languageName = SettingService.getLanguageName();
         final wallpaper = SettingService.getWallpaper();
         final notificationSettings = SettingService.getNotificationSettings();
         final user = await SettingService.getUserProfile();
@@ -25,6 +26,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
             languageCode: language,
             wallpaperIndex: wallpaper,
             notificationSetting: notificationSettings,
+            languageName: languageName,
             userModel: user));
       } catch (e) {
         log(e.toString());
@@ -36,8 +38,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       final appLock = SettingService.getAppLock();
       emit(state.copyWith(appLock: appLock));
     });
+    on<_GetAppLock>((event, emit) async {
+      final appLock = SettingService.getAppLock();
+      emit(state.copyWith(appLock: appLock));
+    });
     on<_DeleteAppLock>((event, emit) {
       SettingService.deleteAppLock();
+      emit(state.copyWith(appLock: null));
+    });
+    on<_ForgetAppLock>((event, emit) {
+      SettingService.forgetAppLock();
       emit(state.copyWith(appLock: null));
     });
 
@@ -47,8 +57,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       emit(state.copyWith(languageCode: language));
     });
     on<_ChangeLanguage>((event, emit) {
-      SettingService.changeLanguage(event.languageCode);
-      emit(state.copyWith(languageCode: event.languageCode));
+      SettingService.changeLanguage(event.languageCode, event.languageName);
+      emit(state.copyWith(
+          languageCode: event.languageCode, languageName: event.languageName));
     });
 
     //wallpaper

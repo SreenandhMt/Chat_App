@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
@@ -9,8 +11,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:image_editor/image_editor.dart';
+
+import '../../../core/error_snackbar.dart';
 
 class StatusEditor extends StatefulWidget {
   const StatusEditor({super.key});
@@ -52,6 +57,10 @@ class _StatusEditorState extends State<StatusEditor> {
   // Save the final image
   Future<void> saveImage() async {
     try {
+      if (await Permission.manageExternalStorage.request().isDenied) {
+        return showExpandableSnackBar(context, "Permission Denied",
+            "Storage Permission Denied", "Permission");
+      }
       final image = await screenshotController.capture(pixelRatio: 2.0);
       if (image != null) {
         final filePath = '/storage/emulated/0/Download/edited_image.png';
@@ -64,10 +73,12 @@ class _StatusEditorState extends State<StatusEditor> {
             ));
         context.pop();
       } else {
-        log("❌ Screenshot failed.");
+        showExpandableSnackBar(context, "❌ Error capturing image",
+            "Something want wrong", "IMAGE");
       }
     } catch (e) {
-      log("❌ Error capturing image: $e");
+      showExpandableSnackBar(
+          context, "❌ Error capturing image", e.toString(), "IMAGE");
     }
   }
 
@@ -113,7 +124,13 @@ class _StatusEditorState extends State<StatusEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StatusBloc, StatusState>(builder: (context, state) {
+    return BlocConsumer<StatusBloc, StatusState>(listener: (context, state) {
+      if (state.error != null) {
+        showExpandableSnackBar(context, state.error!.message,
+            "Error Status: ${state.error!.details}", state.error!.code);
+        context.read<StatusBloc>().add(StatusEvent.clearErrorMessage());
+      }
+    }, builder: (context, state) {
       if (state.selectedFilePath.isNotEmpty) {
         _image = File(state.selectedFilePath);
       }

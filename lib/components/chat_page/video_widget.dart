@@ -6,7 +6,7 @@ import 'package:chat_app/route/navigation_utils.dart';
 
 import '../../core/colors.dart';
 
-class ChatVideoWidget extends StatefulWidget {
+class ChatVideoWidget extends StatelessWidget {
   const ChatVideoWidget({
     super.key,
     required this.video,
@@ -24,20 +24,16 @@ class ChatVideoWidget extends StatefulWidget {
   final String time;
 
   @override
-  State<ChatVideoWidget> createState() => ChatVideoWidgetState();
-}
-
-class ChatVideoWidgetState extends State<ChatVideoWidget> {
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final color = isSender ? Colors.white : null;
     return InkWell(
       onTap: () {
-        NavigationUtils.videoView(context, widget.video);
+        NavigationUtils.videoView(context, video);
       },
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.chatColor(context, widget.isSender),
+          color: AppColors.chatColor(context, isSender),
           borderRadius: BorderRadius.circular(17),
         ),
         constraints: BoxConstraints(
@@ -46,7 +42,7 @@ class ChatVideoWidgetState extends State<ChatVideoWidget> {
           maxWidth: size.width * 0.70,
           minWidth: size.width * 0.55,
         ),
-        margin: widget.isGroup ? null : EdgeInsets.all(10),
+        margin: isGroup ? null : EdgeInsets.all(10),
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         child: Stack(
           children: [
@@ -58,7 +54,7 @@ class ChatVideoWidgetState extends State<ChatVideoWidget> {
                     child: Stack(
                       children: [
                         CachedNetworkImage(
-                            imageUrl: widget.thumbnail, fit: BoxFit.cover),
+                            imageUrl: thumbnail, fit: BoxFit.cover),
                         Positioned(
                           bottom: 0,
                           right: 0,
@@ -66,11 +62,12 @@ class ChatVideoWidgetState extends State<ChatVideoWidget> {
                           top: 0,
                           child: IconButton(
                             onPressed: () {
-                              NavigationUtils.videoView(context, widget.video);
+                              NavigationUtils.videoView(context, video);
                             },
                             icon: Icon(
                               Icons.play_circle_filled,
                               size: 50,
+                              color: color,
                             ),
                           ),
                         )
@@ -85,15 +82,15 @@ class ChatVideoWidgetState extends State<ChatVideoWidget> {
                 mainAxisSize: MainAxisSize.min,
                 spacing: 5,
                 children: [
-                  if (widget.isSender)
+                  if (isSender)
                     Icon(
                       Icons.check,
                       size: 13,
                       color: Colors.blue,
                     ),
                   Text(
-                    widget.time,
-                    style: TextStyle(fontSize: 12),
+                    time,
+                    style: TextStyle(fontSize: 12, color: color),
                   ),
                 ],
               ),

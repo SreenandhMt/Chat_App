@@ -19,6 +19,7 @@ class TextChatWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final color = isSender ? Colors.white : null;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.chatColor(context, isSender),
@@ -37,7 +38,7 @@ class TextChatWidget extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 20),
             child: Text(
               text,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16, color: color),
             ),
           ),
           Positioned(
@@ -57,7 +58,7 @@ class TextChatWidget extends StatelessWidget {
                   ),
                 Text(
                   time,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12, color: color),
                 ),
               ],
             ),

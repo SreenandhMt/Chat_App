@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
+import '../../../core/exceptions.dart';
 import '../../home/models/chat_model.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -18,15 +19,21 @@ class GroupService {
   static final box = Hive.box("chatsCount");
   static Future<Map<String, UserModels>> getAllUsers(
       List<String> participants) async {
-    Map<String, UserModels> allMembers = {};
-    for (var user in participants) {
-      final userModel =
-          await firestore.collection("users").doc(user).get().then(
-                (value) => UserModels.fromJson(value.data()!),
-              );
-      allMembers.addEntries({userModel.uid: userModel}.entries);
+    try {
+      Map<String, UserModels> allMembers = {};
+      for (var user in participants) {
+        final userModel =
+            await firestore.collection("users").doc(user).get().then(
+                  (value) => UserModels.fromJson(value.data()!),
+                );
+        allMembers.addEntries({userModel.uid: userModel}.entries);
+      }
+      return allMembers;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
     }
-    return allMembers;
   }
 
   static Stream<QuerySnapshot<Map<String, dynamic>>>? getAllChats(
@@ -54,9 +61,12 @@ class GroupService {
           .collection("messages")
           .orderBy("timestamp", descending: true)
           .snapshots();
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
-      return null;
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -73,8 +83,10 @@ class GroupService {
           .update({
         "hidechat": FieldValue.arrayUnion([auth.currentUser!.uid])
       });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -82,8 +94,10 @@ class GroupService {
     try {
       if (chatModel.createdBy != auth.currentUser!.uid) return;
       await firestore.collection("chats").doc(chatModel.chatId).delete();
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -97,8 +111,12 @@ class GroupService {
       });
       ChatServices.sendLog(
           chatModel, "${auth.currentUser!.displayName ?? ""} left");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -113,8 +131,12 @@ class GroupService {
       });
       ChatServices.sendLog(
           chatModel, "${auth.currentUser!.displayName ?? ""} kicked $name");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -123,8 +145,10 @@ class GroupService {
       await firestore.collection("chats").doc(chatModel.chatId).update({
         "admins": FieldValue.arrayUnion([uid]),
       });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -133,8 +157,10 @@ class GroupService {
       await firestore.collection("chats").doc(chatModel.chatId).update({
         "admins": FieldValue.arrayRemove([uid]),
       });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -149,8 +175,12 @@ class GroupService {
       });
       ChatServices.sendLog(
           chatModel, "${auth.currentUser!.displayName ?? ""} blocked $name");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -166,8 +196,10 @@ class GroupService {
         if (memberCanEdit != null) "memberCanEdit": memberCanEdit,
         if (memberCanMessage != null) "memberCanMessage": memberCanMessage
       });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -220,8 +252,10 @@ class GroupService {
         "createdAt": date,
         "messageCount": 0,
       });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -246,139 +280,249 @@ class GroupService {
       });
       ChatServices.sendLog(chatModel,
           "${auth.currentUser!.displayName ?? ""} added $membersNames");
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
+      throw UnknownException(details: e.toString());
     }
   }
 
   static Future<List<UserModels>> getContacts() async {
-    final myData = await firestore
-        .collection("users")
-        .doc(auth.currentUser!.uid)
-        .get()
-        .then((value) {
-      return UserModels.fromJson(value.data()!);
-    });
-    final contacts = myData.contacts;
-    if (contacts != null && contacts.isNotEmpty) {
-      List<Future<UserModels>> futures = [];
+    try {
+      final myData = await firestore
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .get()
+          .then((value) {
+        return UserModels.fromJson(value.data()!);
+      });
+      final contacts = myData.contacts;
+      if (contacts != null && contacts.isNotEmpty) {
+        List<Future<UserModels>> futures = [];
 
-      for (var key in contacts.keys) {
-        futures.add(firestore
-            .collection("users")
-            .doc(contacts[key])
-            .get()
-            .then((value) => UserModels.fromJson(value.data()!)));
+        for (var key in contacts.keys) {
+          futures.add(firestore
+              .collection("users")
+              .doc(contacts[key])
+              .get()
+              .then((value) => UserModels.fromJson(value.data()!)));
+        }
+
+        return await Future.wait(futures);
       }
-
-      return await Future.wait(futures);
+      return [];
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
     }
-    return [];
   }
 
   static Future<void> sendMessage(ChatModel chatModel, String message) async {
-    ChatServices.sendMessage(chatModel, message,
-        userName: auth.currentUser!.displayName ?? "");
+    try {
+      ChatServices.sendMessage(chatModel, message,
+          userName: auth.currentUser!.displayName ?? "");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> sendImage(ChatModel chatModel, String path) async {
-    ChatServices.sendImage(chatModel, path,
-        lastMessage: auth.currentUser!.displayName != null
-            ? null
-            : "${auth.currentUser!.displayName}: Image");
+    try {
+      ChatServices.sendImage(chatModel, path,
+          lastMessage: auth.currentUser!.displayName != null
+              ? null
+              : "${auth.currentUser!.displayName}: Image");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> sendVideo(ChatModel chatModel, String path) async {
-    await ChatServices.sendVideo(chatModel, path,
-        lastMessage: auth.currentUser!.displayName != null
-            ? null
-            : "${auth.currentUser!.displayName}: Video");
+    try {
+      await ChatServices.sendVideo(chatModel, path,
+          lastMessage: auth.currentUser!.displayName != null
+              ? null
+              : "${auth.currentUser!.displayName}: Video");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> sendDocument(ChatModel chatModel, String path) async {
-    ChatServices.sendDocument(chatModel, path,
-        lastMessage: auth.currentUser!.displayName != null
-            ? null
-            : "${auth.currentUser!.displayName}: Document");
+    try {
+      ChatServices.sendDocument(chatModel, path,
+          lastMessage: auth.currentUser!.displayName != null
+              ? null
+              : "${auth.currentUser!.displayName}: Document");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> sendAudioFile(
       ChatModel chatModel, File audio, List<double> waveList) async {
-    return await ChatServices.sendAudioFile(chatModel, audio, waveList,
-        lastMessage: auth.currentUser!.displayName != null
-            ? null
-            : "${auth.currentUser!.displayName}: Audio");
+    try {
+      return await ChatServices.sendAudioFile(chatModel, audio, waveList,
+          lastMessage: auth.currentUser!.displayName != null
+              ? null
+              : "${auth.currentUser!.displayName}: Audio");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> sendLink(ChatModel chatModel, String link) async {
-    ChatServices.sendLink(chatModel, link,
-        lastMessage: auth.currentUser!.displayName != null
-            ? null
-            : "${auth.currentUser!.displayName}: $link");
+    try {
+      ChatServices.sendLink(chatModel, link,
+          lastMessage: auth.currentUser!.displayName != null
+              ? null
+              : "${auth.currentUser!.displayName}: $link");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> sendSticker(ChatModel chatModel, String sticker) async {
-    ChatServices.sendSticker(chatModel, sticker,
-        lastMessage: auth.currentUser!.displayName != null
-            ? null
-            : "${auth.currentUser!.displayName}: Sticker");
+    try {
+      ChatServices.sendSticker(chatModel, sticker,
+          lastMessage: auth.currentUser!.displayName != null
+              ? null
+              : "${auth.currentUser!.displayName}: Sticker");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> sendPoll(
       ChatModel chatModel, String question, List<String> options) async {
-    ChatServices.sendPoll(chatModel, question, options,
-        lastMessage: auth.currentUser!.displayName != null
-            ? null
-            : "${auth.currentUser!.displayName}: Poll");
+    try {
+      ChatServices.sendPoll(chatModel, question, options,
+          lastMessage: auth.currentUser!.displayName != null
+              ? null
+              : "${auth.currentUser!.displayName}: Poll");
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> votePoll(ChatModel chatModel, String messageId,
       String option, Map<String, dynamic> votes) async {
-    ChatServices.votePoll(chatModel, messageId, option, votes);
+    try {
+      ChatServices.votePoll(chatModel, messageId, option, votes);
+    } on AppException catch (e) {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> deleteMessage(
       ChatModel chatModel, String messageId) async {
-    await firestore
-        .collection("chats")
-        .doc(chatModel.chatId)
-        .collection("messages")
-        .doc(messageId)
-        .update({
-      "message": "This message has been deleted",
-      "messageType": "delete"
-    });
+    try {
+      await firestore
+          .collection("chats")
+          .doc(chatModel.chatId)
+          .collection("messages")
+          .doc(messageId)
+          .update({
+        "message": "This message has been deleted",
+        "messageType": "delete"
+      });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> muteChat(ChatModel chatModel) async {
-    await firestore.collection("chats").doc(chatModel.chatId).update({
-      "muted": FieldValue.arrayUnion([auth.currentUser!.uid]),
-    });
+    try {
+      await firestore.collection("chats").doc(chatModel.chatId).update({
+        "muted": FieldValue.arrayUnion([auth.currentUser!.uid]),
+      });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> unmuteChat(ChatModel chatModel) async {
-    await firestore.collection("chats").doc(chatModel.chatId).update({
-      "muted": FieldValue.arrayRemove([auth.currentUser!.uid]),
-    });
+    try {
+      await firestore.collection("chats").doc(chatModel.chatId).update({
+        "muted": FieldValue.arrayRemove([auth.currentUser!.uid]),
+      });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static void addReaction(ChatModel chatModel, String messageId, String emoji) {
-    firestore
-        .collection("chats")
-        .doc(chatModel.chatId)
-        .collection("messages")
-        .doc(messageId)
-        .update({"reactions.${auth.currentUser!.uid}": emoji});
+    try {
+      firestore
+          .collection("chats")
+          .doc(chatModel.chatId)
+          .collection("messages")
+          .doc(messageId)
+          .update({"reactions.${auth.currentUser!.uid}": emoji});
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<ChatModel> reloadGroupData(ChatModel chatModel) async {
-    final data = await box.get(chatModel.chatId);
-    return await firestore
-        .collection("chats")
-        .doc(chatModel.chatId)
-        .get()
-        .then((value) {
-      return ChatModel.fromJson(value.data()!, data);
-    });
+    try {
+      final data = await box.get(chatModel.chatId);
+      return await firestore
+          .collection("chats")
+          .doc(chatModel.chatId)
+          .get()
+          .then((value) {
+        return ChatModel.fromJson(value.data()!, data);
+      });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 }

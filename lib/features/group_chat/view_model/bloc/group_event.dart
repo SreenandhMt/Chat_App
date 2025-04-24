@@ -34,6 +34,7 @@ class GroupEvent with _$GroupEvent {
       @Default(null) bool? memberCanAddMember,
       @Default(null) bool? memberCanMessage}) = _EditPermission;
   //
+  const factory GroupEvent.clearError() = _ClearError;
   const factory GroupEvent.votePoll(
       {required String messageId,
       required String option,
@@ -66,4 +67,6 @@ class GroupEvent with _$GroupEvent {
       _CreateGroup;
   const factory GroupEvent.addMember({required List<UserModels> members}) =
       _AddMember;
+
+  const factory GroupEvent.clearState() = _ClearState;
 }

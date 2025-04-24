@@ -34,6 +34,7 @@ class CallingEvent with _$CallingEvent {
       _UpdateCurrentCall;
   const factory CallingEvent.setCurrentCall({required CallModel callModel}) =
       _SetCurrentCall;
+  const factory CallingEvent.clearCurrentCall() = _ClearCurrentCall;
   const factory CallingEvent.pickUpReceiverNormalCall(
       {required String callId}) = _PickUpReceiverNormalCall;
   const factory CallingEvent.updateAgoraId({required String id}) =
@@ -54,4 +55,5 @@ class CallingEvent with _$CallingEvent {
       required bool muted}) = _OnUserMuteAudio;
   const factory CallingEvent.onLocalUserJoined() = _OnLocalUserJoined;
   const factory CallingEvent.onLeave() = _OnLeave;
+  const factory CallingEvent.clearErrorMessage() = _ClearErrorMessage;
 }

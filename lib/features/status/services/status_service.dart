@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:chat_app/core/exceptions.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/status/models/status_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,43 +14,55 @@ class StatusService {
   static final FirebaseStorage _storage = FirebaseStorage.instance;
 
   static Future<void> createStatus(String filePath, String? caption) async {
-    final file = File(filePath);
-    final ref = await _storage
-        .ref("statuses")
-        .child(
-            "${DateTime.now().microsecondsSinceEpoch}.${file.path.split(".").last}")
-        .putFile(file);
-    final url = await ref.ref.getDownloadURL();
-    final id = DateTime.now().microsecondsSinceEpoch;
-    await _firestore.collection("statuses").doc(id.toString()).set({
-      "id": id.toString(),
-      "image": url,
-      "type": "image",
-      "publishedAt": id,
-      "order": id,
-      "userId": _auth.currentUser!.uid,
-      "timestamp": FieldValue.serverTimestamp(),
-      "caption": caption,
-      "views": [],
-    });
+    try {
+      final file = File(filePath);
+      final ref = await _storage
+          .ref("statuses")
+          .child(
+              "${DateTime.now().microsecondsSinceEpoch}.${file.path.split(".").last}")
+          .putFile(file);
+      final url = await ref.ref.getDownloadURL();
+      final id = DateTime.now().microsecondsSinceEpoch;
+      await _firestore.collection("statuses").doc(id.toString()).set({
+        "id": id.toString(),
+        "image": url,
+        "type": "image",
+        "publishedAt": id,
+        "order": id,
+        "userId": _auth.currentUser!.uid,
+        "timestamp": FieldValue.serverTimestamp(),
+        "caption": caption,
+        "views": [],
+      });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<void> createTextStatus(
       String text, int colorIndex, int styleIndex, String? caption) async {
-    final id = DateTime.now().microsecondsSinceEpoch;
-    await _firestore.collection("statuses").doc(id.toString()).set({
-      "id": id.toString(),
-      "text": text,
-      "type": "text",
-      "style": styleIndex,
-      "color": colorIndex,
-      "publishedAt": id,
-      "order": id,
-      "caption": caption,
-      "userId": _auth.currentUser!.uid,
-      "timestamp": FieldValue.serverTimestamp(),
-      "views": [],
-    });
+    try {
+      final id = DateTime.now().microsecondsSinceEpoch;
+      await _firestore.collection("statuses").doc(id.toString()).set({
+        "id": id.toString(),
+        "text": text,
+        "type": "text",
+        "style": styleIndex,
+        "color": colorIndex,
+        "publishedAt": id,
+        "order": id,
+        "caption": caption,
+        "userId": _auth.currentUser!.uid,
+        "timestamp": FieldValue.serverTimestamp(),
+        "views": [],
+      });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<Map<String, dynamic>?> getStatuses() async {
@@ -100,16 +113,23 @@ class StatusService {
         }
       }
       return {"viewed": viewedList, "new": statusList};
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
-      return null;
+      throw UnknownException(details: e.toString());
     }
   }
 
   static void updateViews(String statusId) async {
-    await _firestore.collection("statuses").doc(statusId).update({
-      "views": FieldValue.arrayUnion([_auth.currentUser!.uid])
-    });
+    try {
+      await _firestore.collection("statuses").doc(statusId).update({
+        "views": FieldValue.arrayUnion([_auth.currentUser!.uid])
+      });
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 
   static Future<Map<String, dynamic>?> updateStatus(String uid) async {
@@ -138,9 +158,10 @@ class StatusService {
       }
       log(viewedIndex.toString());
       return {"status": status, "user": user, "isViewed": viewedIndex};
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
-      return null;
+      throw UnknownException(details: e.toString());
     }
   }
 
@@ -159,9 +180,10 @@ class StatusService {
           statuses.docs.map((e) => StatusModel.fromJson(e.data())).toList();
 
       return statusList;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log(e.toString());
-      return null;
+      throw UnknownException(details: e.toString());
     }
   }
 }

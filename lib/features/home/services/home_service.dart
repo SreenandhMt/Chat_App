@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:chat_app/core/exceptions.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/home/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +12,7 @@ class HomeService {
   static Future<List<ChatModel>> getChats(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> data) async {
     try {
+      if (data.isEmpty) return [];
       List<ChatModel> chats = [];
       final box = Hive.box("chatsCount");
       final chatModels = data.map(
@@ -28,8 +28,9 @@ class HomeService {
         }
         final user = await _firestore
             .collection("users")
-            .doc(chatModel.participants
-                .firstWhere((element) => element != _auth.currentUser!.uid))
+            .doc(chatModel.membersHistory.firstWhere(
+                (element) => element != _auth.currentUser!.uid,
+                orElse: () => ""))
             .get()
             .then((value) => UserModels.fromJson(value.data()!));
         chatModel = chatModel.copyWith(userModel: user);
@@ -37,17 +38,24 @@ class HomeService {
       }
 
       return chats;
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
     } catch (e) {
-      log("HomeService getChat: $e");
-      return [];
+      throw UnknownException(details: e.toString());
     }
   }
 
   static Stream<QuerySnapshot<Map<String, dynamic>>>? getChatStream() {
-    return _firestore
-        .collection("chats")
-        .where("participants", arrayContains: _auth.currentUser!.uid)
-        .orderBy("order", descending: true)
-        .snapshots();
+    try {
+      return _firestore
+          .collection("chats")
+          .where("participants", arrayContains: _auth.currentUser!.uid)
+          .orderBy("order", descending: true)
+          .snapshots();
+    } on FirebaseException catch (e) {
+      throw ServerException(details: e.message);
+    } catch (e) {
+      throw UnknownException(details: e.toString());
+    }
   }
 }

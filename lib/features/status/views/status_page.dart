@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:chat_app/core/colors.dart';
+import 'package:chat_app/core/error_snackbar.dart';
 import 'package:chat_app/core/fonts.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
@@ -30,7 +29,13 @@ class StatusPage extends StatelessWidget {
             style: AppFonts.appBarStyle(context),
           ),
         ),
-        body: BlocBuilder<StatusBloc, StatusState>(builder: (context, state) {
+        body: BlocConsumer<StatusBloc, StatusState>(listener: (context, state) {
+          if (state.error != null) {
+            showExpandableSnackBar(context, state.error!.message,
+                "Error Status: ${state.error!.details}", state.error!.code);
+            context.read<StatusBloc>().add(StatusEvent.clearErrorMessage());
+          }
+        }, builder: (context, state) {
           return ListView(
             children: [
               ListTile(

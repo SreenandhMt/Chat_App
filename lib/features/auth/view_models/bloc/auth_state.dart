@@ -4,7 +4,7 @@ part of 'auth_bloc.dart';
 class AuthState with _$AuthState {
   const factory AuthState.status({
     @Default(false) bool isLoading,
-    String? errorMessage,
+    @Default(null) AppException? errorMessage,
     @Default(false) bool phoneNumberSuccess,
     @Default(null) String? verificationId,
     @Default(false) bool optSuccess,

@@ -7,10 +7,13 @@ class SettingsEvent with _$SettingsEvent {
       _CreateAppLock;
   const factory SettingsEvent.getAppLock() = _GetAppLock;
   const factory SettingsEvent.deleteAppLock() = _DeleteAppLock;
+  const factory SettingsEvent.forgetAppLock() = _ForgetAppLock;
 
   const factory SettingsEvent.getLanguage() = _GetLanguage;
-  const factory SettingsEvent.changeLanguage({required String languageCode}) =
-      _ChangeLanguage;
+  const factory SettingsEvent.changeLanguage({
+    required String languageCode,
+    required String languageName,
+  }) = _ChangeLanguage;
 
   const factory SettingsEvent.getWallpaperIndex() = _GetWallpaperIndex;
   const factory SettingsEvent.changeWallpaper({required int index}) =

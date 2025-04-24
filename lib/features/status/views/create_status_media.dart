@@ -1,3 +1,4 @@
+import 'package:chat_app/core/error_snackbar.dart';
 import 'package:chat_app/features/status/view_models/bloc/status_bloc.dart';
 import 'package:chat_app/route/navigation_utils.dart';
 import 'package:flutter/material.dart';
@@ -23,19 +24,24 @@ class _CreateStatusMediaState extends State<CreateStatusMedia> {
 
   Future<void> _loadImages() async {
     // Request permission
-    final PermissionState permission =
-        await PhotoManager.requestPermissionExtend();
-    if (permission.isAuth) {
-      // Fetch images
-      List<AssetPathEntity> albums =
-          await PhotoManager.getAssetPathList(type: RequestType.image);
-      if (albums.isNotEmpty) {
-        List<AssetEntity> media = await albums[0]
-            .getAssetListPaged(page: 0, size: 100); // Load 100 images
-        setState(() => _images = media);
+    try {
+      final PermissionState permission =
+          await PhotoManager.requestPermissionExtend();
+      if (permission.isAuth) {
+        // Fetch images
+        List<AssetPathEntity> albums =
+            await PhotoManager.getAssetPathList(type: RequestType.image);
+        if (albums.isNotEmpty) {
+          List<AssetEntity> media = await albums[0]
+              .getAssetListPaged(page: 0, size: 100); // Load 100 images
+          setState(() => _images = media);
+        }
+      } else {
+        PhotoManager.openSetting(); // Ask user to enable permission
       }
-    } else {
-      PhotoManager.openSetting(); // Ask user to enable permission
+    } catch (e) {
+      showExpandableSnackBar(
+          context, "Something want wrong", e.toString(), "Unknown");
     }
   }
 

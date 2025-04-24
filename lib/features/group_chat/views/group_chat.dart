@@ -12,6 +12,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../components/chat_page/emoji_widget.dart';
@@ -19,6 +20,8 @@ import '../../../components/chat_page/reaction_overlay.dart';
 import '../../../components/group_chat/appbar.dart';
 import '../../../components/group_chat/chat_widget.dart';
 import '../../../core/colors.dart';
+import '../../../core/error_snackbar.dart';
+import '../../../core/loading.dart';
 
 class GroupChatPage extends StatefulWidget {
   const GroupChatPage({super.key});
@@ -71,9 +74,16 @@ class _GroupChatPageState extends State<GroupChatPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<GroupBloc, GroupState>(listener: (context, state) {
       if (state is GroupData) {
+        if (state.isError != null) {
+          showExpandableSnackBar(
+              context,
+              state.isError!.message,
+              "Error Group Chat: ${state.isError!.details}",
+              state.isError!.code);
+          context.read<GroupBloc>().add(GroupEvent.clearError());
+        }
         if (state.messageData != null && !listening) {
           listening = true;
-          log("Init");
           state.messageData!.listen(
             (event) {
               context
@@ -93,11 +103,10 @@ class _GroupChatPageState extends State<GroupChatPage> {
               wallpaperIndex,
               messages,
               isLoading,
-              inputLoading) {
+              inputLoading,
+              isError) {
             if (groupData == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return AppLoadingWidget();
             }
             return Scaffold(
               backgroundColor: wallpaperColor(context)[wallpaperIndex],
@@ -121,87 +130,124 @@ class _GroupChatPageState extends State<GroupChatPage> {
                 },
                 child: Container(
                   decoration: BoxDecoration(),
-                  child: Column(
+                  child: Stack(
                     children: [
-                      Expanded(
-                        child: ListView(
-                          reverse: true,
-                          dragStartBehavior: DragStartBehavior.down,
-                          controller: scrollController,
-                          children: List.generate(
-                            messages.length,
-                            (index) {
-                              final message = messages[index];
-                              return GestureDetector(
-                                onTap: () => clickedMessage(message),
-                                onLongPressStart: (details) =>
-                                    onLongPressStart(message, details),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        selectedMessagesId.contains(message.id)
-                                            ? AppColors.primary(context)
-                                                .withOpacity(0.1)
-                                            : null,
-                                    borderRadius: BorderRadius.circular(2),
-                                  ),
-                                  child: GroupChatWidget(
-                                      sender: allGroupMembers[message.senderId],
-                                      messageModel: message),
-                                ),
-                              );
-                            },
-                          ),
+                      Positioned.fill(
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: ListView(
+                                reverse: true,
+                                dragStartBehavior: DragStartBehavior.down,
+                                controller: scrollController,
+                                children: messages.entries.map((entry) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              entry.key,
+                                              style: GoogleFonts.nunito(),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      ...entry.value.map((chat) {
+                                        final message = chat;
+                                        return GestureDetector(
+                                          onTap: () => clickedMessage(message),
+                                          onLongPressStart: (details) =>
+                                              onLongPressStart(
+                                                  message, details),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: selectedMessagesId
+                                                      .contains(message.id)
+                                                  ? AppColors.primary(context)
+                                                      .withOpacity(0.1)
+                                                  : null,
+                                              borderRadius:
+                                                  BorderRadius.circular(2),
+                                            ),
+                                            child: GroupChatWidget(
+                                                sender: allGroupMembers[
+                                                    message.senderId],
+                                                messageModel: message),
+                                          ),
+                                        );
+                                      }),
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            if (groupData.memberCanMessage != null &&
+                                    groupData.memberCanMessage! ||
+                                groupData.admins.contains(
+                                    FirebaseAuth.instance.currentUser!.uid))
+                              ChatInput(
+                                inputLoading: inputLoading,
+                                emojiHide: isEmojiKeyboardHide,
+                                hideEmoji: () {
+                                  isEmojiKeyboardHide = true;
+                                  if (mounted) {
+                                    setState(() {});
+                                  }
+                                },
+                                isGroup: true,
+                                stickerSelected: (content) async {
+                                  if (content.mimeType != "image/gif") {
+                                    final stickerImage =
+                                        await _convertUriToFile(content.data!);
+                                    context.read<GroupBloc>().add(
+                                        GroupEvent.sendSticker(
+                                            stickerPath: stickerImage!));
+                                  }
+                                },
+                                onSubmit: () {
+                                  if (controller.text.isEmpty) return;
+                                  if (isValidUrl(controller.text)) {
+                                    context.read<GroupBloc>().add(
+                                        GroupEvent.sendLink(controller.text));
+                                    controller.clear();
+                                    return;
+                                  }
+                                  context.read<GroupBloc>().add(
+                                        GroupEvent.sendMessage(controller.text),
+                                      );
+                                  controller.clear();
+                                },
+                                controller: controller,
+                                showEmojiKeyboard: showEmojiKeyboard,
+                              )
+                            else
+                              Container(
+                                width: double.infinity,
+                                padding: EdgeInsets.all(10),
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: AppColors.themeColor(context)),
+                                alignment: Alignment.center,
+                                child: Text("Only admin can send messages"),
+                              ),
+                            CustomEmojiKeyboard(
+                              emojiController: controller,
+                              isHide: isEmojiKeyboardHide,
+                            ),
+                          ],
                         ),
                       ),
-                      if (groupData.memberCanMessage != null &&
-                              groupData.memberCanMessage! ||
-                          groupData.admins
-                              .contains(FirebaseAuth.instance.currentUser!.uid))
-                        ChatInput(
-                          inputLoading: inputLoading,
-                          isGroup: true,
-                          stickerSelected: (content) async {
-                            if (content.mimeType != "image/gif") {
-                              final stickerImage =
-                                  await _convertUriToFile(content.data!);
-                              context.read<GroupBloc>().add(
-                                  GroupEvent.sendSticker(
-                                      stickerPath: stickerImage!));
-                            }
-                          },
-                          onSubmit: () {
-                            if (controller.text.isEmpty) return;
-                            if (isValidUrl(controller.text)) {
-                              context
-                                  .read<GroupBloc>()
-                                  .add(GroupEvent.sendLink(controller.text));
-                              controller.clear();
-                              return;
-                            }
-                            context.read<GroupBloc>().add(
-                                  GroupEvent.sendMessage(controller.text),
-                                );
-                            controller.clear();
-                          },
-                          controller: controller,
-                          showEmojiKeyboard: showEmojiKeyboard,
-                        )
-                      else
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: AppColors.themeColor(context)),
-                          alignment: Alignment.center,
-                          child: Text("Only admin can send messages"),
-                        ),
-                      CustomEmojiKeyboard(
-                        emojiController: controller,
-                        isHide: isEmojiKeyboardHide,
-                      ),
+                      //Loading
+                      if (isLoading) AppLoadingWidget()
                     ],
                   ),
                 ),
@@ -312,6 +358,17 @@ class _GroupChatPageState extends State<GroupChatPage> {
       debugPrint("Error converting URI to file: $e");
       return null;
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ModalRoute.of(context)?.addScopedWillPopCallback(() async {
+      if (isEmojiKeyboardHide) {
+        context.read<GroupBloc>().add(GroupEvent.clearState());
+      }
+      return true;
+    });
   }
 
   @override

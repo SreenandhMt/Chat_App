@@ -1,4 +1,5 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:chat_app/core/colors.dart';
 import 'package:flutter/material.dart';
 
 class VideoCallWidget extends StatelessWidget {
@@ -44,7 +45,7 @@ class VideoCallWidget extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        color: Colors.amber,
+        color: AppColors.grey(context),
         child: AgoraVideoView(
           controller: VideoViewController(
             rtcEngine: rtcEngine!,

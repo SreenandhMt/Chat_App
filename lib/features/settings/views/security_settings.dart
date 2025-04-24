@@ -1,5 +1,8 @@
 import 'package:chat_app/core/size.dart';
+import 'package:chat_app/features/settings/service/setting_service.dart';
+import 'package:chat_app/route/auth_checker.dart';
 import 'package:chat_app/route/navigation_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,38 +32,45 @@ class _SecuritySettingsState extends State<SecuritySettings> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               height10,
-              if (state.appLock != null) ...[
-                ListTile(
-                  leading: Padding(
-                    padding: const EdgeInsets.only(right: 10, left: 5),
-                    child: Icon(Icons.close),
-                  ),
-                  title: const Text(
-                    'Tern OFF',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                  onTap: () {
+              ListTile(
+                leading: Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 5),
+                  child: Icon(Icons.verified_user),
+                ),
+                title: Text(
+                  'App Lock (${state.appLock == null ? "Turn ON" : "Turn OFF"})',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios, size: 20),
+                onTap: () {
+                  if (state.appLock != null) {
                     context
                         .read<SettingsBloc>()
                         .add(SettingsEvent.deleteAppLock());
-                  },
+                    return;
+                  }
+                  NavigationUtils.securityPinPage(context);
+                },
+              ),
+              height10,
+              ListTile(
+                leading: Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 5),
+                  child: Icon(Icons.logout, color: Colors.red),
                 ),
-              ] else ...[
-                ListTile(
-                  leading: Padding(
-                    padding: const EdgeInsets.only(right: 10, left: 5),
-                    child: Icon(Icons.verified_user),
-                  ),
-                  title: const Text(
-                    'Create App Lock',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 20),
-                  onTap: () {
-                    NavigationUtils.securityPinPage(context);
-                  },
+                title: const Text(
+                  'SignOut',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.red),
                 ),
-              ],
+                onTap: () async {
+                  SettingService.deleteAppLock();
+                  await FirebaseAuth.instance.signOut();
+                  AuthChecker.checkAuth(context);
+                },
+              ),
             ],
           ),
         );

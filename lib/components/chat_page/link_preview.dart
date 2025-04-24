@@ -45,6 +45,10 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
     String? description = widget.description;
     String? imageUrl = widget.imageUrl;
     final size = MediaQuery.sizeOf(context);
+    final backgroundColor = widget.isSender
+        ? Color.fromARGB(255, 21, 32, 51)
+        : AppColors.grey(context);
+    final color = widget.isSender ? Colors.white : null;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.chatColor(context, widget.isSender),
@@ -74,8 +78,9 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
                 else
                   Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.grey(context)),
+                      borderRadius: BorderRadius.circular(10),
+                      color: backgroundColor,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -99,14 +104,19 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
                             child: Text(
                               title,
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
+                                  color: color,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
                         if (description != null && description.isNotEmpty)
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 10, bottom: 5, left: 10, right: 10),
-                            child: Text(description),
+                            child: Text(
+                              description,
+                              style: TextStyle(color: color),
+                            ),
                           )
                         else
                           height5,
@@ -125,7 +135,9 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     widget.link,
-                    style: TextStyle(color: Colors.blue, fontSize: 17),
+                    style: TextStyle(
+                        color: widget.isSender ? color : Colors.blue,
+                        fontSize: 17),
                   ),
                 )
               ],
@@ -148,7 +160,7 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
                   ),
                 Text(
                   widget.time,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12, color: color),
                 ),
               ],
             ),

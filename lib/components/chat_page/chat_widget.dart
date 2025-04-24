@@ -36,21 +36,18 @@ class ChatWidget extends StatelessWidget {
       return const SizedBox.shrink();
     }
     if (messageModel.messageType == "log") {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-                color: Colors.grey, borderRadius: BorderRadius.circular(5)),
-            child: Text(
-              messageModel.message ?? "",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-            ),
-          )
-        ],
+      return Align(
+        alignment: Alignment.center,
+        child: Container(
+          margin: EdgeInsets.all(5),
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(
+              color: Colors.grey, borderRadius: BorderRadius.circular(5)),
+          child: Text(
+            messageModel.message ?? "",
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+          ),
+        ),
       );
     }
     return Align(
@@ -126,7 +123,7 @@ class ChatItem extends StatelessWidget {
       return ChatVideoWidget(
           video: message!,
           isSender: isSender,
-          isGroup: isGroup,
+          isGroup: !isSender && isGroup,
           videoSize: size,
           thumbnail: messageModel.thumbnail ?? "",
           time: messageModel.time);
@@ -135,12 +132,14 @@ class ChatItem extends StatelessWidget {
       return StickerWidget(
           isSender: isSender,
           sticker: message!,
-          isGroup: isGroup,
+          isGroup: !isSender && isGroup,
           time: messageModel.time);
     }
     if (messageType == "document") {
       return DocumentWidget(
-          isSender: isSender, isGroup: isGroup, messageModel: messageModel);
+          isSender: isSender,
+          isGroup: !isSender && isGroup,
+          messageModel: messageModel);
     }
     if (messageType == "poll") {
       return PollWidget(
@@ -153,7 +152,7 @@ class ChatItem extends StatelessWidget {
       return LinkPreviewWidget(
         link: message!,
         isSender: isSender,
-        isGroup: isGroup,
+        isGroup: !isSender && isGroup,
         description: messageModel.linkPreviewDescription,
         imageUrl: messageModel.linkPreviewUrl,
         title: messageModel.linkPreviewTitle,
@@ -164,7 +163,7 @@ class ChatItem extends StatelessWidget {
       return ChatAudioWidget(
           isSender: isSender,
           audio: message!,
-          isGroup: isGroup,
+          isGroup: !isSender && isGroup,
           wave: wave!,
           messageId: messageModel.id,
           time: messageModel.time);
@@ -173,26 +172,26 @@ class ChatItem extends StatelessWidget {
       return ChatImageWidget(
           image: message!,
           isSender: isSender,
-          isGroup: isGroup,
+          isGroup: !isSender && isGroup,
           size: size,
           time: messageModel.time);
     }
     if (messageType == "delete") {
       return DeletedMessageLog(
-          isSender: isSender, text: message!, isGroup: isGroup);
+          isSender: isSender, text: message!, isGroup: !isSender && isGroup);
     }
     if (messageType == "typing") {
       return StatusTypingWidget(
         isSender: isSender,
         text: "Typing...",
-        isGroup: isGroup,
+        isGroup: !isSender && isGroup,
         time: messageModel.time,
       );
     }
     return TextChatWidget(
         isSender: isSender,
         text: message!,
-        isGroup: isGroup,
+        isGroup: !isSender && isGroup,
         time: messageModel.time);
   }
 }

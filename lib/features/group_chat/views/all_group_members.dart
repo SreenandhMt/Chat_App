@@ -23,7 +23,8 @@ class AllGroupMembers extends StatelessWidget {
                   wallpaperIndex,
                   messages,
                   isLoading,
-                  inputLoading) =>
+                  inputLoading,
+                  isError) =>
               ListView(
             children: [
               Padding(

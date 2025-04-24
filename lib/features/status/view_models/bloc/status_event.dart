@@ -16,4 +16,5 @@ class StatusEvent with _$StatusEvent {
       String? caption}) = _CreateTextStatus;
   const factory StatusEvent.updateViews(
       {required String uid, required String statusId}) = _UpdateViews;
+  const factory StatusEvent.clearErrorMessage() = _ClearErrorMessage;
 }

@@ -32,4 +32,6 @@ class ChatEvent with _$ChatEvent {
   const factory ChatEvent.muteChat({required bool status}) = _MuteChat;
   const factory ChatEvent.blockUser({required String uid}) = _BlockUser;
   const factory ChatEvent.reportUser({required String uid}) = _ReportUser;
+  const factory ChatEvent.clearState() = _ClearState;
+  const factory ChatEvent.clearError() = _ClearError;
 }

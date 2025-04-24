@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +8,7 @@ import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/auth/views/introduction_page.dart';
 import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 
+import '../../../core/error_snackbar.dart';
 import '../view_models/bloc/contact_bloc.dart';
 
 class AddMembersPage extends StatelessWidget {
@@ -24,7 +23,21 @@ class AddMembersPage extends StatelessWidget {
           title: const Text("Add Members"),
         ),
         body: BlocConsumer<ContactBloc, ContactState>(
-          listener: (ctx, state) {},
+          listener: (ctx, state) {
+            if (state.showMessage != null) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.showMessage!)));
+              context.read<ContactBloc>().add(ContactEvent.clearMessage());
+            }
+            if (state.isError != null) {
+              showExpandableSnackBar(
+                  context,
+                  state.isError!.message,
+                  "Error Contact: ${state.isError!.details}",
+                  state.isError!.code);
+              context.read<ContactBloc>().add(ContactEvent.clearMessage());
+            }
+          },
           builder: (ctx, state) {
             final contacts = state.registeredContacts;
             return Column(

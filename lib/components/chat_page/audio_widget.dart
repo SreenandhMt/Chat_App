@@ -23,6 +23,7 @@ class ChatAudioWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final color = isSender ? Colors.white : null;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.chatColor(context, isSender),
@@ -63,7 +64,7 @@ class ChatAudioWidget extends StatelessWidget {
                   ),
                 Text(
                   time,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12, color: color),
                 ),
               ],
             ),

@@ -10,4 +10,5 @@ class AuthEvent with _$AuthEvent {
       String firstName, String? lastName, String? filePath) = _CreateProfile;
   const factory AuthEvent.resendOTP() = _ResendOTP;
   const factory AuthEvent.signOut() = _SignOut;
+  const factory AuthEvent.resetErrorMessage() = _ResetErrorMessage;
 }

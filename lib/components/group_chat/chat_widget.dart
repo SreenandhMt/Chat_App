@@ -34,23 +34,20 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
       }
     }
     if (widget.messageModel.messageType == "log") {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(10)),
-            child: Text(
-              widget.messageModel.message ?? "",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-            ),
-          )
-        ],
+      return Align(
+        alignment: Alignment.center,
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(10)),
+          child: Text(
+            widget.messageModel.message ?? "",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+          ),
+        ),
       );
     }
     if (widget.messageModel.isSender) {
@@ -73,6 +70,7 @@ class GroupChatWidgetState extends State<GroupChatWidget> {
                 messageType: widget.messageModel.messageType,
                 message: widget.messageModel.message,
                 isSender: widget.messageModel.isSender,
+                isGroup: true,
                 wave: widget.messageModel.wave,
                 size: widget.messageModel.width != null &&
                         widget.messageModel.height != null

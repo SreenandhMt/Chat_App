@@ -35,30 +35,35 @@ PreferredSize groupChatAppBar(BuildContext context,
               icon: Icon(Icons.arrow_back),
             ),
             if (selectedMessagesId.isEmpty) ...[
-              InkWell(
-                onTap: () => NavigationUtils.groupInfoPage(context),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(chatModel.groupImage ?? ""),
-                    ),
-                    width10,
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          chatModel.groupName!,
-                          style: TextStyle(fontSize: 16),
+              Expanded(
+                child: InkWell(
+                  onTap: () => NavigationUtils.groupInfoPage(context),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundImage:
+                            NetworkImage(chatModel.groupImage ?? ""),
+                      ),
+                      width10,
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              chatModel.groupName!,
+                              style: TextStyle(fontSize: 16),
+                              maxLines: 1,
+                            ),
+                            Text("${chatModel.participants.length} Members"),
+                          ],
                         ),
-                        Text("${chatModel.participants.length} Members"),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Spacer(),
               IconButton(
                   onPressed: () {
                     context.read<CallingBloc>().add(
@@ -82,8 +87,6 @@ PreferredSize groupChatAppBar(BuildContext context,
                     NavigationUtils.voiceCallPage(context);
                   },
                   icon: Icon(CupertinoIcons.phone)),
-              // width10,
-              IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.info)),
             ] else ...[
               if (selectedMessagesId.length > 1) ...[
                 Text(selectedMessagesId.length.toString()),

@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/fonts.dart';
@@ -14,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/error_snackbar.dart';
 import '../../auth/models/user_models.dart';
 
 class VoiceCallPage extends StatefulWidget {
@@ -28,11 +28,12 @@ class _VoiceCallPageState extends State<VoiceCallPage> {
   ValueNotifier<Duration?> duration = ValueNotifier<Duration?>(null);
   Timer? _timer;
   bool agoraInit = false;
-  bool valueInit = false;
+  bool isListening = false;
 
   @override
   void initState() {
-    valueInit = false;
+    isListening = false;
+    callSteam();
     super.initState();
   }
 
@@ -42,7 +43,6 @@ class _VoiceCallPageState extends State<VoiceCallPage> {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
-        valueInit = false;
         return;
       }
       duration.value = DateTime.now().difference(startTime.toDate());
@@ -51,8 +51,31 @@ class _VoiceCallPageState extends State<VoiceCallPage> {
 
   void stopDurationFunction() {
     if (_timer != null) {
-      valueInit = false;
       _timer?.cancel();
+    }
+  }
+
+  void callSteam() {
+    final state = context.read<CallingBloc>().state;
+    if (state.currentCall != null) {
+      isListening = true;
+      FirebaseFirestore.instance
+          .collection("calls")
+          .doc(state.currentCall?.historyId)
+          .snapshots()
+          .listen((event) {
+        if (!event.exists) {
+          if (mounted && context.canPop()) {
+            isListening = false;
+            context.read<CallingBloc>().add(CallingEvent.clearCurrentCall());
+            context.pop();
+          }
+          return;
+        }
+        context
+            .read<CallingBloc>()
+            .add(CallingEvent.updateCurrentCall(docs: event));
+      });
     }
   }
 
@@ -60,27 +83,16 @@ class _VoiceCallPageState extends State<VoiceCallPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return BlocConsumer<CallingBloc, CallingState>(listener: (context, state) {
-      if (state.currentCall != null && !valueInit) {
-        FirebaseFirestore.instance
-            .collection("calls")
-            .doc(state.currentCall?.historyId)
-            .snapshots()
-            .listen((event) {
-          if (!event.exists && valueInit) {
-            if (mounted && context.canPop()) {
-              valueInit = false;
-              context.pop();
-            }
-            return;
-          }
-          context
-              .read<CallingBloc>()
-              .add(CallingEvent.updateCurrentCall(docs: event));
-        });
-        if (state.currentCall!.status != "ringing") {
-          startDurationFunction(state.currentCall!.startTime);
-        }
-        valueInit = true;
+      if (state.errorMsg != null) {
+        showExpandableSnackBar(context, state.errorMsg!.message,
+            state.errorMsg!.details, state.errorMsg!.code);
+        context.read<CallingBloc>().add(CallingEvent.clearErrorMessage());
+      }
+      if (state.currentCall!.status != "ringing" && _timer == null) {
+        startDurationFunction(state.currentCall!.startTime);
+      }
+      if (!isListening && state.currentCall != null) {
+        callSteam();
       }
     }, builder: (context, state) {
       if (state.currentCall == null) {

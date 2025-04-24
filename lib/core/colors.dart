@@ -8,10 +8,10 @@ class AppColors {
   static Color secondary(context) =>
       Theme.of(context).brightness == Brightness.dark
           ? Color.fromRGBO(104, 82, 214, 1)
-          : Color.fromARGB(255, 0, 45, 227);
+          : Color.fromRGBO(104, 82, 214, 1);
   static Color grey(context) => Theme.of(context).brightness == Brightness.dark
       ? Color.fromARGB(255, 21, 32, 51)
-      : Colors.grey.shade200;
+      : Colors.grey.shade300;
   static Color backgroundColor(context) =>
       Theme.of(context).scaffoldBackgroundColor;
 
@@ -27,7 +27,7 @@ class AppColors {
     } else {
       return Theme.of(context).brightness == Brightness.dark
           ? Color.fromARGB(255, 59, 59, 61)
-          : Colors.grey.shade200;
+          : const Color.fromARGB(255, 198, 197, 197);
     }
   }
 

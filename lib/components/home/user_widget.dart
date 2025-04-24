@@ -54,7 +54,7 @@ class UserWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text("10:30 PM"),
+            Text(chatModel.date),
             if (chatModel.unreadCount != null && chatModel.unreadCount != 0)
               CircleAvatar(
                   radius: 10,

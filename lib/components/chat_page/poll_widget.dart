@@ -1,4 +1,6 @@
-import 'package:chat_app/components/chat_page/profile_image_widget.dart';
+import 'dart:developer';
+
+import 'package:chat_app/features/group_chat/view_model/bloc/group_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_app/core/colors.dart';
 import 'package:chat_app/core/size.dart';
 import 'package:chat_app/features/chat_page/models/message_model.dart';
-import 'package:chat_app/features/home/models/chat_model.dart';
 
 import '../../features/chat_page/view_models/bloc/chat_bloc.dart';
 
@@ -26,14 +27,11 @@ class PollWidget extends StatefulWidget {
 }
 
 class _PollWidgetState extends State<PollWidget> {
-  final List<String> imageUrls = [
-    'https://randomuser.me/api/portraits/men/1.jpg',
-    'https://randomuser.me/api/portraits/men/2.jpg',
-    'https://randomuser.me/api/portraits/women/1.jpg',
-  ];
   @override
   Widget build(BuildContext context) {
+    log(widget.isGroup.toString());
     final size = MediaQuery.sizeOf(context);
+    final Color? color = widget.isSender ? Colors.white : null;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.chatColor(context, widget.isSender),
@@ -56,24 +54,41 @@ class _PollWidgetState extends State<PollWidget> {
                 Padding(
                   padding: const EdgeInsets.only(left: 2),
                   child: Text(
-                    widget.messageModel.message!,
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+                    widget.messageModel.message ?? "",
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: color),
                   ),
                 ),
-                ...widget.messageModel.options!.keys.map(
-                  (value) => PollItem(
-                    option: value.toString(),
-                    messageId: widget.messageModel.id,
-                    votes: widget.messageModel.votes!,
-                    progress: (widget.messageModel.options![value]! /
-                            (context.read<ChatBloc>().state.chatData!)
-                                .participants
-                                .length) *
-                        1,
-                    imageUrls: imageUrls,
-                    isSender: widget.isSender,
-                  ),
-                ),
+                if (widget.messageModel.options != null &&
+                    (context.read<GroupBloc>().state as GroupData).groupData !=
+                        null)
+                  ...widget.messageModel.options!.keys.map((value) {
+                    final membersLength = widget.isGroup
+                        ? (context.read<GroupBloc>().state as GroupData)
+                            .groupData!
+                            .participants
+                            .length
+                        : context
+                            .read<ChatBloc>()
+                            .state
+                            .chatData!
+                            .participants
+                            .length;
+                    log(membersLength.toString());
+                    final progress =
+                        (widget.messageModel.options![value]! / membersLength) *
+                            1;
+                    return PollItem(
+                      option: value.toString(),
+                      isGroup: widget.isGroup,
+                      messageId: widget.messageModel.id,
+                      votes: widget.messageModel.votes ?? {},
+                      progress: progress,
+                      isSender: widget.isSender,
+                    );
+                  }),
                 height10,
                 Divider(),
                 height10,
@@ -84,7 +99,7 @@ class _PollWidgetState extends State<PollWidget> {
                       "View All",
                       style: TextStyle(
                           color: widget.isSender
-                              ? null
+                              ? color
                               : AppColors.secondary(context),
                           fontSize: 17),
                     )
@@ -110,7 +125,7 @@ class _PollWidgetState extends State<PollWidget> {
                   ),
                 Text(
                   widget.messageModel.time,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12, color: color),
                 ),
               ],
             ),
@@ -124,24 +139,26 @@ class _PollWidgetState extends State<PollWidget> {
 class PollItem extends StatelessWidget {
   const PollItem({
     super.key,
-    required this.imageUrls,
     required this.isSender,
     required this.option,
     required this.progress,
     required this.votes,
     required this.messageId,
+    required this.isGroup,
   });
-  final List<String> imageUrls;
   final bool isSender;
   final String option;
   final double progress;
   final Map<String, dynamic> votes;
   final String messageId;
+  final bool isGroup;
 
   @override
   Widget build(BuildContext context) {
+    final Color? color = isSender ? Colors.white : null;
     return LimitedBox(
       maxWidth: double.infinity,
+      maxHeight: 55,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -152,55 +169,53 @@ class PollItem extends StatelessWidget {
                   : false,
               value: true,
               onChanged: (value) {
-                context.read<ChatBloc>().add(ChatEvent.votePoll(
-                    votes: votes, option: option, messageId: messageId));
+                if (isGroup) {
+                  context.read<GroupBloc>().add(GroupEvent.votePoll(
+                      votes: votes, option: option, messageId: messageId));
+                } else {
+                  context.read<ChatBloc>().add(ChatEvent.votePoll(
+                      votes: votes, option: option, messageId: messageId));
+                }
               }),
           width10,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        option,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 7),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          option,
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: color),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    LimitedBox(
-                      maxHeight: 50,
-                      maxWidth: 70,
-                      child: Stack(
-                        alignment: Alignment.centerRight,
-                        children: List.generate(
-                            (votes[option] is List) ? votes[option].length : 0,
-                            (index) {
-                          return Positioned(
-                            right: index * 17,
-                            child: UserProfileScreen(
-                              uid: votes[option][index],
-                            ),
-                          );
-                        }).toList(),
+                      width5,
+                      Text(
+                        (votes[option] is List)
+                            ? votes[option].length.toString()
+                            : "",
+                        style: TextStyle(
+                          color: color,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    width5,
-                    Text((votes[option] is List)
-                        ? votes[option].length.toString()
-                        : ""),
-                  ],
+                    ],
+                  ),
                 ),
                 LinearProgressIndicator(
                   color: isSender
-                      ? AppColors.backgroundColor(context)
-                      : AppColors.secondary(context),
+                      ? AppColors.secondary(context)
+                      : AppColors.primary(context),
                   borderRadius: BorderRadius.circular(10),
                   minHeight: 10,
                   value: progress,
