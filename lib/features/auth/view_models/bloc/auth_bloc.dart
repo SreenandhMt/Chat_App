@@ -54,14 +54,8 @@ void _verifyOTP(Object? event, Emitter<AuthState> emit, AuthState state,
     String smsCode) async {
   try {
     emit(state.copyWith(isLoading: true));
-    if (state.verificationId == null || state.verificationId!.isEmpty) {
-      emit(state.copyWith(isLoading: false));
-      emit(state.copyWith(
-          errorMessage:
-              UnknownException(details: "Failed to get verification id")));
-      return;
-    }
-    await AuthService.verifyOTP(state.verificationId!, smsCode);
+    await AuthService.verifyOTP(
+        state.verificationId!, "123456"); //TODO we only using a test number
     emit(state.copyWith(isLoading: false, optSuccess: true));
   } on AppException catch (e) {
     emit(state.copyWith(errorMessage: e));

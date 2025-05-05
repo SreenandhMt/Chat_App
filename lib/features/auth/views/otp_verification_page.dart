@@ -1,13 +1,14 @@
-import 'package:chat_app/core/loading.dart';
-import 'package:chat_app/features/auth/view_models/bloc/auth_bloc.dart';
-import 'package:chat_app/localization/locals.dart';
-import 'package:chat_app/route/auth_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:chat_app/core/loading.dart';
+import 'package:chat_app/features/auth/view_models/bloc/auth_bloc.dart';
+import 'package:chat_app/localization/locals.dart';
+import 'package:chat_app/route/auth_checker.dart';
 
 import '../../../core/colors.dart';
 import '../../../core/error_snackbar.dart';
@@ -87,6 +88,8 @@ class OTPVerificationPage extends StatelessWidget {
                         (index) => Expanded(
                             flex: 1,
                             child: OTPInput(
+                              controller:
+                                  TextEditingController(text: value[index]),
                               index: index,
                             ))),
                   ),
@@ -114,8 +117,10 @@ class OTPInput extends StatefulWidget {
   const OTPInput({
     super.key,
     required this.index,
+    required this.controller,
   });
   final int index;
+  final TextEditingController controller;
 
   @override
   State<OTPInput> createState() => _OTPInputState();
@@ -153,7 +158,7 @@ class _OTPInputState extends State<OTPInput> {
         setState(() {});
       },
       onFieldSubmitted: (value) {
-        if (widget.index >= 5 && _formKey.currentState!.validate()) {
+        if (value.length >= 5 && _formKey.currentState!.validate()) {
           context.read<AuthBloc>().add(AuthEvent.verifyOTP(value));
         }
       },
@@ -164,7 +169,7 @@ class _OTPInputState extends State<OTPInput> {
         LengthLimitingTextInputFormatter(1),
         FilteringTextInputFormatter.digitsOnly
       ],
-      controller: TextEditingController(text: value[widget.index]),
+      controller: widget.controller,
       validator: (value) => null,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10),

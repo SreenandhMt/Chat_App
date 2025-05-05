@@ -116,8 +116,6 @@ class HomePage extends StatelessWidget {
                   .add(HomeEvent.loadUserData(docs: snapshot.docs));
             }
           });
-        } else {
-          log("isNotEmpty");
         }
       }, builder: (context, state) {
         return ListView(

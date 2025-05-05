@@ -347,14 +347,11 @@ class ChatServices {
   static Future<void> sendLink(ChatModel chatModel, String link,
       {String? lastMessage}) async {
     try {
-      final title =
-          await UrlPreviewLoader.getMetaTagContent(link, 'og:title') ??
-              await UrlPreviewLoader.getTitle(link);
-      final description =
-          await UrlPreviewLoader.getMetaTagContent(link, 'og:description') ??
-              await UrlPreviewLoader.getMetaTagContent(link, 'description');
-      final imageUrl =
-          await UrlPreviewLoader.getMetaTagContent(link, 'og:image');
+      final Map<String, String?> data =
+          await UrlPreviewLoader.fetchLinkPreviewMeta(link);
+      final title = data["title"] ?? "";
+      final description = data["description"] ?? "";
+      final imageUrl = data["image"] ?? "";
 
       final id = DateTime.now().microsecondsSinceEpoch.toString();
       final date = DateTime.now().millisecondsSinceEpoch;

@@ -170,6 +170,7 @@ class EditProfilePage extends StatelessWidget {
                             ? _firstNameController.text
                             : "${_firstNameController.text} ${_lastNameController.text}",
                         profileImagePath: state.path));
+                    context.pop();
                   },
                 ),
                 height20,

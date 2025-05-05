@@ -68,6 +68,7 @@ class StatusService {
   static Future<Map<String, dynamic>?> getStatuses() async {
     try {
       Map<String, dynamic> statusList = {}, viewedList = {};
+      if (_auth.currentUser == null) return null;
       final userModel = await _firestore
           .collection("users")
           .doc(_auth.currentUser!.uid)
@@ -167,6 +168,7 @@ class StatusService {
 
   static Future<List<StatusModel>?> getMyStatuses() async {
     try {
+      if (_auth.currentUser == null) return null;
       final cutoff =
           Timestamp.fromDate(DateTime.now().subtract(Duration(hours: 24)));
       List<StatusModel> statusList = [];

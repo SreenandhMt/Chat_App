@@ -41,7 +41,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCERfXBav6RjUHptn1pGMCfzfi21xVn_NY',
-    appId: '1:213235388230:android:79c043525a78a3c0a2df47',
+    appId: '1:213235388230:android:a0d0fb9fce1b8569a2df47',
     messagingSenderId: '213235388230',
     projectId: 'ebook-e2135',
     databaseURL: 'https://ebook-e2135-default-rtdb.firebaseio.com',

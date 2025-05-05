@@ -13,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:image_editor/image_editor.dart';
 
 import '../../../core/error_snackbar.dart';
 
@@ -89,32 +88,9 @@ class _StatusEditorState extends State<StatusEditor> {
   }
 
   // Image Manipulation Functions
-  void rotateImage() async {
-    if (_image == null) return;
-    final editorOption = ImageEditorOption()..addOption(RotateOption(90));
-    final result = await ImageEditor.editFileImage(
-      file: _image!,
-      imageEditorOption: editorOption,
-    );
-    if (result != null) {
-      setState(() => _image = File('${_image!.path}_rotated.png')
-        ..writeAsBytesSync(result));
-    }
-  }
+  void rotateImage() async {}
 
-  void flipImage() async {
-    if (_image == null) return;
-    final editorOption = ImageEditorOption()
-      ..addOption(FlipOption(horizontal: true));
-    final result = await ImageEditor.editFileImage(
-      file: _image!,
-      imageEditorOption: editorOption,
-    );
-    if (result != null) {
-      setState(() => _image = File('${_image!.path}_flipped.png')
-        ..writeAsBytesSync(result));
-    }
-  }
+  void flipImage() async {}
 
   void enablePaint() {
     setState(() {

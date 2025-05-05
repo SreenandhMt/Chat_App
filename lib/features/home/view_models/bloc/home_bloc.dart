@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:chat_app/core/exceptions.dart';
 import 'package:chat_app/features/home/services/home_service.dart';
@@ -24,11 +22,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           list = ["Community", "Event", "News"];
         }
         final response = HomeService.getChatStream();
-        emit(HomeState.loadedData(chatsStream: response, categoryList: list));
+        emit(HomeState.loadedData(
+            chatsStream: response, categoryList: list, isLoading: false));
       } on AppException catch (e) {
-        emit(state.copyWith(error: e));
+        emit(state.copyWith(error: e, isLoading: false));
       } catch (e) {
-        emit(state.copyWith(error: UnknownException(details: e.toString())));
+        emit(state.copyWith(
+            error: UnknownException(details: e.toString()), isLoading: false));
       }
     });
 
@@ -42,9 +42,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             selectedCategory: "All",
             isLoading: false));
       } on AppException catch (e) {
-        emit(state.copyWith(error: e));
+        emit(state.copyWith(error: e, isLoading: false));
       } catch (e) {
-        emit(state.copyWith(error: UnknownException(details: e.toString())));
+        emit(state.copyWith(
+            error: UnknownException(details: e.toString()), isLoading: false));
       }
     });
 

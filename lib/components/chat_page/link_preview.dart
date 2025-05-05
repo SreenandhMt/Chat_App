@@ -116,6 +116,7 @@ class _LinkPreviewWidgetState extends State<LinkPreviewWidget> {
                             child: Text(
                               description,
                               style: TextStyle(color: color),
+                              maxLines: 8,
                             ),
                           )
                         else

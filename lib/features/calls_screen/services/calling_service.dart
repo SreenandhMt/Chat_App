@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:agora_token_service/agora_token_service.dart';
 import 'package:chat_app/features/auth/models/user_models.dart';
 import 'package:chat_app/features/calls_screen/models/call_model.dart';
-import 'package:chat_app/features/home/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -15,6 +12,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 class CallingService {
   static Future<List<CallModel>> callHistory() async {
     try {
+      if (_auth.currentUser == null) return [];
       List<CallModel> history = [];
       final docsList = await _firestore
           .collection("callHistory")
@@ -44,9 +42,10 @@ class CallingService {
     }
   }
 
-  static Future<Stream<QuerySnapshot<Map<String, dynamic>>>>
+  static Future<Stream<QuerySnapshot<Map<String, dynamic>>>?>
       getCallStream() async {
     try {
+      if (_auth.currentUser == null) return null;
       return _firestore
           .collection("calls")
           .where("participantsID", arrayContains: _auth.currentUser!.uid)
